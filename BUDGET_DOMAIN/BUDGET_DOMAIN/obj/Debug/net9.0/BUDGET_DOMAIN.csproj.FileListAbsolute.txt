@@ -1,0 +1,13 @@
+C:\Users\jdaza\Downloads\Jose\Budget\BUDGET_DOMAIN\BUDGET_DOMAIN\bin\Debug\net9.0\BUDGET_DOMAIN.deps.json
+C:\Users\jdaza\Downloads\Jose\Budget\BUDGET_DOMAIN\BUDGET_DOMAIN\bin\Debug\net9.0\BUDGET_DOMAIN.dll
+C:\Users\jdaza\Downloads\Jose\Budget\BUDGET_DOMAIN\BUDGET_DOMAIN\bin\Debug\net9.0\BUDGET_DOMAIN.pdb
+C:\Users\jdaza\Downloads\Jose\Budget\BUDGET_DOMAIN\BUDGET_DOMAIN\obj\Debug\net9.0\BUDGET_DOMAIN.csproj.AssemblyReference.cache
+C:\Users\jdaza\Downloads\Jose\Budget\BUDGET_DOMAIN\BUDGET_DOMAIN\obj\Debug\net9.0\BUDGET_DOMAIN.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jdaza\Downloads\Jose\Budget\BUDGET_DOMAIN\BUDGET_DOMAIN\obj\Debug\net9.0\BUDGET_DOMAIN.AssemblyInfoInputs.cache
+C:\Users\jdaza\Downloads\Jose\Budget\BUDGET_DOMAIN\BUDGET_DOMAIN\obj\Debug\net9.0\BUDGET_DOMAIN.AssemblyInfo.cs
+C:\Users\jdaza\Downloads\Jose\Budget\BUDGET_DOMAIN\BUDGET_DOMAIN\obj\Debug\net9.0\BUDGET_DOMAIN.csproj.CoreCompileInputs.cache
+C:\Users\jdaza\Downloads\Jose\Budget\BUDGET_DOMAIN\BUDGET_DOMAIN\obj\Debug\net9.0\BUDGET_DOMAIN.sourcelink.json
+C:\Users\jdaza\Downloads\Jose\Budget\BUDGET_DOMAIN\BUDGET_DOMAIN\obj\Debug\net9.0\BUDGET_DOMAIN.dll
+C:\Users\jdaza\Downloads\Jose\Budget\BUDGET_DOMAIN\BUDGET_DOMAIN\obj\Debug\net9.0\refint\BUDGET_DOMAIN.dll
+C:\Users\jdaza\Downloads\Jose\Budget\BUDGET_DOMAIN\BUDGET_DOMAIN\obj\Debug\net9.0\BUDGET_DOMAIN.pdb
+C:\Users\jdaza\Downloads\Jose\Budget\BUDGET_DOMAIN\BUDGET_DOMAIN\obj\Debug\net9.0\ref\BUDGET_DOMAIN.dll
