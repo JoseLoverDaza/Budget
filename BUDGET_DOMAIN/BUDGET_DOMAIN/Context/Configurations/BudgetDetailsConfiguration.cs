@@ -26,6 +26,9 @@
 
             entity.HasKey(e => e.IdBudgetDetails);
 
+            entity.Property(e => e.CreationDate)
+                 .IsRequired();
+
             entity.Property(e => e.Amount)
                   .HasColumnType("decimal(18,2)")
                   .HasDefaultValue(0)

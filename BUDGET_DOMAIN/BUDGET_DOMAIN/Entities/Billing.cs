@@ -15,7 +15,9 @@
         public int IdBilling { get; set; }
         public short Year { get; set; }
         public byte Month { get; set; }
-        public string? Observations { get; set; }
+        public DateTime CreationDate { get; set; }
+        public string? Description { get; set; }
+        public string? Observation { get; set; }
 
         public int IdUser { get; set; }
         

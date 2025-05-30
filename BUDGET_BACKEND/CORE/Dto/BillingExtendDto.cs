@@ -9,15 +9,17 @@
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
-    /// Nombre: RoleExtendDto   
+    /// Nombre: BillingExtendDto   
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class RoleExtendDto : RoleDto
+    public class BillingExtendDto : BillingDto
     {
 
         #region Atributos y Propiedades
 
+        public string EmailUser { get; set; } = null!;
+        public string LoginUser { get; set; } = null!;
         public string NameStatus { get; set; } = null!;
         public string? DescriptionStatus { get; set; }
 

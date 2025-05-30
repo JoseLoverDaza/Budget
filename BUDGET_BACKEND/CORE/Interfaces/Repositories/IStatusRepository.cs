@@ -1,11 +1,11 @@
 ﻿namespace CORE.Interfaces.Repositories
 {
 
-    #region Using
+    #region Librerias
 
     using Domain.Dto;
 
-    #endregion Using
+    #endregion
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
@@ -18,11 +18,11 @@
 
         #region  Métodos y Funciones
 
-        public StatusDto? GetStatusById(int id);
+        public StatusDto? GetStatusById(int idStatus);
                 
         public StatusDto? GetStatusByName(string name);
 
-        public List<StatusDto> GetStatus(int status);
+        public List<StatusDto> GetStatus();
 
         #endregion
 

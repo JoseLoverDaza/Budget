@@ -1,11 +1,11 @@
 ﻿namespace CORE.Interfaces.Repositories
 {
 
-    #region Using
+    #region Librerias
 
     using CORE.Dto;
 
-    #endregion Using
+    #endregion
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
@@ -18,13 +18,13 @@
 
         #region Métodos y Funciones
 
-        public FinancialInstitutionExtendDto? GetFinancialInstitutionById(int id);
+        public FinancialInstitutionExtendDto? GetFinancialInstitutionById(int idFinancialInstitution);
 
         public FinancialInstitutionExtendDto? GetFinancialInstitutionByName(string name);
 
-        public List<FinancialInstitutionExtendDto> GetFinancialInstitutionsByStatus(int status);
+        public List<FinancialInstitutionExtendDto> GetFinancialInstitutionsByStatus(int idStatus);
 
-        #endregion Methods
+        #endregion
 
     }
 }

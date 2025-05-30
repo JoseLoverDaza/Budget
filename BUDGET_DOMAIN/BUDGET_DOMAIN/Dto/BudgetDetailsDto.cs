@@ -13,9 +13,8 @@
         #region Atributos y Propiedades
 
         public int IdBudgetDetails { get; set; }
-
         public int IdBudget { get; set; }
-
+        public DateTime CreationDate { get; set; }
         public decimal Amount { get; set; }
 
         public int IdExpense { get; set; }

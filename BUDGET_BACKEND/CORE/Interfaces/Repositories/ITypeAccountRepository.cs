@@ -1,11 +1,11 @@
 ﻿namespace CORE.Interfaces.Repositories
 {
 
-    #region Using
+    #region Librerias
 
     using CORE.Dto;
 
-    #endregion Using
+    #endregion
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
@@ -18,11 +18,11 @@
 
         #region Métodos y Funciones
 
-        public TypeAccountExtendDto? GetTypeAccountById(int id);
+        public TypeAccountExtendDto? GetTypeAccountById(int idTypeAccount);
 
         public TypeAccountExtendDto? GetTypeAccountByName(string name);
 
-        public List<TypeAccountExtendDto> GetTypeAccountsByStatus(int status);
+        public List<TypeAccountExtendDto> GetTypeAccountsByStatus(int idStatus);
 
         #endregion 
 

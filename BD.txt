@@ -208,10 +208,12 @@ ALTER TABLE [Budget].[Deposit] CHECK CONSTRAINT [FK_Deposit_User]
 ALTER TABLE [Budget].[Deposit] ADD  DEFAULT ((0)) FOR [Amount]
 
 CREATE TABLE [Budget].[Billing](
-	[IdBilling] [int] IDENTITY(1,1) NOT NULL,
+	[IdBilling] [int] IDENTITY(1,1) NOT NULL,	
 	[Year] [smallint] NOT NULL,
 	[Month] [tinyint] NOT NULL,
-	[Observations] [varchar](255) NULL,
+	[CreationDate] [date] NOT NULL,
+	[Description] [nvarchar](255) NULL,
+	[Observation] [varchar](255) NULL,
 	[IdUser] [int] NOT NULL,
 	[IdStatus] [int] NOT NULL,
 PRIMARY KEY CLUSTERED 
@@ -233,6 +235,7 @@ ALTER TABLE [Budget].[Billing] CHECK CONSTRAINT [FK_Billing_User]
 CREATE TABLE [Budget].[BillingDetails](
 	[IdBillingDetails] [int] IDENTITY(1,1) NOT NULL,
 	[IdBilling] [int] NOT NULL,
+	[CreationDate] [date] NOT NULL,
 	[Amount] [decimal](18, 2) NOT NULL,
 	[IdExpense] [int] NOT NULL,
 	[IdStatus] [int] NOT NULL,
@@ -262,6 +265,9 @@ CREATE TABLE [Budget].[Budget](
 	[IdBudget] [int] IDENTITY(1,1) NOT NULL,
 	[Year] [smallint] NOT NULL,
 	[Month] [tinyint] NOT NULL,
+	[CreationDate] [date] NOT NULL,
+	[Description] [nvarchar](255) NULL,
+	[Observation] [varchar](255) NULL,
 	[IdUser] [int] NOT NULL,
 	[IdStatus] [int] NOT NULL,
 PRIMARY KEY CLUSTERED 
@@ -283,6 +289,7 @@ ALTER TABLE [Budget].[Budget] CHECK CONSTRAINT [FK_Budget_User]
 CREATE TABLE [Budget].[BudgetDetails](
 	[IdBudgetDetails] [int] IDENTITY(1,1) NOT NULL,
 	[IdBudget] [int] NOT NULL,
+	[CreationDate] [date] NOT NULL,
 	[Amount] [decimal](18, 2) NOT NULL,
 	[IdExpense] [int] NOT NULL,
 	[IdStatus] [int] NOT NULL,

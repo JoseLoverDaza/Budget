@@ -1,11 +1,11 @@
 ﻿namespace CORE.Interfaces.Repositories
 {
 
-    #region Using
+    #region Librerias
 
     using System.Linq.Expressions;
 
-    #endregion Using
+    #endregion
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
@@ -44,7 +44,7 @@
                
         public void LoadRelatedCollection(T entity, Expression<Func<T, object>> relatedProperty);
 
-        #endregion Methods
+        #endregion
 
     }
 }

@@ -10,6 +10,8 @@
     public class Constants
     {
 
+        #region Constantes
+
         public static class General
         {
 
@@ -24,6 +26,8 @@
             public const string SUCCESSUL_DELETE = "Successful Delete";
 
         }
+
+        #endregion
 
     }
 }

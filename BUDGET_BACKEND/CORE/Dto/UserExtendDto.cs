@@ -1,11 +1,11 @@
-﻿namespace CORE.Dto
+﻿using Domain.Dto;
+
+namespace CORE.Dto
 {
 
-    #region Using
+    #region Librerias
 
-    using Domain.Dto;
-
-    #endregion Using
+    #endregion
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
@@ -13,7 +13,7 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class UserExtendDto
+    public class UserExtendDto: UserDto
     {
 
         #region Atributos y Propiedades

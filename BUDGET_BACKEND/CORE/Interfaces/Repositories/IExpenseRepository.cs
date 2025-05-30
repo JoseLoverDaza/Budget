@@ -1,11 +1,11 @@
 ﻿namespace CORE.Interfaces.Repositories
 {
 
-    #region Using
+    #region Librerias
 
     using CORE.Dto;
 
-    #endregion Using
+    #endregion
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
@@ -18,13 +18,13 @@
 
         #region Métodos y Funciones
 
-        public ExpenseExtendDto? GetExpenseById(int id);
+        public ExpenseExtendDto? GetExpenseById(int idExpense);
 
         public ExpenseExtendDto? GetExpenseByName(string name);
 
-        public List<ExpenseExtendDto> GetExpensesByStatus(int status);
+        public List<ExpenseExtendDto> GetExpensesByStatus(int idStatus);
 
-        #endregion Methods
+        #endregion
 
     }
 }

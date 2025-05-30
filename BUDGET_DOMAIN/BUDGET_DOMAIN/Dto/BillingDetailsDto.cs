@@ -14,7 +14,7 @@
 
         public int IdBillingDetails { get; set; }
         public int IdBilling { get; set; }
-       
+        public DateTime CreationDate { get; set; }
         public decimal Amount { get; set; }
 
         public int IdExpense { get; set; }

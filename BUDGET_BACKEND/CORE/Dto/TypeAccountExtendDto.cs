@@ -1,11 +1,11 @@
 ﻿namespace CORE.Dto
 {
 
-    #region Using
+    #region Librerias
 
     using Domain.Dto;
 
-    #endregion Using
+    #endregion
 
     /// <summary>
     /// Fecha: 01 de enero de 2026

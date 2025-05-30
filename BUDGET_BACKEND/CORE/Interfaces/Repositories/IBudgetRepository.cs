@@ -1,11 +1,11 @@
 ﻿namespace CORE.Interfaces.Repositories
 {
 
-    #region Using
+    #region Librerias
 
     using CORE.Dto;
 
-    #endregion Using
+    #endregion
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
@@ -18,11 +18,17 @@
 
         #region Métodos y Funciones
 
-        public DepositExtendDto? GetDepositById(int id);
+        public BudgetExtendDto? GetBudgetById(int idBudget);
 
-        public DepositExtendDto? GetDepositByName(string name);
+        public BudgetExtendDto? GetBudgetByYearMonthUser(int year, int month, int idUser);
 
-        #endregion Using
+        public List<BudgetExtendDto> GetBudgetsByUser(int idUser);
+
+        public List<BudgetExtendDto> GetBudgetsByStatus(int idStatus);
+
+        public List<BudgetExtendDto> GetBudgetsByUserStatus(int idUser, int idStatus);
+
+        #endregion 
 
     }
 }

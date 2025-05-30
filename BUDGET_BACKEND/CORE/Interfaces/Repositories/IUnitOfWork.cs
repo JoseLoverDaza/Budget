@@ -1,9 +1,9 @@
 ﻿namespace CORE.Interfaces.Repositories
 {
 
-    #region Using
+    #region Librerias
 
-    #endregion Using
+    #endregion
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
@@ -14,7 +14,7 @@
     public interface IUnitOfWork
     {
 
-        #region Methods
+        #region Métodos y Funciones
 
         public IUnitOfWork GetNewInstanceUnitOfWork();
 
@@ -48,7 +48,7 @@
 
         public IBudgetDetailsRepository BudgetDetailsRepository();
 
-        #endregion Methods
+        #endregion
 
     }
 }

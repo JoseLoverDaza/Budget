@@ -1,11 +1,11 @@
 ﻿namespace CORE.Interfaces.Repositories
 {
 
-    #region Using
+    #region Librerias
 
     using CORE.Dto;
 
-    #endregion Using
+    #endregion
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
@@ -18,25 +18,25 @@
 
         #region Métodos y Funciones
 
-        public AccountExtendDto? GetAccountById(int id);
+        public AccountExtendDto? GetAccountById(int idAccount);
 
         public AccountExtendDto? GetAccountByName(string name);
 
-        public List<AccountExtendDto> GetAccountsByFinancialInstitution(int financialInstitution);
+        public List<AccountExtendDto> GetAccountsByFinancialInstitution(int idFinancialInstitution);
 
-        public List<AccountExtendDto> GetAccountsByTypeAccount(int typeAccount);
+        public List<AccountExtendDto> GetAccountsByTypeAccount(int idTypeAccount);
 
-        public List<AccountExtendDto> GetAccountsByUser(int user);
+        public List<AccountExtendDto> GetAccountsByUser(int idUser);
 
-        public List<AccountExtendDto> GetAccountsByStatus(int status);
+        public List<AccountExtendDto> GetAccountsByStatus(int idStatus);
 
-        public List<AccountExtendDto> GetAccountsByFinancialInstitutionStatus(int financialInstitution, int status);
+        public List<AccountExtendDto> GetAccountsByFinancialInstitutionStatus(int idFinancialInstitution, int idStatus);
 
-        public List<AccountExtendDto> GetAccountsByTypeAccountStatus(int typeAccount, int status);
+        public List<AccountExtendDto> GetAccountsByTypeAccountStatus(int idTypeAccount, int idStatus);
 
-        public List<AccountExtendDto> GetAccountsByUserStatus(int user, int status);
+        public List<AccountExtendDto> GetAccountsByUserStatus(int idUser, int idStatus);
 
-        #endregion Methods
+        #endregion
 
     }
 }

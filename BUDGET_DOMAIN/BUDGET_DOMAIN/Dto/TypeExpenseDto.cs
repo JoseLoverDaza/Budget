@@ -13,7 +13,6 @@
         #region Atributos y Propiedades
 
         public int IdTypeExpense { get; set; }
-
         public string Name { get; set; } = null!;
         public string? Description { get; set; }
 

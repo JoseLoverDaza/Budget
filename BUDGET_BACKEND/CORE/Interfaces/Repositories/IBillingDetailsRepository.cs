@@ -1,12 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CORE.Interfaces.Repositories
+﻿namespace CORE.Interfaces.Repositories
 {
-    internal interface IBillingDetailsRepository
+
+    #region Librerias
+
+    using CORE.Dto;
+
+    #endregion
+
+    /// <summary>
+    /// Fecha: 01 de enero de 2026
+    /// Nombre: IBillingDetailsRepository   
+    /// Autor: Jose Lover Daza Rojas
+    /// </summary>
+
+    public interface IBillingDetailsRepository
     {
+
+        #region Métodos y Funciones
+
+        public BillingDetailExtendDto? GetBillingDetailsById(int idBillingDetails);
+
+        public List<BillingDetailExtendDto> GetBillingDetailsByExpense(int idExpense);
+
+        public List<BillingDetailExtendDto> GetBillingDetailsByStatus(int idStatus);
+
+        public List<BillingDetailExtendDto> GetBillingDetailsByExpenseStatus(int idExpense, int idStatus);
+
+        #endregion
+
     }
 }

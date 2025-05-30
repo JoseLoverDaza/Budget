@@ -32,6 +32,15 @@
             entity.Property(e => e.Month)
                   .IsRequired();
 
+            entity.Property(e => e.CreationDate)
+                 .IsRequired();
+
+            entity.Property(e => e.Description)
+                   .HasMaxLength(255);
+
+            entity.Property(e => e.Observation)
+                  .HasMaxLength(255);
+
             entity.Property(e => e.IdUser)
                   .IsRequired();
 

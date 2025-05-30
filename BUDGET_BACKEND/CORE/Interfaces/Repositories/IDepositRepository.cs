@@ -1,11 +1,11 @@
 ﻿namespace CORE.Interfaces.Repositories
 {
 
-    #region Using
+    #region Librerias
 
     using CORE.Dto;
 
-    #endregion Using
+    #endregion
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
@@ -18,21 +18,27 @@
 
         #region Métodos y Funciones
 
-        public DepositExtendDto? GetDepositById(int id);
+        public DepositExtendDto? GetDepositById(int idDeposit);
 
-        public DepositExtendDto? GetDepositByName(string name);
+        public List<DepositExtendDto> GetDepositsByYearMonth(int year, int month);
 
-        public List<DepositExtendDto> GetDepositsByUser(int user);
+        public List<DepositExtendDto> GetDepositsByYearMonthUser(int year, int month, int idUser);
 
-        public List<DepositExtendDto> GetDepositsByAccount(int account);
+        public List<DepositExtendDto> GetDepositsByYearMonthAccount(int year, int month, int idAccount);
 
-        public List<DepositExtendDto> GetDepositsByStatus(int status);
+        public List<DepositExtendDto> GetDepositsByYearMonthStatus(int year, int month, int idStatus);
 
-        public List<DepositExtendDto> GetDepositsByUserStatus(int user, int status);
+        public List<DepositExtendDto> GetDepositsByUser(int idUser);
 
-        public List<DepositExtendDto> GetDepositsByAccountStatus(int account, int status);
+        public List<DepositExtendDto> GetDepositsByAccount(int idAccount);
 
-        #endregion Methods
+        public List<DepositExtendDto> GetDepositsByStatus(int idStatus);
+
+        public List<DepositExtendDto> GetDepositsByUserStatus(int idUser, int idStatus);
+
+        public List<DepositExtendDto> GetDepositsByAccountStatus(int idAccount, int idStatus);
+
+        #endregion
 
     }
 }

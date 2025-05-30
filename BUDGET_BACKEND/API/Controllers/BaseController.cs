@@ -1,14 +1,14 @@
 ﻿namespace API.Controllers
 {
 
-    #region Using
+    #region Librerias
 
     using Domain.Dto.Common;    
     using Microsoft.AspNetCore.Mvc;  
     using System.Net;
     using System.Runtime.InteropServices;
     
-    #endregion Using
+    #endregion
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
@@ -18,12 +18,13 @@
 
     public class BaseController : ControllerBase
     {
-        #region Attributes
+
+        #region Atributos y Propiedades
 
         protected ResponseDto response;
         protected readonly ResponseDto responseError;
 
-        #endregion Attributes
+        #endregion
 
         #region Constructor
 
@@ -43,7 +44,7 @@
 
         #endregion Constructor
 
-        #region Methods
+        #region Métodos y Funciones
 
         protected void ResponseError(Exception ex, bool includeInnerException = false)
         {
@@ -54,7 +55,7 @@
             response = responseError;
         }
 
-        #endregion Methods
+        #endregion
 
     }
 }
