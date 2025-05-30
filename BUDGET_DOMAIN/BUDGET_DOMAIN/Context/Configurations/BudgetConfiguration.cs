@@ -17,6 +17,7 @@
 
     public partial class BudgetConfiguration : IEntityTypeConfiguration<Budget>
     {
+
         #region Métodos y Funciones
 
         public void Configure(EntityTypeBuilder<Budget> entity)

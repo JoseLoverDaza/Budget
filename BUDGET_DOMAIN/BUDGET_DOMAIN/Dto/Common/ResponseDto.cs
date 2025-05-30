@@ -10,7 +10,7 @@
     public class ResponseDto
     {
 
-        #region Attributes
+        #region Atributos
 
         public bool Status { get; set; }
 

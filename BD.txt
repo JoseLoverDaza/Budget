@@ -1,0 +1,310 @@
+----- BD -----
+
+CREATE DATABASE [BUDGET]
+
+CREATE SCHEMA [Budget]
+CREATE SCHEMA [Parameterization]
+CREATE SCHEMA [Security]
+
+CREATE TABLE [Parameterization].[Status](
+	[IdStatus] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](100) NOT NULL,
+	[Description] [nvarchar](255) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[IdStatus] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+CREATE TABLE [Security].[Role](
+	[IdRole] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](100) NOT NULL,
+	[Description] [nvarchar](255) NULL,
+	[IdStatus] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[IdRole] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [Security].[Role] WITH CHECK ADD CONSTRAINT [FK_Role_Status] FOREIGN KEY([IdStatus])
+REFERENCES [Parameterization ].[Status] ([IdStatus])
+
+ALTER TABLE [Security].[Role] CHECK CONSTRAINT [FK_Role_Status]
+
+CREATE TABLE [Security].[User](
+	[IdUser] [int] IDENTITY(1,1) NOT NULL,
+	[Email] [nvarchar](200) NOT NULL,
+	[Phone] [nvarchar](200) NOT NULL,
+	[Login] [nvarchar](100) NOT NULL,
+	[Password] [nvarchar](200) NOT NULL,
+	[IdRole] [int] NOT NULL,
+	[IdStatus] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[IdUser] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [Security].[User]  WITH CHECK ADD CONSTRAINT [FK_User_Role] FOREIGN KEY([IdRole])
+REFERENCES [Security].[Role] ([IdRole])
+
+ALTER TABLE [Security].[User] CHECK CONSTRAINT [FK_User_Role]
+
+ALTER TABLE [Security].[User]  WITH CHECK ADD  CONSTRAINT [FK_User_Status] FOREIGN KEY([IdStatus])
+REFERENCES [Parameterization ].[Status] ([IdStatus])
+
+ALTER TABLE [Security].[User] CHECK CONSTRAINT [FK_User_Status]
+
+CREATE TABLE [Budget].[FinancialInstitution](
+	[IdFinancialInstitution] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](100) NOT NULL,
+	[Description] [nvarchar](255) NULL,
+	[IdStatus] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[IdFinancialInstitution] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [Budget].[FinancialInstitution]  WITH CHECK ADD  CONSTRAINT [FK_FinancialInstitution_Status] FOREIGN KEY([IdStatus])
+REFERENCES [Parameterization ].[Status] ([IdStatus])
+
+ALTER TABLE [Budget].[FinancialInstitution] CHECK CONSTRAINT [FK_FinancialInstitution_Status]
+
+CREATE TABLE [Budget].[TypeAccount](
+	[IdTypeAccount] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](100) NOT NULL,
+	[Description] [nvarchar](255) NULL,
+	[IdStatus] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[IdTypeAccount] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [Budget].[TypeAccount]  WITH CHECK ADD  CONSTRAINT [FK_TypeAccount_Status] FOREIGN KEY([IdStatus])
+REFERENCES [Parameterization ].[Status] ([IdStatus])
+
+ALTER TABLE [Budget].[TypeAccount] CHECK CONSTRAINT [FK_TypeAccount_Status]
+
+ALTER TABLE [Budget].[TypeAccount] ADD  CONSTRAINT [UQ_TypeAccount_Name] UNIQUE NONCLUSTERED 
+(
+	[Name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+
+CREATE TABLE [Budget].[TypeExpense](
+	[IdTypeExpense] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](100) NOT NULL,
+	[Description] [nvarchar](255) NULL,
+	[IdStatus] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[IdTypeExpense] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [Budget].[TypeExpense]  WITH CHECK ADD  CONSTRAINT [FK_TypeExpense_Status] FOREIGN KEY([IdStatus])
+REFERENCES [Parameterization ].[Status] ([IdStatus])
+
+ALTER TABLE [Budget].[TypeExpense] CHECK CONSTRAINT [FK_TypeExpense_Status]
+
+ALTER TABLE [Budget].[TypeExpense] ADD  CONSTRAINT [UQ_TypeExpense_Name] UNIQUE NONCLUSTERED 
+(
+	[Name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+
+CREATE TABLE [Budget].[Expense](
+	[IdExpense] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](100) NOT NULL,
+	[Description] [nvarchar](255) NULL,
+	[IdTypeExpense] [int] NOT NULL,
+	[IdStatus] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[IdExpense] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [Budget].[Expense]  WITH CHECK ADD  CONSTRAINT [FK_Expense_Status] FOREIGN KEY([IdStatus])
+REFERENCES [Parameterization ].[Status] ([IdStatus])
+
+ALTER TABLE [Budget].[Expense] CHECK CONSTRAINT [FK_Expense_Status]
+
+ALTER TABLE [Budget].[Expense] ADD  CONSTRAINT [UQ_Expense_Name] UNIQUE NONCLUSTERED 
+(
+	[Name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+
+CREATE TABLE [Budget].[Account](
+	[IdAccount] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](100) NOT NULL,
+	[Description] [nvarchar](255) NULL,
+	[IdFinancialInstitution] [int] NOT NULL,
+	[IdTypeAccount] [int] NOT NULL,
+	[IdUser] [int] NOT NULL,
+	[IdStatus] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[IdAccount] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [Budget].[Account]  WITH CHECK ADD  CONSTRAINT [FK_Account_FinancialInstitution] FOREIGN KEY([IdFinancialInstitution])
+REFERENCES [Budget].[FinancialInstitution] ([IdFinancialInstitution])
+
+ALTER TABLE [Budget].[Account] CHECK CONSTRAINT [FK_Account_FinancialInstitution]
+
+ALTER TABLE [Budget].[Account]  WITH CHECK ADD  CONSTRAINT [FK_Account_Status] FOREIGN KEY([IdStatus])
+REFERENCES [Parameterization ].[Status] ([IdStatus])
+
+ALTER TABLE [Budget].[Account] CHECK CONSTRAINT [FK_Account_Status]
+
+ALTER TABLE [Budget].[Account]  WITH CHECK ADD  CONSTRAINT [FK_Account_TypeAccount] FOREIGN KEY([IdTypeAccount])
+REFERENCES [Budget].[TypeAccount] ([IdTypeAccount])
+
+ALTER TABLE [Budget].[Account] CHECK CONSTRAINT [FK_Account_TypeAccount]
+
+ALTER TABLE [Budget].[Account]  WITH CHECK ADD  CONSTRAINT [FK_Account_User] FOREIGN KEY([IdUser])
+REFERENCES [Security].[User] ([IdUser])
+
+ALTER TABLE [Budget].[Account] CHECK CONSTRAINT [FK_Account_User]
+
+ALTER TABLE [Budget].[Account] ADD  CONSTRAINT [UQ_Account_Name] UNIQUE NONCLUSTERED 
+(
+	[Name] ASC,
+	[IdFinancialInstitution] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+
+CREATE TABLE [Budget].[Deposit](
+	[IdDeposit] [int] IDENTITY(1,1) NOT NULL,
+	[Year] [smallint] NOT NULL,
+	[Month] [tinyint] NOT NULL,
+	[Amount] [decimal](18, 2) NOT NULL,
+	[IdUser] [int] NOT NULL,
+	[IdAccount] [int] NOT NULL,
+	[IdStatus] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[IdDeposit] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [Budget].[Deposit]  WITH CHECK ADD  CONSTRAINT [FK_Deposit_Account] FOREIGN KEY([IdAccount])
+REFERENCES [Budget].[Account] ([IdAccount])
+
+ALTER TABLE [Budget].[Deposit] CHECK CONSTRAINT [FK_Deposit_Account]
+
+ALTER TABLE [Budget].[Deposit]  WITH CHECK ADD  CONSTRAINT [FK_Deposit_Status] FOREIGN KEY([IdStatus])
+REFERENCES [Parameterization ].[Status] ([IdStatus])
+
+ALTER TABLE [Budget].[Deposit] CHECK CONSTRAINT [FK_Deposit_Status]
+
+ALTER TABLE [Budget].[Deposit]  WITH CHECK ADD  CONSTRAINT [FK_Deposit_User] FOREIGN KEY([IdUser])
+REFERENCES [Security].[User] ([IdUser])
+
+ALTER TABLE [Budget].[Deposit] CHECK CONSTRAINT [FK_Deposit_User]
+
+ALTER TABLE [Budget].[Deposit] ADD  DEFAULT ((0)) FOR [Amount]
+
+CREATE TABLE [Budget].[Billing](
+	[IdBilling] [int] IDENTITY(1,1) NOT NULL,
+	[Year] [smallint] NOT NULL,
+	[Month] [tinyint] NOT NULL,
+	[Observations] [varchar](255) NULL,
+	[IdUser] [int] NOT NULL,
+	[IdStatus] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[IdBilling] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [Budget].[Billing]  WITH CHECK ADD  CONSTRAINT [FK_Billing_Status] FOREIGN KEY([IdStatus])
+REFERENCES [Parameterization ].[Status] ([IdStatus])
+
+ALTER TABLE [Budget].[Billing] CHECK CONSTRAINT [FK_Billing_Status]
+
+ALTER TABLE [Budget].[Billing]  WITH CHECK ADD  CONSTRAINT [FK_Billing_User] FOREIGN KEY([IdUser])
+REFERENCES [Security].[User] ([IdUser])
+
+ALTER TABLE [Budget].[Billing] CHECK CONSTRAINT [FK_Billing_User]
+
+CREATE TABLE [Budget].[BillingDetails](
+	[IdBillingDetails] [int] IDENTITY(1,1) NOT NULL,
+	[IdBilling] [int] NOT NULL,
+	[Amount] [decimal](18, 2) NOT NULL,
+	[IdExpense] [int] NOT NULL,
+	[IdStatus] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[IdBillingDetails] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+ALTER TABLE [Budget].[BillingDetails]  WITH CHECK ADD  CONSTRAINT [FK_BillingDetails_Billing] FOREIGN KEY([IdBilling])
+REFERENCES [Budget].[Billing] ([IdBilling])
+
+ALTER TABLE [Budget].[BillingDetails] CHECK CONSTRAINT [FK_BillingDetails_Billing]
+
+ALTER TABLE [Budget].[BillingDetails]  WITH CHECK ADD  CONSTRAINT [FK_BillingDetails_Expense] FOREIGN KEY([IdExpense])
+REFERENCES [Budget].[Expense] ([IdExpense])
+
+ALTER TABLE [Budget].[BillingDetails] CHECK CONSTRAINT [FK_BillingDetails_Expense]
+
+ALTER TABLE [Budget].[BillingDetails]  WITH CHECK ADD  CONSTRAINT [FK_BillingDetails_Status] FOREIGN KEY([IdStatus])
+REFERENCES [Parameterization ].[Status] ([IdStatus])
+
+ALTER TABLE [Budget].[BillingDetails] CHECK CONSTRAINT [FK_BillingDetails_Status]
+
+CREATE TABLE [Budget].[Budget](
+	[IdBudget] [int] IDENTITY(1,1) NOT NULL,
+	[Year] [smallint] NOT NULL,
+	[Month] [tinyint] NOT NULL,
+	[IdUser] [int] NOT NULL,
+	[IdStatus] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[IdBudget] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [Budget].[Budget]  WITH CHECK ADD  CONSTRAINT [FK_Budget_Status] FOREIGN KEY([IdStatus])
+REFERENCES [Parameterization ].[Status] ([IdStatus])
+
+ALTER TABLE [Budget].[Budget] CHECK CONSTRAINT [FK_Budget_Status]
+
+ALTER TABLE [Budget].[Budget]  WITH CHECK ADD  CONSTRAINT [FK_Budget_User] FOREIGN KEY([IdUser])
+REFERENCES [Security].[User] ([IdUser])
+
+ALTER TABLE [Budget].[Budget] CHECK CONSTRAINT [FK_Budget_User]
+
+CREATE TABLE [Budget].[BudgetDetails](
+	[IdBudgetDetails] [int] IDENTITY(1,1) NOT NULL,
+	[IdBudget] [int] NOT NULL,
+	[Amount] [decimal](18, 2) NOT NULL,
+	[IdExpense] [int] NOT NULL,
+	[IdStatus] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[IdBudgetDetails] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [Budget].[BudgetDetails]  WITH CHECK ADD  CONSTRAINT [FK_BudgetDetails_Budget] FOREIGN KEY([IdBudget])
+REFERENCES [Budget].[Budget] ([IdBudget])
+
+ALTER TABLE [Budget].[BudgetDetails] CHECK CONSTRAINT [FK_BudgetDetails_Budget]
+
+ALTER TABLE [Budget].[BudgetDetails]  WITH CHECK ADD  CONSTRAINT [FK_BudgetDetails_Expense] FOREIGN KEY([IdExpense])
+REFERENCES [Budget].[Expense] ([IdExpense])
+
+ALTER TABLE [Budget].[BudgetDetails] CHECK CONSTRAINT [FK_BudgetDetails_Expense]
+
+ALTER TABLE [Budget].[BudgetDetails]  WITH CHECK ADD  CONSTRAINT [FK_BudgetDetails_Status] FOREIGN KEY([IdStatus])
+REFERENCES [Parameterization ].[Status] ([IdStatus])
+
+ALTER TABLE [Budget].[BudgetDetails] CHECK CONSTRAINT [FK_BudgetDetails_Status]
+
+ALTER TABLE [Budget].[BudgetDetails] ADD  DEFAULT ((0)) FOR [Amount]

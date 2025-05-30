@@ -10,7 +10,7 @@
     public class PaginationDto
     {
 
-        #region Attributes
+        #region Atributos
 
         public int Page { get; set; }
 

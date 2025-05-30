@@ -18,7 +18,7 @@
     public partial class EFContext : DbContext
     {
 
-        #region Attributes
+        #region Atributos
 
         private readonly string _connectionString;
         
