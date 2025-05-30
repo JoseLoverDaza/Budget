@@ -22,8 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="BUDGET_DOMAIN">
-      <HintPath>Libraries\BUDGET_DOMAIN.dll</HintPath>
+    <Reference Include="Domain">
+      <HintPath>Libraries\Domain.dll</HintPath>
     </Reference>
   </ItemGroup>
 

@@ -1,12 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CORE.Interfaces.Repositories
+﻿namespace CORE.Interfaces.Repositories
 {
-    internal interface IStatusRepository
+
+    #region Using
+
+    using Domain.Dto;
+
+    #endregion Using
+
+    /// <summary>
+    /// Fecha: 01 de enero de 2026
+    /// Nombre: IStatusRepository   
+    /// Autor: Jose Lover Daza Rojas
+    /// </summary>
+
+    public interface IStatusRepository
     {
+
+        #region  Métodos y Funciones
+
+        public StatusDto? GetStatusById(int id);
+                
+        public StatusDto? GetStatusByName(string name);
+
+        public List<StatusDto> GetStatus(int status);
+
+        #endregion
+
     }
 }

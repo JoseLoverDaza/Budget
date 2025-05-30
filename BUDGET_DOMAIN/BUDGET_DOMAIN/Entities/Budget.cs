@@ -21,5 +21,6 @@
         public int IdStatus { get; set; }
        
         #endregion
+
     }
 }

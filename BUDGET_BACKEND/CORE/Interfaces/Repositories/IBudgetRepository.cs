@@ -1,12 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CORE.Interfaces.Repositories
+﻿namespace CORE.Interfaces.Repositories
 {
-    internal interface IBudgetRepository
+
+    #region Using
+
+    using CORE.Dto;
+
+    #endregion Using
+
+    /// <summary>
+    /// Fecha: 01 de enero de 2026
+    /// Nombre: IBudgetRepository   
+    /// Autor: Jose Lover Daza Rojas
+    /// </summary>
+
+    public interface IBudgetRepository
     {
+
+        #region Métodos y Funciones
+
+        public DepositExtendDto? GetDepositById(int id);
+
+        public DepositExtendDto? GetDepositByName(string name);
+
+        #endregion Using
+
     }
 }

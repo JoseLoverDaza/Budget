@@ -10,7 +10,7 @@
     public class ResponseDto
     {
 
-        #region Atributos
+        #region Atributos y Propiedades
 
         public bool Status { get; set; }
 
@@ -22,7 +22,7 @@
 
         public PaginationDto? Pagination { get; set; }
 
-        #endregion Attributes
+        #endregion
 
         #region Constructor
 

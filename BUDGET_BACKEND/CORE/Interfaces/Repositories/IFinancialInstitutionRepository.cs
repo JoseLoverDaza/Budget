@@ -1,12 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CORE.Interfaces.Repositories
+﻿namespace CORE.Interfaces.Repositories
 {
-    internal interface IFinancialInstitutionRepository
+
+    #region Using
+
+    using CORE.Dto;
+
+    #endregion Using
+
+    /// <summary>
+    /// Fecha: 01 de enero de 2026
+    /// Nombre: IFinancialInstitutionRepository   
+    /// Autor: Jose Lover Daza Rojas
+    /// </summary>
+
+    public interface IFinancialInstitutionRepository
     {
+
+        #region Métodos y Funciones
+
+        public FinancialInstitutionExtendDto? GetFinancialInstitutionById(int id);
+
+        public FinancialInstitutionExtendDto? GetFinancialInstitutionByName(string name);
+
+        public List<FinancialInstitutionExtendDto> GetFinancialInstitutionsByStatus(int status);
+
+        #endregion Methods
+
     }
 }

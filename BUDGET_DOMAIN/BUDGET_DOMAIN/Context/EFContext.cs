@@ -4,9 +4,8 @@
     #region Librerias
 
     using Domain.Entities;
-    using Domain.Entities;
     using Microsoft.EntityFrameworkCore;
-    
+
     #endregion
 
     /// <summary>
@@ -18,7 +17,7 @@
     public partial class EFContext : DbContext
     {
 
-        #region Atributos
+        #region Atributos y Propiedades
 
         private readonly string _connectionString;
         

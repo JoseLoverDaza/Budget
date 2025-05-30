@@ -1,12 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CORE.Interfaces.Repositories
+﻿namespace CORE.Interfaces.Repositories
 {
-    internal interface ITypeExpenseRepository
+
+    #region Using
+
+    using CORE.Dto;
+
+    #endregion Using
+
+    /// <summary>
+    /// Fecha: 01 de enero de 2026
+    /// Nombre: ITypeExpenseRepository   
+    /// Autor: Jose Lover Daza Rojas
+    /// </summary>
+
+    public interface ITypeExpenseRepository
     {
+
+        #region Métodos y Funciones
+
+        public TypeExpenseExtendDto? GetTypeExpenseById(int id);
+
+        public TypeExpenseExtendDto? GetTypeExpenseByName(string name);
+
+        public List<TypeExpenseExtendDto> GetTypeExpensesByStatus(int status);
+
+        #endregion Methods
+
     }
 }

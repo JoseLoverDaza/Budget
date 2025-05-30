@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="Domain">
+      <HintPath>..\API\Libraries\Domain.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
