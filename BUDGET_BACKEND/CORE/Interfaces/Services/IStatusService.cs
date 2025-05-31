@@ -28,8 +28,6 @@
 
         public StatusDto UpdateStatus(StatusDto status);
 
-        public StatusDto DeleteStatus(StatusDto status);
-
         #endregion
 
     }

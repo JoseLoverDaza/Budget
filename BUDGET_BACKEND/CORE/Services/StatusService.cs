@@ -4,7 +4,14 @@
     #region Librerias
 
     using CORE.Interfaces.Repositories;
-
+    using CORE.Interfaces.Services;
+    using CORE.Utils;
+    using Domain.Dto;
+    using Domain.Entities;
+    using System.Collections.Generic;
+    using System.Runtime.InteropServices;
+    using System.Text.RegularExpressions;
+   
     #endregion
 
     /// <summary>
@@ -13,12 +20,12 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class StatusService : BaseService
+    public class StatusService : BaseService, IStatusService
     {
 
-        #region Attributes
+        #region Atributos y Propiedades
 
-        #endregion Attributes
+        #endregion
 
         #region Constructor
 
@@ -26,7 +33,129 @@
         {
         }
 
-        #endregion Constructor
+        #endregion
+
+        #region Métodos y Funciones
+
+        public StatusDto? GetStatusById(int idStatus)
+        {
+            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+
+            StatusDto? status = statusRepository.GetStatusById(idStatus);
+
+            if (status != null)
+            {
+                return status;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+        }
+
+        public StatusDto? GetStatusByName(string name)
+        {
+            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+
+            StatusDto? status = statusRepository.GetStatusByName(name);
+
+            if (status != null)
+            {
+                return status;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+        }
+
+        public List<StatusDto> GetStatus()
+        {
+            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+
+            List<StatusDto> status = statusRepository.GetStatus();
+
+            if (status.Count != 0)
+            {
+                return status;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+        }
+
+        public StatusDto SaveStatus(StatusDto status)
+        {
+            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+
+            if (status == null || string.IsNullOrWhiteSpace(status.Name.Trim()))
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+
+            if (!Regex.IsMatch(status.Name.Trim(), @"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$"))
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+
+            StatusDto? statusSearch = statusRepository.GetStatusByName(status.Name.Trim());
+
+            if (statusSearch != null)
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+
+            UnitOfWork.BaseRepository<Status>().Add(new Status
+            {
+                Name = status.Name.Trim(),
+                Description = status.Description!.Trim()
+            });
+
+            if (UnitOfWork.SaveChanges() <= 0)
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }             
+            return status;
+        }
+
+        public StatusDto UpdateStatus(StatusDto status)
+        {
+            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+
+            if (status == null || status.IdStatus <= 0 || string.IsNullOrWhiteSpace(status.Name.Trim()))
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+
+            if (!Regex.IsMatch(status.Name.Trim(), @"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$"))
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+
+            StatusDto? statusDuplicado = statusRepository.GetStatusByName(status.Name);
+            StatusDto? statusSearch = statusRepository.GetStatusById(status.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+
+            if (statusDuplicado != null && statusDuplicado.IdStatus != status.IdStatus)
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+
+            UnitOfWork.BaseRepository<Status>().Update(new Status
+            {
+                IdStatus = statusSearch.IdStatus,
+                Name = status.Name.Trim(),
+                Description = status.Description!.Trim()
+            });
+
+            if (UnitOfWork.SaveChanges() <= 0)
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+            return status;
+        }
+
+        #endregion
 
     }
 }

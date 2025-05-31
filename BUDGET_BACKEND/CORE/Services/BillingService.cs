@@ -3,7 +3,10 @@
 
     #region Librerias
 
+    using CORE.Dto;
     using CORE.Interfaces.Repositories;
+    using CORE.Interfaces.Services;
+    using System.Collections.Generic;
 
     #endregion
 
@@ -13,12 +16,12 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class BillingService : BaseService
+    public class BillingService : BaseService, IBillingService
     {
 
-        #region Attributes
+        #region Atributos y Propiedades
 
-        #endregion Attributes
+        #endregion
 
         #region Constructor
 
@@ -26,6 +29,50 @@
         {
         }
 
-        #endregion Constructor
+        #endregion
+
+        #region Métodos y Funciones
+
+        public BillingExtendDto? GetBillingById(int idBilling)
+        {
+            throw new NotImplementedException();
+        }
+
+        public BillingExtendDto? GetBillingByYearMonthUser(int year, int month, int idUser)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<BillingExtendDto> GetBillingsByStatus(int idStatus)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<BillingExtendDto> GetBillingsByUser(int idUser)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<BillingExtendDto> GetBillingsByUserStatus(int idUser, int idStatus)
+        {
+            throw new NotImplementedException();
+        }
+
+        public BillingExtendDto SaveBilling(BillingExtendDto billing)
+        {
+            throw new NotImplementedException();
+        }
+
+        public BillingExtendDto UpdateBilling(BillingExtendDto billing)
+        {
+            throw new NotImplementedException();
+        }
+
+        public BillingExtendDto DeleteBilling(BillingExtendDto billing)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

@@ -3,7 +3,10 @@
 
     #region Librerias
 
+    using CORE.Dto;
     using CORE.Interfaces.Repositories;
+    using CORE.Interfaces.Services;
+    using System.Collections.Generic;
 
     #endregion
 
@@ -13,12 +16,12 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class TypeAccountService : BaseService
+    public class TypeAccountService : BaseService, ITypeAccountService
     {
 
-        #region Attributes
+        #region Atributos y Propiedades
 
-        #endregion Attributes
+        #endregion 
 
         #region Constructor
 
@@ -26,7 +29,41 @@
         {
         }
 
-        #endregion Constructor
+        #endregion
+
+        #region Métodos y Funciones
+               
+        public TypeAccountExtendDto? GetTypeAccountById(int idTypeAccount)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TypeAccountExtendDto? GetTypeAccountByName(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<TypeAccountExtendDto> GetTypeAccountsByStatus(int idStatus)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TypeAccountExtendDto SaveTypeAccount(TypeAccountExtendDto typeAccount)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TypeAccountExtendDto UpdateTypeAccount(TypeAccountExtendDto typeAccount)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TypeAccountExtendDto DeleteTypeAccount(TypeAccountExtendDto typeAccount)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
 
     }
 }

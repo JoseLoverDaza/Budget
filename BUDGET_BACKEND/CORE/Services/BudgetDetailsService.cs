@@ -3,7 +3,10 @@
 
     #region Librerias
 
+    using CORE.Dto;
     using CORE.Interfaces.Repositories;
+    using CORE.Interfaces.Services;
+    using System.Collections.Generic;
 
     #endregion
 
@@ -13,12 +16,12 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class BudgetDetailsService : BaseService
+    public class BudgetDetailsService : BaseService, IBudgetDetailsService
     {
 
-        #region Attributes
+        #region Atributos y Propiedades
 
-        #endregion Attributes
+        #endregion
 
         #region Constructor
 
@@ -26,7 +29,46 @@
         {
         }
 
-        #endregion Constructor
+        #endregion
+
+        #region Métodos y Funciones
+
+        public BudgetDetailExtendDto? GetBudgetDetailsById(int idBudgetDetails)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<BudgetDetailExtendDto> GetBudgetDetailsByExpense(int idExpense)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<BudgetDetailExtendDto> GetBudgetDetailsByExpenseStatus(int idExpense, int idStatus)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<BudgetDetailExtendDto> GetBudgetDetailsByStatus(int idStatus)
+        {
+            throw new NotImplementedException();
+        }
+
+        public BudgetDetailExtendDto SaveBudgetDetail(BudgetDetailExtendDto budgetDetail)
+        {
+            throw new NotImplementedException();
+        }
+
+        public BudgetDetailExtendDto UpdateBudgetDetail(BudgetDetailExtendDto budgetDetail)
+        {
+            throw new NotImplementedException();
+        }
+
+        public BudgetDetailExtendDto DeleteBudgetDetail(BudgetDetailExtendDto budgetDetail)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
 
     }
 }
