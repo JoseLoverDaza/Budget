@@ -3,11 +3,19 @@
 using API.Extensions;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services
+    .AddControllers()
+    .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddHttpContextAccessor();
+builder.Host.AddSerilogConfig(builder.Configuration);
+builder.Services.AddDatabase(builder.Configuration);
+builder.Services.AddUnitOfWork();
+builder.Services.AddBusinessServices();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerDocumentation();
 

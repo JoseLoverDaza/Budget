@@ -8,6 +8,12 @@
 
     #endregion
 
+    /// <summary>
+    /// Fecha: 01 de enero de 2026
+    /// Nombre: SwaggerServiceExtensions   
+    /// Autor: Jose Lover Daza Rojas
+    /// </summary>
+
     [ExcludeFromCodeCoverage]
     public static class SwaggerServiceExtensions
     {

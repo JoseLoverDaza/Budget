@@ -1,12 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CORE.Services
+﻿namespace CORE.Services
 {
-    internal class FinancialInstitutionService
+
+    #region Librerias
+
+    using CORE.Interfaces.Repositories;
+
+    #endregion
+
+    /// <summary>
+    /// Fecha: 01 de enero de 2026
+    /// Nombre: FinancialInstitutionService   
+    /// Autor: Jose Lover Daza Rojas
+    /// </summary>
+
+    public class FinancialInstitutionService : BaseService
     {
+
+        #region Attributes
+
+        #endregion Attributes
+
+        #region Constructor
+
+        public FinancialInstitutionService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
+        }
+
+        #endregion Constructor
+
     }
 }

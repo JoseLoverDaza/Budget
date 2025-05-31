@@ -1,12 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CORE.Services
+﻿namespace CORE.Services
 {
-    internal class TypeExpenseService
+
+    #region Librerias
+
+    using CORE.Interfaces.Repositories;
+
+    #endregion
+
+    /// <summary>
+    /// Fecha: 01 de enero de 2026
+    /// Nombre: TypeExpenseService   
+    /// Autor: Jose Lover Daza Rojas
+    /// </summary>
+
+    public class TypeExpenseService : BaseService
     {
+
+        #region Attributes
+
+        #endregion Attributes
+
+        #region Constructor
+
+        public TypeExpenseService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
+        }
+
+        #endregion Constructor
+
     }
 }

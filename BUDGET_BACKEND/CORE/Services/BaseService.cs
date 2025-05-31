@@ -1,11 +1,9 @@
-﻿using CORE.Interfaces.Repositories;
-
-namespace CORE.Services
+﻿namespace CORE.Services
 {
 
     #region Using
 
-    
+    using CORE.Interfaces.Repositories;
 
     #endregion Using
 
