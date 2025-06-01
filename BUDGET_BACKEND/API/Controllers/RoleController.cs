@@ -1,18 +1,22 @@
 ﻿namespace API.Controllers
 {
-    using CORE.Dto;
 
     #region Librerias
 
+    using CORE.Dto;
     using CORE.Interfaces.Services;
-    using CORE.Services;
     using CORE.Utils;
-    using Domain.Dto;
     using Domain.Dto.Common;
     using Microsoft.AspNetCore.Mvc;
     using Swashbuckle.AspNetCore.Annotations;
 
     #endregion
+
+    /// <summary>
+    /// Fecha: 01 de enero de 2026
+    /// Nombre: RoleController   
+    /// Autor: Jose Lover Daza Rojas
+    /// </summary>
 
     [Route("api/[controller]")]
     [ApiController]

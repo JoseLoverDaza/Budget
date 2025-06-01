@@ -12,6 +12,12 @@
 
     #endregion
 
+    /// <summary>
+    /// Fecha: 01 de enero de 2026
+    /// Nombre: StatusController   
+    /// Autor: Jose Lover Daza Rojas
+    /// </summary>
+
     [Route("api/[controller]")]
     [ApiController]
     public class StatusController : BaseController
