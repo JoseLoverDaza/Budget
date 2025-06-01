@@ -1,12 +1,16 @@
 ﻿namespace CORE.Services
 {
-   
+
     #region Librerias
 
     using CORE.Dto;
     using CORE.Interfaces.Repositories;
     using CORE.Interfaces.Services;
+    using CORE.Utils;
+    using Domain.Entities;
     using System.Collections.Generic;
+    using System.Runtime.InteropServices;
+    using System.Text.RegularExpressions;
 
     #endregion
 
@@ -35,32 +39,144 @@
 
         public FinancialInstitutionExtendDto? GetFinancialInstitutionById(int idFinancialInstitution)
         {
-            throw new NotImplementedException();
+            IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
+            FinancialInstitutionExtendDto? financialInstitution = financialInstitutionRepository.GetFinancialInstitutionById(idFinancialInstitution);
+
+            if (financialInstitution != null)
+            {
+                return financialInstitution;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
         }
 
         public FinancialInstitutionExtendDto? GetFinancialInstitutionByName(string name)
         {
-            throw new NotImplementedException();
+            IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
+            FinancialInstitutionExtendDto? financialInstitution = financialInstitutionRepository.GetFinancialInstitutionByName(name);
+
+            if (financialInstitution != null)
+            {
+                return financialInstitution;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
         }
 
         public List<FinancialInstitutionExtendDto> GetFinancialInstitutionsByStatus(int idStatus)
         {
-            throw new NotImplementedException();
+            IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
+            List<FinancialInstitutionExtendDto> financialInstitutions = financialInstitutionRepository.GetFinancialInstitutionsByStatus(idStatus);
+
+            if (financialInstitutions.Count != 0)
+            {
+                return financialInstitutions;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
         }
 
         public FinancialInstitutionExtendDto SaveFinancialInstitution(FinancialInstitutionExtendDto financialInstitution)
         {
-            throw new NotImplementedException();
+            IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
+
+            if (financialInstitution == null || string.IsNullOrWhiteSpace(financialInstitution.Name.Trim()))
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+
+            if (!Regex.IsMatch(financialInstitution.Name.Trim(), @"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$"))
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+
+            FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionByName(financialInstitution.Name.Trim());
+
+            if (financialInstitutionSearch != null)
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+
+            FinancialInstitution saveFinancialInstitution = new()
+            {
+                Name = financialInstitution.Name.Trim(),
+                Description = financialInstitution.Description!.Trim()
+            };
+
+            UnitOfWork.BaseRepository<FinancialInstitution>().Add(saveFinancialInstitution);
+
+            if (UnitOfWork.SaveChanges() <= 0)
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+            return financialInstitution;
         }
 
         public FinancialInstitutionExtendDto UpdateFinancialInstitution(FinancialInstitutionExtendDto financialInstitution)
         {
-            throw new NotImplementedException();
+            IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
+
+            if (financialInstitution == null || financialInstitution.IdFinancialInstitution <= 0 || string.IsNullOrWhiteSpace(financialInstitution.Name.Trim()))
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+
+            if (!Regex.IsMatch(financialInstitution.Name.Trim(), @"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$"))
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+
+            FinancialInstitutionExtendDto? financialInstitutionDuplicado = financialInstitutionRepository.GetFinancialInstitutionByName(financialInstitution.Name);
+            FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionById(financialInstitution.IdFinancialInstitution) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+
+            if (financialInstitutionDuplicado != null && financialInstitutionDuplicado.IdFinancialInstitution != financialInstitution.IdFinancialInstitution)
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+
+            FinancialInstitution updateFinancialInstitution = new()
+            {
+                IdFinancialInstitution = financialInstitutionSearch.IdFinancialInstitution,
+                Name = financialInstitution.Name.Trim(),
+                Description = financialInstitution.Description!.Trim(),
+                IdStatus = financialInstitutionSearch.IdStatus
+            };
+
+            UnitOfWork.BaseRepository<FinancialInstitution>().Update(updateFinancialInstitution);
+
+            if (UnitOfWork.SaveChanges() <= 0)
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+            return financialInstitution;
         }
 
         public FinancialInstitutionExtendDto DeleteFinancialInstitution(FinancialInstitutionExtendDto financialInstitution)
         {
-            throw new NotImplementedException();
+            IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
+            FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionById(financialInstitution.IdFinancialInstitution) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+
+            FinancialInstitution deleteFinancialInstitution = new()
+            {
+                IdFinancialInstitution = financialInstitutionSearch.IdFinancialInstitution,
+                Name = financialInstitutionSearch.Name.Trim(),
+                Description = financialInstitutionSearch.Description!.Trim(),
+                IdStatus = Constants.Status.INACTIVO
+            };
+
+            UnitOfWork.BaseRepository<FinancialInstitution>().Update(deleteFinancialInstitution);
+
+            if (UnitOfWork.SaveChanges() <= 0)
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+            return financialInstitution;
         }
 
         #endregion

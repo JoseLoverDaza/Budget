@@ -106,11 +106,13 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            UnitOfWork.BaseRepository<Status>().Add(new Status
+            Status saveStatus = new()
             {
                 Name = status.Name.Trim(),
                 Description = status.Description!.Trim()
-            });
+            };
+
+            UnitOfWork.BaseRepository<Status>().Add(saveStatus);
 
             if (UnitOfWork.SaveChanges() <= 0)
             {
@@ -141,12 +143,14 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            UnitOfWork.BaseRepository<Status>().Update(new Status
+            Status updateStatus = new()
             {
                 IdStatus = statusSearch.IdStatus,
                 Name = status.Name.Trim(),
                 Description = status.Description!.Trim()
-            });
+            };
+
+            UnitOfWork.BaseRepository<Status>().Update(updateStatus);
 
             if (UnitOfWork.SaveChanges() <= 0)
             {
