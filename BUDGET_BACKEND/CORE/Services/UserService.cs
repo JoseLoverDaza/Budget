@@ -9,8 +9,7 @@
     using CORE.Utils;
     using Domain.Dto;
     using Domain.Entities;
-    using System.Collections.Generic;
-    using System.Data;
+    using System.Collections.Generic;    
     using System.Runtime.InteropServices;
     using System.Text.RegularExpressions;
 
@@ -32,7 +31,7 @@
         #region Constructor
 
         public UserService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        {            
         }
 
         #endregion
@@ -209,8 +208,16 @@
         public UserExtendDto DeleteUser(UserExtendDto user)
         {
             IUserRepository userRepository = UnitOfWork.UserRepository();
+            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+
             UserExtendDto? userSearch = userRepository.GetUserById(user.IdUser) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            
+            StatusDto? statusSearch = statusRepository.GetStatusById(user.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+
+            if (statusSearch.IdStatus == user.IdStatus)
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+
             User deleteUser = new()
             {
                 IdUser = userSearch!.IdUser,
@@ -219,7 +226,7 @@
                 Login = userSearch.Login.Trim(),
                 Password = userSearch.Password!.Trim(),
                 IdRole = userSearch.IdRole,               
-                IdStatus = Constants.Status.INACTIVO
+                IdStatus = statusSearch.IdStatus
             };
 
             UnitOfWork.BaseRepository<User>().Update(deleteUser);

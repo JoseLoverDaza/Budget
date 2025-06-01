@@ -9,8 +9,7 @@
     using CORE.Utils;
     using Domain.Dto;
     using Domain.Entities;
-    using System.Collections.Generic;
-    using System.Data;
+    using System.Collections.Generic;   
     using System.Runtime.InteropServices;
     using System.Text.RegularExpressions;
 
@@ -32,7 +31,7 @@
         #region Constructor
 
         public FinancialInstitutionService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        {           
         }
 
         #endregion
@@ -166,14 +165,22 @@
         public FinancialInstitutionExtendDto DeleteFinancialInstitution(FinancialInstitutionExtendDto financialInstitution)
         {
             IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
+            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+
             FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionById(financialInstitution.IdFinancialInstitution) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusDto? statusSearch = statusRepository.GetStatusById(financialInstitution.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+
+            if (statusSearch.IdStatus == financialInstitution.IdStatus)
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
 
             FinancialInstitution deleteFinancialInstitution = new()
             {
                 IdFinancialInstitution = financialInstitutionSearch.IdFinancialInstitution,
                 Name = financialInstitutionSearch.Name.Trim(),
                 Description = financialInstitutionSearch.Description!.Trim(),
-                IdStatus = Constants.Status.INACTIVO
+                IdStatus = statusSearch.IdStatus
             };
 
             UnitOfWork.BaseRepository<FinancialInstitution>().Update(deleteFinancialInstitution);

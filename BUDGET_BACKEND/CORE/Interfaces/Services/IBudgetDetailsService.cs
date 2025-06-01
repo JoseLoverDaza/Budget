@@ -20,9 +20,13 @@
 
         public BudgetDetailExtendDto? GetBudgetDetailsById(int idBudgetDetails);
 
+        public List<BudgetDetailExtendDto> GetBudgetDetailsByBudget(int idBudget);
+
         public List<BudgetDetailExtendDto> GetBudgetDetailsByExpense(int idExpense);
 
         public List<BudgetDetailExtendDto> GetBudgetDetailsByStatus(int idStatus);
+
+        public List<BudgetDetailExtendDto> GetBudgetDetailsByBudgetExpense(int idBudget, int idExpense);
 
         public List<BudgetDetailExtendDto> GetBudgetDetailsByExpenseStatus(int idExpense, int idStatus);
 

@@ -31,7 +31,7 @@
         #region Constructor
 
         public TypeExpenseService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        {           
         }
 
         #endregion
@@ -165,14 +165,22 @@
         public TypeExpenseExtendDto DeleteTypeExpense(TypeExpenseExtendDto typeExpense)
         {
             ITypeExpenseRepository typeExpenseRepository = UnitOfWork.TypeExpenseRepository();
+            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+
             TypeExpenseExtendDto? typeExpenseSearch = typeExpenseRepository.GetTypeExpenseById(typeExpense.IdTypeExpense) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusDto? statusSearch = statusRepository.GetStatusById(typeExpense.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+
+            if (statusSearch.IdStatus == typeExpense.IdStatus)
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
 
             TypeExpense deleteTypeExpense = new()
             {
                 IdTypeExpense = typeExpenseSearch.IdTypeExpense,
                 Name = typeExpenseSearch.Name.Trim(),
                 Description = typeExpenseSearch.Description!.Trim(),
-                IdStatus = Constants.Status.INACTIVO
+                IdStatus = statusSearch.IdStatus
             };
 
             UnitOfWork.BaseRepository<TypeExpense>().Update(deleteTypeExpense);

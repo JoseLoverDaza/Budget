@@ -9,6 +9,7 @@
     using Domain.Entities;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
+    using System.Net.NetworkInformation;
 
     #endregion
 
@@ -68,6 +69,36 @@
                 .FirstOrDefault();
         }
 
+        public List<BudgetDetailExtendDto> GetBudgetDetailsByBudget(int idBudget)
+        {
+            return (
+                     from bd in _context.BudgetDetails.AsNoTracking()
+                     join b in _context.Budgets.AsNoTracking()
+                     on bd.IdBudget equals b.IdBudget
+                     join e in _context.Expenses.AsNoTracking()
+                     on bd.IdExpense equals e.IdExpense
+                     join s in _context.Status.AsNoTracking()
+                     on b.IdStatus equals s.IdStatus
+                     where bd.IdBudget == idBudget
+                     select new BudgetDetailExtendDto
+                     {
+                         IdBudgetDetails = bd.IdBudgetDetails,
+                         IdBudget = bd.IdBudget,
+                         YearBudget = b.Year,
+                         MonthBudget = b.Month,
+                         CreationDate = bd.CreationDate,
+                         Amount = bd.Amount,
+                         IdExpense = bd.IdExpense,
+                         NameExpense = e.Name,
+                         DescriptionExpense = e.Description,
+                         IdStatus = bd.IdStatus,
+                         NameStatus = s.Name,
+                         DescriptionStatus = s.Description
+                     }
+                )
+                .ToList();
+        }
+
         public List<BudgetDetailExtendDto> GetBudgetDetailsByExpense(int idExpense)
         {
             return (
@@ -109,6 +140,36 @@
                      join s in _context.Status.AsNoTracking()
                      on b.IdStatus equals s.IdStatus
                      where bd.IdStatus == idStatus
+                     select new BudgetDetailExtendDto
+                     {
+                         IdBudgetDetails = bd.IdBudgetDetails,
+                         IdBudget = bd.IdBudget,
+                         YearBudget = b.Year,
+                         MonthBudget = b.Month,
+                         CreationDate = bd.CreationDate,
+                         Amount = bd.Amount,
+                         IdExpense = bd.IdExpense,
+                         NameExpense = e.Name,
+                         DescriptionExpense = e.Description,
+                         IdStatus = bd.IdStatus,
+                         NameStatus = s.Name,
+                         DescriptionStatus = s.Description
+                     }
+                )
+                .ToList();
+        }
+
+        public List<BudgetDetailExtendDto> GetBudgetDetailsByBudgetExpense(int idBudget, int idExpense)
+        {
+            return (
+                     from bd in _context.BudgetDetails.AsNoTracking()
+                     join b in _context.Budgets.AsNoTracking()
+                     on bd.IdBudget equals b.IdBudget
+                     join e in _context.Expenses.AsNoTracking()
+                     on bd.IdExpense equals e.IdExpense
+                     join s in _context.Status.AsNoTracking()
+                     on b.IdStatus equals s.IdStatus
+                     where bd.IdBudget == idBudget && bd.IdExpense == idExpense
                      select new BudgetDetailExtendDto
                      {
                          IdBudgetDetails = bd.IdBudgetDetails,

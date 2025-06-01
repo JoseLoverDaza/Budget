@@ -25,13 +25,13 @@
     {
 
         #region Atributos y Propiedades
-
+                
         #endregion
 
         #region Constructor
 
         public RoleService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        {            
         }
 
         #endregion
@@ -166,15 +166,23 @@
 
         public RoleExtendDto DeleteRole(RoleExtendDto role)
         {
-            IRoleRepository roleRepository = UnitOfWork.RoleRepository();            
-            RoleExtendDto? roleSearch = roleRepository.GetRoleById(role.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            IRoleRepository roleRepository = UnitOfWork.RoleRepository();
+            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+
+            RoleExtendDto? roleSearch = roleRepository.GetRoleById(role.IdRole) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusDto? statusSearch = statusRepository.GetStatusById(role.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+
+            if (roleSearch.IdStatus == role.IdStatus)
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
 
             Role deleteRole = new()
             {
                 IdRole = roleSearch.IdRole,
                 Name = roleSearch.Name.Trim(),
                 Description = roleSearch.Description!.Trim(),
-                IdStatus = Constants.Status.INACTIVO
+                IdStatus = statusSearch.IdStatus
             };
 
             UnitOfWork.BaseRepository<Role>().Update(deleteRole);

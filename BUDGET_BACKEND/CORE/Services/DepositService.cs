@@ -30,7 +30,7 @@
         #region Constructor
 
         public DepositService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        {           
         }
 
         #endregion
@@ -238,14 +238,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            List<DepositExtendDto>? deposits = depositRepository.GetDepositsByYearMonthUserAccount(deposit.Year, deposit.Month, deposit.IdUser, deposit.IdAccount);
-            DepositExtendDto? depositDuplicado = deposits.Count != 0 ? deposits.FirstOrDefault() : new DepositExtendDto();
             DepositExtendDto? depositSearch = depositRepository.GetDepositById(deposit.IdDeposit) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-
-            if (depositDuplicado != null && depositDuplicado.IdDeposit != depositSearch.IdDeposit)
-            {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            }
 
             Deposit updateDeposit = new()
             {
@@ -270,7 +263,15 @@
         public DepositExtendDto DeleteDeposit(DepositExtendDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
+            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+
             DepositExtendDto? depositSearch = depositRepository.GetDepositById(deposit.IdDeposit) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusDto? statusSearch = statusRepository.GetStatusById(deposit.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+
+            if (statusSearch.IdStatus == deposit.IdStatus)
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
 
             Deposit deleteDeposit = new()
             {
@@ -280,7 +281,7 @@
                 Amount = depositSearch.Amount,
                 IdUser = depositSearch.IdUser,
                 IdAccount = depositSearch.IdAccount,               
-                IdStatus = Constants.Status.INACTIVO
+                IdStatus = statusSearch.IdStatus
             };
 
             UnitOfWork.BaseRepository<Deposit>().Update(deleteDeposit);

@@ -31,7 +31,7 @@
         #region Constructor
 
         public ExpenseService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        {           
         }
 
         #endregion
@@ -170,7 +170,15 @@
         public ExpenseExtendDto DeleteExpense(ExpenseExtendDto expense)
         {
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
+            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+
             ExpenseExtendDto? expenseSearch = expenseRepository.GetExpenseById(expense.IdExpense) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusDto? statusSearch = statusRepository.GetStatusById(expense.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+
+            if (statusSearch.IdStatus == expense.IdStatus)
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
 
             Expense deleteExpense = new()
             {
@@ -178,7 +186,7 @@
                 Name = expenseSearch.Name.Trim(),
                 Description = expenseSearch.Description!.Trim(),
                 IdTypeExpense = expenseSearch.IdTypeExpense,
-                IdStatus = Constants.Status.INACTIVO
+                IdStatus = statusSearch.IdStatus
             };
 
             UnitOfWork.BaseRepository<Expense>().Update(deleteExpense);

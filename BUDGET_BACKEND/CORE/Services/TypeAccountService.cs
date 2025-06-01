@@ -9,8 +9,7 @@
     using CORE.Utils;
     using Domain.Dto;
     using Domain.Entities;
-    using System.Collections.Generic;
-    using System.Data;
+    using System.Collections.Generic;    
     using System.Runtime.InteropServices;
     using System.Text.RegularExpressions;
 
@@ -26,13 +25,13 @@
     {
 
         #region Atributos y Propiedades
-
+               
         #endregion 
 
         #region Constructor
 
         public TypeAccountService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        {           
         }
 
         #endregion
@@ -166,14 +165,22 @@
         public TypeAccountExtendDto DeleteTypeAccount(TypeAccountExtendDto typeAccount)
         {
             ITypeAccountRepository typeAccountRepository = UnitOfWork.TypeAccountRepository();
+            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+
             TypeAccountExtendDto? typeAccountSearch = typeAccountRepository.GetTypeAccountById(typeAccount.IdTypeAccount) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusDto? statusSearch = statusRepository.GetStatusById(typeAccount.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+
+            if (statusSearch.IdStatus == typeAccount.IdStatus)
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
 
             TypeAccount deleteTypeAccount = new()
             {
                 IdTypeAccount = typeAccountSearch.IdTypeAccount,
                 Name = typeAccountSearch.Name.Trim(),
                 Description = typeAccountSearch.Description!.Trim(),
-                IdStatus = Constants.Status.INACTIVO
+                IdStatus = statusSearch.IdStatus
             };
 
             UnitOfWork.BaseRepository<TypeAccount>().Update(deleteTypeAccount);

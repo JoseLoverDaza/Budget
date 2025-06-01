@@ -31,7 +31,7 @@
         #region Constructor
 
         public AccountService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        {            
         }
 
         #endregion
@@ -268,7 +268,15 @@
         public AccountExtendDto DeleteAccount(AccountExtendDto account)
         {
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
+            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+
             AccountExtendDto? accountSearch = accountRepository.GetAccountById(account.IdAccount) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusDto? statusSearch = statusRepository.GetStatusById(account.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+
+            if (statusSearch.IdStatus == account.IdStatus)
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
 
             Account deleteAccount = new()
             {
@@ -277,7 +285,7 @@
                 IdFinancialInstitution = accountSearch.IdFinancialInstitution,
                 IdTypeAccount = accountSearch.IdTypeAccount,
                 IdUser = accountSearch.IdUser,
-                IdStatus = Constants.Status.INACTIVO
+                IdStatus = statusSearch.IdStatus
             };
 
             UnitOfWork.BaseRepository<Account>().Update(deleteAccount);

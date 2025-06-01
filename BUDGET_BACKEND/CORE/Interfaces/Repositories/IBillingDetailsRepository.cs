@@ -20,9 +20,13 @@
 
         public BillingDetailExtendDto? GetBillingDetailsById(int idBillingDetails);
 
+        public List<BillingDetailExtendDto> GetBillingDetailsByBilling(int idBilling);
+
         public List<BillingDetailExtendDto> GetBillingDetailsByExpense(int idExpense);
 
         public List<BillingDetailExtendDto> GetBillingDetailsByStatus(int idStatus);
+
+        public List<BillingDetailExtendDto> GetBillingDetailsByBillingExpense(int idBilling, int idExpense);
 
         public List<BillingDetailExtendDto> GetBillingDetailsByExpenseStatus(int idExpense, int idStatus);
 

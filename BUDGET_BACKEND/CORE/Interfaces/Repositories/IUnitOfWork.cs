@@ -44,6 +44,8 @@
 
         public IBillingRepository BillingRepository();
 
+        public IBillingDetailsRepository BillingDetailsRepository();
+
         public IBudgetRepository BudgetRepository();
 
         public IBudgetDetailsRepository BudgetDetailsRepository();

@@ -27,14 +27,6 @@
 
         }
 
-        public static class Status
-        {
-            public const int INACTIVO = 1;
-            public const int ACTIVO = 2;
-            public const int CANCELADO = 3;
-            public const int CERRADO = 4;
-        }
-
         #endregion
 
     }
