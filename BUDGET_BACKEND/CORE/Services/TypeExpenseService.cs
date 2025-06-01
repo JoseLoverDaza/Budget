@@ -7,6 +7,7 @@
     using CORE.Interfaces.Repositories;
     using CORE.Interfaces.Services;
     using CORE.Utils;
+    using Domain.Dto;
     using Domain.Entities;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
@@ -85,6 +86,7 @@
         public TypeExpenseExtendDto SaveTypeExpense(TypeExpenseExtendDto typeExpense)
         {
             ITypeExpenseRepository typeExpenseRepository = UnitOfWork.TypeExpenseRepository();
+            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
 
             if (typeExpense == null || string.IsNullOrWhiteSpace(typeExpense.Name.Trim()))
             {
@@ -103,10 +105,13 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
+            StatusDto? statusSearch = statusRepository.GetStatusById(typeExpense.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+
             TypeExpense saveTypeExpense = new()
             {
                 Name = typeExpense.Name.Trim(),
-                Description = typeExpense.Description!.Trim()
+                Description = typeExpense.Description!.Trim(),
+                IdStatus = statusSearch.IdStatus
             };
 
             UnitOfWork.BaseRepository<TypeExpense>().Add(saveTypeExpense);

@@ -28,7 +28,7 @@
 
         public List<UserExtendDto> GetUsersByStatus(int idStatus);
 
-        public List<UserExtendDto> GetUsersByStatusRole(int idRole, int idStatus);
+        public List<UserExtendDto> GetUsersByRoleStatus(int idRole, int idStatus);
 
         public UserExtendDto SaveUser(UserExtendDto user);
 

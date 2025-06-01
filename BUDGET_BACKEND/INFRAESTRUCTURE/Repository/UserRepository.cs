@@ -169,7 +169,7 @@
                  .ToList();
         }
 
-        public List<UserExtendDto> GetUsersByStatusRole(int idRole, int idStatus)
+        public List<UserExtendDto> GetUsersByRoleStatus(int idRole, int idStatus)
         {
             return (
                      from u in _context.Users.AsNoTracking()

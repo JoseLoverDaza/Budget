@@ -44,7 +44,7 @@
                        from r in _context.Roles.AsNoTracking()
                        join s in _context.Status.AsNoTracking()
                        on r.IdStatus equals s.IdStatus
-                       where r.IdStatus == idRole
+                       where r.IdRole == idRole
                        select new RoleExtendDto
                        {
                            IdRole = r.IdRole,

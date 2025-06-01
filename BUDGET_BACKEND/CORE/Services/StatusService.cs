@@ -138,7 +138,7 @@
             StatusDto? statusDuplicado = statusRepository.GetStatusByName(status.Name);
             StatusDto? statusSearch = statusRepository.GetStatusById(status.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            if (statusDuplicado != null && statusDuplicado.IdStatus != status.IdStatus)
+            if (statusDuplicado != null && statusDuplicado.IdStatus != statusSearch.IdStatus)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }

@@ -7,8 +7,10 @@
     using CORE.Interfaces.Repositories;
     using CORE.Interfaces.Services;
     using CORE.Utils;
+    using Domain.Dto;
     using Domain.Entities;
     using System.Collections.Generic;
+    using System.Data;
     using System.Runtime.InteropServices;
     using System.Text.RegularExpressions;
 
@@ -85,6 +87,7 @@
         public TypeAccountExtendDto SaveTypeAccount(TypeAccountExtendDto typeAccount)
         {
             ITypeAccountRepository typeAccountRepository = UnitOfWork.TypeAccountRepository();
+            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
 
             if (typeAccount == null || string.IsNullOrWhiteSpace(typeAccount.Name.Trim()))
             {
@@ -103,10 +106,13 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
+            StatusDto? statusSearch = statusRepository.GetStatusById(typeAccount.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+
             TypeAccount saveTypeAccount = new()
             {
                 Name = typeAccount.Name.Trim(),
-                Description = typeAccount.Description!.Trim()
+                Description = typeAccount.Description!.Trim(),
+                IdStatus = statusSearch.IdStatus
             };
 
             UnitOfWork.BaseRepository<TypeAccount>().Add(saveTypeAccount);
@@ -121,7 +127,7 @@
         public TypeAccountExtendDto UpdateTypeAccount(TypeAccountExtendDto typeAccount)
         {
             ITypeAccountRepository typeAccountRepository = UnitOfWork.TypeAccountRepository();
-
+            
             if (typeAccount == null || typeAccount.IdTypeAccount <= 0 || string.IsNullOrWhiteSpace(typeAccount.Name.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);

@@ -7,6 +7,7 @@
     using CORE.Interfaces.Repositories;
     using CORE.Interfaces.Services;
     using CORE.Utils;
+    using Domain.Dto;
     using Domain.Entities;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
@@ -87,6 +88,7 @@
         public RoleExtendDto SaveRole(RoleExtendDto role)
         {           
             IRoleRepository roleRepository = UnitOfWork.RoleRepository();
+            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
 
             if (role == null || string.IsNullOrWhiteSpace(role.Name.Trim()))
             {
@@ -105,10 +107,13 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
+            StatusDto? statusSearch = statusRepository.GetStatusById(role.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+
             Role saveRole = new()
             {
                 Name = role.Name.Trim(),
-                Description = role.Description!.Trim()
+                Description = role.Description!.Trim(),
+                IdStatus = statusSearch.IdStatus
             };
 
             UnitOfWork.BaseRepository<Role>().Add(saveRole);
@@ -123,7 +128,7 @@
         public RoleExtendDto UpdateRole(RoleExtendDto role)
         {
             IRoleRepository roleRepository = UnitOfWork.RoleRepository();
-
+            
             if (role == null || role.IdRole <= 0 || string.IsNullOrWhiteSpace(role.Name.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
@@ -135,9 +140,9 @@
             }
 
             RoleExtendDto? roleDuplicado = roleRepository.GetRoleByName(role.Name);
-            RoleExtendDto? roleSearch = roleRepository.GetRoleById(role.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            RoleExtendDto? roleSearch = roleRepository.GetRoleById(role.IdRole) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            if (roleDuplicado != null && roleDuplicado.IdStatus != role.IdStatus)
+            if (roleDuplicado != null && roleDuplicado.IdRole != roleSearch.IdRole)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }

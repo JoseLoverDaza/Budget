@@ -46,7 +46,8 @@
                        select new StatusDto
                        {
                            IdStatus = s.IdStatus,
-                           Name = s.Name
+                           Name = s.Name,
+                           Description = s.Description
                        }
                    )                  
                    .FirstOrDefault();
@@ -60,7 +61,8 @@
                        select new StatusDto
                        {
                            IdStatus = s.IdStatus,
-                           Name = s.Name
+                           Name = s.Name,
+                           Description = s.Description
                        }
                    )                   
                    .FirstOrDefault();
@@ -73,7 +75,8 @@
                      select new StatusDto
                      {
                          IdStatus = s.IdStatus,
-                         Name = s.Name
+                         Name = s.Name,
+                         Description = s.Description
                      }
                  )                               
                  .ToList();

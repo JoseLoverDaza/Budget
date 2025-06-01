@@ -28,6 +28,8 @@
 
         public List<DepositExtendDto> GetDepositsByYearMonthStatus(int year, int month, int idStatus);
 
+        public List<DepositExtendDto> GetDepositsByYearMonthUserAccount(int year, int month, int idUser, int idAccount);
+
         public List<DepositExtendDto> GetDepositsByUser(int idUser);
 
         public List<DepositExtendDto> GetDepositsByAccount(int idAccount);

@@ -193,6 +193,37 @@
                  .ToList();
         }
 
+        public List<DepositExtendDto> GetDepositsByYearMonthUserAccount(int year, int month, int idUser, int idAccount)
+        {
+            return (
+                    from d in _context.Deposits.AsNoTracking()
+                    join u in _context.Users.AsNoTracking()
+                    on d.IdUser equals u.IdUser
+                    join a in _context.Accounts.AsNoTracking()
+                    on d.IdAccount equals a.IdAccount
+                    join s in _context.Status.AsNoTracking()
+                    on d.IdStatus equals s.IdStatus
+                    where d.Year == year && d.Month == month && d.IdUser == idUser && d.IdAccount == idAccount
+                    select new DepositExtendDto
+                    {
+                        IdDeposit = d.IdDeposit,
+                        Year = d.Year,
+                        Month = d.Month,
+                        Amount = d.Amount,
+                        IdUser = d.IdUser,
+                        EmailUser = u.Email,
+                        LoginUser = u.Login,
+                        IdAccount = d.IdAccount,
+                        NameAccount = a.Name,
+                        DescriptionAccount = a.Description,
+                        IdStatus = d.IdStatus,
+                        NameStatus = s.Name,
+                        DescriptionStatus = s.Description
+                    }
+                  )
+                 .ToList();
+        }
+
         public List<DepositExtendDto> GetDepositsByUser(int idUser)
         {
             return (

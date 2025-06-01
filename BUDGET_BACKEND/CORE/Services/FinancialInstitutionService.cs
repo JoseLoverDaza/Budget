@@ -7,8 +7,10 @@
     using CORE.Interfaces.Repositories;
     using CORE.Interfaces.Services;
     using CORE.Utils;
+    using Domain.Dto;
     using Domain.Entities;
     using System.Collections.Generic;
+    using System.Data;
     using System.Runtime.InteropServices;
     using System.Text.RegularExpressions;
 
@@ -85,6 +87,7 @@
         public FinancialInstitutionExtendDto SaveFinancialInstitution(FinancialInstitutionExtendDto financialInstitution)
         {
             IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
+            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
 
             if (financialInstitution == null || string.IsNullOrWhiteSpace(financialInstitution.Name.Trim()))
             {
@@ -103,10 +106,13 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
+            StatusDto? statusSearch = statusRepository.GetStatusById(financialInstitution.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+
             FinancialInstitution saveFinancialInstitution = new()
             {
                 Name = financialInstitution.Name.Trim(),
-                Description = financialInstitution.Description!.Trim()
+                Description = financialInstitution.Description!.Trim(),
+                IdStatus = statusSearch.IdStatus
             };
 
             UnitOfWork.BaseRepository<FinancialInstitution>().Add(saveFinancialInstitution);
