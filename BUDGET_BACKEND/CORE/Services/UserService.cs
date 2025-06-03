@@ -11,8 +11,7 @@
     using Domain.Entities;
     using System.Collections.Generic;    
     using System.Runtime.InteropServices;
-    using System.Text.RegularExpressions;
-
+    
     #endregion
 
     /// <summary>
@@ -213,7 +212,7 @@
             UserExtendDto? userSearch = userRepository.GetUserById(user.IdUser) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(user.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            if (statusSearch.IdStatus == user.IdStatus)
+            if (userSearch.IdStatus == user.IdStatus)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }

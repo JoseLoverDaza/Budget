@@ -7,6 +7,7 @@
     using CORE.Interfaces.Repositories;
     using Domain.Context;
     using Microsoft.EntityFrameworkCore;
+    using System.Data;
     using System.Linq.Expressions;
     using System.Reflection;
 
@@ -24,6 +25,7 @@
         #region Atributos y Propiedades
 
         private readonly DbSet<T> _dbSet;
+        private readonly EFContext _context;
 
         #endregion
 
@@ -32,6 +34,7 @@
         public BaseRepository(EFContext dbContext)
         {
             _dbSet = dbContext.Set<T>();
+            _context = dbContext;
         }
 
         #endregion
@@ -67,13 +70,35 @@
                
         public T Update(T entity)
         {
-            _dbSet.Update(entity);
+            Microsoft.EntityFrameworkCore.Metadata.IProperty? keyProperty = _context.Model.FindEntityType(typeof(T))?.FindPrimaryKey()?.Properties
+                .FirstOrDefault();
+
+            if (keyProperty != null)
+            {
+                var keyValue = keyProperty.PropertyInfo?.GetValue(entity);
+
+                var trackedEntity = _context.ChangeTracker.Entries<T>()
+                    .FirstOrDefault(e =>
+                        keyProperty.PropertyInfo?.GetValue(e.Entity)?.Equals(keyValue) == true);
+
+                if (trackedEntity != null)
+                {
+                    _context.Entry(trackedEntity.Entity).CurrentValues.SetValues(entity);
+                    return trackedEntity.Entity;
+                }
+            }
+
+            _dbSet.Attach(entity);
+            _context.Entry(entity).State = EntityState.Modified;
             return entity;
         }
                
         public IEnumerable<T> AddUpdate(IEnumerable<T> entity)
         {
-            _dbSet.UpdateRange(entity);
+            foreach (var item in entity)
+            {
+                Update(item);
+            }
             return entity;
         }
                

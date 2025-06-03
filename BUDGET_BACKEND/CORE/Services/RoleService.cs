@@ -11,8 +11,7 @@
     using Domain.Entities;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
-    using System.Text.RegularExpressions;
-
+    
     #endregion
 
     /// <summary>
@@ -21,11 +20,11 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class RoleService : BaseService, IRoleService
+    public partial class RoleService : BaseService, IRoleService
     {
 
         #region Atributos y Propiedades
-                
+
         #endregion
 
         #region Constructor
@@ -95,7 +94,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            if (!Regex.IsMatch(role.Name.Trim(), @"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$"))
+            if (string.IsNullOrWhiteSpace(role.Name.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -112,7 +111,7 @@
             Role saveRole = new()
             {
                 Name = role.Name.Trim(),
-                Description = role.Description!.Trim(),
+                Description = role.Description?.Trim() ?? string.Empty,
                 IdStatus = statusSearch.IdStatus
             };
 
@@ -134,7 +133,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            if (!Regex.IsMatch(role.Name.Trim(), @"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$"))
+            if (string.IsNullOrWhiteSpace(role.Name.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -151,7 +150,7 @@
             {
                 IdRole = roleSearch.IdRole,
                 Name = role.Name.Trim(),
-                Description = role.Description!.Trim(),
+                Description = role.Description?.Trim() ?? string.Empty,
                 IdStatus = roleSearch.IdStatus
             };
 
@@ -181,7 +180,7 @@
             {
                 IdRole = roleSearch.IdRole,
                 Name = roleSearch.Name.Trim(),
-                Description = roleSearch.Description!.Trim(),
+                Description = role.Description?.Trim() ?? string.Empty,
                 IdStatus = statusSearch.IdStatus
             };
 
@@ -193,6 +192,8 @@
             }
             return role;
         }
+
+        
 
         #endregion
 

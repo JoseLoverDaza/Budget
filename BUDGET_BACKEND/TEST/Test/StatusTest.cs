@@ -3,16 +3,16 @@
 
     #region Librerias
 
-    using API.Controllers;
+    using API.Controllers;   
     using CORE.Interfaces.Services;
     using CORE.Services;
     using Domain.Context;
+    using Domain.Dto;
     using Domain.Entities;
     using INFRAESTRUCTURE.Context;    
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
-    using System.Net;    
+    using Microsoft.EntityFrameworkCore;   
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System.Net;    
 
     #endregion
 
@@ -139,6 +139,81 @@
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(HttpStatusCode.OK.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void SaveStatusOK()
+        {
+            ///Arrange   
+            StatusDto status = new()
+            {
+                Name = "Test1"               
+            };
+
+            ///Act
+            var result = _statusController!.SaveStatus(status);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.OK.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void SaveStatusFail()
+        {
+            ///Arrange   
+            StatusDto status = new()
+            {
+                Name = "Test",
+                IdStatus = -1
+            };
+
+            ///Act
+            var result = _statusController!.SaveStatus(status);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.InternalServerError.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void UpdateStatus()
+        {
+            ///Arrange   
+            StatusDto status = new()
+            {
+                IdStatus = 1,
+                Name = "Test1"
+            };
+
+            ///Act
+            var result = _statusController!.UpdateStatus(status);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.OK.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void UpdateStatusFail()
+        {
+            ///Arrange   
+            StatusDto status = new()
+            {
+                Name = "Test",
+                IdStatus = -1
+            };
+
+            ///Act
+            var result = _statusController!.UpdateStatus(status);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.InternalServerError.GetHashCode(), result.Code);
         }
 
         #endregion

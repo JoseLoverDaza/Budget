@@ -31,4 +31,13 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Libraries\BUDGET_DOMAIN.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Libraries\Domain.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

@@ -9,8 +9,7 @@
     using CORE.Utils;
     using Domain.Dto;
     using Domain.Entities;
-    using System.Collections.Generic;
-    using System.Net.NetworkInformation;
+    using System.Collections.Generic;   
     using System.Runtime.InteropServices;
 
     #endregion

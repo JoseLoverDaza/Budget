@@ -9,6 +9,7 @@
     using Domain.Dto;
     using Domain.Entities;
     using System.Collections.Generic;
+    using System.Data;
     using System.Runtime.InteropServices;
     using System.Text.RegularExpressions;
    
@@ -94,7 +95,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            if (!Regex.IsMatch(status.Name.Trim(), @"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$"))
+            if (string.IsNullOrWhiteSpace(status.Name.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -109,7 +110,7 @@
             Status saveStatus = new()
             {
                 Name = status.Name.Trim(),
-                Description = status.Description!.Trim()
+                Description = status.Description?.Trim() ?? string.Empty
             };
 
             UnitOfWork.BaseRepository<Status>().Add(saveStatus);
@@ -130,7 +131,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            if (!Regex.IsMatch(status.Name.Trim(), @"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$"))
+            if (string.IsNullOrWhiteSpace(status.Name.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -147,7 +148,7 @@
             {
                 IdStatus = statusSearch.IdStatus,
                 Name = status.Name.Trim(),
-                Description = status.Description!.Trim()
+                Description = status.Description?.Trim() ?? string.Empty
             };
 
             UnitOfWork.BaseRepository<Status>().Update(updateStatus);

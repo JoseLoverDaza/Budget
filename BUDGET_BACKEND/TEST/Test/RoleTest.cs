@@ -4,6 +4,7 @@
     #region Librerias
 
     using API.Controllers;
+    using CORE.Dto;
     using CORE.Interfaces.Services;
     using CORE.Services;
     using Domain.Context;
@@ -58,6 +59,26 @@
 
             _context.SaveChanges();
 
+            /// Status Id 2
+            _context.Status.Add(new Status()
+            {
+                IdStatus = 2,
+                Name = "Test1",
+                Description = "Test1"
+            });
+
+            _context.SaveChanges();
+
+            /// Status Id 3
+            _context.Status.Add(new Status()
+            {
+                IdStatus = 3,
+                Name = "Test2",
+                Description = "Test2"
+            });
+
+            _context.SaveChanges();
+
             /// Role Id 1
             _context.Roles.Add(new Role()
             {
@@ -89,7 +110,7 @@
             ///Assert
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Data);
-            Assert.IsTrue(result.Code == HttpStatusCode.OK.GetHashCode());
+            Assert.AreEqual(HttpStatusCode.OK.GetHashCode(), result.Code);
         }
 
         [TestMethod]
@@ -104,7 +125,7 @@
             ///Assert
             Assert.IsNotNull(result);
             Assert.IsNull(result.Data);
-            Assert.IsTrue(result.Code == HttpStatusCode.InternalServerError.GetHashCode());
+            Assert.AreEqual(HttpStatusCode.InternalServerError.GetHashCode(), result.Code);
         }
 
         [TestMethod]
@@ -119,7 +140,7 @@
             ///Assert
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Data);
-            Assert.IsTrue(result.Code == HttpStatusCode.OK.GetHashCode());
+            Assert.AreEqual(HttpStatusCode.OK.GetHashCode(), result.Code);
         }
 
         [TestMethod]
@@ -134,7 +155,7 @@
             ///Assert
             Assert.IsNotNull(result);
             Assert.IsNull(result.Data);
-            Assert.IsTrue(result.Code == HttpStatusCode.InternalServerError.GetHashCode());
+            Assert.AreEqual(HttpStatusCode.InternalServerError.GetHashCode(), result.Code);
         }
 
         [TestMethod]
@@ -149,7 +170,7 @@
             ///Assert
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Data);
-            Assert.IsTrue(result.Code == HttpStatusCode.OK.GetHashCode());
+            Assert.AreEqual(HttpStatusCode.OK.GetHashCode(), result.Code);
         }
 
         [TestMethod]
@@ -164,7 +185,125 @@
             ///Assert
             Assert.IsNotNull(result);
             Assert.IsNull(result.Data);
-            Assert.IsTrue(result.Code == HttpStatusCode.InternalServerError.GetHashCode());
+            Assert.AreEqual(HttpStatusCode.InternalServerError.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void SaveRoleOK()
+        {
+            ///Arrange   
+            RoleExtendDto role = new()
+            {
+                Name = "Test1",
+                IdStatus = 1
+            };
+
+            ///Act
+            var result = _roleController!.SaveRole(role);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.OK.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void SaveRoleFail()
+        {
+            ///Arrange   
+            RoleExtendDto role = new()
+            {
+                Name = "Test",
+                IdStatus = 1
+            };
+
+            ///Act
+            var result = _roleController!.SaveRole(role);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.InternalServerError.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void UpdateRoleOK()
+        {
+            ///Arrange   
+            RoleExtendDto role = new()
+            {
+                IdRole = 1,
+                Name = "Test1",
+                IdStatus = 1
+            };
+
+            ///Act
+            var result = _roleController!.UpdateRole(role);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.OK.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void UpdateRoleFail()
+        {
+            ///Arrange   
+            RoleExtendDto role = new()
+            {
+                IdRole = -1,
+                Name = "Test1",
+                IdStatus = 1
+            };
+
+            ///Act
+            var result = _roleController!.UpdateRole(role);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.InternalServerError.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void DeleteRoleOK()
+        {
+            ///Arrange   
+            RoleExtendDto role = new()
+            {
+                IdRole = 1,
+                Name = "Test1",
+                IdStatus = 3
+            };
+
+            ///Act
+            var result = _roleController!.DeleteRole(role);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.OK.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void DeleteRoleFail()
+        {
+            ///Arrange   
+            RoleExtendDto role = new()
+            {
+                IdRole = -1,
+                Name = "Test1",
+                IdStatus = 1
+            };
+
+            ///Act
+            var result = _roleController!.DeleteRole(role);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.InternalServerError.GetHashCode(), result.Code);
         }
 
         #endregion

@@ -11,8 +11,7 @@
     using Domain.Entities;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
-    using System.Text.RegularExpressions;
-
+    
     #endregion
 
     /// <summary>
@@ -96,7 +95,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            if (!Regex.IsMatch(expense.Name.Trim(), @"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$"))
+            if (string.IsNullOrWhiteSpace(expense.Name.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -137,7 +136,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            if (!Regex.IsMatch(expense.Name.Trim(), @"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$"))
+            if (string.IsNullOrWhiteSpace(expense.Name.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }

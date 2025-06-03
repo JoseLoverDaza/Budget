@@ -58,6 +58,7 @@
                            IdRole = u.IdRole,
                            NameRole = r.Name,
                            DescriptionRole = r.Description,
+                           IdStatus = u.IdStatus,
                            NameStatus = s.Name,
                            DescriptionStatus = s.Description
                        }
@@ -84,6 +85,7 @@
                           IdRole = u.IdRole,
                           NameRole = r.Name,
                           DescriptionRole = r.Description,
+                          IdStatus = u.IdStatus,
                           NameStatus = s.Name,
                           DescriptionStatus = s.Description
                       }
@@ -110,6 +112,7 @@
                           IdRole = u.IdRole,
                           NameRole = r.Name,
                           DescriptionRole = r.Description,
+                          IdStatus = u.IdStatus,
                           NameStatus = s.Name,
                           DescriptionStatus = s.Description
                       }
@@ -136,6 +139,7 @@
                          IdRole = u.IdRole,
                          NameRole = r.Name,
                          DescriptionRole = r.Description,
+                         IdStatus = u.IdStatus,
                          NameStatus = s.Name,
                          DescriptionStatus = s.Description
                      }
@@ -162,6 +166,7 @@
                          IdRole = u.IdRole,
                          NameRole = r.Name,
                          DescriptionRole = r.Description,
+                         IdStatus = u.IdStatus,
                          NameStatus = s.Name,
                          DescriptionStatus = s.Description
                      }
@@ -188,6 +193,7 @@
                          IdRole = u.IdRole,
                          NameRole = r.Name,
                          DescriptionRole = r.Description,
+                         IdStatus = u.IdStatus,
                          NameStatus = s.Name,
                          DescriptionStatus = s.Description
                      }

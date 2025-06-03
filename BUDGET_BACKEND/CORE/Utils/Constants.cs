@@ -7,7 +7,7 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class Constants
+    public static class Constants
     {
 
         #region Constantes
