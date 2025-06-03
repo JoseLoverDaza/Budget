@@ -1,11 +1,14 @@
 #region Builder
 
 using API.Extensions;
+using API.Helper;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
+
+EncryptionHelper.Configure(builder.Configuration);
 
 builder.Services
     .AddControllers()

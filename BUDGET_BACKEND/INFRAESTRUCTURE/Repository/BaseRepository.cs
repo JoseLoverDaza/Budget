@@ -70,8 +70,7 @@
                
         public T Update(T entity)
         {
-            Microsoft.EntityFrameworkCore.Metadata.IProperty? keyProperty = _context.Model.FindEntityType(typeof(T))?.FindPrimaryKey()?.Properties
-                .FirstOrDefault();
+            var keyProperty = _context.Model.FindEntityType(typeof(T))?.FindPrimaryKey()?.Properties[0];
 
             if (keyProperty != null)
             {

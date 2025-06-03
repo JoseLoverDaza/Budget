@@ -1,5 +1,6 @@
 ﻿namespace API.Extensions
 {
+    using API.Helper;
 
     #region Librerias
 
@@ -33,9 +34,11 @@
 
         public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
         {
+            string decryptedConnectionString = GetDecryptedConnectionString(configuration);
+
             return services.AddDbContext<EFContext>(options =>
-                     options.UseSqlServer(configuration.GetConnectionString(Constants.General.CONNECTION_STRING_DATABASE_NAME))
-                     .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+             options.UseSqlServer(decryptedConnectionString)
+                    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
         }
 
         public static IServiceCollection AddBusinessServices(this IServiceCollection services)
@@ -59,13 +62,27 @@
 
         public static IHostBuilder AddSerilogConfig(this IHostBuilder host, IConfiguration configuration)
         {
+            string decryptedConn = GetDecryptedConnectionString(configuration);
+
             return host.UseSerilog((ctx, cfg) =>
             {
-                cfg.ReadFrom.Configuration(ctx.Configuration).WriteTo.MSSqlServer(
-                    connectionString: (configuration.GetConnectionString(Constants.General.CONNECTION_STRING_DATABASE_NAME)),
-                    sinkOptions: new MSSqlServerSinkOptions { TableName = "logs_excepcion", AutoCreateSqlTable = true },
-                    restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Error);
+                cfg.ReadFrom.Configuration(ctx.Configuration)
+                   .WriteTo.MSSqlServer(
+                        connectionString: decryptedConn,
+                        sinkOptions: new MSSqlServerSinkOptions
+                        {
+                            TableName = "logs_excepcion",
+                            AutoCreateSqlTable = true
+                        },
+                        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Error);
             });
+        }
+
+        private static string GetDecryptedConnectionString(IConfiguration configuration)
+        {           
+            EncryptionHelper.Configure(configuration); 
+            string encrypted = configuration.GetConnectionString(Constants.General.CONNECTION_STRING_DATABASE_NAME)!;
+            return EncryptionHelper.Decrypt(encrypted);
         }
 
         #endregion Methods
