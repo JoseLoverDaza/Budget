@@ -74,8 +74,6 @@
             modelBuilder.ApplyConfiguration(new Configurations.BudgetDetailsConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.BillingConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.BillingDetailsConfiguration());
-
-            OnModelCreatingPartial(modelBuilder);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -85,8 +83,6 @@
                 optionsBuilder.UseSqlServer(_connectionString);
             }
         }
-
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 
         #endregion
 

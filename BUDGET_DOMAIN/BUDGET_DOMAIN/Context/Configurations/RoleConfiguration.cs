@@ -22,6 +22,8 @@
 
         public void Configure(EntityTypeBuilder<Role> entity)
         {
+            /// Tabla [Role].[Security]
+
             entity.ToTable("Role", "Security");
 
             entity.HasKey(e => e.IdRole);
@@ -35,11 +37,7 @@
 
             entity.Property(e => e.IdStatus)
                   .IsRequired();
-
-            OnConfigurePartial(entity);
         }
-
-        partial void OnConfigurePartial(EntityTypeBuilder<Role> entity);
 
         #endregion
 

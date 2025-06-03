@@ -22,6 +22,8 @@
 
         public void Configure(EntityTypeBuilder<Account> entity)
         {
+            /// Tabla [Account].[Budget]
+
             entity.ToTable("Account", "Budget");
 
             entity.HasKey(e => e.IdAccount);
@@ -37,11 +39,7 @@
             entity.Property(e => e.IdTypeAccount).IsRequired();
             entity.Property(e => e.IdUser).IsRequired();
             entity.Property(e => e.IdStatus).IsRequired();
-
-            OnConfigurePartial(entity);
         }
-
-        partial void OnConfigurePartial(EntityTypeBuilder<Account> entity);
 
         #endregion
 

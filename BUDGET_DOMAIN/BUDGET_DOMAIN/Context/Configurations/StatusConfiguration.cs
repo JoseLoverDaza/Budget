@@ -22,6 +22,8 @@
 
         public void Configure(EntityTypeBuilder<Status> entity) 
         {
+            /// Tabla [Status].[Parameterization]
+
             entity.ToTable("Status", "Parameterization");
 
             entity.HasKey(e => e.IdStatus);
@@ -32,11 +34,7 @@
 
             entity.Property(e => e.Description)
                   .HasMaxLength(255);
-
-            OnConfigurePartial(entity);
         }
-
-        partial void OnConfigurePartial(EntityTypeBuilder<Status> entity);
 
         #endregion
 

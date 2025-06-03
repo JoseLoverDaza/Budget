@@ -22,6 +22,8 @@
 
         public void Configure(EntityTypeBuilder<Deposit> entity)
         {
+            /// Tabla [Deposit].[Budget]
+            
             entity.ToTable("Deposit", "Budget");
 
             entity.HasKey(e => e.IdDeposit);
@@ -40,11 +42,7 @@
             entity.Property(e => e.IdUser).IsRequired();
             entity.Property(e => e.IdAccount).IsRequired();
             entity.Property(e => e.IdStatus).IsRequired();
-
-            OnConfigurePartial(entity);
         }
-
-        partial void OnConfigurePartial(EntityTypeBuilder<Deposit> entity);
 
         #endregion
 
