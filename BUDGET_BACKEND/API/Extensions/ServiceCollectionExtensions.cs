@@ -79,7 +79,7 @@
         }
 
         private static string GetDecryptedConnectionString(IConfiguration configuration)
-        {           
+        {       
             EncryptionHelper.Configure(configuration); 
             string encrypted = configuration.GetConnectionString(Constants.General.CONNECTION_STRING_DATABASE_NAME)!;
             return EncryptionHelper.Decrypt(encrypted);

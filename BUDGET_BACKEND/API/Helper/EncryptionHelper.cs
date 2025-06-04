@@ -20,7 +20,7 @@
 
         #region Atributos y Propiedades
 
-        private static IConfiguration _configuration;
+        private static IConfiguration? _configuration;
         
         #endregion
 
@@ -33,45 +33,42 @@
 
         private static byte[] GetKey()
         {
-            string projectName = _configuration?["Encryption:ProjectName"] ?? throw new InvalidOperationException("ProjectName no configurado.");
+            string projectName = _configuration?["Encryption:ProjectName"]
+                ?? throw new InvalidOperationException("ProjectName no configurado.");
             return SHA256.HashData(Encoding.UTF8.GetBytes(projectName)).Take(32).ToArray();
-        }
-
-        private static byte[] GetIV()
-        {
-            string projectName = _configuration?["Encryption:ProjectName"] ?? throw new InvalidOperationException("ProjectName no configurado.");
-            return MD5.HashData(Encoding.UTF8.GetBytes(projectName)).Take(16).ToArray();
         }
 
         public static string Encrypt(string plainText)
         {
             byte[] key = GetKey();
-            byte[] iv = GetIV();
-
             using Aes aes = Aes.Create();
             aes.Key = key;
-            aes.IV = iv;
+            aes.GenerateIV();
 
-            using MemoryStream ms = new();
+            using MemoryStream ms = new();            
+            ms.Write(aes.IV, 0, aes.IV.Length);
+
             using (CryptoStream cs = new(ms, aes.CreateEncryptor(), CryptoStreamMode.Write))
             using (StreamWriter sw = new(cs))
             {
                 sw.Write(plainText);
             }
-
             return Convert.ToBase64String(ms.ToArray());
         }
 
         public static string Decrypt(string encryptedText)
         {
+            byte[] fullCipher = Convert.FromBase64String(encryptedText);
             byte[] key = GetKey();
-            byte[] iv = GetIV();
+
+            byte[] iv = fullCipher.Take(16).ToArray();
+            byte[] cipher = fullCipher.Skip(16).ToArray();
 
             using Aes aes = Aes.Create();
             aes.Key = key;
             aes.IV = iv;
 
-            using MemoryStream ms = new(Convert.FromBase64String(encryptedText));
+            using MemoryStream ms = new(cipher);
             using CryptoStream cs = new(ms, aes.CreateDecryptor(), CryptoStreamMode.Read);
             using StreamReader sr = new(cs);
 
