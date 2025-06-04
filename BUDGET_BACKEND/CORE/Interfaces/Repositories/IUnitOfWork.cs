@@ -30,6 +30,12 @@
 
         public IUserRepository UserRepository();
 
+        public IAuditRepository AuditRepository();
+
+        public ITokenApiRepository TokenApiRepository();
+
+        public ILogRepository LogRepository();
+
         public IFinancialInstitutionRepository FinancialInstitutionRepository();
 
         public ITypeAccountRepository TypeAccountRepository();

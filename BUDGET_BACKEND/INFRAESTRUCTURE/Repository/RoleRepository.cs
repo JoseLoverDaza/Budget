@@ -6,6 +6,7 @@
     using CORE.Dto;
     using CORE.Interfaces.Repositories;
     using Domain.Context;
+    using Domain.Dto;
     using Domain.Entities;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
@@ -38,13 +39,13 @@
 
         #region Métodos y Funciones
 
-        public RoleExtendDto? GetRoleById(int idRole)
+        public RoleExtendDto? GetRoleById(RoleDto role)
         {
             return (
                        from r in _context.Roles.AsNoTracking()
                        join s in _context.Status.AsNoTracking()
                        on r.IdStatus equals s.IdStatus
-                       where r.IdRole == idRole
+                       where r.IdRole == role.IdRole
                        select new RoleExtendDto
                        {
                            IdRole = r.IdRole,
@@ -57,13 +58,13 @@
                    .FirstOrDefault();
         }
 
-        public RoleExtendDto? GetRoleByName(string name)
+        public RoleExtendDto? GetRoleByName(RoleDto role)
         {
             return (
                       from r in _context.Roles.AsNoTracking()
                       join s in _context.Status.AsNoTracking()
                       on r.IdStatus equals s.IdStatus
-                      where r.Name == name
+                      where r.Name == role.Name
                       select new RoleExtendDto
                       {
                           IdRole = r.IdRole,
@@ -76,13 +77,13 @@
                   .FirstOrDefault();
         }
 
-        public List<RoleExtendDto> GetRolesByStatus(int idStatus)
+        public List<RoleExtendDto> GetRolesByStatus(RoleDto role)
         {
             return (
                      from r in _context.Roles.AsNoTracking()
                      join s in _context.Status.AsNoTracking()
                      on r.IdStatus equals s.IdStatus
-                     where r.IdStatus == idStatus
+                     where r.IdStatus == role.IdStatus
                      select new RoleExtendDto
                      {
                          IdRole = r.IdRole,

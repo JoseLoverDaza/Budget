@@ -38,11 +38,11 @@
 
         #region  Métodos y Funciones
 
-        public StatusDto? GetStatusById(int idStatus)
+        public StatusDto? GetStatusById(StatusDto status)
         {
             return (
                        from s in _context.Status.AsNoTracking()
-                       where s.IdStatus == idStatus
+                       where s.IdStatus == status.IdStatus
                        select new StatusDto
                        {
                            IdStatus = s.IdStatus,
@@ -53,11 +53,11 @@
                    .FirstOrDefault();
         }
 
-        public StatusDto? GetStatusByName(string name)
+        public StatusDto? GetStatusByName(StatusDto status)
         {
             return (
                        from s in _context.Status.AsNoTracking()
-                       where s.Name == name
+                       where s.Name == status.Name
                        select new StatusDto
                        {
                            IdStatus = s.IdStatus,

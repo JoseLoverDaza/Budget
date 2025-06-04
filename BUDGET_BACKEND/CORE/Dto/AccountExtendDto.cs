@@ -22,6 +22,7 @@
         public string? DescriptionFinancialInstitution { get; set; }
         public string NameTypeAccount { get; set; } = null!;
         public string? DescriptionTypeAccount { get; set; }
+
         public string EmailUser { get; set; } = null!;
         public string LoginUser { get; set; } = null!;
 

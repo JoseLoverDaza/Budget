@@ -6,6 +6,7 @@
     using CORE.Dto;
     using CORE.Interfaces.Repositories;
     using Domain.Context;
+    using Domain.Dto;
     using Domain.Entities;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
@@ -38,7 +39,7 @@
 
         #region Métodos y Funciones
 
-        public ExpenseExtendDto? GetExpenseById(int idExpense)
+        public ExpenseExtendDto? GetExpenseById(ExpenseDto expense)
         {
             return (
                        from e in _context.Expenses.AsNoTracking()
@@ -46,7 +47,7 @@
                        on e.IdTypeExpense equals t.IdTypeExpense
                        join s in _context.Status.AsNoTracking()
                        on e.IdStatus equals s.IdStatus
-                       where e.IdExpense == idExpense
+                       where e.IdExpense == expense.IdExpense
                        select new ExpenseExtendDto
                        {
                            IdExpense = e.IdExpense,
@@ -61,34 +62,9 @@
                        }
                    )
                    .FirstOrDefault();
-        }
+        }       
 
-        public ExpenseExtendDto? GetExpenseByName(string name)
-        {
-            return (
-                       from e in _context.Expenses.AsNoTracking()
-                       join t in _context.TypeExpenses.AsNoTracking()
-                       on e.IdTypeExpense equals t.IdTypeExpense
-                       join s in _context.Status.AsNoTracking()
-                       on e.IdStatus equals s.IdStatus
-                       where e.Name == name
-                       select new ExpenseExtendDto
-                       {
-                           IdExpense = e.IdExpense,
-                           Name = e.Name,
-                           Description = e.Description,
-                           IdTypeExpense = t.IdTypeExpense,
-                           NameTypeExpense = t.Name,
-                           DescriptionTypeExpense = t.Description,
-                           IdStatus = e.IdStatus,
-                           NameStatus = s.Name,
-                           DescriptionStatus = s.Description
-                       }
-                   )
-                   .FirstOrDefault();
-        }
-
-        public List<ExpenseExtendDto> GetExpensesByTypeExpense(int idTypeExpense)
+        public List<ExpenseExtendDto> GetExpensesByTypeExpense(ExpenseDto expense)
         {
             return (
                    from e in _context.Expenses.AsNoTracking()
@@ -96,7 +72,7 @@
                    on e.IdTypeExpense equals t.IdTypeExpense
                    join s in _context.Status.AsNoTracking()
                    on e.IdStatus equals s.IdStatus
-                   where e.IdTypeExpense == idTypeExpense
+                   where e.IdTypeExpense == expense.IdTypeExpense
                    select new ExpenseExtendDto
                    {
                        IdExpense = e.IdExpense,
@@ -113,7 +89,7 @@
                 .ToList();
         }
 
-        public List<ExpenseExtendDto> GetExpensesByStatus(int idStatus)
+        public List<ExpenseExtendDto> GetExpensesByStatus(ExpenseDto expense)
         {
             return (
                     from e in _context.Expenses.AsNoTracking()
@@ -121,7 +97,7 @@
                     on e.IdTypeExpense equals t.IdTypeExpense
                     join s in _context.Status.AsNoTracking()
                     on e.IdStatus equals s.IdStatus
-                    where e.IdStatus == idStatus
+                    where e.IdStatus == expense.IdStatus
                     select new ExpenseExtendDto
                     {
                         IdExpense = e.IdExpense,
@@ -138,7 +114,32 @@
                  .ToList();
         }
 
-        public List<ExpenseExtendDto> GetExpensesByTypeExpenseStatus(int idTypeExpense, int idStatus)
+        public List<ExpenseExtendDto> GetExpensesByNameTypeExpense(ExpenseDto expense)
+        {
+            return (
+                   from e in _context.Expenses.AsNoTracking()
+                   join t in _context.TypeExpenses.AsNoTracking()
+                   on e.IdTypeExpense equals t.IdTypeExpense
+                   join s in _context.Status.AsNoTracking()
+                   on e.IdStatus equals s.IdStatus
+                   where e.Name == expense.Name && e.IdTypeExpense == expense.IdTypeExpense
+                   select new ExpenseExtendDto
+                   {
+                       IdExpense = e.IdExpense,
+                       Name = e.Name,
+                       Description = e.Description,
+                       IdTypeExpense = t.IdTypeExpense,
+                       NameTypeExpense = t.Name,
+                       DescriptionTypeExpense = t.Description,
+                       IdStatus = e.IdStatus,
+                       NameStatus = s.Name,
+                       DescriptionStatus = s.Description
+                   }
+                 )
+                .ToList();
+        }
+
+        public List<ExpenseExtendDto> GetExpensesByTypeExpenseStatus(ExpenseDto expense)
         {
             return (
                     from e in _context.Expenses.AsNoTracking()
@@ -146,7 +147,7 @@
                     on e.IdTypeExpense equals t.IdTypeExpense
                     join s in _context.Status.AsNoTracking()
                     on e.IdStatus equals s.IdStatus
-                    where e.IdTypeExpense == idTypeExpense && e.IdStatus == idStatus
+                    where e.IdTypeExpense == expense.IdTypeExpense && e.IdStatus == expense.IdStatus
                     select new ExpenseExtendDto
                     {
                         IdExpense = e.IdExpense,

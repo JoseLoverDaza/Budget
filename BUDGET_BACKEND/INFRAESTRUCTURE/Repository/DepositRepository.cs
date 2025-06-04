@@ -6,6 +6,7 @@
     using CORE.Dto;
     using CORE.Interfaces.Repositories;
     using Domain.Context;
+    using Domain.Dto;
     using Domain.Entities;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
@@ -38,7 +39,7 @@
 
         #region Métodos y Funciones
 
-        public DepositExtendDto? GetDepositById(int idDeposit)
+        public DepositExtendDto? GetDepositById(DepositDto deposit)
         {
             return (
                       from d in _context.Deposits.AsNoTracking()
@@ -48,7 +49,7 @@
                       on d.IdAccount equals a.IdAccount
                       join s in _context.Status.AsNoTracking()
                       on d.IdStatus equals s.IdStatus
-                      where d.IdDeposit == idDeposit
+                      where d.IdDeposit == deposit.IdDeposit
                       select new DepositExtendDto
                       {
                           IdDeposit = d.IdDeposit,
@@ -69,7 +70,7 @@
                   .FirstOrDefault();
         }
 
-        public List<DepositExtendDto> GetDepositsByYearMonth(int year, int month)
+        public List<DepositExtendDto> GetDepositsByYearMonth(DepositDto deposit)
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
@@ -79,7 +80,7 @@
                     on d.IdAccount equals a.IdAccount
                     join s in _context.Status.AsNoTracking()
                     on d.IdStatus equals s.IdStatus
-                    where d.Year == year && d.Month == month
+                    where d.Year == deposit.Year && d.Month == deposit.Month
                     select new DepositExtendDto
                     {
                         IdDeposit = d.IdDeposit,
@@ -100,7 +101,7 @@
                  .ToList();
         }
 
-        public List<DepositExtendDto> GetDepositsByYearMonthUser(int year, int month, int idUser)
+        public List<DepositExtendDto> GetDepositsByYearUser(DepositDto deposit)
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
@@ -110,7 +111,7 @@
                     on d.IdAccount equals a.IdAccount
                     join s in _context.Status.AsNoTracking()
                     on d.IdStatus equals s.IdStatus
-                    where d.Year == year && d.Month == month && d.IdUser == idUser
+                    where d.Year == deposit.Year && d.IdUser == deposit.IdUser
                     select new DepositExtendDto
                     {
                         IdDeposit = d.IdDeposit,
@@ -131,7 +132,7 @@
                  .ToList();
         }
 
-        public List<DepositExtendDto> GetDepositsByYearMonthAccount(int year, int month, int idAccount)
+        public List<DepositExtendDto> GetDepositsByMonthUser(DepositDto deposit)
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
@@ -141,7 +142,7 @@
                     on d.IdAccount equals a.IdAccount
                     join s in _context.Status.AsNoTracking()
                     on d.IdStatus equals s.IdStatus
-                    where d.Year == year && d.Month == month && d.IdAccount == idAccount
+                    where d.Month == deposit.Month && d.IdUser == deposit.IdUser
                     select new DepositExtendDto
                     {
                         IdDeposit = d.IdDeposit,
@@ -162,7 +163,7 @@
                  .ToList();
         }
 
-        public List<DepositExtendDto> GetDepositsByYearMonthStatus(int year, int month, int idStatus)
+        public List<DepositExtendDto> GetDepositsByYearMonthUser(DepositDto deposit)
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
@@ -172,7 +173,7 @@
                     on d.IdAccount equals a.IdAccount
                     join s in _context.Status.AsNoTracking()
                     on d.IdStatus equals s.IdStatus
-                    where d.Year == year && d.Month == month && d.IdStatus == idStatus
+                    where d.Year == deposit.Year && d.Month == deposit.Month && d.IdUser == deposit.IdUser
                     select new DepositExtendDto
                     {
                         IdDeposit = d.IdDeposit,
@@ -193,7 +194,7 @@
                  .ToList();
         }
 
-        public List<DepositExtendDto> GetDepositsByYearMonthUserAccount(int year, int month, int idUser, int idAccount)
+        public List<DepositExtendDto> GetDepositsByYearMonthAccount(DepositDto deposit)
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
@@ -203,7 +204,7 @@
                     on d.IdAccount equals a.IdAccount
                     join s in _context.Status.AsNoTracking()
                     on d.IdStatus equals s.IdStatus
-                    where d.Year == year && d.Month == month && d.IdUser == idUser && d.IdAccount == idAccount
+                    where d.Year == deposit.Year && d.Month == deposit.Month && d.IdAccount == deposit.IdAccount
                     select new DepositExtendDto
                     {
                         IdDeposit = d.IdDeposit,
@@ -224,7 +225,7 @@
                  .ToList();
         }
 
-        public List<DepositExtendDto> GetDepositsByUser(int idUser)
+        public List<DepositExtendDto> GetDepositsByYearMonthStatus(DepositDto deposit)
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
@@ -234,7 +235,7 @@
                     on d.IdAccount equals a.IdAccount
                     join s in _context.Status.AsNoTracking()
                     on d.IdStatus equals s.IdStatus
-                    where d.IdUser == idUser
+                    where d.Year == deposit.Year && d.Month == deposit.Month && d.IdStatus == deposit.IdStatus
                     select new DepositExtendDto
                     {
                         IdDeposit = d.IdDeposit,
@@ -255,7 +256,7 @@
                  .ToList();
         }
 
-        public List<DepositExtendDto> GetDepositsByAccount(int idAccount)
+        public List<DepositExtendDto> GetDepositsByYearMonthUserAccount(DepositDto deposit)
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
@@ -265,7 +266,7 @@
                     on d.IdAccount equals a.IdAccount
                     join s in _context.Status.AsNoTracking()
                     on d.IdStatus equals s.IdStatus
-                    where d.IdAccount == idAccount
+                    where d.Year == deposit.Year && d.Month == deposit.Month && d.IdUser == deposit.IdUser && d.IdAccount == deposit.IdAccount
                     select new DepositExtendDto
                     {
                         IdDeposit = d.IdDeposit,
@@ -286,7 +287,7 @@
                  .ToList();
         }
 
-        public List<DepositExtendDto> GetDepositsByStatus(int idStatus)
+        public List<DepositExtendDto> GetDepositsByUser(DepositDto deposit)
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
@@ -296,7 +297,7 @@
                     on d.IdAccount equals a.IdAccount
                     join s in _context.Status.AsNoTracking()
                     on d.IdStatus equals s.IdStatus
-                    where d.IdStatus == idStatus
+                    where d.IdUser == deposit.IdUser
                     select new DepositExtendDto
                     {
                         IdDeposit = d.IdDeposit,
@@ -317,7 +318,7 @@
                  .ToList();
         }
 
-        public List<DepositExtendDto> GetDepositsByUserStatus(int idUser, int idStatus)
+        public List<DepositExtendDto> GetDepositsByAccount(DepositDto deposit)
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
@@ -327,7 +328,7 @@
                     on d.IdAccount equals a.IdAccount
                     join s in _context.Status.AsNoTracking()
                     on d.IdStatus equals s.IdStatus
-                    where d.IdUser == idUser && d.IdStatus == idStatus
+                    where d.IdAccount == deposit.IdAccount
                     select new DepositExtendDto
                     {
                         IdDeposit = d.IdDeposit,
@@ -348,7 +349,7 @@
                  .ToList();
         }
 
-        public List<DepositExtendDto> GetDepositsByAccountStatus(int idAccount, int idStatus)
+        public List<DepositExtendDto> GetDepositsByStatus(DepositDto deposit)
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
@@ -358,7 +359,69 @@
                     on d.IdAccount equals a.IdAccount
                     join s in _context.Status.AsNoTracking()
                     on d.IdStatus equals s.IdStatus
-                    where d.IdAccount == idAccount && d.IdStatus == idStatus
+                    where d.IdStatus == deposit.IdStatus
+                    select new DepositExtendDto
+                    {
+                        IdDeposit = d.IdDeposit,
+                        Year = d.Year,
+                        Month = d.Month,
+                        Amount = d.Amount,
+                        IdUser = d.IdUser,
+                        EmailUser = u.Email,
+                        LoginUser = u.Login,
+                        IdAccount = d.IdAccount,
+                        NameAccount = a.Name,
+                        DescriptionAccount = a.Description,
+                        IdStatus = d.IdStatus,
+                        NameStatus = s.Name,
+                        DescriptionStatus = s.Description
+                    }
+                  )
+                 .ToList();
+        }
+
+        public List<DepositExtendDto> GetDepositsByUserStatus(DepositDto deposit)
+        {
+            return (
+                    from d in _context.Deposits.AsNoTracking()
+                    join u in _context.Users.AsNoTracking()
+                    on d.IdUser equals u.IdUser
+                    join a in _context.Accounts.AsNoTracking()
+                    on d.IdAccount equals a.IdAccount
+                    join s in _context.Status.AsNoTracking()
+                    on d.IdStatus equals s.IdStatus
+                    where d.IdUser == deposit.IdUser && d.IdStatus == deposit.IdStatus
+                    select new DepositExtendDto
+                    {
+                        IdDeposit = d.IdDeposit,
+                        Year = d.Year,
+                        Month = d.Month,
+                        Amount = d.Amount,
+                        IdUser = d.IdUser,
+                        EmailUser = u.Email,
+                        LoginUser = u.Login,
+                        IdAccount = d.IdAccount,
+                        NameAccount = a.Name,
+                        DescriptionAccount = a.Description,
+                        IdStatus = d.IdStatus,
+                        NameStatus = s.Name,
+                        DescriptionStatus = s.Description
+                    }
+                  )
+                 .ToList();
+        }
+
+        public List<DepositExtendDto> GetDepositsByAccountStatus(DepositDto deposit)
+        {
+            return (
+                    from d in _context.Deposits.AsNoTracking()
+                    join u in _context.Users.AsNoTracking()
+                    on d.IdUser equals u.IdUser
+                    join a in _context.Accounts.AsNoTracking()
+                    on d.IdAccount equals a.IdAccount
+                    join s in _context.Status.AsNoTracking()
+                    on d.IdStatus equals s.IdStatus
+                    where d.IdAccount == deposit.IdAccount && d.IdStatus == deposit.IdStatus
                     select new DepositExtendDto
                     {
                         IdDeposit = d.IdDeposit,

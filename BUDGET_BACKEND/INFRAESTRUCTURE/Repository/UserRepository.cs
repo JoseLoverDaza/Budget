@@ -6,6 +6,7 @@
     using CORE.Dto;
     using CORE.Interfaces.Repositories;
     using Domain.Context;
+    using Domain.Dto;
     using Domain.Entities;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
@@ -39,7 +40,7 @@
 
         #region Métodos y Funciones
 
-        public UserExtendDto? GetUserById(int idUser)
+        public UserExtendDto? GetUserById(UserDto user)
         {
             return (
                        from u in _context.Users.AsNoTracking()
@@ -47,7 +48,7 @@
                        on u.IdRole equals r.IdRole
                        join s in _context.Status.AsNoTracking()
                        on u.IdStatus equals s.IdStatus
-                       where u.IdUser == idUser
+                       where u.IdUser == user.IdUser
                        select new UserExtendDto
                        {
                            IdUser = u.IdUser,
@@ -66,7 +67,7 @@
                    .FirstOrDefault();
         }
 
-        public UserExtendDto? GetUserByEmail(string email)
+        public UserExtendDto? GetUserByEmail(UserDto user)
         {
             return (
                       from u in _context.Users.AsNoTracking()
@@ -74,7 +75,7 @@
                       on u.IdRole equals r.IdRole
                       join s in _context.Status.AsNoTracking()
                       on u.IdStatus equals s.IdStatus
-                      where u.Email == email
+                      where u.Email == user.Email
                       select new UserExtendDto
                       {
                           IdUser = u.IdUser,
@@ -93,7 +94,7 @@
                   .FirstOrDefault();
         }
 
-        public UserExtendDto? GetUserByLogin(string login)
+        public UserExtendDto? GetUserByLogin(UserDto user)
         {
             return (
                       from u in _context.Users.AsNoTracking()
@@ -101,7 +102,7 @@
                       on u.IdRole equals r.IdRole
                       join s in _context.Status.AsNoTracking()
                       on u.IdStatus equals s.IdStatus
-                      where u.Login == login
+                      where u.Login == user.Login
                       select new UserExtendDto
                       {
                           IdUser = u.IdUser,
@@ -120,7 +121,7 @@
                   .FirstOrDefault();
         }
 
-        public List<UserExtendDto> GetUsersByRole(int idRole)
+        public List<UserExtendDto> GetUsersByRole(UserDto user)
         {
             return (
                      from u in _context.Users.AsNoTracking()
@@ -128,7 +129,7 @@
                      on u.IdRole equals r.IdRole
                      join s in _context.Status.AsNoTracking()
                      on u.IdStatus equals s.IdStatus
-                     where r.IdRole == idRole
+                     where r.IdRole == user.IdRole
                      select new UserExtendDto
                      {
                          IdUser = u.IdUser,
@@ -147,7 +148,7 @@
                  .ToList();
         }
 
-        public List<UserExtendDto> GetUsersByStatus(int idStatus)
+        public List<UserExtendDto> GetUsersByStatus(UserDto user)
         {
             return (
                      from u in _context.Users.AsNoTracking()
@@ -155,7 +156,7 @@
                      on u.IdRole equals r.IdRole
                      join s in _context.Status.AsNoTracking()
                      on u.IdStatus equals s.IdStatus
-                     where r.IdStatus == idStatus
+                     where r.IdStatus == user.IdStatus
                      select new UserExtendDto
                      {
                          IdUser = u.IdUser,
@@ -174,7 +175,7 @@
                  .ToList();
         }
 
-        public List<UserExtendDto> GetUsersByRoleStatus(int idRole, int idStatus)
+        public List<UserExtendDto> GetUsersByRoleStatus(UserDto user)
         {
             return (
                      from u in _context.Users.AsNoTracking()
@@ -182,7 +183,7 @@
                      on u.IdRole equals r.IdRole
                      join s in _context.Status.AsNoTracking()
                      on u.IdStatus equals s.IdStatus
-                     where r.IdRole == idRole && r.IdStatus == idStatus
+                     where r.IdRole == user.IdRole && r.IdStatus == user.IdStatus
                      select new UserExtendDto
                      {
                          IdUser = u.IdUser,

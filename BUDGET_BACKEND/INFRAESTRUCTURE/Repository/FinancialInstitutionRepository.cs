@@ -6,6 +6,7 @@
     using CORE.Dto;
     using CORE.Interfaces.Repositories;
     using Domain.Context;
+    using Domain.Dto;
     using Domain.Entities;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
@@ -38,13 +39,13 @@
 
         #region Métodos y Funciones
 
-        public FinancialInstitutionExtendDto? GetFinancialInstitutionById(int idFinancialInstitution)
+        public FinancialInstitutionExtendDto? GetFinancialInstitutionById(FinancialInstitutionDto financialInstitution)
         {
             return (
                        from f in _context.FinancialInstitutions.AsNoTracking()
                        join s in _context.Status.AsNoTracking()
                        on f.IdStatus equals s.IdStatus
-                       where f.IdFinancialInstitution == idFinancialInstitution
+                       where f.IdFinancialInstitution == financialInstitution.IdFinancialInstitution
                        select new FinancialInstitutionExtendDto
                        {
                            IdFinancialInstitution = f.IdFinancialInstitution,
@@ -57,13 +58,13 @@
                    .FirstOrDefault();
         }
 
-        public FinancialInstitutionExtendDto? GetFinancialInstitutionByName(string name)
+        public FinancialInstitutionExtendDto? GetFinancialInstitutionByName(FinancialInstitutionDto financialInstitution)
         {
             return (
                        from f in _context.FinancialInstitutions.AsNoTracking()
                        join s in _context.Status.AsNoTracking()
                        on f.IdStatus equals s.IdStatus
-                       where f.Name == name
+                       where f.Name == financialInstitution.Name
                        select new FinancialInstitutionExtendDto
                        {
                            IdFinancialInstitution = f.IdFinancialInstitution,
@@ -76,13 +77,13 @@
                    .FirstOrDefault();
         }
 
-        public List<FinancialInstitutionExtendDto> GetFinancialInstitutionsByStatus(int idStatus)
+        public List<FinancialInstitutionExtendDto> GetFinancialInstitutionsByStatus(FinancialInstitutionDto financialInstitution)
         {
             return (
                     from f in _context.FinancialInstitutions.AsNoTracking()
                     join s in _context.Status.AsNoTracking()
                     on f.IdStatus equals s.IdStatus
-                    where f.IdStatus == idStatus
+                    where f.IdStatus == financialInstitution.IdStatus
                     select new FinancialInstitutionExtendDto
                     {
                         IdFinancialInstitution = f.IdFinancialInstitution,

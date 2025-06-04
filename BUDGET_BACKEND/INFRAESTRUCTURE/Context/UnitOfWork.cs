@@ -79,6 +79,21 @@
             return new UserRepository(_dbContext);
         }
 
+        public IAuditRepository AuditRepository()
+        {
+            return new AuditRepository(_dbContext);
+        }
+
+        public ITokenApiRepository TokenApiRepository()
+        {
+            return new TokenApiRepository(_dbContext);
+        }
+
+        public ILogRepository LogRepository()
+        {
+            return new LogRepository(_dbContext);
+        }
+
         public ITypeAccountRepository TypeAccountRepository()
         {
             return new TypeAccountRepository(_dbContext);

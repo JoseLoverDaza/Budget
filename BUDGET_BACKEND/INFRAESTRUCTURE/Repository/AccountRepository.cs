@@ -6,11 +6,11 @@
     using CORE.Dto;
     using CORE.Interfaces.Repositories;
     using Domain.Context;
+    using Domain.Dto;
     using Domain.Entities;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
-    using System.Net.NetworkInformation;
-
+    
     #endregion
 
     /// <summary>
@@ -39,7 +39,7 @@
 
         #region Métodos y Funciones
 
-        public AccountExtendDto? GetAccountById(int idAccount)
+        public AccountExtendDto? GetAccountById(AccountDto account)
         {
             return (
                      from a in _context.Accounts.AsNoTracking()
@@ -51,7 +51,7 @@
                      on a.IdUser equals u.IdUser
                      join s in _context.Status.AsNoTracking()
                      on a.IdStatus equals s.IdStatus
-                     where a.IdAccount == idAccount
+                     where a.IdAccount == account.IdAccount
                      select new AccountExtendDto
                      {
                          IdAccount = a.IdAccount,
@@ -74,7 +74,7 @@
                  .FirstOrDefault();
         }
 
-        public List<AccountExtendDto> GetAccountsByFinancialInstitution(int idFinancialInstitution)
+        public List<AccountExtendDto> GetAccountsByFinancialInstitution(AccountDto account)
         {
             return (
                     from a in _context.Accounts.AsNoTracking()
@@ -86,7 +86,7 @@
                     on a.IdUser equals u.IdUser
                     join s in _context.Status.AsNoTracking()
                     on a.IdStatus equals s.IdStatus
-                    where a.IdFinancialInstitution == idFinancialInstitution
+                    where a.IdFinancialInstitution == account.IdFinancialInstitution
                     select new AccountExtendDto
                     {
                         IdAccount = a.IdAccount,
@@ -109,7 +109,7 @@
                  .ToList();
         }
 
-        public List<AccountExtendDto> GetAccountsByTypeAccount(int idTypeAccount)
+        public List<AccountExtendDto> GetAccountsByTypeAccount(AccountDto account)
         {
             return (
                     from a in _context.Accounts.AsNoTracking()
@@ -121,7 +121,7 @@
                     on a.IdUser equals u.IdUser
                     join s in _context.Status.AsNoTracking()
                     on a.IdStatus equals s.IdStatus
-                    where a.IdTypeAccount == idTypeAccount
+                    where a.IdTypeAccount == account.IdTypeAccount
                     select new AccountExtendDto
                     {
                         IdAccount = a.IdAccount,
@@ -144,7 +144,7 @@
                  .ToList();
         }
 
-        public List<AccountExtendDto> GetAccountsByUser(int idUser)
+        public List<AccountExtendDto> GetAccountsByUser(AccountDto account)
         {
             return (
                     from a in _context.Accounts.AsNoTracking()
@@ -156,7 +156,7 @@
                     on a.IdUser equals u.IdUser
                     join s in _context.Status.AsNoTracking()
                     on a.IdStatus equals s.IdStatus
-                    where a.IdUser == idUser
+                    where a.IdUser == account.IdUser
                     select new AccountExtendDto
                     {
                         IdAccount = a.IdAccount,
@@ -179,7 +179,7 @@
                  .ToList();
         }
 
-        public List<AccountExtendDto> GetAccountsByStatus(int idStatus)
+        public List<AccountExtendDto> GetAccountsByStatus(AccountDto account)
         {
             return (
                     from a in _context.Accounts.AsNoTracking()
@@ -191,7 +191,7 @@
                     on a.IdUser equals u.IdUser
                     join s in _context.Status.AsNoTracking()
                     on a.IdStatus equals s.IdStatus
-                    where a.IdStatus == idStatus
+                    where a.IdStatus == account.IdStatus
                     select new AccountExtendDto
                     {
                         IdAccount = a.IdAccount,
@@ -214,7 +214,7 @@
                  .ToList();
         }
 
-        public List<AccountExtendDto> GetAccountsByFinancialInstitutionStatus(int idFinancialInstitution, int idStatus)
+        public List<AccountExtendDto> GetAccountsByFinancialInstitutionStatus(AccountDto account)
         {
             return (
                    from a in _context.Accounts.AsNoTracking()
@@ -226,7 +226,7 @@
                    on a.IdUser equals u.IdUser
                    join s in _context.Status.AsNoTracking()
                    on a.IdStatus equals s.IdStatus
-                   where a.IdFinancialInstitution == idFinancialInstitution && a.IdStatus == idStatus
+                   where a.IdFinancialInstitution == account.IdFinancialInstitution && a.IdStatus == account.IdStatus
                    select new AccountExtendDto
                    {
                        IdAccount = a.IdAccount,
@@ -249,7 +249,7 @@
                 .ToList();
         }
 
-        public List<AccountExtendDto> GetAccountsByTypeAccountStatus(int idTypeAccount, int idStatus)
+        public List<AccountExtendDto> GetAccountsByTypeAccountStatus(AccountDto account)
         {
             return (
                   from a in _context.Accounts.AsNoTracking()
@@ -261,7 +261,7 @@
                   on a.IdUser equals u.IdUser
                   join s in _context.Status.AsNoTracking()
                   on a.IdStatus equals s.IdStatus
-                  where a.IdTypeAccount == idTypeAccount && a.IdStatus == idStatus
+                  where a.IdTypeAccount == account.IdTypeAccount && a.IdStatus == account.IdStatus
                   select new AccountExtendDto
                   {
                       IdAccount = a.IdAccount,
@@ -284,7 +284,7 @@
                .ToList();
         }
 
-        public List<AccountExtendDto> GetAccountsByUserStatus(int idUser, int idStatus)
+        public List<AccountExtendDto> GetAccountsByUserStatus(AccountDto account)
         {
             return (
                   from a in _context.Accounts.AsNoTracking()
@@ -296,7 +296,7 @@
                   on a.IdUser equals u.IdUser
                   join s in _context.Status.AsNoTracking()
                   on a.IdStatus equals s.IdStatus
-                  where a.IdUser == idUser && a.IdStatus == idStatus
+                  where a.IdUser == account.IdUser && a.IdStatus == account.IdStatus
                   select new AccountExtendDto
                   {
                       IdAccount = a.IdAccount,
@@ -319,7 +319,7 @@
                .ToList();
         }
 
-        public List<AccountExtendDto> GetAccountsByNameFinancialInstitutionTypeAccountUser(string name, int idFinancialInstitution, int idTypeAccount, int idUser)
+        public List<AccountExtendDto> GetAccountsByNameFinancialInstitutionTypeAccountUser(AccountDto account)
         {
             return (
                  from a in _context.Accounts.AsNoTracking()
@@ -331,7 +331,7 @@
                  on a.IdUser equals u.IdUser
                  join s in _context.Status.AsNoTracking()
                  on a.IdStatus equals s.IdStatus
-                 where a.Name == name && a.IdFinancialInstitution == idFinancialInstitution && a.IdTypeAccount == idTypeAccount && a.IdUser == idUser
+                 where a.Name == account.Name && a.IdFinancialInstitution == account.IdFinancialInstitution && a.IdTypeAccount == account.IdTypeAccount && a.IdUser == account.IdUser
                  select new AccountExtendDto
                  {
                      IdAccount = a.IdAccount,
@@ -354,7 +354,7 @@
               .ToList();
         }
 
-        public List<AccountExtendDto> GetAccountsByFinancialInstitutionTypeAccountUser(int idFinancialInstitution, int idTypeAccount, int idUser)
+        public List<AccountExtendDto> GetAccountsByFinancialInstitutionTypeAccountUser(AccountDto account)
         {
             return (
                  from a in _context.Accounts.AsNoTracking()
@@ -366,7 +366,7 @@
                  on a.IdUser equals u.IdUser
                  join s in _context.Status.AsNoTracking()
                  on a.IdStatus equals s.IdStatus
-                 where a.IdFinancialInstitution == idFinancialInstitution && a.IdTypeAccount == idTypeAccount && a.IdUser == idUser
+                 where a.IdFinancialInstitution == account.IdFinancialInstitution && a.IdTypeAccount == account.IdTypeAccount && a.IdUser == account.IdUser
                  select new AccountExtendDto
                  {
                      IdAccount = a.IdAccount,

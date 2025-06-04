@@ -6,6 +6,7 @@
     using CORE.Dto;
     using CORE.Interfaces.Repositories;
     using Domain.Context;
+    using Domain.Dto;
     using Domain.Entities;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
@@ -38,7 +39,7 @@
 
         #region Métodos y Funciones
 
-        public BillingExtendDto? GetBillingById(int idBilling)
+        public BillingExtendDto? GetBillingById(BillingDto billing)
         {
             return (
                      from b in _context.Billings.AsNoTracking()
@@ -46,7 +47,7 @@
                      on b.IdUser equals u.IdUser
                      join s in _context.Status.AsNoTracking()
                      on b.IdStatus equals s.IdStatus
-                     where b.IdBilling == idBilling
+                     where b.IdBilling == billing.IdBilling
                      select new BillingExtendDto
                      {
                          IdBilling = b.IdBilling,
@@ -66,7 +67,7 @@
                 .FirstOrDefault();
         }
 
-        public BillingExtendDto? GetBillingByYearMonthUser(int year, int month, int idUser)
+        public List<BillingExtendDto> GetBillingsByYearUser(BillingDto billing)
         {
             return (
                      from b in _context.Billings.AsNoTracking()
@@ -74,7 +75,63 @@
                      on b.IdUser equals u.IdUser
                      join s in _context.Status.AsNoTracking()
                      on b.IdStatus equals s.IdStatus
-                     where b.Year == year && b.Month == month && b.IdUser == idUser
+                     where b.Year == billing.Year && b.IdUser == billing.IdBilling
+                     select new BillingExtendDto
+                     {
+                         IdBilling = b.IdBilling,
+                         Year = b.Year,
+                         Month = b.Month,
+                         CreationDate = b.CreationDate,
+                         Description = b.Description,
+                         Observation = b.Observation,
+                         IdUser = b.IdUser,
+                         EmailUser = u.Email,
+                         LoginUser = u.Login,
+                         IdStatus = b.IdStatus,
+                         NameStatus = s.Name,
+                         DescriptionStatus = s.Description
+                     }
+                   )
+                   .ToList();
+        }
+
+        public List<BillingExtendDto> GetBillingsByMonthUser(BillingDto billing)
+        {
+            return (
+                     from b in _context.Billings.AsNoTracking()
+                     join u in _context.Users.AsNoTracking()
+                     on b.IdUser equals u.IdUser
+                     join s in _context.Status.AsNoTracking()
+                     on b.IdStatus equals s.IdStatus
+                     where b.Month == billing.Month && b.IdUser == billing.IdBilling
+                     select new BillingExtendDto
+                     {
+                         IdBilling = b.IdBilling,
+                         Year = b.Year,
+                         Month = b.Month,
+                         CreationDate = b.CreationDate,
+                         Description = b.Description,
+                         Observation = b.Observation,
+                         IdUser = b.IdUser,
+                         EmailUser = u.Email,
+                         LoginUser = u.Login,
+                         IdStatus = b.IdStatus,
+                         NameStatus = s.Name,
+                         DescriptionStatus = s.Description
+                     }
+                   )
+                   .ToList();
+        }
+
+        public List<BillingExtendDto> GetBillingsByYearMonthUser(BillingDto billing)
+        {
+            return (
+                     from b in _context.Billings.AsNoTracking()
+                     join u in _context.Users.AsNoTracking()
+                     on b.IdUser equals u.IdUser
+                     join s in _context.Status.AsNoTracking()
+                     on b.IdStatus equals s.IdStatus
+                     where b.Year == billing.Year && b.Month == billing.Month && b.IdUser == billing.IdUser
                      select new BillingExtendDto
                      {
                          IdBilling = b.IdBilling,
@@ -91,10 +148,10 @@
                          DescriptionStatus = s.Description
                      }
                 )
-                .FirstOrDefault();
+                .ToList();
         }
 
-        public List<BillingExtendDto> GetBillingsByUser(int idUser)
+        public List<BillingExtendDto> GetBillingsByUser(BillingDto billing)
         {
             return (
                      from b in _context.Billings.AsNoTracking()
@@ -102,7 +159,7 @@
                      on b.IdUser equals u.IdUser
                      join s in _context.Status.AsNoTracking()
                      on b.IdStatus equals s.IdStatus
-                     where b.IdUser == idUser
+                     where b.IdUser == billing.IdUser
                      select new BillingExtendDto
                      {
                          IdBilling = b.IdBilling,
@@ -122,7 +179,7 @@
                    .ToList();
         }
 
-        public List<BillingExtendDto> GetBillingsByStatus(int idStatus)
+        public List<BillingExtendDto> GetBillingsByStatus(BillingDto billing)
         {
             return (
                      from b in _context.Billings.AsNoTracking()
@@ -130,7 +187,7 @@
                      on b.IdUser equals u.IdUser
                      join s in _context.Status.AsNoTracking()
                      on b.IdStatus equals s.IdStatus
-                     where b.IdStatus == idStatus
+                     where b.IdStatus == billing.IdStatus
                      select new BillingExtendDto
                      {
                          IdBilling = b.IdBilling,
@@ -150,7 +207,7 @@
                    .ToList();
         }
 
-        public List<BillingExtendDto> GetBillingsByUserStatus(int idUser, int idStatus)
+        public List<BillingExtendDto> GetBillingsByUserStatus(BillingDto billing)
         {
             return (
                     from b in _context.Billings.AsNoTracking()
@@ -158,7 +215,7 @@
                     on b.IdUser equals u.IdUser
                     join s in _context.Status.AsNoTracking()
                     on b.IdStatus equals s.IdStatus
-                    where b.IdUser == idUser && b.IdStatus == idStatus
+                    where b.IdUser == billing.IdUser && b.IdStatus == billing.IdStatus
                     select new BillingExtendDto
                     {
                         IdBilling = b.IdBilling,
@@ -178,7 +235,7 @@
                   .ToList();
         }
 
-        #endregion 
+        #endregion
 
     }
 }

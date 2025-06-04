@@ -21,6 +21,8 @@
 
         public BillingExtendDto? GetBillingById(BillingDto billing);
 
+        public List<BillingExtendDto> GetBillingsByYearMonth(BillingDto billing);
+
         public List<BillingExtendDto> GetBillingsByYearUser(BillingDto billing);
 
         public List<BillingExtendDto> GetBillingsByMonthUser(BillingDto billing);

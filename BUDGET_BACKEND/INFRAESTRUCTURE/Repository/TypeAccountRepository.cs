@@ -6,6 +6,7 @@
     using CORE.Dto;
     using CORE.Interfaces.Repositories;
     using Domain.Context;
+    using Domain.Dto;
     using Domain.Entities;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
@@ -38,13 +39,13 @@
 
         #region Métodos y Funciones
 
-        public TypeAccountExtendDto? GetTypeAccountById(int idTypeAccount)
+        public TypeAccountExtendDto? GetTypeAccountById(TypeAccountDto typeAccount)
         {
             return (
                        from t in _context.TypeAccounts.AsNoTracking()
                        join s in _context.Status.AsNoTracking()
                        on t.IdStatus equals s.IdStatus
-                       where t.IdTypeAccount == idTypeAccount
+                       where t.IdTypeAccount == typeAccount.IdTypeAccount
                        select new TypeAccountExtendDto
                        {
                            IdTypeAccount = t.IdTypeAccount,
@@ -57,13 +58,13 @@
                    .FirstOrDefault();
         }
 
-        public TypeAccountExtendDto? GetTypeAccountByName(string name)
+        public TypeAccountExtendDto? GetTypeAccountByName(TypeAccountDto typeAccount)
         {
             return (
                       from t in _context.TypeAccounts.AsNoTracking()
                       join s in _context.Status.AsNoTracking()
                       on t.IdStatus equals s.IdStatus
-                      where t.Name == name
+                      where t.Name == typeAccount.Name
                       select new TypeAccountExtendDto
                       {
                           IdTypeAccount = t.IdTypeAccount,
@@ -76,13 +77,13 @@
                   .FirstOrDefault();
         }
 
-        public List<TypeAccountExtendDto> GetTypeAccountsByStatus(int idStatus)
+        public List<TypeAccountExtendDto> GetTypeAccountsByStatus(TypeAccountDto typeAccount)
         {
             return (
                      from t in _context.TypeAccounts.AsNoTracking()
                      join s in _context.Status.AsNoTracking()
                      on t.IdStatus equals s.IdStatus
-                     where t.IdStatus == idStatus
+                     where t.IdStatus == typeAccount.IdStatus
                      select new TypeAccountExtendDto
                      {
                          IdTypeAccount = t.IdTypeAccount,

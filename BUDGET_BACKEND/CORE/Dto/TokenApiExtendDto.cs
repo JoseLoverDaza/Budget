@@ -18,6 +18,9 @@
 
         #region Atributos y Propiedades
 
+        public string EmailUser { get; set; } = null!;
+        public string LoginUser { get; set; } = null!;
+
         public string NameStatus { get; set; } = null!;
         public string? DescriptionStatus { get; set; }
 

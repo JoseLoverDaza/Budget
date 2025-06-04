@@ -13,7 +13,7 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class LogExtendDto
+    public class LogExtendDto : LogDto
     {
 
         #region Atributos y Propiedades

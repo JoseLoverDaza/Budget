@@ -21,6 +21,8 @@
 
         public BudgetExtendDto? GetBudgetById(BudgetDto budget);
 
+        public List<BudgetExtendDto> GetBudgetsByYearMonth(BudgetDto budget);
+
         public List<BudgetExtendDto> GetBudgetsByYearUser(BudgetDto budget);
 
         public List<BudgetExtendDto> GetBudgetsByMonthUser(BudgetDto budget);

@@ -6,6 +6,7 @@
     using CORE.Dto;
     using CORE.Interfaces.Repositories;
     using Domain.Context;
+    using Domain.Dto;
     using Domain.Entities;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
@@ -38,7 +39,7 @@
 
         #region Métodos y Funciones
 
-        public BudgetExtendDto? GetBudgetById(int idBudget)
+        public BudgetExtendDto? GetBudgetById(BudgetDto budget)
         {
             return (
                      from b in _context.Budgets.AsNoTracking()
@@ -46,7 +47,7 @@
                      on b.IdUser equals u.IdUser
                      join s in _context.Status.AsNoTracking()
                      on b.IdStatus equals s.IdStatus
-                     where b.IdBudget == idBudget
+                     where b.IdBudget == budget.IdBudget
                      select new BudgetExtendDto
                      {
                         IdBudget = b.IdBudget,
@@ -66,7 +67,35 @@
                 .FirstOrDefault();
         }
 
-        public BudgetExtendDto? GetBudgetByYearMonthUser(int year, int month, int idUser)
+        public List<BudgetExtendDto> GetBudgetsByYearUser(BudgetDto budget)
+        {
+            return (
+                    from b in _context.Budgets.AsNoTracking()
+                    join u in _context.Users.AsNoTracking()
+                    on b.IdUser equals u.IdUser
+                    join s in _context.Status.AsNoTracking()
+                    on b.IdStatus equals s.IdStatus
+                    where b.Year == budget.Year && b.IdUser == budget.IdUser
+                    select new BudgetExtendDto
+                    {
+                        IdBudget = b.IdBudget,
+                        Year = b.Year,
+                        Month = b.Month,
+                        CreationDate = b.CreationDate,
+                        Description = b.Description,
+                        Observation = b.Observation,
+                        IdUser = b.IdUser,
+                        EmailUser = u.Email,
+                        LoginUser = u.Login,
+                        IdStatus = b.IdStatus,
+                        NameStatus = s.Name,
+                        DescriptionStatus = s.Description
+                    }
+               )
+               .ToList();
+        }
+
+        public List<BudgetExtendDto> GetBudgetsByMonthUser(BudgetDto budget)
         {
             return (
                      from b in _context.Budgets.AsNoTracking()
@@ -74,7 +103,7 @@
                      on b.IdUser equals u.IdUser
                      join s in _context.Status.AsNoTracking()
                      on b.IdStatus equals s.IdStatus
-                     where b.Year == year && b.Month == month && b.IdUser == idUser
+                     where b.Month == budget.Month && b.IdUser == budget.IdUser
                      select new BudgetExtendDto
                      {
                          IdBudget = b.IdBudget,
@@ -91,10 +120,10 @@
                          DescriptionStatus = s.Description
                      }
                 )
-                .FirstOrDefault();
+                .ToList();
         }
 
-        public List<BudgetExtendDto> GetBudgetsByUser(int idUser)
+        public List<BudgetExtendDto> GetBudgetsByYearMonthUser(BudgetDto budget)
         {
             return (
                      from b in _context.Budgets.AsNoTracking()
@@ -102,7 +131,35 @@
                      on b.IdUser equals u.IdUser
                      join s in _context.Status.AsNoTracking()
                      on b.IdStatus equals s.IdStatus
-                     where b.IdUser == idUser
+                     where b.Year == budget.Year && b.Month == budget.Month && b.IdUser == budget.IdUser
+                     select new BudgetExtendDto
+                     {
+                         IdBudget = b.IdBudget,
+                         Year = b.Year,
+                         Month = b.Month,
+                         CreationDate = b.CreationDate,
+                         Description = b.Description,
+                         Observation = b.Observation,
+                         IdUser = b.IdUser,
+                         EmailUser = u.Email,
+                         LoginUser = u.Login,
+                         IdStatus = b.IdStatus,
+                         NameStatus = s.Name,
+                         DescriptionStatus = s.Description
+                     }
+                )
+                .ToList();
+        }
+
+        public List<BudgetExtendDto> GetBudgetsByUser(BudgetDto budget)
+        {
+            return (
+                     from b in _context.Budgets.AsNoTracking()
+                     join u in _context.Users.AsNoTracking()
+                     on b.IdUser equals u.IdUser
+                     join s in _context.Status.AsNoTracking()
+                     on b.IdStatus equals s.IdStatus
+                     where b.IdUser == budget.IdUser
                      select new BudgetExtendDto
                      {
                          IdBudget = b.IdBudget,
@@ -122,7 +179,7 @@
                  .ToList();
         }
 
-        public List<BudgetExtendDto> GetBudgetsByStatus(int idStatus)
+        public List<BudgetExtendDto> GetBudgetsByStatus(BudgetDto budget)
         {
             return (
                     from b in _context.Budgets.AsNoTracking()
@@ -130,7 +187,7 @@
                     on b.IdUser equals u.IdUser
                     join s in _context.Status.AsNoTracking()
                     on b.IdStatus equals s.IdStatus
-                    where b.IdStatus == idStatus
+                    where b.IdStatus == budget.IdStatus
                     select new BudgetExtendDto
                     {
                         IdBudget = b.IdBudget,
@@ -150,7 +207,7 @@
                 .ToList();
         }
 
-        public List<BudgetExtendDto> GetBudgetsByUserStatus(int idUser, int idStatus)
+        public List<BudgetExtendDto> GetBudgetsByUserStatus(BudgetDto budget)
         {
             return (
                    from b in _context.Budgets.AsNoTracking()
@@ -158,7 +215,7 @@
                    on b.IdUser equals u.IdUser
                    join s in _context.Status.AsNoTracking()
                    on b.IdStatus equals s.IdStatus
-                   where b.IdUser == idUser && b.IdStatus == idStatus
+                   where b.IdUser == budget.IdUser && b.IdStatus == budget.IdStatus
                    select new BudgetExtendDto
                    {
                        IdBudget = b.IdBudget,
@@ -178,7 +235,7 @@
                .ToList();
         }
 
-        #endregion 
+        #endregion
 
     }
 }

@@ -24,11 +24,15 @@
         
         public List<AuditExtendDto> GetAuditsByCreationDate(AuditDto audit);
 
+        public List<AuditExtendDto> GetAuditsByStatus(AuditDto audit);
+
         public List<AuditExtendDto> GetAuditsByMethodCreationDate(AuditDto audit);
 
         public List<AuditExtendDto> GetAuditsByEndpointCreationDate(AuditDto audit);
 
-        public List<AuditExtendDto> GetAuditsByStatus(AuditDto audit);
+        public List<AuditExtendDto> GetAuditsByEndpointMethodCreationDate(AuditDto audit);
+
+        public List<AuditExtendDto> GetAuditsByEndpointMethodCreationDateStatus(AuditDto audit);
 
         #endregion
 

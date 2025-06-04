@@ -6,6 +6,7 @@
     using CORE.Dto;
     using CORE.Interfaces.Repositories;
     using Domain.Context;
+    using Domain.Dto;
     using Domain.Entities;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
@@ -38,13 +39,13 @@
 
         #region Métodos y Funciones
 
-        public TypeExpenseExtendDto? GetTypeExpenseById(int idTypeExpense)
+        public TypeExpenseExtendDto? GetTypeExpenseById(TypeExpenseDto typeExpense)
         {
             return (
                        from t in _context.TypeExpenses.AsNoTracking()
                        join s in _context.Status.AsNoTracking()
                        on t.IdStatus equals s.IdStatus
-                       where t.IdTypeExpense == idTypeExpense
+                       where t.IdTypeExpense == typeExpense.IdTypeExpense
                        select new TypeExpenseExtendDto
                        {
                            IdTypeExpense = t.IdTypeExpense,
@@ -57,13 +58,13 @@
                    .FirstOrDefault();
         }
 
-        public TypeExpenseExtendDto? GetTypeExpenseByName(string name)
+        public TypeExpenseExtendDto? GetTypeExpenseByName(TypeExpenseDto typeExpense)
         {
             return (
                        from t in _context.TypeExpenses.AsNoTracking()
                        join s in _context.Status.AsNoTracking()
                        on t.IdStatus equals s.IdStatus
-                       where t.Name == name
+                       where t.Name == typeExpense.Name
                        select new TypeExpenseExtendDto
                        {
                            IdTypeExpense = t.IdTypeExpense,
@@ -76,13 +77,13 @@
                    .FirstOrDefault();
         }
 
-        public List<TypeExpenseExtendDto> GetTypeExpensesByStatus(int idStatus)
+        public List<TypeExpenseExtendDto> GetTypeExpensesByStatus(TypeExpenseDto typeExpense)
         {
             return (
                     from t in _context.TypeExpenses.AsNoTracking()
                     join s in _context.Status.AsNoTracking()
                     on t.IdStatus equals s.IdStatus
-                    where t.IdStatus == idStatus
+                    where t.IdStatus == typeExpense.IdStatus
                     select new TypeExpenseExtendDto
                     {
                         IdTypeExpense = t.IdTypeExpense,
