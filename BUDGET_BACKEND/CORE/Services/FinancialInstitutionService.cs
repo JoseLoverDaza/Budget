@@ -109,7 +109,7 @@
             FinancialInstitution saveFinancialInstitution = new()
             {
                 Name = financialInstitution.Name.Trim(),
-                Description = financialInstitution.Description!.Trim(),
+                Description = financialInstitution.Description?.Trim() ?? string.Empty,
                 IdStatus = statusSearch.IdStatus
             };
 
@@ -148,7 +148,7 @@
             {
                 IdFinancialInstitution = financialInstitutionSearch.IdFinancialInstitution,
                 Name = financialInstitution.Name.Trim(),
-                Description = financialInstitution.Description!.Trim(),
+                Description = financialInstitution.Description?.Trim() ?? string.Empty,
                 IdStatus = financialInstitutionSearch.IdStatus
             };
 
@@ -169,7 +169,7 @@
             FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionById(financialInstitution.IdFinancialInstitution) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(financialInstitution.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            if (statusSearch.IdStatus == financialInstitution.IdStatus)
+            if (financialInstitutionSearch.IdStatus == statusSearch.IdStatus)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -178,7 +178,7 @@
             {
                 IdFinancialInstitution = financialInstitutionSearch.IdFinancialInstitution,
                 Name = financialInstitutionSearch.Name.Trim(),
-                Description = financialInstitutionSearch.Description!.Trim(),
+                Description = financialInstitution.Description?.Trim() ?? string.Empty,
                 IdStatus = statusSearch.IdStatus
             };
 

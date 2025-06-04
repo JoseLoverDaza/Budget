@@ -109,7 +109,7 @@
             TypeExpense saveTypeExpense = new()
             {
                 Name = typeExpense.Name.Trim(),
-                Description = typeExpense.Description!.Trim(),
+                Description = typeExpense.Description?.Trim() ?? string.Empty,
                 IdStatus = statusSearch.IdStatus
             };
 
@@ -148,7 +148,7 @@
             {
                 IdTypeExpense = typeExpenseSearch.IdTypeExpense,
                 Name = typeExpense.Name.Trim(),
-                Description = typeExpense.Description!.Trim(),
+                Description = typeExpense.Description?.Trim() ?? string.Empty,
                 IdStatus = typeExpenseSearch.IdStatus
             };
 
@@ -169,7 +169,7 @@
             TypeExpenseExtendDto? typeExpenseSearch = typeExpenseRepository.GetTypeExpenseById(typeExpense.IdTypeExpense) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(typeExpense.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            if (statusSearch.IdStatus == typeExpense.IdStatus)
+            if (typeExpenseSearch.IdStatus == typeExpense.IdStatus)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -178,7 +178,7 @@
             {
                 IdTypeExpense = typeExpenseSearch.IdTypeExpense,
                 Name = typeExpenseSearch.Name.Trim(),
-                Description = typeExpenseSearch.Description!.Trim(),
+                Description = typeExpense.Description?.Trim() ?? string.Empty,
                 IdStatus = statusSearch.IdStatus
             };
 

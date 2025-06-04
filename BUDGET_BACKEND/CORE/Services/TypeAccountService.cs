@@ -109,7 +109,7 @@
             TypeAccount saveTypeAccount = new()
             {
                 Name = typeAccount.Name.Trim(),
-                Description = typeAccount.Description!.Trim(),
+                Description = typeAccount.Description?.Trim() ?? string.Empty,
                 IdStatus = statusSearch.IdStatus
             };
 
@@ -148,7 +148,7 @@
             {
                 IdTypeAccount = typeAccountSearch.IdTypeAccount,
                 Name = typeAccount.Name.Trim(),
-                Description = typeAccount.Description!.Trim(),
+                Description = typeAccount.Description?.Trim() ?? string.Empty,
                 IdStatus = typeAccountSearch.IdStatus
             };
 
@@ -169,7 +169,7 @@
             TypeAccountExtendDto? typeAccountSearch = typeAccountRepository.GetTypeAccountById(typeAccount.IdTypeAccount) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(typeAccount.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            if (statusSearch.IdStatus == typeAccount.IdStatus)
+            if (typeAccountSearch.IdStatus == typeAccount.IdStatus)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -178,7 +178,7 @@
             {
                 IdTypeAccount = typeAccountSearch.IdTypeAccount,
                 Name = typeAccountSearch.Name.Trim(),
-                Description = typeAccountSearch.Description!.Trim(),
+                Description = typeAccount.Description?.Trim() ?? string.Empty,
                 IdStatus = statusSearch.IdStatus
             };
 
