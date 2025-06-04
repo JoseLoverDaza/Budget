@@ -2,6 +2,7 @@
 
 using API.Extensions;
 using API.Helper;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using System.Text.Json.Serialization;
@@ -48,6 +49,13 @@ app.UseRequestLocalization(new RequestLocalizationOptions
     SupportedCultures = supportedCultures,
 
     SupportedUICultures = supportedCultures
+});
+
+app.UseMiddleware<MiddlewareAudit>();
+
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
 });
 
 if (app.Environment.IsDevelopment())

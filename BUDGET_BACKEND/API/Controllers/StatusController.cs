@@ -46,7 +46,7 @@
         public ResponseDto GetStatusById(int id)
         {
             try
-            {
+            {                
                 response.Data = _statusService.GetStatusById(id);
                 response.Message = Constants.General.SUCCESSUL;
             }
