@@ -9,6 +9,7 @@
     using Domain.Entities;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
+    using System.Net.NetworkInformation;
 
     #endregion
 
@@ -65,41 +66,6 @@
                          IdUser = a.IdUser,
                          EmailUser = u.Email,
                          LoginUser = u.Login,                        
-                         IdStatus = a.IdStatus,
-                         NameStatus = s.Name,
-                         DescriptionStatus = s.Description
-                     }
-                 )
-                 .FirstOrDefault();
-        }
-
-        public AccountExtendDto? GetAccountByName(string name)
-        {
-            return (
-                     from a in _context.Accounts.AsNoTracking()
-                     join f in _context.FinancialInstitutions.AsNoTracking()
-                     on a.IdFinancialInstitution equals f.IdFinancialInstitution
-                     join t in _context.TypeAccounts.AsNoTracking()
-                     on a.IdTypeAccount equals t.IdTypeAccount
-                     join u in _context.Users.AsNoTracking()
-                     on a.IdUser equals u.IdUser
-                     join s in _context.Status.AsNoTracking()
-                     on a.IdStatus equals s.IdStatus
-                     where a.Name == name
-                     select new AccountExtendDto
-                     {
-                         IdAccount = a.IdAccount,
-                         Name = a.Name,
-                         Description = a.Description,
-                         IdFinancialInstitution = a.IdFinancialInstitution,
-                         NameFinancialInstitution = f.Name,
-                         DescriptionFinancialInstitution = f.Description,
-                         IdTypeAccount = a.IdTypeAccount,
-                         NameTypeAccount = t.Name,
-                         DescriptionTypeAccount = t.Description,
-                         IdUser = a.IdUser,
-                         EmailUser = u.Email,
-                         LoginUser = u.Login,
                          IdStatus = a.IdStatus,
                          NameStatus = s.Name,
                          DescriptionStatus = s.Description
@@ -351,6 +317,76 @@
                   }
                 )
                .ToList();
+        }
+
+        public List<AccountExtendDto> GetAccountsByNameFinancialInstitutionTypeAccountUser(string name, int idFinancialInstitution, int idTypeAccount, int idUser)
+        {
+            return (
+                 from a in _context.Accounts.AsNoTracking()
+                 join f in _context.FinancialInstitutions.AsNoTracking()
+                 on a.IdFinancialInstitution equals f.IdFinancialInstitution
+                 join t in _context.TypeAccounts.AsNoTracking()
+                 on a.IdTypeAccount equals t.IdTypeAccount
+                 join u in _context.Users.AsNoTracking()
+                 on a.IdUser equals u.IdUser
+                 join s in _context.Status.AsNoTracking()
+                 on a.IdStatus equals s.IdStatus
+                 where a.Name == name && a.IdFinancialInstitution == idFinancialInstitution && a.IdTypeAccount == idTypeAccount && a.IdUser == idUser
+                 select new AccountExtendDto
+                 {
+                     IdAccount = a.IdAccount,
+                     Name = a.Name,
+                     Description = a.Description,
+                     IdFinancialInstitution = a.IdFinancialInstitution,
+                     NameFinancialInstitution = f.Name,
+                     DescriptionFinancialInstitution = f.Description,
+                     IdTypeAccount = a.IdTypeAccount,
+                     NameTypeAccount = t.Name,
+                     DescriptionTypeAccount = t.Description,
+                     IdUser = a.IdUser,
+                     EmailUser = u.Email,
+                     LoginUser = u.Login,
+                     IdStatus = a.IdStatus,
+                     NameStatus = s.Name,
+                     DescriptionStatus = s.Description
+                 }
+               )
+              .ToList();
+        }
+
+        public List<AccountExtendDto> GetAccountsByFinancialInstitutionTypeAccountUser(int idFinancialInstitution, int idTypeAccount, int idUser)
+        {
+            return (
+                 from a in _context.Accounts.AsNoTracking()
+                 join f in _context.FinancialInstitutions.AsNoTracking()
+                 on a.IdFinancialInstitution equals f.IdFinancialInstitution
+                 join t in _context.TypeAccounts.AsNoTracking()
+                 on a.IdTypeAccount equals t.IdTypeAccount
+                 join u in _context.Users.AsNoTracking()
+                 on a.IdUser equals u.IdUser
+                 join s in _context.Status.AsNoTracking()
+                 on a.IdStatus equals s.IdStatus
+                 where a.IdFinancialInstitution == idFinancialInstitution && a.IdTypeAccount == idTypeAccount && a.IdUser == idUser
+                 select new AccountExtendDto
+                 {
+                     IdAccount = a.IdAccount,
+                     Name = a.Name,
+                     Description = a.Description,
+                     IdFinancialInstitution = a.IdFinancialInstitution,
+                     NameFinancialInstitution = f.Name,
+                     DescriptionFinancialInstitution = f.Description,
+                     IdTypeAccount = a.IdTypeAccount,
+                     NameTypeAccount = t.Name,
+                     DescriptionTypeAccount = t.Description,
+                     IdUser = a.IdUser,
+                     EmailUser = u.Email,
+                     LoginUser = u.Login,
+                     IdStatus = a.IdStatus,
+                     NameStatus = s.Name,
+                     DescriptionStatus = s.Description
+                 }
+               )
+              .ToList();
         }
 
         #endregion

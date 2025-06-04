@@ -4,7 +4,8 @@
     #region Librerias
 
     using CORE.Dto;
-   
+    using Domain.Dto;
+
     #endregion
 
     /// <summary>
@@ -18,17 +19,17 @@
 
         #region Métodos y Funciones
 
-        public TypeAccountExtendDto? GetTypeAccountById(int idTypeAccount);
+        public TypeAccountExtendDto? GetTypeAccountById(TypeAccountDto typeAccount);
 
-        public TypeAccountExtendDto? GetTypeAccountByName(string name);
+        public TypeAccountExtendDto? GetTypeAccountByName(TypeAccountDto typeAccount);
 
-        public List<TypeAccountExtendDto> GetTypeAccountsByStatus(int idStatus);
+        public List<TypeAccountExtendDto> GetTypeAccountsByStatus(TypeAccountDto typeAccount);
 
-        public TypeAccountExtendDto SaveTypeAccount(TypeAccountExtendDto typeAccount);
+        public TypeAccountExtendDto SaveTypeAccount(TypeAccountDto typeAccount);
 
-        public TypeAccountExtendDto UpdateTypeAccount(TypeAccountExtendDto typeAccount);
+        public TypeAccountExtendDto UpdateTypeAccount(TypeAccountDto typeAccount);
 
-        public TypeAccountExtendDto DeleteTypeAccount(TypeAccountExtendDto typeAccount);
+        public TypeAccountExtendDto DeleteTypeAccount(TypeAccountDto typeAccount);
 
         #endregion 
 

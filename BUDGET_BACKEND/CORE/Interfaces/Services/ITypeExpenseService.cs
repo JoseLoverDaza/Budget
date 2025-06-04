@@ -4,7 +4,8 @@
     #region Librerias
 
     using CORE.Dto;
-    
+    using Domain.Dto;
+
     #endregion
 
     /// <summary>
@@ -18,17 +19,17 @@
 
         #region Métodos y Funciones
 
-        public TypeExpenseExtendDto? GetTypeExpenseById(int idTypeExpense);
+        public TypeExpenseExtendDto? GetTypeExpenseById(TypeExpenseDto typeExpense);
 
-        public TypeExpenseExtendDto? GetTypeExpenseByName(string name);
+        public TypeExpenseExtendDto? GetTypeExpenseByName(TypeExpenseDto typeExpense);
 
-        public List<TypeExpenseExtendDto> GetTypeExpensesByStatus(int idStatus);
+        public List<TypeExpenseExtendDto> GetTypeExpensesByStatus(TypeExpenseDto typeExpense);
 
-        public TypeExpenseExtendDto SaveTypeExpense(TypeExpenseExtendDto typeExpense);
+        public TypeExpenseExtendDto SaveTypeExpense(TypeExpenseDto typeExpense);
 
-        public TypeExpenseExtendDto UpdateTypeExpense(TypeExpenseExtendDto typeExpense);
+        public TypeExpenseExtendDto UpdateTypeExpense(TypeExpenseDto typeExpense);
 
-        public TypeExpenseExtendDto DeleteTypeExpense(TypeExpenseExtendDto typeExpense);
+        public TypeExpenseExtendDto DeleteTypeExpense(TypeExpenseDto typeExpense);
 
         #endregion
 

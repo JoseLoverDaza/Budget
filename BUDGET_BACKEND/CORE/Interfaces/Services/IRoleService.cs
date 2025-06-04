@@ -4,7 +4,8 @@
     #region Librerias
 
     using CORE.Dto;
-   
+    using Domain.Dto;
+
     #endregion
 
     /// <summary>
@@ -18,17 +19,17 @@
 
         #region Métodos y Funciones
 
-        public RoleExtendDto? GetRoleById(int idRole);
+        public RoleExtendDto? GetRoleById(RoleDto role);
 
-        public RoleExtendDto? GetRoleByName(string name);
+        public RoleExtendDto? GetRoleByName(RoleDto role);
 
-        public List<RoleExtendDto> GetRolesByStatus(int idStatus);
+        public List<RoleExtendDto> GetRolesByStatus(RoleDto role);
 
-        public RoleExtendDto SaveRole(RoleExtendDto role);
+        public RoleExtendDto SaveRole(RoleDto role);
 
-        public RoleExtendDto UpdateRole(RoleExtendDto role);
+        public RoleExtendDto UpdateRole(RoleDto role);
 
-        public RoleExtendDto DeleteRole(RoleExtendDto role);
+        public RoleExtendDto DeleteRole(RoleDto role);
 
         #endregion 
 

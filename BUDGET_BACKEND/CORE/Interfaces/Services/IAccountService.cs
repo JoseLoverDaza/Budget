@@ -4,6 +4,7 @@
     #region Librerias
 
     using CORE.Dto;
+    using Domain.Dto;
 
     #endregion
 
@@ -18,29 +19,31 @@
 
         #region Métodos y Funciones
 
-        public AccountExtendDto? GetAccountById(int idAccount);
+        public AccountExtendDto? GetAccountById(AccountDto account);
 
-        public AccountExtendDto? GetAccountByName(string name);
+        public List<AccountExtendDto> GetAccountsByFinancialInstitution(AccountDto account);
 
-        public List<AccountExtendDto> GetAccountsByFinancialInstitution(int idFinancialInstitution);
+        public List<AccountExtendDto> GetAccountsByTypeAccount(AccountDto account);
 
-        public List<AccountExtendDto> GetAccountsByTypeAccount(int idTypeAccount);
+        public List<AccountExtendDto> GetAccountsByUser(AccountDto account);
 
-        public List<AccountExtendDto> GetAccountsByUser(int idUser);
+        public List<AccountExtendDto> GetAccountsByStatus(AccountDto account);
 
-        public List<AccountExtendDto> GetAccountsByStatus(int idStatus);
+        public List<AccountExtendDto> GetAccountsByFinancialInstitutionStatus(AccountDto account);
 
-        public List<AccountExtendDto> GetAccountsByFinancialInstitutionStatus(int idFinancialInstitution, int idStatus);
+        public List<AccountExtendDto> GetAccountsByTypeAccountStatus(AccountDto account);
 
-        public List<AccountExtendDto> GetAccountsByTypeAccountStatus(int idTypeAccount, int idStatus);
+        public List<AccountExtendDto> GetAccountsByUserStatus(AccountDto account);
 
-        public List<AccountExtendDto> GetAccountsByUserStatus(int idUser, int idStatus);
+        public List<AccountExtendDto> GetAccountsByNameFinancialInstitutionTypeAccountUser(AccountDto account);
 
-        public AccountExtendDto SaveAccount(AccountExtendDto account);
+        public List<AccountExtendDto> GetAccountsByFinancialInstitutionTypeAccountUser(AccountDto account);
 
-        public AccountExtendDto UpdateAccount(AccountExtendDto account);
+        public AccountExtendDto SaveAccount(AccountDto account);
 
-        public AccountExtendDto DeleteAccount(AccountExtendDto account);
+        public AccountExtendDto UpdateAccount(AccountDto account);
+
+        public AccountExtendDto DeleteAccount(AccountDto account);
 
         #endregion
 

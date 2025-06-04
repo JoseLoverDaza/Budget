@@ -9,7 +9,7 @@
     using CORE.Utils;
     using Domain.Dto;
     using Domain.Entities;
-    using System.Collections.Generic;
+    using System.Collections.Generic;    
     using System.Runtime.InteropServices;
    
     #endregion
@@ -52,55 +52,10 @@
             }
         }
 
-        public AccountExtendDto? GetAccountByName(string name)
-        {
-            IAccountRepository accountRepository = UnitOfWork.AccountRepository();
-            AccountExtendDto? account = accountRepository.GetAccountByName(name);
-
-            if (account != null)
-            {
-                return account;
-            }
-            else
-            {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            }
-        }
-
         public List<AccountExtendDto> GetAccountsByFinancialInstitution(int idFinancialInstitution)
         {
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
             List<AccountExtendDto> accounts = accountRepository.GetAccountsByFinancialInstitution(idFinancialInstitution);
-
-            if (accounts.Count != 0)
-            {
-                return accounts;
-            }
-            else
-            {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            }
-        }
-
-        public List<AccountExtendDto> GetAccountsByFinancialInstitutionStatus(int idFinancialInstitution, int idStatus)
-        {
-            IAccountRepository accountRepository = UnitOfWork.AccountRepository();
-            List<AccountExtendDto> accounts = accountRepository.GetAccountsByFinancialInstitutionStatus(idFinancialInstitution, idStatus);
-
-            if (accounts.Count != 0)
-            {
-                return accounts;
-            }
-            else
-            {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            }
-        }
-
-        public List<AccountExtendDto> GetAccountsByStatus(int idStatus)
-        {
-            IAccountRepository accountRepository = UnitOfWork.AccountRepository();
-            List<AccountExtendDto> accounts = accountRepository.GetAccountsByStatus(idStatus);
 
             if (accounts.Count != 0)
             {
@@ -127,10 +82,10 @@
             }
         }
 
-        public List<AccountExtendDto> GetAccountsByTypeAccountStatus(int idTypeAccount, int idStatus)
+        public List<AccountExtendDto> GetAccountsByUser(int idUser)
         {
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
-            List<AccountExtendDto> accounts = accountRepository.GetAccountsByTypeAccountStatus(idTypeAccount, idStatus);
+            List<AccountExtendDto> accounts = accountRepository.GetAccountsByUser(idUser);
 
             if (accounts.Count != 0)
             {
@@ -142,10 +97,40 @@
             }
         }
 
-        public List<AccountExtendDto> GetAccountsByUser(int idUser)
+        public List<AccountExtendDto> GetAccountsByStatus(int idStatus)
         {
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
-            List<AccountExtendDto> accounts = accountRepository.GetAccountsByUser(idUser);
+            List<AccountExtendDto> accounts = accountRepository.GetAccountsByStatus(idStatus);
+
+            if (accounts.Count != 0)
+            {
+                return accounts;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+        }
+
+        public List<AccountExtendDto> GetAccountsByFinancialInstitutionStatus(int idFinancialInstitution, int idStatus)
+        {
+            IAccountRepository accountRepository = UnitOfWork.AccountRepository();
+            List<AccountExtendDto> accounts = accountRepository.GetAccountsByFinancialInstitutionStatus(idFinancialInstitution, idStatus);
+
+            if (accounts.Count != 0)
+            {
+                return accounts;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+        }
+
+        public List<AccountExtendDto> GetAccountsByTypeAccountStatus(int idTypeAccount, int idStatus)
+        {
+            IAccountRepository accountRepository = UnitOfWork.AccountRepository();
+            List<AccountExtendDto> accounts = accountRepository.GetAccountsByTypeAccountStatus(idTypeAccount, idStatus);
 
             if (accounts.Count != 0)
             {
@@ -172,6 +157,37 @@
             }
         }
 
+        public List<AccountExtendDto> GetAccountsByNameFinancialInstitutionTypeAccountUser(string name, int idFinancialInstitution, int idTypeAccount, int idUser)
+        {
+            IAccountRepository accountRepository = UnitOfWork.AccountRepository();
+            List<AccountExtendDto> accounts = accountRepository.GetAccountsByNameFinancialInstitutionTypeAccountUser(name, idFinancialInstitution, idTypeAccount, idUser);
+
+            if (accounts.Count != 0)
+            {
+                return accounts;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+        }
+
+        public List<AccountExtendDto> GetAccountsByFinancialInstitutionTypeAccountUser(int idFinancialInstitution, int idTypeAccount, int idUser)
+        {
+            IAccountRepository accountRepository = UnitOfWork.AccountRepository();
+            List<AccountExtendDto> accounts = accountRepository.GetAccountsByFinancialInstitutionTypeAccountUser(idFinancialInstitution, idTypeAccount, idUser);
+
+            if (accounts.Count != 0)
+            {
+                return accounts;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+        }
+
+
         public AccountExtendDto SaveAccount(AccountExtendDto account)
         {
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
@@ -190,10 +206,9 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            AccountExtendDto? accountSearch = accountRepository.GetAccountByName(account.Name.Trim());
+            List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByNameFinancialInstitutionTypeAccountUser(account.Name.Trim(), account.IdFinancialInstitution, account.IdTypeAccount, account.IdUser);
 
-            if (accountSearch != null && accountSearch.IdFinancialInstitution == account.IdFinancialInstitution
-                && accountSearch.IdTypeAccount == account.IdTypeAccount && accountSearch.IdUser == account.IdUser)
+            if (accountsSearch.Count != 0)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -236,10 +251,10 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            AccountExtendDto? accountDuplicado = accountRepository.GetAccountByName(account.Name);
+            List<AccountExtendDto> accountDuplicados = accountRepository.GetAccountsByNameFinancialInstitutionTypeAccountUser(account.Name.Trim(), account.IdFinancialInstitution, account.IdTypeAccount, account.IdUser);
             AccountExtendDto? accountSearch = accountRepository.GetAccountById(account.IdAccount) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            if (accountDuplicado != null && accountDuplicado.IdAccount != accountSearch.IdAccount)
+            if (accountDuplicados.Count != 0 && accountDuplicados.FirstOrDefault()!.IdAccount != accountSearch.IdAccount)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }

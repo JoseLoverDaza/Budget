@@ -4,6 +4,7 @@
     #region Librerias
 
     using CORE.Dto;
+    using Domain.Dto;
 
     #endregion
 
@@ -18,15 +19,19 @@
 
         #region Métodos y Funciones
 
-        public BudgetExtendDto? GetBudgetById(int idBudget);
+        public BudgetExtendDto? GetBudgetById(BudgetDto budget);
 
-        public BudgetExtendDto? GetBudgetByYearMonthUser(int year, int month, int idUser);
+        public List<BudgetExtendDto> GetBudgetsByYearUser(BudgetDto budget);
 
-        public List<BudgetExtendDto> GetBudgetsByUser(int idUser);
+        public List<BudgetExtendDto> GetBudgetsByMonthUser(BudgetDto budget);
 
-        public List<BudgetExtendDto> GetBudgetsByStatus(int idStatus);
+        public List<BudgetExtendDto> GetBudgetsByYearMonthUser(BudgetDto budget);
 
-        public List<BudgetExtendDto> GetBudgetsByUserStatus(int idUser, int idStatus);
+        public List<BudgetExtendDto> GetBudgetsByUser(BudgetDto budget);
+
+        public List<BudgetExtendDto> GetBudgetsByStatus(BudgetDto budget);
+
+        public List<BudgetExtendDto> GetBudgetsByUserStatus(BudgetDto budget);
 
         #endregion 
 

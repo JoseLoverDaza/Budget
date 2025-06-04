@@ -4,6 +4,7 @@
     #region Librerias
 
     using CORE.Dto;
+    using Domain.Dto;
 
     #endregion
 
@@ -18,17 +19,17 @@
 
         #region Métodos y Funciones
 
-        public UserExtendDto? GetUserById(int idUser);
+        public UserExtendDto? GetUserById(UserDto user);
 
-        public UserExtendDto? GetUserByEmail(string email);
+        public UserExtendDto? GetUserByEmail(UserDto user);
 
-        public UserExtendDto? GetUserByLogin(string login);
+        public UserExtendDto? GetUserByLogin(UserDto user);
 
-        public List<UserExtendDto> GetUsersByRole(int idRole);
+        public List<UserExtendDto> GetUsersByRole(UserDto user);
 
-        public List<UserExtendDto> GetUsersByStatus(int idStatus);
+        public List<UserExtendDto> GetUsersByStatus(UserDto user);
               
-        public List<UserExtendDto> GetUsersByRoleStatus(int idRole, int idStatus);
+        public List<UserExtendDto> GetUsersByRoleStatus(UserDto user);
 
         #endregion
 

@@ -4,6 +4,7 @@
     #region Librerias
 
     using CORE.Dto;
+    using Domain.Dto;
 
     #endregion
 
@@ -18,27 +19,29 @@
 
         #region Métodos y Funciones
 
-        public DepositExtendDto? GetDepositById(int idDeposit);
+        public DepositExtendDto? GetDepositById(DepositDto deposit);
 
-        public List<DepositExtendDto> GetDepositsByYearMonth(int year, int month);
+        public List<DepositExtendDto> GetDepositsByYearUser(DepositDto deposit);
 
-        public List<DepositExtendDto> GetDepositsByYearMonthUser(int year, int month, int idUser);
+        public List<DepositExtendDto> GetDepositsByMonthUser(DepositDto deposit);
 
-        public List<DepositExtendDto> GetDepositsByYearMonthAccount(int year, int month, int idAccount);
+        public List<DepositExtendDto> GetDepositsByYearMonthUser(DepositDto deposit);
 
-        public List<DepositExtendDto> GetDepositsByYearMonthStatus(int year, int month, int idStatus);
+        public List<DepositExtendDto> GetDepositsByYearMonthAccount(DepositDto deposit);
 
-        public List<DepositExtendDto> GetDepositsByYearMonthUserAccount(int year, int month, int idUser, int idAccount);
+        public List<DepositExtendDto> GetDepositsByYearMonthStatus(DepositDto deposit);
 
-        public List<DepositExtendDto> GetDepositsByUser(int idUser);
+        public List<DepositExtendDto> GetDepositsByYearMonthUserAccount(DepositDto deposit);
 
-        public List<DepositExtendDto> GetDepositsByAccount(int idAccount);
+        public List<DepositExtendDto> GetDepositsByUser(DepositDto deposit);
 
-        public List<DepositExtendDto> GetDepositsByStatus(int idStatus);
+        public List<DepositExtendDto> GetDepositsByAccount(DepositDto deposit);
 
-        public List<DepositExtendDto> GetDepositsByUserStatus(int idUser, int idStatus);
+        public List<DepositExtendDto> GetDepositsByStatus(DepositDto deposits);
 
-        public List<DepositExtendDto> GetDepositsByAccountStatus(int idAccount, int idStatus);
+        public List<DepositExtendDto> GetDepositsByUserStatus(DepositDto deposit);
+
+        public List<DepositExtendDto> GetDepositsByAccountStatus(DepositDto deposit);
 
         #endregion
 

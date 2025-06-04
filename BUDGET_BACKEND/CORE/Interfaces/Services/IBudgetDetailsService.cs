@@ -4,6 +4,7 @@
     #region Librerias
 
     using CORE.Dto;
+    using Domain.Dto;
 
     #endregion
 
@@ -18,23 +19,25 @@
 
         #region Métodos y Funciones
 
-        public BudgetDetailExtendDto? GetBudgetDetailsById(int idBudgetDetails);
+        public BudgetDetailExtendDto? GetBudgetDetailsById(BudgetDetailsDto budgetDetails);
 
-        public List<BudgetDetailExtendDto> GetBudgetDetailsByBudget(int idBudget);
+        public List<BudgetDetailExtendDto> GetBudgetDetailsByBudget(BudgetDetailsDto budgetDetails);
 
-        public List<BudgetDetailExtendDto> GetBudgetDetailsByExpense(int idExpense);
+        public List<BudgetDetailExtendDto> GetBudgetDetailsByExpense(BudgetDetailsDto budgetDetails);
 
-        public List<BudgetDetailExtendDto> GetBudgetDetailsByStatus(int idStatus);
+        public List<BudgetDetailExtendDto> GetBudgetDetailsByStatus(BudgetDetailsDto budgetDetails);
 
-        public List<BudgetDetailExtendDto> GetBudgetDetailsByBudgetExpense(int idBudget, int idExpense);
+        public List<BudgetDetailExtendDto> GetBudgetDetailsByBudgetExpense(BudgetDetailsDto budgetDetails);
 
-        public List<BudgetDetailExtendDto> GetBudgetDetailsByExpenseStatus(int idExpense, int idStatus);
+        public List<BudgetDetailExtendDto> GetBudgetDetailsByExpenseStatus(BudgetDetailsDto budgetDetails);
 
-        public BudgetDetailExtendDto SaveBudgetDetail(BudgetDetailExtendDto budgetDetail);
+        public List<BudgetDetailExtendDto> GetBudgetDetailsByBudgetExpenseStatus(BudgetDetailsDto budgetDetails);
 
-        public BudgetDetailExtendDto UpdateBudgetDetail(BudgetDetailExtendDto budgetDetail);
+        public BudgetDetailExtendDto SaveBudgetDetail(BudgetDetailsDto budgetDetail);
 
-        public BudgetDetailExtendDto DeleteBudgetDetail(BudgetDetailExtendDto budgetDetail);
+        public BudgetDetailExtendDto UpdateBudgetDetail(BudgetDetailsDto budgetDetail);
+
+        public BudgetDetailExtendDto DeleteBudgetDetail(BudgetDetailsDto budgetDetail);
 
         #endregion
 

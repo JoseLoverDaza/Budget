@@ -4,6 +4,7 @@
     #region Librerias
 
     using CORE.Dto;
+    using Domain.Dto;
 
     #endregion
 
@@ -18,15 +19,19 @@
 
         #region Métodos y Funciones
 
-        public BillingExtendDto? GetBillingById(int idBilling);
+        public BillingExtendDto? GetBillingById(BillingDto billing);
 
-        public BillingExtendDto? GetBillingByYearMonthUser(int year, int month, int idUser);
+        public List<BillingExtendDto> GetBillingsByYearUser(BillingDto billing);
 
-        public List<BillingExtendDto> GetBillingsByUser(int idUser);
+        public List<BillingExtendDto> GetBillingsByMonthUser(BillingDto billing);
 
-        public List<BillingExtendDto> GetBillingsByStatus(int idStatus);
+        public List<BillingExtendDto> GetBillingsByYearMonthUser(BillingDto billing);
 
-        public List<BillingExtendDto> GetBillingsByUserStatus(int idUser, int idStatus);
+        public List<BillingExtendDto> GetBillingsByUser(BillingDto billing);
+
+        public List<BillingExtendDto> GetBillingsByStatus(BillingDto billing);
+
+        public List<BillingExtendDto> GetBillingsByUserStatus(BillingDto billing);
 
         #endregion 
 

@@ -18,9 +18,9 @@
 
         #region  Métodos y Funciones
 
-        public StatusDto? GetStatusById(int idStatus);
+        public StatusDto? GetStatusById(StatusDto status);
 
-        public StatusDto? GetStatusByName(string name);
+        public StatusDto? GetStatusByName(StatusDto status);
 
         public List<StatusDto> GetStatus();
 

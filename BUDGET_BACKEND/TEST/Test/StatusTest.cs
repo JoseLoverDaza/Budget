@@ -70,11 +70,14 @@
         [TestMethod]
         public void GetStatusByIdOK()
         {
-            ///Arrange   
-            int Id = 1;
+            ///Arrange 
+            StatusDto status = new()
+            {
+                IdStatus = 1
+            };
 
             ///Act
-            var result = _statusController!.GetStatusById(Id);
+            var result = _statusController!.GetStatusById(status);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -86,10 +89,13 @@
         public void GetStatusByIdFail()
         {
             ///Arrange   
-            int Id = -1;
+            StatusDto status = new()
+            {
+                IdStatus = -1
+            };
 
             ///Act
-            var result = _statusController!.GetStatusById(Id);
+            var result = _statusController!.GetStatusById(status);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -101,10 +107,13 @@
         public void GetStatusByNameOK()
         {
             ///Arrange   
-            string Name = "Test";
-
+            StatusDto status = new()
+            {
+                Name = "Test"
+            };
+            
             ///Act
-            var result = _statusController!.GetStatusByName(Name);
+            var result = _statusController!.GetStatusByName(status);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -116,10 +125,13 @@
         public void GetStatusByNameFail()
         {
             ///Arrange   
-            string Name = "";
+            StatusDto status = new()
+            {
+                Name = ""
+            };
 
             ///Act
-            var result = _statusController!.GetStatusByName(Name);
+            var result = _statusController!.GetStatusByName(status);
 
             ///Assert
             Assert.IsNotNull(result);

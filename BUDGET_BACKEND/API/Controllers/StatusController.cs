@@ -43,11 +43,11 @@
         [HttpGet]
         [Route("GetStatusById")]
         [SwaggerOperation(Summary = "Get Status By Id")]
-        public ResponseDto GetStatusById(int id)
+        public ResponseDto GetStatusById(StatusDto status)
         {
             try
             {                
-                response.Data = _statusService.GetStatusById(id);
+                response.Data = _statusService.GetStatusById(status);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -60,11 +60,11 @@
         [HttpGet]
         [Route("GetStatusByName")]
         [SwaggerOperation(Summary = "Get Status By Name")]
-        public ResponseDto GetStatusByName(string name)
+        public ResponseDto GetStatusByName(StatusDto status)
         {
             try
             {
-                response.Data = _statusService.GetStatusByName(name);
+                response.Data = _statusService.GetStatusByName(status);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)

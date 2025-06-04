@@ -4,7 +4,8 @@
     #region Librerias
 
     using CORE.Dto;
-   
+    using Domain.Dto;
+
     #endregion
 
     /// <summary>
@@ -18,17 +19,17 @@
 
         #region Métodos y Funciones
 
-        public FinancialInstitutionExtendDto? GetFinancialInstitutionById(int idFinancialInstitution);
+        public FinancialInstitutionExtendDto? GetFinancialInstitutionById(FinancialInstitutionDto financialInstitution);
 
-        public FinancialInstitutionExtendDto? GetFinancialInstitutionByName(string name);
+        public FinancialInstitutionExtendDto? GetFinancialInstitutionByName(FinancialInstitutionDto financialInstitution);
 
-        public List<FinancialInstitutionExtendDto> GetFinancialInstitutionsByStatus(int idStatus);
+        public List<FinancialInstitutionExtendDto> GetFinancialInstitutionsByStatus(FinancialInstitutionDto financialInstitution);
 
-        public FinancialInstitutionExtendDto SaveFinancialInstitution(FinancialInstitutionExtendDto financialInstitution);
+        public FinancialInstitutionExtendDto SaveFinancialInstitution(FinancialInstitutionDto financialInstitution);
 
-        public FinancialInstitutionExtendDto UpdateFinancialInstitution(FinancialInstitutionExtendDto financialInstitution);
+        public FinancialInstitutionExtendDto UpdateFinancialInstitution(FinancialInstitutionDto financialInstitution);
 
-        public FinancialInstitutionExtendDto DeleteFinancialInstitution(FinancialInstitutionExtendDto financialInstitution);
+        public FinancialInstitutionExtendDto DeleteFinancialInstitution(FinancialInstitutionDto financialInstitution);
 
         #endregion
 

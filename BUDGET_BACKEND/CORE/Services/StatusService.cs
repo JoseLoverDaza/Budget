@@ -8,11 +8,9 @@
     using CORE.Utils;
     using Domain.Dto;
     using Domain.Entities;
-    using System.Collections.Generic;
-    using System.Data;
+    using System.Collections.Generic;    
     using System.Runtime.InteropServices;
-    using System.Text.RegularExpressions;
-   
+       
     #endregion
 
     /// <summary>
@@ -38,15 +36,15 @@
 
         #region Métodos y Funciones
 
-        public StatusDto? GetStatusById(int idStatus)
+        public StatusDto? GetStatusById(StatusDto status)
         {
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();
 
-            StatusDto? status = statusRepository.GetStatusById(idStatus);
+            StatusDto? statusSearch = statusRepository.GetStatusById(status.IdStatus);
 
-            if (status != null)
+            if (statusSearch != null)
             {
-                return status;
+                return statusSearch;
             }
             else
             {
@@ -54,15 +52,15 @@
             }
         }
 
-        public StatusDto? GetStatusByName(string name)
+        public StatusDto? GetStatusByName(StatusDto status)
         {
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();
 
-            StatusDto? status = statusRepository.GetStatusByName(name);
+            StatusDto? statusSearch = statusRepository.GetStatusByName(status.Name.Trim());
 
-            if (status != null)
+            if (statusSearch != null)
             {
-                return status;
+                return statusSearch;
             }
             else
             {
