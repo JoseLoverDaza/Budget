@@ -22,7 +22,11 @@
 
         public ExpenseExtendDto? GetExpenseByName(string name);
 
+        public List<ExpenseExtendDto> GetExpensesByTypeExpense(int idTypeExpense);
+
         public List<ExpenseExtendDto> GetExpensesByStatus(int idStatus);
+
+        public List<ExpenseExtendDto> GetExpensesByTypeExpenseStatus(int idTypeExpense, int idStatus);
 
         #endregion
 

@@ -1,12 +1,44 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace API.Controllers
+﻿namespace API.Controllers
 {
-    public class AccountController : Controller
+
+    #region Librerias
+
+    using CORE.Dto;
+    using CORE.Interfaces.Services;
+    using CORE.Services;
+    using CORE.Utils;
+    using Domain.Dto.Common;
+    using Domain.Entities;
+    using Microsoft.AspNetCore.Mvc;
+    using Swashbuckle.AspNetCore.Annotations;
+
+    #endregion
+
+    /// <summary>
+    /// Fecha: 01 de enero de 2026
+    /// Nombre: AccountController   
+    /// Autor: Jose Lover Daza Rojas
+    /// </summary>
+
+    [Route("api/[controller]")]
+    [ApiController]
+    public class AccountController : BaseController
     {
-        public IActionResult Index()
+
+        #region Atributos y Propiedades
+
+        private readonly IAccountService _accountService;
+
+        #endregion
+
+        #region Constructor
+
+        public AccountController(IAccountService accountService)
         {
-            return View();
+            _accountService = accountService;
         }
+
+        #endregion
+
     }
 }

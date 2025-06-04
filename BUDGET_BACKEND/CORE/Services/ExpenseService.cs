@@ -10,6 +10,7 @@
     using Domain.Dto;
     using Domain.Entities;
     using System.Collections.Generic;
+    using System.Net.NetworkInformation;
     using System.Runtime.InteropServices;
     
     #endregion
@@ -69,10 +70,40 @@
             }
         }
 
+        public List<ExpenseExtendDto> GetExpensesByTypeExpense(int idTypeExpense)
+        {
+            IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
+            List<ExpenseExtendDto> expenses = expenseRepository.GetExpensesByTypeExpense(idTypeExpense);
+
+            if (expenses.Count != 0)
+            {
+                return expenses;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+        }
+
         public List<ExpenseExtendDto> GetExpensesByStatus(int idStatus)
         {
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
             List<ExpenseExtendDto> expenses = expenseRepository.GetExpensesByStatus(idStatus);
+
+            if (expenses.Count != 0)
+            {
+                return expenses;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+        }
+
+        public List<ExpenseExtendDto> GetExpensesByTypeExpenseStatus(int idTypeExpense, int idStatus)
+        {
+            IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
+            List<ExpenseExtendDto> expenses = expenseRepository.GetExpensesByTypeExpenseStatus(idTypeExpense, idStatus);
 
             if (expenses.Count != 0)
             {
@@ -113,7 +144,7 @@
             Expense saveExpense = new()
             {
                 Name = expense.Name.Trim(),
-                Description = expense.Description!.Trim(),
+                Description = expense.Description?.Trim() ?? string.Empty,
                 IdTypeExpense = typeExpenseSearch.IdTypeExpense,
                 IdStatus = statusSearch.IdStatus
             };
@@ -153,7 +184,7 @@
             {
                 IdExpense = expenseSearch.IdExpense,
                 Name = expense.Name.Trim(),
-                Description = expense.Description!.Trim(),
+                Description = expense.Description?.Trim() ?? string.Empty,
                 IdStatus = expenseSearch.IdStatus
             };
 
@@ -174,7 +205,7 @@
             ExpenseExtendDto? expenseSearch = expenseRepository.GetExpenseById(expense.IdExpense) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(expense.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            if (statusSearch.IdStatus == expense.IdStatus)
+            if (expenseSearch.IdStatus == expense.IdStatus)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -183,7 +214,7 @@
             {
                 IdExpense = expenseSearch.IdExpense,
                 Name = expenseSearch.Name.Trim(),
-                Description = expenseSearch.Description!.Trim(),
+                Description = expenseSearch.Description?.Trim() ?? string.Empty,
                 IdTypeExpense = expenseSearch.IdTypeExpense,
                 IdStatus = statusSearch.IdStatus
             };
