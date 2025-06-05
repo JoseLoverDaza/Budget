@@ -21,6 +21,8 @@
 
         public BudgetExtendDto? GetBudgetById(BudgetDto budget);
 
+        public List<BudgetExtendDto> GetBudgetsByYearMonth(BudgetDto budget);
+
         public List<BudgetExtendDto> GetBudgetsByYearUser(BudgetDto budget);
 
         public List<BudgetExtendDto> GetBudgetsByMonthUser(BudgetDto budget);
@@ -33,13 +35,13 @@
 
         public List<BudgetExtendDto> GetBudgetsByUserStatus(BudgetDto budget);
 
-        public BudgetExtendDto SaveBudget(BudgetDto budget);
+        public BudgetDto SaveBudget(BudgetDto budget);
 
-        public BudgetExtendDto UpdateBudget(BudgetDto budget);
+        public BudgetDto UpdateBudget(BudgetDto budget);
 
-        public BudgetExtendDto DeleteBudget(BudgetDto budget);
+        public BudgetDto DeleteBudget(BudgetDto budget);
 
         #endregion 
 
-    }
+    } 
 }

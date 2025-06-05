@@ -31,11 +31,11 @@
 
         public List<LogExtendDto> GetLogsByEntityCreationDateStatus(LogDto log);
 
-        public LogExtendDto SaveLog(LogDto log);
+        public LogDto SaveLog(LogDto log);
 
-        public LogExtendDto UpdateLog(LogDto log);
+        public LogDto UpdateLog(LogDto log);
 
-        public LogExtendDto DeleteLog(LogDto log);
+        public LogDto DeleteLog(LogDto log);
 
         #endregion
 

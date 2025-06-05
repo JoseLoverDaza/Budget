@@ -92,11 +92,6 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            if (string.IsNullOrWhiteSpace(typeExpense.Name.Trim()))
-            {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            }
-
             TypeExpenseExtendDto? typeExpenseSearch = typeExpenseRepository.GetTypeExpenseByName(typeExpense.Name.Trim());
 
             if (typeExpenseSearch != null)

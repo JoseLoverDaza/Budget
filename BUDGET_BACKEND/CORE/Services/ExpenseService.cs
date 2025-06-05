@@ -9,8 +9,7 @@
     using CORE.Utils;
     using Domain.Dto;
     using Domain.Entities;
-    using System.Collections.Generic;
-    using System.Net.NetworkInformation;
+    using System.Collections.Generic;   
     using System.Runtime.InteropServices;
     
     #endregion
@@ -38,15 +37,15 @@
 
         #region Métodos y Funciones
 
-        public ExpenseExtendDto? GetExpenseById(int idExpense)
+        public ExpenseExtendDto? GetExpenseById(ExpenseDto expense)
         {
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
 
-            ExpenseExtendDto? expense = expenseRepository.GetExpenseById(idExpense);
+            ExpenseExtendDto? expenseSearch = expenseRepository.GetExpenseById(expense);
 
-            if (expense != null)
+            if (expenseSearch != null)
             {
-                return expense;
+                return expenseSearch;
             }
             else
             {
@@ -54,15 +53,14 @@
             }
         }
 
-        public ExpenseExtendDto? GetExpenseByName(string name)
+        public List<ExpenseExtendDto> GetExpensesByTypeExpense(ExpenseDto expense)
         {
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
+            List<ExpenseExtendDto> expensesSearch = expenseRepository.GetExpensesByTypeExpense(expense);
 
-            ExpenseExtendDto? expense = expenseRepository.GetExpenseByName(name);
-
-            if (expense != null)
+            if (expensesSearch.Count != 0)
             {
-                return expense;
+                return expensesSearch;
             }
             else
             {
@@ -70,14 +68,14 @@
             }
         }
 
-        public List<ExpenseExtendDto> GetExpensesByTypeExpense(int idTypeExpense)
+        public List<ExpenseExtendDto> GetExpensesByStatus(ExpenseDto expense)
         {
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
-            List<ExpenseExtendDto> expenses = expenseRepository.GetExpensesByTypeExpense(idTypeExpense);
+            List<ExpenseExtendDto> expensesSearch = expenseRepository.GetExpensesByStatus(expense);
 
-            if (expenses.Count != 0)
+            if (expensesSearch.Count != 0)
             {
-                return expenses;
+                return expensesSearch;
             }
             else
             {
@@ -85,14 +83,14 @@
             }
         }
 
-        public List<ExpenseExtendDto> GetExpensesByStatus(int idStatus)
+        public List<ExpenseExtendDto> GetExpensesByNameTypeExpense(ExpenseDto expense)
         {
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
-            List<ExpenseExtendDto> expenses = expenseRepository.GetExpensesByStatus(idStatus);
+            List<ExpenseExtendDto> expensesSearch = expenseRepository.GetExpensesByNameTypeExpense(expense);
 
-            if (expenses.Count != 0)
+            if (expensesSearch.Count != 0)
             {
-                return expenses;
+                return expensesSearch;
             }
             else
             {
@@ -100,14 +98,14 @@
             }
         }
 
-        public List<ExpenseExtendDto> GetExpensesByTypeExpenseStatus(int idTypeExpense, int idStatus)
+        public List<ExpenseExtendDto> GetExpensesByTypeExpenseStatus(ExpenseDto expense)
         {
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
-            List<ExpenseExtendDto> expenses = expenseRepository.GetExpensesByTypeExpenseStatus(idTypeExpense, idStatus);
+            List<ExpenseExtendDto> expensesSearch = expenseRepository.GetExpensesByTypeExpenseStatus(expense);
 
-            if (expenses.Count != 0)
+            if (expensesSearch.Count != 0)
             {
-                return expenses;
+                return expensesSearch;
             }
             else
             {
@@ -115,7 +113,7 @@
             }
         }
 
-        public ExpenseExtendDto SaveExpense(ExpenseExtendDto expense)
+        public ExpenseDto SaveExpense(ExpenseDto expense)
         {
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
             ITypeExpenseRepository typeExpenseRepository = UnitOfWork.TypeExpenseRepository();
@@ -131,15 +129,15 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            ExpenseExtendDto? expenseSearch = expenseRepository.GetExpenseByName(expense.Name.Trim());
+            List<ExpenseExtendDto> expensesSearch = expenseRepository.GetExpensesByNameTypeExpense(expense);
 
-            if (expenseSearch != null)
+            if (expensesSearch.Count != 0)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            TypeExpenseExtendDto? typeExpenseSearch = typeExpenseRepository.GetTypeExpenseById(expense.IdTypeExpense) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(expense.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            TypeExpenseExtendDto? typeExpenseSearch = typeExpenseRepository.GetTypeExpenseById(new TypeExpenseDto { IdTypeExpense = expense.IdTypeExpense }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = expense.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             Expense saveExpense = new()
             {
@@ -158,7 +156,7 @@
             return expense;
         }
 
-        public ExpenseExtendDto UpdateExpense(ExpenseExtendDto expense)
+        public ExpenseDto UpdateExpense(ExpenseDto expense)
         {
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
 
@@ -167,15 +165,10 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            if (string.IsNullOrWhiteSpace(expense.Name.Trim()))
-            {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            }
+            List<ExpenseExtendDto> expenseDuplicados = expenseRepository.GetExpensesByNameTypeExpense(expense);
+            ExpenseExtendDto? expenseSearch = expenseRepository.GetExpenseById(expense) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            ExpenseExtendDto? expenseDuplicado = expenseRepository.GetExpenseByName(expense.Name);
-            ExpenseExtendDto? expenseSearch = expenseRepository.GetExpenseById(expense.IdExpense) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-
-            if (expenseDuplicado != null && expenseDuplicado.IdExpense != expenseSearch.IdExpense)
+            if (expenseDuplicados.Count != 0 && expenseDuplicados.FirstOrDefault()!.IdExpense != expenseSearch.IdExpense)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -197,13 +190,13 @@
             return expense;
         }
 
-        public ExpenseExtendDto DeleteExpense(ExpenseExtendDto expense)
+        public ExpenseDto DeleteExpense(ExpenseDto expense)
         {
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();
 
-            ExpenseExtendDto? expenseSearch = expenseRepository.GetExpenseById(expense.IdExpense) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(expense.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            ExpenseExtendDto? expenseSearch = expenseRepository.GetExpenseById(expense) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = expense.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (expenseSearch.IdStatus == expense.IdStatus)
             {

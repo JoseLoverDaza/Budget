@@ -39,11 +39,11 @@
 
         public List<AccountExtendDto> GetAccountsByFinancialInstitutionTypeAccountUser(AccountDto account);
 
-        public AccountExtendDto SaveAccount(AccountDto account);
+        public AccountDto SaveAccount(AccountDto account);
 
-        public AccountExtendDto UpdateAccount(AccountDto account);
+        public AccountDto UpdateAccount(AccountDto account);
 
-        public AccountExtendDto DeleteAccount(AccountDto account);
+        public AccountDto DeleteAccount(AccountDto account);
 
         #endregion
 

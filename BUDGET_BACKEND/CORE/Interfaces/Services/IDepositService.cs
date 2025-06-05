@@ -37,17 +37,17 @@
 
         public List<DepositExtendDto> GetDepositsByAccount(DepositDto deposit);
 
-        public List<DepositExtendDto> GetDepositsByStatus(DepositDto deposits);
+        public List<DepositExtendDto> GetDepositsByStatus(DepositDto deposit);
 
         public List<DepositExtendDto> GetDepositsByUserStatus(DepositDto deposit);
 
         public List<DepositExtendDto> GetDepositsByAccountStatus(DepositDto deposit);
 
-        public DepositExtendDto SaveDeposit(DepositDto deposit);
+        public DepositDto SaveDeposit(DepositDto deposit);
 
-        public DepositExtendDto UpdateDeposit(DepositDto deposit);
+        public DepositDto UpdateDeposit(DepositDto deposit);
 
-        public DepositExtendDto DeleteDeposit(DepositDto deposit);
+        public DepositDto DeleteDeposit(DepositDto deposit);
 
         #endregion
 

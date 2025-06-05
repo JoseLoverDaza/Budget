@@ -33,11 +33,11 @@
 
         public List<BudgetDetailExtendDto> GetBudgetDetailsByBudgetExpenseStatus(BudgetDetailsDto budgetDetails);
 
-        public BudgetDetailExtendDto SaveBudgetDetail(BudgetDetailsDto budgetDetail);
+        public BudgetDetailsDto SaveBudgetDetail(BudgetDetailsDto budgetDetails);
 
-        public BudgetDetailExtendDto UpdateBudgetDetail(BudgetDetailsDto budgetDetail);
+        public BudgetDetailsDto UpdateBudgetDetail(BudgetDetailsDto budgetDetails);
 
-        public BudgetDetailExtendDto DeleteBudgetDetail(BudgetDetailsDto budgetDetail);
+        public BudgetDetailsDto DeleteBudgetDetail(BudgetDetailsDto budgetDetails);
 
         #endregion
 

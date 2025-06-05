@@ -35,11 +35,11 @@
 
         public List<BillingExtendDto> GetBillingsByUserStatus(BillingDto billing);
 
-        public BillingExtendDto SaveBilling(BillingExtendDto billing);
+        public BillingDto SaveBilling(BillingDto billing);
 
-        public BillingExtendDto UpdateBilling(BillingExtendDto billing);
+        public BillingDto UpdateBilling(BillingDto billing);
 
-        public BillingExtendDto DeleteBilling(BillingExtendDto billing);
+        public BillingDto DeleteBilling(BillingDto billing);
 
         #endregion 
 

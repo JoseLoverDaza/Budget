@@ -37,14 +37,14 @@
 
         #region Métodos y Funciones
 
-        public FinancialInstitutionExtendDto? GetFinancialInstitutionById(int idFinancialInstitution)
+        public FinancialInstitutionExtendDto? GetFinancialInstitutionById(FinancialInstitutionDto financialInstitution)
         {
             IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
-            FinancialInstitutionExtendDto? financialInstitution = financialInstitutionRepository.GetFinancialInstitutionById(idFinancialInstitution);
+            FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionById(financialInstitution);
 
-            if (financialInstitution != null)
+            if (financialInstitutionSearch != null)
             {
-                return financialInstitution;
+                return financialInstitutionSearch;
             }
             else
             {
@@ -52,14 +52,14 @@
             }
         }
 
-        public FinancialInstitutionExtendDto? GetFinancialInstitutionByName(string name)
+        public FinancialInstitutionExtendDto? GetFinancialInstitutionByName(FinancialInstitutionDto financialInstitution)
         {
             IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
-            FinancialInstitutionExtendDto? financialInstitution = financialInstitutionRepository.GetFinancialInstitutionByName(name);
+            FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionByName(financialInstitution);
 
-            if (financialInstitution != null)
+            if (financialInstitutionSearch != null)
             {
-                return financialInstitution;
+                return financialInstitutionSearch;
             }
             else
             {
@@ -67,14 +67,14 @@
             }
         }
 
-        public List<FinancialInstitutionExtendDto> GetFinancialInstitutionsByStatus(int idStatus)
+        public List<FinancialInstitutionExtendDto> GetFinancialInstitutionsByStatus(FinancialInstitutionDto financialInstitution)
         {
             IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
-            List<FinancialInstitutionExtendDto> financialInstitutions = financialInstitutionRepository.GetFinancialInstitutionsByStatus(idStatus);
+            List<FinancialInstitutionExtendDto> financialInstitutionsSearch = financialInstitutionRepository.GetFinancialInstitutionsByStatus(financialInstitution);
 
-            if (financialInstitutions.Count != 0)
+            if (financialInstitutionsSearch.Count != 0)
             {
-                return financialInstitutions;
+                return financialInstitutionsSearch;
             }
             else
             {
@@ -82,7 +82,7 @@
             }
         }
 
-        public FinancialInstitutionExtendDto SaveFinancialInstitution(FinancialInstitutionExtendDto financialInstitution)
+        public FinancialInstitutionDto SaveFinancialInstitution(FinancialInstitutionDto financialInstitution)
         {
             IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();
@@ -92,19 +92,14 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            if (string.IsNullOrWhiteSpace(financialInstitution.Name.Trim()))
-            {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            }
-
-            FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionByName(financialInstitution.Name.Trim());
+            FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionByName(financialInstitution);
 
             if (financialInstitutionSearch != null)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            StatusDto? statusSearch = statusRepository.GetStatusById(financialInstitution.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = financialInstitution.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             FinancialInstitution saveFinancialInstitution = new()
             {
@@ -122,7 +117,7 @@
             return financialInstitution;
         }
 
-        public FinancialInstitutionExtendDto UpdateFinancialInstitution(FinancialInstitutionExtendDto financialInstitution)
+        public FinancialInstitutionDto UpdateFinancialInstitution(FinancialInstitutionDto financialInstitution)
         {
             IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
 
@@ -131,13 +126,8 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            if (string.IsNullOrWhiteSpace(financialInstitution.Name.Trim()))
-            {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            }
-
-            FinancialInstitutionExtendDto? financialInstitutionDuplicado = financialInstitutionRepository.GetFinancialInstitutionByName(financialInstitution.Name);
-            FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionById(financialInstitution.IdFinancialInstitution) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            FinancialInstitutionExtendDto? financialInstitutionDuplicado = financialInstitutionRepository.GetFinancialInstitutionByName(financialInstitution);
+            FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionById(financialInstitution) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (financialInstitutionDuplicado != null && financialInstitutionDuplicado.IdFinancialInstitution != financialInstitution.IdFinancialInstitution)
             {
@@ -161,13 +151,13 @@
             return financialInstitution;
         }
 
-        public FinancialInstitutionExtendDto DeleteFinancialInstitution(FinancialInstitutionExtendDto financialInstitution)
+        public FinancialInstitutionDto DeleteFinancialInstitution(FinancialInstitutionDto financialInstitution)
         {
             IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();
 
-            FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionById(financialInstitution.IdFinancialInstitution) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(financialInstitution.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionById(financialInstitution) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = financialInstitution.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (financialInstitutionSearch.IdStatus == statusSearch.IdStatus)
             {

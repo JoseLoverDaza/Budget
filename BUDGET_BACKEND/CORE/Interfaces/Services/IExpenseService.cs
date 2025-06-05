@@ -29,11 +29,11 @@
 
         public List<ExpenseExtendDto> GetExpensesByTypeExpenseStatus(ExpenseDto expense);
 
-        public ExpenseExtendDto SaveExpense(ExpenseDto expense);
+        public ExpenseDto SaveExpense(ExpenseDto expense);
 
-        public ExpenseExtendDto UpdateExpense(ExpenseDto expense);
+        public ExpenseDto UpdateExpense(ExpenseDto expense);
 
-        public ExpenseExtendDto DeleteExpense(ExpenseDto expense);
+        public ExpenseDto DeleteExpense(ExpenseDto expense);
 
 
         #endregion

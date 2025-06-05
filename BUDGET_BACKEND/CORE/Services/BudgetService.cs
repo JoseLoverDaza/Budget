@@ -9,7 +9,7 @@
     using CORE.Utils;
     using Domain.Dto;
     using Domain.Entities;
-    using System.Collections.Generic;
+    using System.Collections.Generic;    
     using System.Runtime.InteropServices;
 
     #endregion
@@ -37,14 +37,14 @@
 
         #region Métodos y Funciones
 
-        public BudgetExtendDto? GetBudgetById(int idBudget)
+        public BudgetExtendDto? GetBudgetById(BudgetDto budget)
         {
             IBudgetRepository budgetRepository = UnitOfWork.BudgetRepository();
-            BudgetExtendDto? budget = budgetRepository.GetBudgetById(idBudget);
+            BudgetExtendDto? budgetSearch = budgetRepository.GetBudgetById(budget);
 
-            if (budget != null)
+            if (budgetSearch != null)
             {
-                return budget;
+                return budgetSearch;
             }
             else
             {
@@ -52,25 +52,10 @@
             }
         }
 
-        public BudgetExtendDto? GetBudgetByYearMonthUser(int year, int month, int idUser)
+        public List<BudgetExtendDto> GetBudgetsByYearMonth(BudgetDto budget)
         {
             IBudgetRepository budgetRepository = UnitOfWork.BudgetRepository();
-            BudgetExtendDto? budget = budgetRepository.GetBudgetByYearMonthUser(year, month, idUser);
-
-            if (budget != null)
-            {
-                return budget;
-            }
-            else
-            {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            }
-        }
-
-        public List<BudgetExtendDto> GetBudgetsByStatus(int idStatus)
-        {
-            IBudgetRepository budgetRepository = UnitOfWork.BudgetRepository();
-            List<BudgetExtendDto> budgets = budgetRepository.GetBudgetsByStatus(idStatus);
+            List<BudgetExtendDto> budgets = budgetRepository.GetBudgetsByYearMonth(budget);
 
             if (budgets.Count != 0)
             {
@@ -82,10 +67,10 @@
             }
         }
 
-        public List<BudgetExtendDto> GetBudgetsByUser(int idUser)
+        public List<BudgetExtendDto> GetBudgetsByYearUser(BudgetDto budget)
         {
             IBudgetRepository budgetRepository = UnitOfWork.BudgetRepository();
-            List<BudgetExtendDto> budgets = budgetRepository.GetBudgetsByUser(idUser);
+            List<BudgetExtendDto> budgets = budgetRepository.GetBudgetsByYearUser(budget);
 
             if (budgets.Count != 0)
             {
@@ -97,10 +82,10 @@
             }
         }
 
-        public List<BudgetExtendDto> GetBudgetsByUserStatus(int idUser, int idStatus)
+        public List<BudgetExtendDto> GetBudgetsByMonthUser(BudgetDto budget)
         {
             IBudgetRepository budgetRepository = UnitOfWork.BudgetRepository();
-            List<BudgetExtendDto> budgets = budgetRepository.GetBudgetsByUserStatus(idUser, idStatus);
+            List<BudgetExtendDto> budgets = budgetRepository.GetBudgetsByMonthUser(budget);
 
             if (budgets.Count != 0)
             {
@@ -112,23 +97,83 @@
             }
         }
 
-        public BudgetExtendDto SaveBudget(BudgetExtendDto budget)
+        public List<BudgetExtendDto> GetBudgetsByYearMonthUser(BudgetDto budget)
         {
             IBudgetRepository budgetRepository = UnitOfWork.BudgetRepository();
-            IUserRepository userRepository = UnitOfWork.UserRepository();           
+            List<BudgetExtendDto> budgets = budgetRepository.GetBudgetsByYearMonthUser(budget);
+
+            if (budgets.Count != 0)
+            {
+                return budgets;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+        }
+
+        public List<BudgetExtendDto> GetBudgetsByUser(BudgetDto budget)
+        {
+            IBudgetRepository budgetRepository = UnitOfWork.BudgetRepository();
+            List<BudgetExtendDto> budgets = budgetRepository.GetBudgetsByUser(budget);
+
+            if (budgets.Count != 0)
+            {
+                return budgets;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+        }
+
+        public List<BudgetExtendDto> GetBudgetsByStatus(BudgetDto budget)
+        {
+            IBudgetRepository budgetRepository = UnitOfWork.BudgetRepository();
+            List<BudgetExtendDto> budgets = budgetRepository.GetBudgetsByStatus(budget);
+
+            if (budgets.Count != 0)
+            {
+                return budgets;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+        }
+
+        public List<BudgetExtendDto> GetBudgetsByUserStatus(BudgetDto budget)
+        {
+            IBudgetRepository budgetRepository = UnitOfWork.BudgetRepository();
+            List<BudgetExtendDto> budgets = budgetRepository.GetBudgetsByUserStatus(budget);
+
+            if (budgets.Count != 0)
+            {
+                return budgets;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+        }
+
+        public BudgetDto SaveBudget(BudgetDto budget)
+        {
+            IBudgetRepository budgetRepository = UnitOfWork.BudgetRepository();
+            IUserRepository userRepository = UnitOfWork.UserRepository();
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();
 
             if (budget == null || budget.Year <= 0 || budget.Month <= 0)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
-                        
-            UserExtendDto? userSearch = userRepository.GetUserById(budget.IdUser) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(budget.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            BudgetExtendDto? budgetSearch = budgetRepository.GetBudgetByYearMonthUser(budget.Year, budget.Month, budget.IdUser);
+            UserExtendDto? userSearch = userRepository.GetUserById(new UserDto { IdUser = budget.IdUser} ) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = budget.IdStatus} ) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            if (budgetSearch != null)
+            List<BudgetExtendDto> budgetsSearch = budgetRepository.GetBudgetsByYearMonthUser(budget);
+
+            if (budgetsSearch.Count != 0)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -153,7 +198,7 @@
             return budget;
         }
 
-        public BudgetExtendDto UpdateBudget(BudgetExtendDto budget)
+        public BudgetDto UpdateBudget(BudgetDto budget)
         {
             IBudgetRepository budgetRepository = UnitOfWork.BudgetRepository();
 
@@ -162,7 +207,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            BudgetExtendDto? budgetSearch = budgetRepository.GetBudgetById(budget.IdBudget) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            BudgetExtendDto? budgetSearch = budgetRepository.GetBudgetById(budget) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             Budget updateBudget = new()
             {
@@ -185,13 +230,13 @@
             return budget;
         }
 
-        public BudgetExtendDto DeleteBudget(BudgetExtendDto budget)
+        public BudgetDto DeleteBudget(BudgetDto budget)
         {
             IBudgetRepository budgetRepository = UnitOfWork.BudgetRepository();
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();
 
-            BudgetExtendDto? budgetSearch = budgetRepository.GetBudgetById(budget.IdBudget) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(budget.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            BudgetExtendDto? budgetSearch = budgetRepository.GetBudgetById(budget) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = budget.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (statusSearch.IdStatus == budget.IdStatus)
             {

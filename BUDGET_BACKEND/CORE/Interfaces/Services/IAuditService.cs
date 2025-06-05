@@ -29,11 +29,11 @@
 
         public List<AuditExtendDto> GetAuditsByEndpointCreationDate(AuditDto audit);
 
-        public AuditExtendDto SaveAudit(AuditDto audit);
+        public AuditDto SaveAudit(AuditDto audit);
 
-        public AuditExtendDto UpdateAudit(AuditDto audit);
+        public AuditDto UpdateAudit(AuditDto audit);
 
-        public AuditExtendDto DeleteAudit(AuditDto audit);
+        public AuditDto DeleteAudit(AuditDto audit);
 
         #endregion
 

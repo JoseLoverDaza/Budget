@@ -25,11 +25,11 @@
 
         public List<FinancialInstitutionExtendDto> GetFinancialInstitutionsByStatus(FinancialInstitutionDto financialInstitution);
 
-        public FinancialInstitutionExtendDto SaveFinancialInstitution(FinancialInstitutionDto financialInstitution);
+        public FinancialInstitutionDto SaveFinancialInstitution(FinancialInstitutionDto financialInstitution);
 
-        public FinancialInstitutionExtendDto UpdateFinancialInstitution(FinancialInstitutionDto financialInstitution);
+        public FinancialInstitutionDto UpdateFinancialInstitution(FinancialInstitutionDto financialInstitution);
 
-        public FinancialInstitutionExtendDto DeleteFinancialInstitution(FinancialInstitutionDto financialInstitution);
+        public FinancialInstitutionDto DeleteFinancialInstitution(FinancialInstitutionDto financialInstitution);
 
         #endregion
 

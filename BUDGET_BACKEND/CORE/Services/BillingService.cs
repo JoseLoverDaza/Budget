@@ -37,14 +37,14 @@
 
         #region Métodos y Funciones
 
-        public BillingExtendDto? GetBillingById(int idBilling)
+        public BillingExtendDto? GetBillingById(BillingDto billing)
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
-            BillingExtendDto? billing = billingRepository.GetBillingById(idBilling);
+            BillingExtendDto? billingSearch = billingRepository.GetBillingById(billing);
 
-            if (billing != null)
+            if (billingSearch != null)
             {
-                return billing;
+                return billingSearch;
             }
             else
             {
@@ -52,25 +52,10 @@
             }
         }
 
-        public BillingExtendDto? GetBillingByYearMonthUser(int year, int month, int idUser)
+        public List<BillingExtendDto> GetBillingsByYearMonth(BillingDto billing)
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
-            BillingExtendDto? billing = billingRepository.GetBillingByYearMonthUser(year, month, idUser);
-
-            if (billing != null)
-            {
-                return billing;
-            }
-            else
-            {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            }
-        }
-
-        public List<BillingExtendDto> GetBillingsByStatus(int idStatus)
-        {
-            IBillingRepository billingRepository = UnitOfWork.BillingRepository();
-            List<BillingExtendDto> billings = billingRepository.GetBillingsByStatus(idStatus);
+            List<BillingExtendDto> billings = billingRepository.GetBillingsByYearMonth(billing);
 
             if (billings.Count != 0)
             {
@@ -82,10 +67,10 @@
             }
         }
 
-        public List<BillingExtendDto> GetBillingsByUser(int idUser)
+        public List<BillingExtendDto> GetBillingsByYearUser(BillingDto billing)
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
-            List<BillingExtendDto> billings = billingRepository.GetBillingsByUser(idUser);
+            List<BillingExtendDto> billings = billingRepository.GetBillingsByYearUser(billing);
 
             if (billings.Count != 0)
             {
@@ -97,10 +82,10 @@
             }
         }
 
-        public List<BillingExtendDto> GetBillingsByUserStatus(int idUser, int idStatus)
+        public List<BillingExtendDto> GetBillingsByMonthUser(BillingDto billing)
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
-            List<BillingExtendDto> billings = billingRepository.GetBillingsByUserStatus(idUser, idStatus);
+            List<BillingExtendDto> billings = billingRepository.GetBillingsByMonthUser(billing);
 
             if (billings.Count != 0)
             {
@@ -112,7 +97,67 @@
             }
         }
 
-        public BillingExtendDto SaveBilling(BillingExtendDto billing)
+        public List<BillingExtendDto> GetBillingsByYearMonthUser(BillingDto billing)
+        {
+            IBillingRepository billingRepository = UnitOfWork.BillingRepository();
+            List<BillingExtendDto> billings = billingRepository.GetBillingsByYearMonthUser(billing);
+
+            if (billings.Count != 0)
+            {
+                return billings;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+        }
+        
+        public List<BillingExtendDto> GetBillingsByUser(BillingDto billing)
+        {
+            IBillingRepository billingRepository = UnitOfWork.BillingRepository();
+            List<BillingExtendDto> billings = billingRepository.GetBillingsByUser(billing);
+
+            if (billings.Count != 0)
+            {
+                return billings;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+        }
+
+        public List<BillingExtendDto> GetBillingsByStatus(BillingDto billing)
+        {
+            IBillingRepository billingRepository = UnitOfWork.BillingRepository();
+            List<BillingExtendDto> billings = billingRepository.GetBillingsByStatus(billing);
+
+            if (billings.Count != 0)
+            {
+                return billings;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+        }
+
+        public List<BillingExtendDto> GetBillingsByUserStatus(BillingDto billing)
+        {
+            IBillingRepository billingRepository = UnitOfWork.BillingRepository();
+            List<BillingExtendDto> billings = billingRepository.GetBillingsByUserStatus(billing);
+
+            if (billings.Count != 0)
+            {
+                return billings;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+        }
+
+        public BillingDto SaveBilling(BillingDto billing)
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
             IUserRepository userRepository = UnitOfWork.UserRepository();
@@ -123,16 +168,16 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            UserExtendDto? userSearch = userRepository.GetUserById(billing.IdUser) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(billing.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            UserExtendDto? userSearch = userRepository.GetUserById( new UserDto { IdStatus = billing.IdUser} ) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusDto? statusSearch = statusRepository.GetStatusById( new StatusDto { IdStatus = billing.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            BillingExtendDto? billingSearch = billingRepository.GetBillingByYearMonthUser(billing.Year, billing.Month, billing.IdUser);
+            List<BillingExtendDto> billingsSearch = billingRepository.GetBillingsByYearMonthUser(billing);
 
-            if (billingSearch != null)
+            if (billingsSearch.Count != 0)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
-
+           
             Billing saveBilling = new()
             {
                 Year = billing.Year,
@@ -153,7 +198,7 @@
             return billing;
         }
 
-        public BillingExtendDto UpdateBilling(BillingExtendDto billing)
+        public BillingDto UpdateBilling(BillingDto billing)
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
 
@@ -162,7 +207,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            BillingExtendDto? billingSearch = billingRepository.GetBillingById(billing.IdBilling) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            BillingExtendDto? billingSearch = billingRepository.GetBillingById(billing) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             Billing updateBilling = new()
             {
@@ -185,15 +230,15 @@
             return billing;
         }
 
-        public BillingExtendDto DeleteBilling(BillingExtendDto billing)
+        public BillingDto DeleteBilling(BillingDto billing)
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();
 
-            BillingExtendDto? billingSearch = billingRepository.GetBillingById(billing.IdBilling) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(billing.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            BillingExtendDto? billingSearch = billingRepository.GetBillingById(billing) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = billing.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            if (statusSearch.IdStatus == billing.IdStatus)
+            if (billingSearch.IdStatus == billing.IdStatus)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }

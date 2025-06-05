@@ -37,14 +37,14 @@
 
         #region Métodos y Funciones
 
-        public BillingDetailExtendDto? GetBillingDetailsById(int idBillingDetails)
+        public BillingDetailExtendDto? GetBillingDetailsById(BillingDetailsDto billingDetails)
         {
             IBillingDetailsRepository billingDetailRepository = UnitOfWork.BillingDetailsRepository();
-            BillingDetailExtendDto? billingDetails = billingDetailRepository.GetBillingDetailsById(idBillingDetails);
+            BillingDetailExtendDto? billingDetailsSearch = billingDetailRepository.GetBillingDetailsById(billingDetails);
 
-            if (billingDetails != null)
+            if (billingDetailsSearch != null)
             {
-                return billingDetails;
+                return billingDetailsSearch;
             }
             else
             {
@@ -52,14 +52,14 @@
             }
         }
 
-        public List<BillingDetailExtendDto> GetBillingDetailsByBilling(int idBilling)
+        public List<BillingDetailExtendDto> GetBillingDetailsByBilling(BillingDetailsDto billingDetails)
         {
             IBillingDetailsRepository billingDetailRepository = UnitOfWork.BillingDetailsRepository();
-            List<BillingDetailExtendDto> billingDetails = billingDetailRepository.GetBillingDetailsByBilling(idBilling);
+            List<BillingDetailExtendDto> billingDetailsSearch = billingDetailRepository.GetBillingDetailsByBilling(billingDetails);
 
-            if (billingDetails.Count != 0)
+            if (billingDetailsSearch.Count != 0)
             {
-                return billingDetails;
+                return billingDetailsSearch;
             }
             else
             {
@@ -67,14 +67,14 @@
             }
         }
 
-        public List<BillingDetailExtendDto> GetBillingDetailsByExpense(int idExpense)
+        public List<BillingDetailExtendDto> GetBillingDetailsByExpense(BillingDetailsDto billingDetails)
         {
             IBillingDetailsRepository billingDetailRepository = UnitOfWork.BillingDetailsRepository();
-            List<BillingDetailExtendDto> billingDetails = billingDetailRepository.GetBillingDetailsByExpense(idExpense);
+            List<BillingDetailExtendDto> billingDetailsSearch = billingDetailRepository.GetBillingDetailsByExpense(billingDetails);
 
-            if (billingDetails.Count != 0)
+            if (billingDetailsSearch.Count != 0)
             {
-                return billingDetails;
+                return billingDetailsSearch;
             }
             else
             {
@@ -82,14 +82,14 @@
             }
         }
 
-        public List<BillingDetailExtendDto> GetBillingDetailsByBillingExpense(int idBilling, int idExpense)
+        public List<BillingDetailExtendDto> GetBillingDetailsByStatus(BillingDetailsDto billingDetails)
         {
             IBillingDetailsRepository billingDetailRepository = UnitOfWork.BillingDetailsRepository();
-            List<BillingDetailExtendDto> billingDetails = billingDetailRepository.GetBillingDetailsByBillingExpense(idBilling, idExpense);
+            List<BillingDetailExtendDto> billingDetailsSearch = billingDetailRepository.GetBillingDetailsByStatus(billingDetails);
 
-            if (billingDetails.Count != 0)
+            if (billingDetailsSearch.Count != 0)
             {
-                return billingDetails;
+                return billingDetailsSearch;
             }
             else
             {
@@ -97,14 +97,14 @@
             }
         }
 
-        public List<BillingDetailExtendDto> GetBillingDetailsByExpenseStatus(int idExpense, int idStatus)
+        public List<BillingDetailExtendDto> GetBillingDetailsByBillingExpense(BillingDetailsDto billingDetails)
         {
             IBillingDetailsRepository billingDetailRepository = UnitOfWork.BillingDetailsRepository();
-            List<BillingDetailExtendDto> billingDetails = billingDetailRepository.GetBillingDetailsByExpenseStatus(idExpense, idStatus);
+            List<BillingDetailExtendDto> billingDetailsSearch = billingDetailRepository.GetBillingDetailsByBillingExpense(billingDetails);
 
-            if (billingDetails.Count != 0)
+            if (billingDetailsSearch.Count != 0)
             {
-                return billingDetails;
+                return billingDetailsSearch;
             }
             else
             {
@@ -112,14 +112,14 @@
             }
         }
 
-        public List<BillingDetailExtendDto> GetBillingDetailsByStatus(int idStatus)
+        public List<BillingDetailExtendDto> GetBillingDetailsByExpenseStatus(BillingDetailsDto billingDetails)
         {
             IBillingDetailsRepository billingDetailRepository = UnitOfWork.BillingDetailsRepository();
-            List<BillingDetailExtendDto> billingDetails = billingDetailRepository.GetBillingDetailsByStatus(idStatus);
+            List<BillingDetailExtendDto> billingDetailsSearch = billingDetailRepository.GetBillingDetailsByExpenseStatus(billingDetails);
 
-            if (billingDetails.Count != 0)
+            if (billingDetailsSearch.Count != 0)
             {
-                return billingDetails;
+                return billingDetailsSearch;
             }
             else
             {
@@ -127,34 +127,49 @@
             }
         }
 
-        public BillingDetailExtendDto SaveBillingDetail(BillingDetailExtendDto billingDetail)
+        public List<BillingDetailExtendDto> GetBillingDetailsByBillingExpenseStatus(BillingDetailsDto billingDetails)
+        {
+            IBillingDetailsRepository billingDetailRepository = UnitOfWork.BillingDetailsRepository();
+            List<BillingDetailExtendDto> billingDetailsSearch = billingDetailRepository.GetBillingDetailsByBillingExpenseStatus(billingDetails);
+
+            if (billingDetailsSearch.Count != 0)
+            {
+                return billingDetailsSearch;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+        }
+
+        public BillingDetailsDto SaveBillingDetail(BillingDetailsDto billingDetails)
         {
             IBillingDetailsRepository billingDetailRepository = UnitOfWork.BillingDetailsRepository();
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();
 
-            if (billingDetail == null || billingDetail.Amount <= 0)
+            if (billingDetails == null || billingDetails.Amount <= 0)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            List<BillingDetailExtendDto> billingDetailsSearch = billingDetailRepository.GetBillingDetailsByBillingExpense(billingDetail.IdBilling, billingDetail.IdExpense);
+            List<BillingDetailExtendDto> billingDetailsSearch = billingDetailRepository.GetBillingDetailsByBillingExpense(billingDetails);
 
             if (billingDetailsSearch.Count != 0)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            BillingExtendDto? billingSearch = billingRepository.GetBillingById(billingDetail.IdBilling) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            ExpenseExtendDto? expenseSearch = expenseRepository.GetExpenseById(billingDetail.IdExpense) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(billingDetail.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            BillingExtendDto? billingSearch = billingRepository.GetBillingById(new BillingDto { IdBilling = billingDetails.IdBilling }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            ExpenseExtendDto? expenseSearch = expenseRepository.GetExpenseById(new ExpenseDto { IdExpense = billingDetails.IdExpense }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = billingDetails.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             BillingDetails saveBillingDetails = new()
             {
                 IdBilling = billingSearch.IdBilling,
-                CreationDate = billingDetail.CreationDate,
-                Amount = billingDetail.Amount,
+                CreationDate = billingDetails.CreationDate,
+                Amount = billingDetails.Amount,
                 IdExpense = expenseSearch.IdExpense,
                 IdStatus = statusSearch.IdStatus
             };
@@ -166,26 +181,26 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            return billingDetail;
+            return billingDetails;
         }
 
-        public BillingDetailExtendDto UpdateBillingDetail(BillingDetailExtendDto billingDetail)
+        public BillingDetailsDto UpdateBillingDetail(BillingDetailsDto billingDetails)
         {
             IBillingDetailsRepository billingDetailRepository = UnitOfWork.BillingDetailsRepository();
 
-            if (billingDetail == null || billingDetail.IdBilling <= 0 || billingDetail.IdExpense <= 0)
+            if (billingDetails == null || billingDetails.IdBilling <= 0 || billingDetails.IdExpense <= 0)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            BillingDetailExtendDto? billingDetailSearch = billingDetailRepository.GetBillingDetailsById(billingDetail.IdBillingDetails) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            BillingDetailExtendDto? billingDetailSearch = billingDetailRepository.GetBillingDetailsById(billingDetails) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             BillingDetails updateBillingDetails = new()
             {
-                IdBillingDetails = billingDetail.IdBillingDetails,
+                IdBillingDetails = billingDetails.IdBillingDetails,
                 IdBilling = billingDetailSearch.IdBilling,
                 CreationDate = billingDetailSearch.CreationDate,
-                Amount = billingDetail.Amount,
+                Amount = billingDetails.Amount,
                 IdExpense = billingDetailSearch.IdExpense,
                 IdStatus = billingDetailSearch.IdStatus
             };
@@ -197,18 +212,18 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            return billingDetail;
+            return billingDetails;
         }
 
-        public BillingDetailExtendDto DeleteBillingDetail(BillingDetailExtendDto billingDetail)
+        public BillingDetailsDto DeleteBillingDetail(BillingDetailsDto billingDetails)
         {
             IBillingDetailsRepository billingDetailRepository = UnitOfWork.BillingDetailsRepository();
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();
 
-            BillingDetailExtendDto? billingDetailSearch = billingDetailRepository.GetBillingDetailsById(billingDetail.IdBillingDetails) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(billingDetail.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            BillingDetailExtendDto? billingDetailSearch = billingDetailRepository.GetBillingDetailsById(billingDetails) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusDto? statusSearch = statusRepository.GetStatusById( new StatusDto { IdStatus = billingDetails.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            if (statusSearch.IdStatus == billingDetail.IdStatus)
+            if (billingDetailSearch.IdStatus == billingDetails.IdStatus)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -220,7 +235,7 @@
                 CreationDate = billingDetailSearch.CreationDate,
                 Amount = billingDetailSearch.Amount,
                 IdExpense = billingDetailSearch.IdExpense,
-                IdStatus = billingDetail.IdStatus
+                IdStatus = statusSearch.IdStatus
             };
 
             UnitOfWork.BaseRepository<BillingDetails>().Update(deleteBillingDetails);
@@ -229,7 +244,7 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
-            return billingDetail;
+            return billingDetails;
         }
 
         #endregion Constructor

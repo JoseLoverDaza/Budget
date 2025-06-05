@@ -39,11 +39,11 @@
 
         public List<TokenApiExtendDto> GetTokenApisByExpirationDateUserStatus(TokenApiDto tokenApi);
 
-        public TokenApiExtendDto SaveTokenApi(TokenApiDto tokenApi);
+        public TokenApiDto SaveTokenApi(TokenApiDto tokenApi);
 
-        public TokenApiExtendDto UpdateTokenApi(TokenApiDto tokenApi);
+        public TokenApiDto UpdateTokenApi(TokenApiDto tokenApi);
 
-        public TokenApiExtendDto DeleteTokenApi(TokenApiDto tokenApi);
+        public TokenApiDto DeleteTokenApi(TokenApiDto tokenApi);
 
         #endregion
 

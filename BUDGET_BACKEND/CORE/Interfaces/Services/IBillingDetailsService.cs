@@ -33,11 +33,11 @@
 
         public List<BillingDetailExtendDto> GetBillingDetailsByBillingExpenseStatus(BillingDetailsDto billingDetails);
 
-        public BillingDetailExtendDto SaveBillingDetail(BillingDetailsDto billingDetail);
+        public BillingDetailsDto SaveBillingDetail(BillingDetailsDto billingDetails);
 
-        public BillingDetailExtendDto UpdateBillingDetail(BillingDetailsDto billingDetail);
+        public BillingDetailsDto UpdateBillingDetail(BillingDetailsDto billingDetails);
 
-        public BillingDetailExtendDto DeleteBillingDetail(BillingDetailsDto billingDetail);
+        public BillingDetailsDto DeleteBillingDetail(BillingDetailsDto billingDetails);
 
         #endregion
 

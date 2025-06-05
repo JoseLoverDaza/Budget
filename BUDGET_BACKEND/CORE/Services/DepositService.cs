@@ -37,14 +37,14 @@
 
         #region Métodos y Funciones
 
-        public DepositExtendDto? GetDepositById(int idDeposit)
+        public DepositExtendDto? GetDepositById(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
-            DepositExtendDto? deposit = depositRepository.GetDepositById(idDeposit);
+            DepositExtendDto? depositSearch = depositRepository.GetDepositById(deposit);
 
-            if (deposit != null)
+            if (depositSearch != null)
             {
-                return deposit;
+                return depositSearch;
             }
             else
             {
@@ -52,10 +52,100 @@
             }
         }
 
-        public List<DepositExtendDto> GetDepositsByYearMonth(int year, int month)
+        public List<DepositExtendDto> GetDepositsByYearMonth(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
-            List<DepositExtendDto> deposits = depositRepository.GetDepositsByYearMonth(year, month);
+            List<DepositExtendDto> depositsSearch = depositRepository.GetDepositsByYearMonth(deposit);
+
+            if (depositsSearch.Count != 0)
+            {
+                return depositsSearch;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+        }
+
+        public List<DepositExtendDto> GetDepositsByYearUser(DepositDto deposit)
+        {
+            IDepositRepository depositRepository = UnitOfWork.DepositRepository();
+            List<DepositExtendDto> depositsSearch = depositRepository.GetDepositsByYearUser(deposit);
+
+            if (depositsSearch.Count != 0)
+            {
+                return depositsSearch;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+        }
+
+        public List<DepositExtendDto> GetDepositsByMonthUser(DepositDto deposit)
+        {
+            IDepositRepository depositRepository = UnitOfWork.DepositRepository();
+            List<DepositExtendDto> depositsSearch = depositRepository.GetDepositsByMonthUser(deposit);
+
+            if (depositsSearch.Count != 0)
+            {
+                return depositsSearch;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+        }
+
+        public List<DepositExtendDto> GetDepositsByYearMonthUser(DepositDto deposit)
+        {
+            IDepositRepository depositRepository = UnitOfWork.DepositRepository();
+            List<DepositExtendDto> depositsSearch = depositRepository.GetDepositsByYearMonthUser(deposit);
+
+            if (depositsSearch.Count != 0)
+            {
+                return depositsSearch;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+        }
+
+        public List<DepositExtendDto> GetDepositsByYearMonthAccount(DepositDto deposit)
+        {
+            IDepositRepository depositRepository = UnitOfWork.DepositRepository();
+            List<DepositExtendDto> depositsSearch = depositRepository.GetDepositsByYearMonthAccount(deposit);
+
+            if (depositsSearch.Count != 0)
+            {
+                return depositsSearch;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+        }
+
+        public List<DepositExtendDto> GetDepositsByYearMonthStatus(DepositDto deposit)
+        {
+            IDepositRepository depositRepository = UnitOfWork.DepositRepository();
+            List<DepositExtendDto> depositsSearch = depositRepository.GetDepositsByYearMonthStatus(deposit);
+
+            if (depositsSearch.Count != 0)
+            {
+                return depositsSearch;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+        }
+
+        public List<DepositExtendDto> GetDepositsByYearMonthUserAccount(DepositDto deposit)
+        {
+            IDepositRepository depositRepository = UnitOfWork.DepositRepository();
+            List<DepositExtendDto> deposits = depositRepository.GetDepositsByYearMonthUserAccount(deposit);
 
             if (deposits.Count != 0)
             {
@@ -67,10 +157,10 @@
             }
         }
 
-        public List<DepositExtendDto> GetDepositsByYearMonthAccount(int year, int month, int idAccount)
+        public List<DepositExtendDto> GetDepositsByUser(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
-            List<DepositExtendDto> deposits = depositRepository.GetDepositsByYearMonthAccount(year, month, idAccount);
+            List<DepositExtendDto> deposits = depositRepository.GetDepositsByUser(deposit);
 
             if (deposits.Count != 0)
             {
@@ -82,10 +172,10 @@
             }
         }
 
-        public List<DepositExtendDto> GetDepositsByYearMonthStatus(int year, int month, int idStatus)
+        public List<DepositExtendDto> GetDepositsByAccount(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
-            List<DepositExtendDto> deposits = depositRepository.GetDepositsByYearMonthStatus(year, month, idStatus);
+            List<DepositExtendDto> deposits = depositRepository.GetDepositsByAccount(deposit);
 
             if (deposits.Count != 0)
             {
@@ -97,10 +187,10 @@
             }
         }
 
-        public List<DepositExtendDto> GetDepositsByYearMonthUser(int year, int month, int idUser)
+        public List<DepositExtendDto> GetDepositsByStatus(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
-            List<DepositExtendDto> deposits = depositRepository.GetDepositsByYearMonthUser(year, month, idUser);
+            List<DepositExtendDto> deposits = depositRepository.GetDepositsByStatus(deposit);
 
             if (deposits.Count != 0)
             {
@@ -112,10 +202,10 @@
             }
         }
 
-        public List<DepositExtendDto> GetDepositsByUser(int idUser)
+        public List<DepositExtendDto> GetDepositsByUserStatus(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
-            List<DepositExtendDto> deposits = depositRepository.GetDepositsByUser(idUser);
+            List<DepositExtendDto> deposits = depositRepository.GetDepositsByUserStatus(deposit);
 
             if (deposits.Count != 0)
             {
@@ -127,10 +217,10 @@
             }
         }
 
-        public List<DepositExtendDto> GetDepositsByAccount(int idAccount)
+        public List<DepositExtendDto> GetDepositsByAccountStatus(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
-            List<DepositExtendDto> deposits = depositRepository.GetDepositsByAccount(idAccount);
+            List<DepositExtendDto> deposits = depositRepository.GetDepositsByAccountStatus(deposit);
 
             if (deposits.Count != 0)
             {
@@ -142,52 +232,7 @@
             }
         }
 
-        public List<DepositExtendDto> GetDepositsByStatus(int idStatus)
-        {
-            IDepositRepository depositRepository = UnitOfWork.DepositRepository();
-            List<DepositExtendDto> deposits = depositRepository.GetDepositsByStatus(idStatus);
-
-            if (deposits.Count != 0)
-            {
-                return deposits;
-            }
-            else
-            {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            }
-        }
-
-        public List<DepositExtendDto> GetDepositsByUserStatus(int idUser, int idStatus)
-        {
-            IDepositRepository depositRepository = UnitOfWork.DepositRepository();
-            List<DepositExtendDto> deposits = depositRepository.GetDepositsByUserStatus(idUser, idStatus);
-
-            if (deposits.Count != 0)
-            {
-                return deposits;
-            }
-            else
-            {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            }
-        }
-
-        public List<DepositExtendDto> GetDepositsByAccountStatus(int idAccount, int idStatus)
-        {
-            IDepositRepository depositRepository = UnitOfWork.DepositRepository();
-            List<DepositExtendDto> deposits = depositRepository.GetDepositsByAccountStatus(idAccount, idStatus);
-
-            if (deposits.Count != 0)
-            {
-                return deposits;
-            }
-            else
-            {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            }
-        }
-
-        public DepositExtendDto SaveDeposit(DepositExtendDto deposit)
+        public DepositDto SaveDeposit(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
             IUserRepository userRepository = UnitOfWork.UserRepository();
@@ -199,11 +244,11 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
                      
-            AccountExtendDto? accountSearch = accountRepository.GetAccountById(deposit.IdAccount) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            UserExtendDto? userSearch = userRepository.GetUserById(deposit.IdUser) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(deposit.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            AccountExtendDto? accountSearch = accountRepository.GetAccountById(new AccountDto { IdAccount = deposit.IdAccount }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            UserExtendDto? userSearch = userRepository.GetUserById(new UserDto { IdUser = deposit.IdUser }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto{ IdStatus = deposit.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            List<DepositExtendDto>? depositSearch = depositRepository.GetDepositsByYearMonthUserAccount(deposit.Year, deposit.Month, userSearch.IdUser, accountSearch.IdAccount);
+            List<DepositExtendDto>? depositSearch = depositRepository.GetDepositsByYearMonthUserAccount(deposit);
 
             if (depositSearch.Count != 0)
             {
@@ -229,7 +274,7 @@
             return deposit;
         }
 
-        public DepositExtendDto UpdateDeposit(DepositExtendDto deposit)
+        public DepositDto UpdateDeposit(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
 
@@ -238,7 +283,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            DepositExtendDto? depositSearch = depositRepository.GetDepositById(deposit.IdDeposit) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            DepositExtendDto? depositSearch = depositRepository.GetDepositById(deposit) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             Deposit updateDeposit = new()
             {
@@ -260,13 +305,13 @@
             return deposit;
         }
 
-        public DepositExtendDto DeleteDeposit(DepositExtendDto deposit)
+        public DepositDto DeleteDeposit(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();
 
-            DepositExtendDto? depositSearch = depositRepository.GetDepositById(deposit.IdDeposit) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(deposit.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            DepositExtendDto? depositSearch = depositRepository.GetDepositById(deposit) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = deposit.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (statusSearch.IdStatus == deposit.IdStatus)
             {
