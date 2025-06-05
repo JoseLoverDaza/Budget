@@ -1,8 +1,8 @@
 ﻿namespace API.Controllers
 {
-
+    
     #region Librerias
-       
+
     using CORE.Interfaces.Services;   
     using CORE.Utils;
     using Domain.Dto;
@@ -14,26 +14,26 @@
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
-    /// Nombre: AccountController   
+    /// Nombre: TokenApiController   
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountController : BaseController
+    public class TokenApiController : BaseController
     {
 
         #region Atributos y Propiedades
 
-        private readonly IAccountService _accountService;
+        private readonly ITokenApiService _tokenApiService;
 
         #endregion
 
         #region Constructor
 
-        public AccountController(IAccountService accountService)
+        public TokenApiController(ITokenApiService tokenApiService)
         {
-            _accountService = accountService;
+            _tokenApiService = tokenApiService;
         }
 
         #endregion
@@ -41,13 +41,13 @@
         #region Métodos y Funciones
 
         [HttpPost]
-        [Route("GetAccountById")]
-        [SwaggerOperation(Summary = "Get Account By Id")]
-        public ResponseDto GetAccountById(AccountDto account)
+        [Route("GetTokenApiById")]
+        [SwaggerOperation(Summary = "Get Token Api By Id")]
+        public ResponseDto GetTokenApiById(TokenApiDto tokenApi)
         {
             try
             {
-                response.Data = _accountService.GetAccountById(account);
+                response.Data = _tokenApiService.GetTokenApiById(tokenApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -58,13 +58,13 @@
         }
 
         [HttpPost]
-        [Route("GetAccountsByFinancialInstitution")]
-        [SwaggerOperation(Summary = "Get Accounts By Financial Institution")]
-        public ResponseDto GetAccountsByFinancialInstitution(AccountDto account)
+        [Route("GetTokenApiByToken")]
+        [SwaggerOperation(Summary = "Get Token Api By Token")]
+        public ResponseDto GetTokenApiByToken(TokenApiDto tokenApi)
         {
             try
             {
-                response.Data = _accountService.GetAccountsByFinancialInstitution(account);
+                response.Data = _tokenApiService.GetTokenApiByToken(tokenApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -75,13 +75,13 @@
         }
 
         [HttpPost]
-        [Route("GetAccountsByTypeAccount")]
-        [SwaggerOperation(Summary = "Get Accounts By Type Account")]
-        public ResponseDto GetAccountsByTypeAccount(AccountDto account)
+        [Route("GetTokenApisByCreationDate")]
+        [SwaggerOperation(Summary = "Get Token Apis By Creation Date")]
+        public ResponseDto GetTokenApisByCreationDate(TokenApiDto tokenApi)
         {
             try
             {
-                response.Data = _accountService.GetAccountsByTypeAccount(account);
+                response.Data = _tokenApiService.GetTokenApisByCreationDate(tokenApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -92,13 +92,13 @@
         }
 
         [HttpPost]
-        [Route("GetAccountsByUser")]
-        [SwaggerOperation(Summary = "Get Accounts By User")]
-        public ResponseDto GetAccountsByUser(AccountDto account)
+        [Route("GetTokenApisByUser")]
+        [SwaggerOperation(Summary = "Get Token Apis By User")]
+        public ResponseDto GetTokenApisByUser(TokenApiDto tokenApi)
         {
             try
             {
-                response.Data = _accountService.GetAccountsByUser(account);
+                response.Data = _tokenApiService.GetTokenApisByUser(tokenApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -109,13 +109,13 @@
         }
 
         [HttpPost]
-        [Route("GetAccountsByStatus")]
-        [SwaggerOperation(Summary = "Get Accounts By Status")]
-        public ResponseDto GetAccountsByStatus(AccountDto account)
+        [Route("GetTokenApisByStatus")]
+        [SwaggerOperation(Summary = "Get Token Apis By Status")]
+        public ResponseDto GetTokenApisByStatus(TokenApiDto tokenApi)
         {
             try
             {
-                response.Data = _accountService.GetAccountsByStatus(account);
+                response.Data = _tokenApiService.GetTokenApisByStatus(tokenApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -126,13 +126,13 @@
         }
 
         [HttpPost]
-        [Route("GetAccountsByFinancialInstitutionStatus")]
-        [SwaggerOperation(Summary = "Get Accounts By Financial InstitutionStatus")]
-        public ResponseDto GetAccountsByFinancialInstitutionStatus(AccountDto account)
+        [Route("GetTokenApisByCreationDateStatus")]
+        [SwaggerOperation(Summary = "Get Token Apis By Creation Date Status")]
+        public ResponseDto GetTokenApisByCreationDateStatus(TokenApiDto tokenApi)
         {
             try
             {
-                response.Data = _accountService.GetAccountsByFinancialInstitutionStatus(account);
+                response.Data = _tokenApiService.GetTokenApisByCreationDateStatus(tokenApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -143,13 +143,13 @@
         }
 
         [HttpPost]
-        [Route("GetAccountsByTypeAccountStatus")]
-        [SwaggerOperation(Summary = "Get Accounts By Type Account Status")]
-        public ResponseDto GetAccountsByTypeAccountStatus(AccountDto account)
+        [Route("GetTokenApisByExpirationDateStatus")]
+        [SwaggerOperation(Summary = "Get Token Apis By Expiration Date Status")]
+        public ResponseDto GetTokenApisByExpirationDateStatus(TokenApiDto tokenApi)
         {
             try
             {
-                response.Data = _accountService.GetAccountsByTypeAccountStatus(account);
+                response.Data = _tokenApiService.GetTokenApisByExpirationDateStatus(tokenApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -160,13 +160,13 @@
         }
 
         [HttpPost]
-        [Route("GetAccountsByUserStatus")]
-        [SwaggerOperation(Summary = "Get Accounts By User Status")]
-        public ResponseDto GetAccountsByUserStatus(AccountDto account)
+        [Route("GetTokenApisByUserStatus")]
+        [SwaggerOperation(Summary = "Get Token Apis By User Status")]
+        public ResponseDto GetTokenApisByUserStatus(TokenApiDto tokenApi)
         {
             try
             {
-                response.Data = _accountService.GetAccountsByUserStatus(account);
+                response.Data = _tokenApiService.GetTokenApisByUserStatus(tokenApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -177,13 +177,13 @@
         }
 
         [HttpPost]
-        [Route("GetAccountsByNameFinancialInstitutionTypeAccountUser")]
-        [SwaggerOperation(Summary = "Get Accounts By Name Financial Institution Type Account User")]
-        public ResponseDto GetAccountsByNameFinancialInstitutionTypeAccountUser(AccountDto account)
+        [Route("GetTokenApisByCreationDateUserStatus")]
+        [SwaggerOperation(Summary = "Get Token Apis By Creation Date User Status")]
+        public ResponseDto GetTokenApisByCreationDateUserStatus(TokenApiDto tokenApi)
         {
             try
             {
-                response.Data = _accountService.GetAccountsByNameFinancialInstitutionTypeAccountUser(account);
+                response.Data = _tokenApiService.GetTokenApisByCreationDateUserStatus(tokenApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -194,13 +194,13 @@
         }
 
         [HttpPost]
-        [Route("GetAccountsByFinancialInstitutionTypeAccountUser")]
-        [SwaggerOperation(Summary = "Get Accounts By Financial Institution Type Account User")]
-        public ResponseDto GetAccountsByFinancialInstitutionTypeAccountUser(AccountDto account)
+        [Route("GetTokenApisByExpirationDateUserStatus")]
+        [SwaggerOperation(Summary = "Get Token Apis By Expiration Date User Status")]
+        public ResponseDto GetTokenApisByExpirationDateUserStatus(TokenApiDto tokenApi)
         {
             try
             {
-                response.Data = _accountService.GetAccountsByFinancialInstitutionTypeAccountUser(account);
+                response.Data = _tokenApiService.GetTokenApisByExpirationDateUserStatus(tokenApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -211,13 +211,13 @@
         }
 
         [HttpPost]
-        [Route("SaveAccount")]
-        [SwaggerOperation(Summary = "Save Account")]
-        public ResponseDto SaveAccount(AccountDto account)
+        [Route("SaveTokenApi")]
+        [SwaggerOperation(Summary = "Save Token Api")]
+        public ResponseDto SaveTokenApi(TokenApiDto tokenApi)
         {
             try
             {
-                response.Data = _accountService.SaveAccount(account);
+                response.Data = _tokenApiService.SaveTokenApi(tokenApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -228,13 +228,13 @@
         }
 
         [HttpPost]
-        [Route("UpdateAccount")]
-        [SwaggerOperation(Summary = "Update Account")]
-        public ResponseDto UpdateAccount(AccountDto account)
+        [Route("UpdateTokenApi")]
+        [SwaggerOperation(Summary = "Update Token Api")]
+        public ResponseDto UpdateTokenApi(TokenApiDto tokenApi)
         {
             try
             {
-                response.Data = _accountService.UpdateAccount(account);
+                response.Data = _tokenApiService.UpdateTokenApi(tokenApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -245,13 +245,13 @@
         }
 
         [HttpPost]
-        [Route("DeleteAccount")]
-        [SwaggerOperation(Summary = "Delete Account")]
-        public ResponseDto DeleteAccount(AccountDto account)
+        [Route("DeleteTokenApi")]
+        [SwaggerOperation(Summary = "Delete Token Api")]
+        public ResponseDto DeleteTokenApi(TokenApiDto tokenApi)
         {
             try
             {
-                response.Data = _accountService.DeleteAccount(account);
+                response.Data = _tokenApiService.DeleteTokenApi(tokenApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)

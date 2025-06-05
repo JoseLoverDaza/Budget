@@ -40,7 +40,7 @@
         {
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();
 
-            StatusDto? statusSearch = statusRepository.GetStatusById(status.IdStatus);
+            StatusDto? statusSearch = statusRepository.GetStatusById(status);
 
             if (statusSearch != null)
             {
@@ -56,7 +56,7 @@
         {
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();
 
-            StatusDto? statusSearch = statusRepository.GetStatusByName(status.Name.Trim());
+            StatusDto? statusSearch = statusRepository.GetStatusByName(status);
 
             if (statusSearch != null)
             {
@@ -93,12 +93,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            if (string.IsNullOrWhiteSpace(status.Name.Trim()))
-            {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            }
-
-            StatusDto? statusSearch = statusRepository.GetStatusByName(status.Name.Trim());
+            StatusDto? statusSearch = statusRepository.GetStatusByName(status);
 
             if (statusSearch != null)
             {
@@ -129,13 +124,8 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            if (string.IsNullOrWhiteSpace(status.Name.Trim()))
-            {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            }
-
-            StatusDto? statusDuplicado = statusRepository.GetStatusByName(status.Name);
-            StatusDto? statusSearch = statusRepository.GetStatusById(status.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusDto? statusDuplicado = statusRepository.GetStatusByName(status);
+            StatusDto? statusSearch = statusRepository.GetStatusById(status) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (statusDuplicado != null && statusDuplicado.IdStatus != statusSearch.IdStatus)
             {

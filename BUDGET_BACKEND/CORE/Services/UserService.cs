@@ -37,14 +37,14 @@
 
         #region Métodos y Funciones
 
-        public UserExtendDto? GetUserById(int idUser)
+        public UserExtendDto? GetUserById(UserDto user)
         {
             IUserRepository userRepository = UnitOfWork.UserRepository();
-            UserExtendDto? user = userRepository.GetUserById(idUser);
+            UserExtendDto? userSearch = userRepository.GetUserById(user);
 
-            if (user != null)
+            if (userSearch != null)
             {
-                return user;
+                return userSearch;
             }
             else
             {
@@ -52,14 +52,14 @@
             }
         }
 
-        public UserExtendDto? GetUserByEmail(string email)
+        public UserExtendDto? GetUserByEmail(UserDto user)
         {
             IUserRepository userRepository = UnitOfWork.UserRepository();
-            UserExtendDto? user = userRepository.GetUserByEmail(email);
+            UserExtendDto? userSearch = userRepository.GetUserByEmail(user);
 
-            if (user != null)
+            if (userSearch != null)
             {
-                return user;
+                return userSearch;
             }
             else
             {
@@ -67,14 +67,14 @@
             }
         }
 
-        public UserExtendDto? GetUserByLogin(string login)
+        public UserExtendDto? GetUserByLogin(UserDto user)
         {
             IUserRepository userRepository = UnitOfWork.UserRepository();
-            UserExtendDto? user = userRepository.GetUserByLogin(login);
+            UserExtendDto? userSearch = userRepository.GetUserByLogin(user);
 
-            if (user != null)
+            if (userSearch != null)
             {
-                return user;
+                return userSearch;
             }
             else
             {
@@ -82,14 +82,14 @@
             }
         }
 
-        public List<UserExtendDto> GetUsersByRole(int idRole)
+        public List<UserExtendDto> GetUsersByRole(UserDto user)
         {
             IUserRepository userRepository = UnitOfWork.UserRepository();
-            List<UserExtendDto> users = userRepository.GetUsersByRole(idRole);
+            List<UserExtendDto> usersSearch = userRepository.GetUsersByRole(user);
 
-            if (users.Count != 0)
+            if (usersSearch.Count != 0)
             {
-                return users;
+                return usersSearch;
             }
             else
             {
@@ -97,14 +97,14 @@
             }
         }
 
-        public List<UserExtendDto> GetUsersByStatus(int idStatus)
+        public List<UserExtendDto> GetUsersByStatus(UserDto user)
         {
             IUserRepository userRepository = UnitOfWork.UserRepository();
-            List<UserExtendDto> users = userRepository.GetUsersByStatus(idStatus);
+            List<UserExtendDto> usersSearch = userRepository.GetUsersByStatus(user);
 
-            if (users.Count != 0)
+            if (usersSearch.Count != 0)
             {
-                return users;
+                return usersSearch;
             }
             else
             {
@@ -112,14 +112,14 @@
             }
         }
 
-        public List<UserExtendDto> GetUsersByRoleStatus(int idRole, int idStatus)
+        public List<UserExtendDto> GetUsersByRoleStatus(UserDto user)
         {
             IUserRepository userRepository = UnitOfWork.UserRepository();
-            List<UserExtendDto> users = userRepository.GetUsersByRoleStatus(idRole, idStatus);
+            List<UserExtendDto> usersSearch = userRepository.GetUsersByRoleStatus(user);
 
-            if (users.Count != 0)
+            if (usersSearch.Count != 0)
             {
-                return users;
+                return usersSearch;
             }
             else
             {
@@ -127,7 +127,7 @@
             }
         }
 
-        public UserExtendDto SaveUser(UserExtendDto user)
+        public UserDto SaveUser(UserDto user)
         {
             IUserRepository userRepository = UnitOfWork.UserRepository();
             IRoleRepository roleRepository = UnitOfWork.RoleRepository();
@@ -138,15 +138,15 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            UserExtendDto? userSearch = userRepository.GetUserByLogin(user.Login.Trim());
+            UserExtendDto? userSearch = userRepository.GetUserByLogin(user);
 
             if (userSearch != null)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            RoleExtendDto? rolSearch = roleRepository.GetRoleById(user.IdRole) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(user.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            RoleExtendDto? rolSearch = roleRepository.GetRoleById(new RoleDto { IdRole = user.IdRole }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = user.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             User saveUser = new()
             {                
@@ -167,7 +167,7 @@
             return user;
         }
 
-        public UserExtendDto UpdateUser(UserExtendDto user)
+        public UserDto UpdateUser(UserDto user)
         {
             IUserRepository userRepository = UnitOfWork.UserRepository();
            
@@ -176,8 +176,8 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            UserExtendDto? userDuplicado = userRepository.GetUserByLogin(user.Login);
-            UserExtendDto? userSearch = userRepository.GetUserById(user.IdUser) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            UserExtendDto? userDuplicado = userRepository.GetUserByLogin(user);
+            UserExtendDto? userSearch = userRepository.GetUserById(user) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (userDuplicado != null && userSearch != null && userDuplicado.IdUser != user.IdUser)
             {
@@ -204,13 +204,13 @@
             return user;
         }
 
-        public UserExtendDto DeleteUser(UserExtendDto user)
+        public UserDto DeleteUser(UserDto user)
         {
             IUserRepository userRepository = UnitOfWork.UserRepository();
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();
 
-            UserExtendDto? userSearch = userRepository.GetUserById(user.IdUser) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(user.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            UserExtendDto? userSearch = userRepository.GetUserById(user) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = user.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (userSearch.IdStatus == user.IdStatus)
             {

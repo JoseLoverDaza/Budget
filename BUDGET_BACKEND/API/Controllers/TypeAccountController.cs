@@ -2,10 +2,10 @@
 {
 
     #region Librerias
-
-    using CORE.Dto;
+      
     using CORE.Interfaces.Services;    
     using CORE.Utils;
+    using Domain.Dto;
     using Domain.Dto.Common;
     using Microsoft.AspNetCore.Mvc;
     using Swashbuckle.AspNetCore.Annotations;
@@ -43,11 +43,11 @@
         [HttpGet]
         [Route("GetTypeAccountById")]
         [SwaggerOperation(Summary = "Get Type Account By Id")]
-        public ResponseDto GetTypeAccountById(int id)
+        public ResponseDto GetTypeAccountById(TypeAccountDto typeAccount)
         {
             try
             {
-                response.Data = _typeAccountService.GetTypeAccountById(id);
+                response.Data = _typeAccountService.GetTypeAccountById(typeAccount);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -60,11 +60,11 @@
         [HttpGet]
         [Route("GetTypeAccountByName")]
         [SwaggerOperation(Summary = "Get Type Account By Name")]
-        public ResponseDto GetTypeAccountByName(string name)
+        public ResponseDto GetTypeAccountByName(TypeAccountDto typeAccount)
         {
             try
             {
-                response.Data = _typeAccountService.GetTypeAccountByName(name);
+                response.Data = _typeAccountService.GetTypeAccountByName(typeAccount);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -77,11 +77,11 @@
         [HttpGet]
         [Route("GetTypeAccountsByStatus")]
         [SwaggerOperation(Summary = "Get Type Accounts By Status")]
-        public ResponseDto GetTypeAccountsByStatus(int idStatus)
+        public ResponseDto GetTypeAccountsByStatus(TypeAccountDto typeAccount)
         {
             try
             {
-                response.Data = _typeAccountService.GetTypeAccountsByStatus(idStatus);
+                response.Data = _typeAccountService.GetTypeAccountsByStatus(typeAccount);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -94,7 +94,7 @@
         [HttpPost]
         [Route("SaveTypeAccount")]
         [SwaggerOperation(Summary = "Save Type Account")]
-        public ResponseDto SaveTypeAccount(TypeAccountExtendDto typeAccount)
+        public ResponseDto SaveTypeAccount(TypeAccountDto typeAccount)
         {
             try
             {
@@ -111,7 +111,7 @@
         [HttpPost]
         [Route("UpdateTypeAccount")]
         [SwaggerOperation(Summary = "Update Type Account")]
-        public ResponseDto UpdateTypeAccount(TypeAccountExtendDto typeAccount)
+        public ResponseDto UpdateTypeAccount(TypeAccountDto typeAccount)
         {
             try
             {
@@ -128,7 +128,7 @@
         [HttpPost]
         [Route("DeleteTypeAccount")]
         [SwaggerOperation(Summary = "Delete Type Account")]
-        public ResponseDto DeleteTypeAccount(TypeAccountExtendDto typeAccount)
+        public ResponseDto DeleteTypeAccount(TypeAccountDto typeAccount)
         {
             try
             {

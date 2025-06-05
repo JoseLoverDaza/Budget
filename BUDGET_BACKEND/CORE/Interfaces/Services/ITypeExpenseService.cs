@@ -25,11 +25,11 @@
 
         public List<TypeExpenseExtendDto> GetTypeExpensesByStatus(TypeExpenseDto typeExpense);
 
-        public TypeExpenseExtendDto SaveTypeExpense(TypeExpenseDto typeExpense);
+        public TypeExpenseDto SaveTypeExpense(TypeExpenseDto typeExpense);
 
-        public TypeExpenseExtendDto UpdateTypeExpense(TypeExpenseDto typeExpense);
+        public TypeExpenseDto UpdateTypeExpense(TypeExpenseDto typeExpense);
 
-        public TypeExpenseExtendDto DeleteTypeExpense(TypeExpenseDto typeExpense);
+        public TypeExpenseDto DeleteTypeExpense(TypeExpenseDto typeExpense);
 
         #endregion
 

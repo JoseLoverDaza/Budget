@@ -2,10 +2,10 @@
 {
 
     #region Librerias
-
-    using CORE.Dto;
+       
     using CORE.Interfaces.Services;
     using CORE.Utils;
+    using Domain.Dto;
     using Domain.Dto.Common;
     using Microsoft.AspNetCore.Mvc;
     using Swashbuckle.AspNetCore.Annotations;
@@ -43,11 +43,11 @@
         [HttpGet]
         [Route("GetRoleById")]
         [SwaggerOperation(Summary = "Get Role By Id")]
-        public ResponseDto GetRoleById(int id)
+        public ResponseDto GetRoleById(RoleDto role)
         {
             try
             {
-                response.Data = _roleService.GetRoleById(id);
+                response.Data = _roleService.GetRoleById(role);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -60,11 +60,11 @@
         [HttpGet]
         [Route("GetRoleByName")]
         [SwaggerOperation(Summary = "Get Role By Name")]
-        public ResponseDto GetRoleByName(string name)
+        public ResponseDto GetRoleByName(RoleDto role)
         {
             try
             {
-                response.Data = _roleService.GetRoleByName(name);
+                response.Data = _roleService.GetRoleByName(role);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -77,11 +77,11 @@
         [HttpGet]
         [Route("GetRolesByStatus")]
         [SwaggerOperation(Summary = "Get Roles By Status")]
-        public ResponseDto GetRolesByStatus(int idStatus)
+        public ResponseDto GetRolesByStatus(RoleDto role)
         {
             try
             {
-                response.Data = _roleService.GetRolesByStatus(idStatus);
+                response.Data = _roleService.GetRolesByStatus(role);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -94,7 +94,7 @@
         [HttpPost]
         [Route("SaveRole")]
         [SwaggerOperation(Summary = "Save Role")]
-        public ResponseDto SaveRole(RoleExtendDto role)
+        public ResponseDto SaveRole(RoleDto role)
         {
             try
             {
@@ -111,7 +111,7 @@
         [HttpPost]
         [Route("UpdateRole")]
         [SwaggerOperation(Summary = "Update Role")]
-        public ResponseDto UpdateRole(RoleExtendDto role)
+        public ResponseDto UpdateRole(RoleDto role)
         {
             try
             {
@@ -128,7 +128,7 @@
         [HttpPost]
         [Route("DeleteRole")]
         [SwaggerOperation(Summary = "Delete Role")]
-        public ResponseDto DeleteRole(RoleExtendDto role)
+        public ResponseDto DeleteRole(RoleDto role)
         {
             try
             {

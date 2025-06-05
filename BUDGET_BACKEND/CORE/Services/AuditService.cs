@@ -112,6 +112,36 @@
             }
         }
 
+        public List<AuditExtendDto> GetAuditsByEndpointMethodCreationDate(AuditDto audit)
+        {
+            IAuditRepository auditRepository = UnitOfWork.AuditRepository();
+            List<AuditExtendDto> auditsSearch = auditRepository.GetAuditsByEndpointMethodCreationDate(audit);
+
+            if (auditsSearch.Count != 0)
+            {
+                return auditsSearch;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+        }
+
+        public List<AuditExtendDto> GetAuditsByEndpointMethodCreationDateStatus(AuditDto audit)
+        {
+            IAuditRepository auditRepository = UnitOfWork.AuditRepository();
+            List<AuditExtendDto> auditsSearch = auditRepository.GetAuditsByEndpointMethodCreationDateStatus(audit);
+
+            if (auditsSearch.Count != 0)
+            {
+                return auditsSearch;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+        }
+
         public AuditDto SaveAudit(AuditDto audit)
         {            
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();

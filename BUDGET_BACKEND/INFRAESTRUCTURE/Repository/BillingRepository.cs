@@ -67,6 +67,34 @@
                 .FirstOrDefault();
         }
 
+        public List<BillingExtendDto> GetBillingsByYearMonth(BillingDto billing)
+        {
+            return (
+                     from b in _context.Billings.AsNoTracking()
+                     join u in _context.Users.AsNoTracking()
+                     on b.IdUser equals u.IdUser
+                     join s in _context.Status.AsNoTracking()
+                     on b.IdStatus equals s.IdStatus
+                     where b.Year == billing.Year && billing.Month == billing.Month
+                     select new BillingExtendDto
+                     {
+                         IdBilling = b.IdBilling,
+                         Year = b.Year,
+                         Month = b.Month,
+                         CreationDate = b.CreationDate,
+                         Description = b.Description,
+                         Observation = b.Observation,
+                         IdUser = b.IdUser,
+                         EmailUser = u.Email,
+                         LoginUser = u.Login,
+                         IdStatus = b.IdStatus,
+                         NameStatus = s.Name,
+                         DescriptionStatus = s.Description
+                     }
+                   )
+                   .ToList();
+        }
+
         public List<BillingExtendDto> GetBillingsByYearUser(BillingDto billing)
         {
             return (

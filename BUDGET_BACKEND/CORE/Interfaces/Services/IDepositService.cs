@@ -21,6 +21,8 @@
 
         public DepositExtendDto? GetDepositById(DepositDto deposit);
 
+        public List<DepositExtendDto> GetDepositsByYearMonth(DepositDto deposit);
+
         public List<DepositExtendDto> GetDepositsByYearUser(DepositDto deposit);
 
         public List<DepositExtendDto> GetDepositsByMonthUser(DepositDto deposit);

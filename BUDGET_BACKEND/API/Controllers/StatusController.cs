@@ -40,7 +40,7 @@
 
         #region Métodos y Funciones
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetStatusById")]
         [SwaggerOperation(Summary = "Get Status By Id")]
         public ResponseDto GetStatusById(StatusDto status)
@@ -57,7 +57,7 @@
             return response;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetStatusByName")]
         [SwaggerOperation(Summary = "Get Status By Name")]
         public ResponseDto GetStatusByName(StatusDto status)
@@ -74,7 +74,7 @@
             return response;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetStatus")]
         [SwaggerOperation(Summary = "Get Status")]
         public ResponseDto GetStatus()

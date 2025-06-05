@@ -25,11 +25,11 @@
 
         public List<RoleExtendDto> GetRolesByStatus(RoleDto role);
 
-        public RoleExtendDto SaveRole(RoleDto role);
+        public RoleDto SaveRole(RoleDto role);
 
-        public RoleExtendDto UpdateRole(RoleDto role);
+        public RoleDto UpdateRole(RoleDto role);
 
-        public RoleExtendDto DeleteRole(RoleDto role);
+        public RoleDto DeleteRole(RoleDto role);
 
         #endregion 
 

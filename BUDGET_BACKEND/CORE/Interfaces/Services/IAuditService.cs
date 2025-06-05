@@ -29,6 +29,10 @@
 
         public List<AuditExtendDto> GetAuditsByEndpointCreationDate(AuditDto audit);
 
+        public List<AuditExtendDto> GetAuditsByEndpointMethodCreationDate(AuditDto audit);
+
+        public List<AuditExtendDto> GetAuditsByEndpointMethodCreationDateStatus(AuditDto audit);
+
         public AuditDto SaveAudit(AuditDto audit);
 
         public AuditDto UpdateAudit(AuditDto audit);

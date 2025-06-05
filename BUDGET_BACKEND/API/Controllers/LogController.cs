@@ -2,7 +2,7 @@
 {
 
     #region Librerias
-       
+
     using CORE.Interfaces.Services;   
     using CORE.Utils;
     using Domain.Dto;
@@ -14,26 +14,26 @@
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
-    /// Nombre: UserController   
+    /// Nombre: LogController   
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : BaseController
+    public class LogController : BaseController
     {
 
         #region Atributos y Propiedades
 
-        private readonly IUserService _userService;
+        private readonly ILogService _logService;
 
         #endregion
 
         #region Constructor
 
-        public UserController(IUserService userService)
+        public LogController(ILogService logService)
         {
-            _userService = userService;
+            _logService = logService;
         }
 
         #endregion
@@ -41,13 +41,13 @@
         #region Métodos y Funciones
 
         [HttpPost]
-        [Route("GetUserById")]
-        [SwaggerOperation(Summary = "Get User By Id")]
-        public ResponseDto GetUserById(UserDto user)
+        [Route("GetLogById")]
+        [SwaggerOperation(Summary = "Get Log By Id")]
+        public ResponseDto GetLogById(LogDto log)
         {
             try
             {
-                response.Data = _userService.GetUserById(user);
+                response.Data = _logService.GetLogById(log);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -58,13 +58,13 @@
         }
 
         [HttpPost]
-        [Route("GetUserByEmail")]
-        [SwaggerOperation(Summary = "Get User By Email")]
-        public ResponseDto GetUserByEmail(UserDto user)
+        [Route("GetLogsByCreationDate")]
+        [SwaggerOperation(Summary = "Get Logs By Creation Date")]
+        public ResponseDto GetLogsByCreationDate(LogDto log)
         {
             try
             {
-                response.Data = _userService.GetUserByEmail(user);
+                response.Data = _logService.GetLogsByCreationDate(log);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -75,13 +75,13 @@
         }
 
         [HttpPost]
-        [Route("GetUserByLogin")]
-        [SwaggerOperation(Summary = "Get User By Login")]
-        public ResponseDto GetUserByLogin(UserDto user)
+        [Route("GetLogsByStatus")]
+        [SwaggerOperation(Summary = "Get Logs By Status")]
+        public ResponseDto GetLogsByStatus(LogDto log)
         {
             try
             {
-                response.Data = _userService.GetUserByLogin(user);
+                response.Data = _logService.GetLogsByStatus(log);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -92,13 +92,13 @@
         }
 
         [HttpPost]
-        [Route("GetUsersByRole")]
-        [SwaggerOperation(Summary = "Get Users By Role")]
-        public ResponseDto GetUsersByRole(UserDto user)
+        [Route("GetLogsByEntityCreationDate")]
+        [SwaggerOperation(Summary = "Get Logs By Entity Creation Date")]
+        public ResponseDto GetLogsByEntityCreationDate(LogDto log)
         {
             try
             {
-                response.Data = _userService.GetUsersByRole(user);
+                response.Data = _logService.GetLogsByEntityCreationDate(log);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -109,13 +109,13 @@
         }
 
         [HttpPost]
-        [Route("GetUsersByStatus")]
-        [SwaggerOperation(Summary = "Get Users By Status")]
-        public ResponseDto GetUsersByStatus(UserDto user)
+        [Route("GetLogsByCreationDateStatus")]
+        [SwaggerOperation(Summary = "Get Logs By Creation Date Status")]
+        public ResponseDto GetLogsByCreationDateStatus(LogDto log)
         {
             try
             {
-                response.Data = _userService.GetUsersByStatus(user);
+                response.Data = _logService.GetLogsByCreationDateStatus(log);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -126,13 +126,13 @@
         }
 
         [HttpPost]
-        [Route("GetUsersByRoleStatus")]
-        [SwaggerOperation(Summary = "Get Users By Role Status")]
-        public ResponseDto GetUsersByRoleStatus(UserDto user)
+        [Route("GetLogsByEntityCreationDateStatus")]
+        [SwaggerOperation(Summary = "Get Logs By Entity Creation Date Status")]
+        public ResponseDto GetLogsByEntityCreationDateStatus(LogDto log)
         {
             try
             {
-                response.Data = _userService.GetUsersByRoleStatus(user);
+                response.Data = _logService.GetLogsByEntityCreationDateStatus(log);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -143,13 +143,13 @@
         }
 
         [HttpPost]
-        [Route("SaveUser")]
-        [SwaggerOperation(Summary = "Save User")]
-        public ResponseDto SaveUser(UserDto user)
+        [Route("SaveLog")]
+        [SwaggerOperation(Summary = "Save Log")]
+        public ResponseDto SaveLog(LogDto log)
         {
             try
             {
-                response.Data = _userService.SaveUser(user);
+                response.Data = _logService.SaveLog(log);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -160,13 +160,13 @@
         }
 
         [HttpPost]
-        [Route("UpdateUser")]
-        [SwaggerOperation(Summary = "Update User")]
-        public ResponseDto UpdateUser(UserDto user)
+        [Route("UpdateLog")]
+        [SwaggerOperation(Summary = "Update Log")]
+        public ResponseDto UpdateLog(LogDto log)
         {
             try
             {
-                response.Data = _userService.UpdateUser(user);
+                response.Data = _logService.UpdateLog(log);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -177,13 +177,13 @@
         }
 
         [HttpPost]
-        [Route("DeleteUser")]
-        [SwaggerOperation(Summary = "Delete User")]
-        public ResponseDto DeleteUser(UserDto user)
+        [Route("DeleteLog")]
+        [SwaggerOperation(Summary = "Delete Log")]
+        public ResponseDto DeleteLog(LogDto log)
         {
             try
             {
-                response.Data = _userService.DeleteUser(user);
+                response.Data = _logService.DeleteLog(log);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)

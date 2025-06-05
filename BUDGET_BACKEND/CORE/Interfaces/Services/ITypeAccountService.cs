@@ -25,11 +25,11 @@
 
         public List<TypeAccountExtendDto> GetTypeAccountsByStatus(TypeAccountDto typeAccount);
 
-        public TypeAccountExtendDto SaveTypeAccount(TypeAccountDto typeAccount);
+        public TypeAccountDto SaveTypeAccount(TypeAccountDto typeAccount);
 
-        public TypeAccountExtendDto UpdateTypeAccount(TypeAccountDto typeAccount);
+        public TypeAccountDto UpdateTypeAccount(TypeAccountDto typeAccount);
 
-        public TypeAccountExtendDto DeleteTypeAccount(TypeAccountDto typeAccount);
+        public TypeAccountDto DeleteTypeAccount(TypeAccountDto typeAccount);
 
         #endregion 
 

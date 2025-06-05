@@ -3,9 +3,9 @@
 
     #region Librerias
 
-    using CORE.Dto;
     using CORE.Interfaces.Services;
     using CORE.Utils;
+    using Domain.Dto;
     using Domain.Dto.Common;
     using Microsoft.AspNetCore.Mvc;
     using Swashbuckle.AspNetCore.Annotations;
@@ -40,14 +40,14 @@
 
         #region Métodos y Funciones
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetTypeExpenseById")]
         [SwaggerOperation(Summary = "Get Type Expense By Id")]
-        public ResponseDto GetTypeExpenseById(int id)
+        public ResponseDto GetTypeExpenseById(TypeExpenseDto typeExpense)
         {
             try
             {
-                response.Data = _typeExpenseService.GetTypeExpenseById(id);
+                response.Data = _typeExpenseService.GetTypeExpenseById(typeExpense);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -57,14 +57,14 @@
             return response;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetTypeExpenseByName")]
         [SwaggerOperation(Summary = "Get Type Expense By Name")]
-        public ResponseDto GetTypeExpenseByName(string name)
+        public ResponseDto GetTypeExpenseByName(TypeExpenseDto typeExpense)
         {
             try
             {
-                response.Data = _typeExpenseService.GetTypeExpenseByName(name);
+                response.Data = _typeExpenseService.GetTypeExpenseByName(typeExpense);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -74,14 +74,14 @@
             return response;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetTypeExpensesByStatus")]
         [SwaggerOperation(Summary = "Get Type Expenses By Status")]
-        public ResponseDto GetTypeExpensesByStatus(int idStatus)
+        public ResponseDto GetTypeExpensesByStatus(TypeExpenseDto typeExpense)
         {
             try
             {
-                response.Data = _typeExpenseService.GetTypeExpensesByStatus(idStatus);
+                response.Data = _typeExpenseService.GetTypeExpensesByStatus(typeExpense);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -94,7 +94,7 @@
         [HttpPost]
         [Route("SaveTypeExpense")]
         [SwaggerOperation(Summary = "Save Type Expense")]
-        public ResponseDto SaveTypeExpense(TypeExpenseExtendDto typeExpense)
+        public ResponseDto SaveTypeExpense(TypeExpenseDto typeExpense)
         {
             try
             {
@@ -111,7 +111,7 @@
         [HttpPost]
         [Route("UpdateTypeExpense")]
         [SwaggerOperation(Summary = "Update Type Expense")]
-        public ResponseDto UpdateTypeExpense(TypeExpenseExtendDto typeExpense)
+        public ResponseDto UpdateTypeExpense(TypeExpenseDto typeExpense)
         {
             try
             {
@@ -128,7 +128,7 @@
         [HttpPost]
         [Route("DeleteTypeExpense")]
         [SwaggerOperation(Summary = "Delete Type Expense")]
-        public ResponseDto DeleteTypeExpense(TypeExpenseExtendDto typeExpense)
+        public ResponseDto DeleteTypeExpense(TypeExpenseDto typeExpense)
         {
             try
             {

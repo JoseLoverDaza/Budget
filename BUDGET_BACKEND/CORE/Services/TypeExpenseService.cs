@@ -37,14 +37,14 @@
 
         #region Métodos y Funciones
 
-        public TypeExpenseExtendDto? GetTypeExpenseById(int idTypeExpense)
+        public TypeExpenseExtendDto? GetTypeExpenseById(TypeExpenseDto typeExpense)
         {
             ITypeExpenseRepository typeExpenseRepository = UnitOfWork.TypeExpenseRepository();
-            TypeExpenseExtendDto? typeExpense = typeExpenseRepository.GetTypeExpenseById(idTypeExpense);
+            TypeExpenseExtendDto? typeExpenseSearch = typeExpenseRepository.GetTypeExpenseById(typeExpense);
 
-            if (typeExpense != null)
+            if (typeExpenseSearch != null)
             {
-                return typeExpense;
+                return typeExpenseSearch;
             }
             else
             {
@@ -52,14 +52,14 @@
             }
         }
 
-        public TypeExpenseExtendDto? GetTypeExpenseByName(string name)
+        public TypeExpenseExtendDto? GetTypeExpenseByName(TypeExpenseDto typeExpense)
         {
             ITypeExpenseRepository typeExpenseRepository = UnitOfWork.TypeExpenseRepository();
-            TypeExpenseExtendDto? typeExpense = typeExpenseRepository.GetTypeExpenseByName(name);
+            TypeExpenseExtendDto? typeExpenseSearch = typeExpenseRepository.GetTypeExpenseByName(typeExpense);
 
-            if (typeExpense != null)
+            if (typeExpenseSearch != null)
             {
-                return typeExpense;
+                return typeExpenseSearch;
             }
             else
             {
@@ -67,14 +67,14 @@
             }
         }
 
-        public List<TypeExpenseExtendDto> GetTypeExpensesByStatus(int idStatus)
+        public List<TypeExpenseExtendDto> GetTypeExpensesByStatus(TypeExpenseDto typeExpense)
         {
             ITypeExpenseRepository typeExpenseRepository = UnitOfWork.TypeExpenseRepository();
-            List<TypeExpenseExtendDto> typeExpenses = typeExpenseRepository.GetTypeExpensesByStatus(idStatus);
+            List<TypeExpenseExtendDto> typeExpensesSearch = typeExpenseRepository.GetTypeExpensesByStatus(typeExpense);
 
-            if (typeExpenses.Count != 0)
+            if (typeExpensesSearch.Count != 0)
             {
-                return typeExpenses;
+                return typeExpensesSearch;
             }
             else
             {
@@ -82,7 +82,7 @@
             }
         }
 
-        public TypeExpenseExtendDto SaveTypeExpense(TypeExpenseExtendDto typeExpense)
+        public TypeExpenseDto SaveTypeExpense(TypeExpenseDto typeExpense)
         {
             ITypeExpenseRepository typeExpenseRepository = UnitOfWork.TypeExpenseRepository();
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();
@@ -92,14 +92,14 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            TypeExpenseExtendDto? typeExpenseSearch = typeExpenseRepository.GetTypeExpenseByName(typeExpense.Name.Trim());
+            TypeExpenseExtendDto? typeExpenseSearch = typeExpenseRepository.GetTypeExpenseByName(typeExpense);
 
             if (typeExpenseSearch != null)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            StatusDto? statusSearch = statusRepository.GetStatusById(typeExpense.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = typeExpense.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             TypeExpense saveTypeExpense = new()
             {
@@ -117,7 +117,7 @@
             return typeExpense;
         }
 
-        public TypeExpenseExtendDto UpdateTypeExpense(TypeExpenseExtendDto typeExpense)
+        public TypeExpenseDto UpdateTypeExpense(TypeExpenseDto typeExpense)
         {
             ITypeExpenseRepository typeExpenseRepository = UnitOfWork.TypeExpenseRepository();
 
@@ -131,8 +131,8 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            TypeExpenseExtendDto? typeExpenseDuplicado = typeExpenseRepository.GetTypeExpenseByName(typeExpense.Name);
-            TypeExpenseExtendDto? typeExpenseSearch = typeExpenseRepository.GetTypeExpenseById(typeExpense.IdTypeExpense) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            TypeExpenseExtendDto? typeExpenseDuplicado = typeExpenseRepository.GetTypeExpenseByName(typeExpense);
+            TypeExpenseExtendDto? typeExpenseSearch = typeExpenseRepository.GetTypeExpenseById(new TypeExpenseDto { IdTypeExpense = typeExpense.IdTypeExpense }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (typeExpenseDuplicado != null && typeExpenseDuplicado.IdTypeExpense != typeExpense.IdTypeExpense)
             {
@@ -156,13 +156,13 @@
             return typeExpense;
         }
 
-        public TypeExpenseExtendDto DeleteTypeExpense(TypeExpenseExtendDto typeExpense)
+        public TypeExpenseDto DeleteTypeExpense(TypeExpenseDto typeExpense)
         {
             ITypeExpenseRepository typeExpenseRepository = UnitOfWork.TypeExpenseRepository();
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();
 
-            TypeExpenseExtendDto? typeExpenseSearch = typeExpenseRepository.GetTypeExpenseById(typeExpense.IdTypeExpense) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(typeExpense.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            TypeExpenseExtendDto? typeExpenseSearch = typeExpenseRepository.GetTypeExpenseById(typeExpense) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = typeExpense.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (typeExpenseSearch.IdStatus == typeExpense.IdStatus)
             {

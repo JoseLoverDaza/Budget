@@ -37,15 +37,15 @@
 
         #region Métodos y Funciones
         
-        public RoleExtendDto? GetRoleById(int idRole)
+        public RoleExtendDto? GetRoleById(RoleDto role)
         { 
             IRoleRepository roleRepository = UnitOfWork.RoleRepository();
 
-            RoleExtendDto? role = roleRepository.GetRoleById(idRole);
+            RoleExtendDto? roleSearch = roleRepository.GetRoleById(role);
 
-            if (role != null)
+            if (roleSearch != null)
             {
-                return role;
+                return roleSearch;
             }
             else
             {
@@ -53,15 +53,14 @@
             }
         }
 
-        public RoleExtendDto? GetRoleByName(string name)
+        public RoleExtendDto? GetRoleByName(RoleDto role)
         {
             IRoleRepository roleRepository = UnitOfWork.RoleRepository();
+            RoleExtendDto? roleSearch = roleRepository.GetRoleByName(role);
 
-            RoleExtendDto? role = roleRepository.GetRoleByName(name);
-
-            if (role != null)
+            if (roleSearch != null)
             {
-                return role;
+                return roleSearch;
             }
             else
             {
@@ -69,14 +68,14 @@
             }
         }
 
-        public List<RoleExtendDto> GetRolesByStatus(int idStatus)
+        public List<RoleExtendDto> GetRolesByStatus(RoleDto role)
         {
             IRoleRepository roleRepository = UnitOfWork.RoleRepository();
-            List<RoleExtendDto> roles = roleRepository.GetRolesByStatus(idStatus);
+            List<RoleExtendDto> rolesSearch = roleRepository.GetRolesByStatus(role);
 
-            if (roles.Count != 0)
+            if (rolesSearch.Count != 0)
             {
-                return roles;
+                return rolesSearch;
             }
             else
             {
@@ -84,7 +83,7 @@
             }
         }
 
-        public RoleExtendDto SaveRole(RoleExtendDto role)
+        public RoleDto SaveRole(RoleDto role)
         {           
             IRoleRepository roleRepository = UnitOfWork.RoleRepository();
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();
@@ -94,19 +93,14 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            if (string.IsNullOrWhiteSpace(role.Name.Trim()))
-            {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            }
-
-            RoleExtendDto? roleSearch = roleRepository.GetRoleByName(role.Name.Trim());
+            RoleExtendDto? roleSearch = roleRepository.GetRoleByName(role);
 
             if (roleSearch != null)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            StatusDto? statusSearch = statusRepository.GetStatusById(role.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = role.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             Role saveRole = new()
             {
@@ -124,7 +118,7 @@
             return role;
         }
 
-        public RoleExtendDto UpdateRole(RoleExtendDto role)
+        public RoleDto UpdateRole(RoleDto role)
         {
             IRoleRepository roleRepository = UnitOfWork.RoleRepository();
             
@@ -133,13 +127,8 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            if (string.IsNullOrWhiteSpace(role.Name.Trim()))
-            {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            }
-
-            RoleExtendDto? roleDuplicado = roleRepository.GetRoleByName(role.Name);
-            RoleExtendDto? roleSearch = roleRepository.GetRoleById(role.IdRole) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            RoleExtendDto? roleDuplicado = roleRepository.GetRoleByName(role);
+            RoleExtendDto? roleSearch = roleRepository.GetRoleById(role) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (roleDuplicado != null && roleDuplicado.IdRole != roleSearch.IdRole)
             {
@@ -163,13 +152,13 @@
             return role;
         }
 
-        public RoleExtendDto DeleteRole(RoleExtendDto role)
+        public RoleDto DeleteRole(RoleDto role)
         {
             IRoleRepository roleRepository = UnitOfWork.RoleRepository();
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();
 
-            RoleExtendDto? roleSearch = roleRepository.GetRoleById(role.IdRole) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(role.IdStatus) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            RoleExtendDto? roleSearch = roleRepository.GetRoleById(role) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = role.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (roleSearch.IdStatus == role.IdStatus)
             {

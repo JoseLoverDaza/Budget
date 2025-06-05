@@ -67,6 +67,34 @@
                 .FirstOrDefault();
         }
 
+        public List<BudgetExtendDto> GetBudgetsByYearMonth(BudgetDto budget)
+        {
+            return (
+                    from b in _context.Budgets.AsNoTracking()
+                    join u in _context.Users.AsNoTracking()
+                    on b.IdUser equals u.IdUser
+                    join s in _context.Status.AsNoTracking()
+                    on b.IdStatus equals s.IdStatus
+                    where b.Year == budget.Year && b.Month == budget.Month
+                    select new BudgetExtendDto
+                    {
+                        IdBudget = b.IdBudget,
+                        Year = b.Year,
+                        Month = b.Month,
+                        CreationDate = b.CreationDate,
+                        Description = b.Description,
+                        Observation = b.Observation,
+                        IdUser = b.IdUser,
+                        EmailUser = u.Email,
+                        LoginUser = u.Login,
+                        IdStatus = b.IdStatus,
+                        NameStatus = s.Name,
+                        DescriptionStatus = s.Description
+                    }
+               )
+               .ToList();
+        }
+
         public List<BudgetExtendDto> GetBudgetsByYearUser(BudgetDto budget)
         {
             return (

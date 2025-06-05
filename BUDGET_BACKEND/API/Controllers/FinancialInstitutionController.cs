@@ -3,10 +3,9 @@
 
     #region Librerias
 
-    using CORE.Dto;
     using CORE.Interfaces.Services;
-    using CORE.Services;
     using CORE.Utils;
+    using Domain.Dto;
     using Domain.Dto.Common;
     using Microsoft.AspNetCore.Mvc;
     using Swashbuckle.AspNetCore.Annotations;
@@ -41,14 +40,14 @@
 
         #region Métodos y Funciones
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetFinancialInstitutionById")]
         [SwaggerOperation(Summary = "Get Financial Institution By Id")]
-        public ResponseDto GetFinancialInstitutionById(int id)
+        public ResponseDto GetFinancialInstitutionById(FinancialInstitutionDto financialInstitution)
         {
             try
             {
-                response.Data = _financialInstitutionService.GetFinancialInstitutionById(id);
+                response.Data = _financialInstitutionService.GetFinancialInstitutionById(financialInstitution);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -58,14 +57,14 @@
             return response;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetFinancialInstitutionByName")]
         [SwaggerOperation(Summary = "Get Financial Institution By Name")]
-        public ResponseDto GetFinancialInstitutionByName(string name)
+        public ResponseDto GetFinancialInstitutionByName(FinancialInstitutionDto financialInstitution)
         {
             try
             {
-                response.Data = _financialInstitutionService.GetFinancialInstitutionByName(name);
+                response.Data = _financialInstitutionService.GetFinancialInstitutionByName(financialInstitution);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -75,14 +74,14 @@
             return response;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetFinancialInstitutionsByStatus")]
         [SwaggerOperation(Summary = "Get Financial Institutions By Status")]
-        public ResponseDto GetFinancialInstitutionsByStatus(int idStatus)
+        public ResponseDto GetFinancialInstitutionsByStatus(FinancialInstitutionDto financialInstitution)
         {
             try
             {
-                response.Data = _financialInstitutionService.GetFinancialInstitutionsByStatus(idStatus);
+                response.Data = _financialInstitutionService.GetFinancialInstitutionsByStatus(financialInstitution);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -95,7 +94,7 @@
         [HttpPost]
         [Route("SaveFinancialInstitution")]
         [SwaggerOperation(Summary = "Save Financial Institution")]
-        public ResponseDto SaveFinancialInstitution(FinancialInstitutionExtendDto financialInstitution)
+        public ResponseDto SaveFinancialInstitution(FinancialInstitutionDto financialInstitution)
         {
             try
             {
@@ -112,7 +111,7 @@
         [HttpPost]
         [Route("UpdateFinancialInstitution")]
         [SwaggerOperation(Summary = "Update Financial Institution")]
-        public ResponseDto UpdateFinancialInstitution(FinancialInstitutionExtendDto financialInstitution)
+        public ResponseDto UpdateFinancialInstitution(FinancialInstitutionDto financialInstitution)
         {
             try
             {
@@ -129,7 +128,7 @@
         [HttpPost]
         [Route("DeleteFinancialInstitution")]
         [SwaggerOperation(Summary = "Delete Financial Institution")]
-        public ResponseDto DeleteFinancialInstitution(FinancialInstitutionExtendDto financialInstitution)
+        public ResponseDto DeleteFinancialInstitution(FinancialInstitutionDto financialInstitution)
         {
             try
             {

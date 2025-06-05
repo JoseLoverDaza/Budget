@@ -31,11 +31,11 @@
 
         public List<UserExtendDto> GetUsersByRoleStatus(UserDto user);
 
-        public UserExtendDto SaveUser(UserDto user);
+        public UserDto SaveUser(UserDto user);
 
-        public UserExtendDto UpdateUser(UserDto user);
+        public UserDto UpdateUser(UserDto user);
 
-        public UserExtendDto DeleteUser(UserDto user);
+        public UserDto DeleteUser(UserDto user);
 
         #endregion
 
