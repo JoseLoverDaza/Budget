@@ -179,7 +179,7 @@
         [HttpPost]
         [Route("SaveBilling")]
         [SwaggerOperation(Summary = "Save Billing")]
-        public ResponseDto SaSaveBillingveAccount(BillingDto billing)
+        public ResponseDto SaveBilling(BillingDto billing)
         {
             try
             {

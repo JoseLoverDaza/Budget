@@ -197,7 +197,7 @@
 
             BillingDetails updateBillingDetails = new()
             {
-                IdBillingDetails = billingDetails.IdBillingDetails,
+                IdBillingDetails = billingDetailSearch.IdBillingDetails,
                 IdBilling = billingDetailSearch.IdBilling,
                 CreationDate = billingDetailSearch.CreationDate,
                 Amount = billingDetails.Amount,

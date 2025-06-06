@@ -183,8 +183,8 @@
                 Year = budget.Year,
                 Month = budget.Month,
                 CreationDate = budget.CreationDate,
-                Description = budget.Description,
-                Observation = budget.Observation,
+                Description = budget.Description?.Trim() ?? string.Empty,
+                Observation = budget.Observation?.Trim() ?? string.Empty,
                 IdUser = userSearch.IdUser,               
                 IdStatus = statusSearch.IdStatus
             };
@@ -215,8 +215,8 @@
                 Year = budgetSearch.Year,
                 Month = budgetSearch.Month,
                 CreationDate = budget.CreationDate,
-                Description = budget.Description,
-                Observation = budget.Observation,
+                Description = budget.Description?.Trim() ?? string.Empty,
+                Observation = budget.Observation?.Trim() ?? string.Empty,
                 IdUser = budgetSearch.IdUser,
                 IdStatus = budgetSearch.IdStatus
             };
@@ -238,7 +238,7 @@
             BudgetExtendDto? budgetSearch = budgetRepository.GetBudgetById(budget) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = budget.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            if (statusSearch.IdStatus == budget.IdStatus)
+            if (budgetSearch.IdStatus == budget.IdStatus)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -249,8 +249,8 @@
                 Year = budgetSearch.Year,
                 Month = budgetSearch.Month,
                 CreationDate = budgetSearch.CreationDate,
-                Description = budgetSearch.Description,
-                Observation = budgetSearch.Observation,
+                Description = budgetSearch.Description?.Trim() ?? string.Empty,
+                Observation = budgetSearch.Observation?.Trim() ?? string.Empty,
                 IdUser = budgetSearch.IdUser,
                 IdStatus = statusSearch.IdStatus
             };

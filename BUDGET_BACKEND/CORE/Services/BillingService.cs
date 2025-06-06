@@ -168,7 +168,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            UserExtendDto? userSearch = userRepository.GetUserById( new UserDto { IdStatus = billing.IdUser} ) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            UserExtendDto? userSearch = userRepository.GetUserById( new UserDto { IdUser = billing.IdUser} ) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById( new StatusDto { IdStatus = billing.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             List<BillingExtendDto> billingsSearch = billingRepository.GetBillingsByYearMonthUser(billing);
@@ -183,8 +183,8 @@
                 Year = billing.Year,
                 Month = billing.Month,
                 CreationDate = billing.CreationDate,
-                Description = billing.Description,
-                Observation = billing.Observation,
+                Description = billing.Description?.Trim() ?? string.Empty,
+                Observation = billing.Observation?.Trim() ?? string.Empty,
                 IdUser = userSearch.IdUser,
                 IdStatus = statusSearch.IdStatus
             };
@@ -215,8 +215,8 @@
                 Year = billingSearch.Year,
                 Month = billingSearch.Month,
                 CreationDate = billing.CreationDate,
-                Description = billing.Description,
-                Observation = billing.Observation,
+                Description = billing.Description?.Trim() ?? string.Empty,
+                Observation = billing.Observation?.Trim() ?? string.Empty,
                 IdUser = billingSearch.IdUser,
                 IdStatus = billingSearch.IdStatus
             };
@@ -249,8 +249,8 @@
                 Year = billingSearch.Year,
                 Month = billingSearch.Month,
                 CreationDate = billingSearch.CreationDate,
-                Description = billingSearch.Description,
-                Observation = billingSearch.Observation,
+                Description = billingSearch.Description?.Trim() ?? string.Empty,
+                Observation = billingSearch.Observation?.Trim() ?? string.Empty,
                 IdUser = billingSearch.IdUser,
                 IdStatus = statusSearch.IdStatus
             };

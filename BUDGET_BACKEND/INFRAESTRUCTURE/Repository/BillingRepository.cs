@@ -103,7 +103,7 @@
                      on b.IdUser equals u.IdUser
                      join s in _context.Status.AsNoTracking()
                      on b.IdStatus equals s.IdStatus
-                     where b.Year == billing.Year && b.IdUser == billing.IdBilling
+                     where b.Year == billing.Year && b.IdUser == billing.IdUser
                      select new BillingExtendDto
                      {
                          IdBilling = b.IdBilling,
@@ -131,7 +131,7 @@
                      on b.IdUser equals u.IdUser
                      join s in _context.Status.AsNoTracking()
                      on b.IdStatus equals s.IdStatus
-                     where b.Month == billing.Month && b.IdUser == billing.IdBilling
+                     where b.Month == billing.Month && b.IdUser == billing.IdUser
                      select new BillingExtendDto
                      {
                          IdBilling = b.IdBilling,

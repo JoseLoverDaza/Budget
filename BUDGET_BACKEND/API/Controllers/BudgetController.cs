@@ -145,7 +145,7 @@
         [HttpPost]
         [Route("GetBudgetsByStatus")]
         [SwaggerOperation(Summary = "Get Budgets By Status")]
-        public ResponseDto GetBudGetBudgetsByStatusgetById(BudgetDto budget)
+        public ResponseDto GetBudgetsByStatus(BudgetDto budget)
         {
             try
             {
