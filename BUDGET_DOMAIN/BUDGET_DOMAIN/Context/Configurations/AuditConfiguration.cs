@@ -43,8 +43,6 @@
             entity.Property(e => e.CreationDate)
                   .IsRequired();
 
-            entity.Property(e => e.IdStatus)
-                  .IsRequired();
         }
 
         #endregion

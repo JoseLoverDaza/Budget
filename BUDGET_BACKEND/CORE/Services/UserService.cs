@@ -132,15 +132,16 @@
             IUserRepository userRepository = UnitOfWork.UserRepository();
             IRoleRepository roleRepository = UnitOfWork.RoleRepository();
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();
-
-            if (user == null || string.IsNullOrWhiteSpace(user.Email.Trim()) || string.IsNullOrWhiteSpace(user.Phone.Trim()) || string.IsNullOrWhiteSpace(user.Login.Trim()))
+            
+            if (user == null || string.IsNullOrWhiteSpace(user.Email.Trim()) || string.IsNullOrWhiteSpace(user.Phone.Trim()) || string.IsNullOrWhiteSpace(user.Login.Trim()) || string.IsNullOrWhiteSpace(user.Password.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            UserExtendDto? userSearch = userRepository.GetUserByLogin(user);
+            UserExtendDto? userEmailSearch = userRepository.GetUserByEmail(user);
+            UserExtendDto? userLoginSearch = userRepository.GetUserByLogin(user);
 
-            if (userSearch != null)
+            if (userEmailSearch != null || userLoginSearch != null)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -148,12 +149,14 @@
             RoleExtendDto? rolSearch = roleRepository.GetRoleById(new RoleDto { IdRole = user.IdRole }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = user.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
+            string sHashPassword = PasswordHash.HashPassword(user.Password);
+
             User saveUser = new()
             {                
                 Email = user.Email.Trim(),
                 Phone = user.Phone.Trim(),
                 Login = user.Login.Trim(),
-                Password = user.Password.Trim(),
+                Password = !string.IsNullOrWhiteSpace(sHashPassword.Trim()) ? sHashPassword.Trim() : user.Password,
                 IdRole = rolSearch.IdRole,
                 IdStatus = statusSearch.IdStatus
             };
@@ -171,18 +174,26 @@
         {
             IUserRepository userRepository = UnitOfWork.UserRepository();
            
-            if (user == null || user.IdUser <= 0 || string.IsNullOrWhiteSpace(user.Email.Trim()) || string.IsNullOrWhiteSpace(user.Phone.Trim()) || string.IsNullOrWhiteSpace(user.Login.Trim()))
+            if (user == null || user.IdUser <= 0 || string.IsNullOrWhiteSpace(user.Email.Trim()) || string.IsNullOrWhiteSpace(user.Phone.Trim()) || string.IsNullOrWhiteSpace(user.Login.Trim()) || string.IsNullOrWhiteSpace(user.Password.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            UserExtendDto? userDuplicado = userRepository.GetUserByLogin(user);
+            UserExtendDto? userEmailDuplicado = userRepository.GetUserByEmail(user);
+            UserExtendDto? userLoginDuplicado = userRepository.GetUserByLogin(user);
             UserExtendDto? userSearch = userRepository.GetUserById(user) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            if (userDuplicado != null && userSearch != null && userDuplicado.IdUser != user.IdUser)
+            if (userEmailDuplicado != null && userSearch != null && userEmailDuplicado.IdUser != user.IdUser)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+
+            if (userLoginDuplicado != null && userSearch != null && userLoginDuplicado.IdUser != user.IdUser)
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+
+            string sHashPassword = PasswordHash.HashPassword(user.Password);
 
             User updateUser = new()
             {
@@ -190,7 +201,7 @@
                 Email = user.Email.Trim(),
                 Phone = user.Phone.Trim(),
                 Login = user.Login.Trim(),
-                Password = user.Password.Trim(),
+                Password = !string.IsNullOrWhiteSpace(sHashPassword.Trim()) ? sHashPassword.Trim() : user.Password,
                 IdRole = userSearch.IdRole,
                 IdStatus = userSearch.IdStatus
             };

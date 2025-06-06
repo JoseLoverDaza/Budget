@@ -24,7 +24,6 @@
     /// </summary>
 
     [TestClass]
-
     public class AccountTest
     {
 
@@ -88,8 +87,6 @@
                 Name = "Test",
                 Description = "Test"
             });
-
-            _context.SaveChanges();
 
             _context.SaveChanges();
 
@@ -525,7 +522,6 @@
             Assert.IsNull(result.Data);
             Assert.AreEqual(HttpStatusCode.InternalServerError.GetHashCode(), result.Code);
         }
-
 
         [TestMethod]
         public void SaveAccountOK()

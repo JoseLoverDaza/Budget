@@ -3,8 +3,7 @@
 
     #region Librerias
 
-    using API.Controllers;
-    using CORE.Dto;
+    using API.Controllers;    
     using CORE.Interfaces.Services;
     using CORE.Services;
     using Domain.Context;
@@ -99,7 +98,7 @@
                 Email = "Test",
                 Phone = "1234567890",
                 Login = "Test",                 
-                Password = "Test",
+                Password = "A7Ws/sQDVsXXi/xheT1IufcXPN5rJUKXmPWvnJTGzjRgOzD+vAt1GAMXoD0/mlrD",
                 IdRole = 1,
                 IdStatus = 1
             });
@@ -354,7 +353,7 @@
                 Email = "Test1",
                 Phone = "Test1",
                 Login = "Test2",
-                Password = "Test1",
+                Password = "Test",
                 IdRole = 1,
                 IdStatus = 1
             };
@@ -401,7 +400,7 @@
                 Email = "Test1",
                 Phone = "Test1",
                 Login = "Test",
-                Password = "Test1",
+                Password = "Test",
                 IdRole = 1,
                 IdStatus = 1
             };
@@ -425,7 +424,7 @@
                 Email = "Test1",
                 Phone = "Test1",
                 Login = "Test1",
-                Password = "Test1",
+                Password = "Test",
                 IdRole = 1,
                 IdStatus = 1
             };
@@ -449,7 +448,7 @@
                 Email = "Test1",
                 Phone = "Test1",
                 Login = "Test1",
-                Password = "Test1",
+                Password = "Test",
                 IdRole = 1,
                 IdStatus = 3
             };
@@ -473,7 +472,7 @@
                 Email = "Test1",
                 Phone = "Test1",
                 Login = "Test1",
-                Password = "Test1",
+                Password = "Test",
                 IdRole = 1,
                 IdStatus = 1
             };

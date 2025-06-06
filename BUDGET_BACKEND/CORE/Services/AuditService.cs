@@ -2,8 +2,7 @@
 {
 
     #region Librerias
-
-    using CORE.Dto;
+       
     using CORE.Interfaces.Repositories;
     using CORE.Interfaces.Services;
     using CORE.Utils;
@@ -37,10 +36,10 @@
 
         #region Métodos y Funciones
 
-        public AuditExtendDto? GetAuditById(AuditDto audit)
+        public AuditDto? GetAuditById(AuditDto audit)
         {
             IAuditRepository auditRepository = UnitOfWork.AuditRepository();
-            AuditExtendDto? auditSearch = auditRepository.GetAuditById(audit);
+            AuditDto? auditSearch = auditRepository.GetAuditById(audit);
 
             if (auditSearch != null)
             {
@@ -52,10 +51,10 @@
             }
         }
 
-        public List<AuditExtendDto> GetAuditsByCreationDate(AuditDto audit)
+        public List<AuditDto> GetAuditsByCreationDate(AuditDto audit)
         {
             IAuditRepository auditRepository = UnitOfWork.AuditRepository();
-            List<AuditExtendDto> auditsSearch = auditRepository.GetAuditsByCreationDate(audit);
+            List<AuditDto> auditsSearch = auditRepository.GetAuditsByCreationDate(audit);
 
             if (auditsSearch.Count != 0)
             {
@@ -67,10 +66,10 @@
             }
         }
 
-        public List<AuditExtendDto> GetAuditsByStatus(AuditDto audit)
+        public List<AuditDto> GetAuditsByMethodCreationDate(AuditDto audit)
         {
             IAuditRepository auditRepository = UnitOfWork.AuditRepository();
-            List<AuditExtendDto> auditsSearch = auditRepository.GetAuditsByStatus(audit);
+            List<AuditDto> auditsSearch = auditRepository.GetAuditsByMethodCreationDate(audit);
 
             if (auditsSearch.Count != 0)
             {
@@ -82,10 +81,10 @@
             }
         }
 
-        public List<AuditExtendDto> GetAuditsByMethodCreationDate(AuditDto audit)
+        public List<AuditDto> GetAuditsByEndpointCreationDate(AuditDto audit)
         {
             IAuditRepository auditRepository = UnitOfWork.AuditRepository();
-            List<AuditExtendDto> auditsSearch = auditRepository.GetAuditsByMethodCreationDate(audit);
+            List<AuditDto> auditsSearch = auditRepository.GetAuditsByEndpointCreationDate(audit);
 
             if (auditsSearch.Count != 0)
             {
@@ -97,40 +96,10 @@
             }
         }
 
-        public List<AuditExtendDto> GetAuditsByEndpointCreationDate(AuditDto audit)
+        public List<AuditDto> GetAuditsByEndpointMethodCreationDate(AuditDto audit)
         {
             IAuditRepository auditRepository = UnitOfWork.AuditRepository();
-            List<AuditExtendDto> auditsSearch = auditRepository.GetAuditsByEndpointCreationDate(audit);
-
-            if (auditsSearch.Count != 0)
-            {
-                return auditsSearch;
-            }
-            else
-            {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            }
-        }
-
-        public List<AuditExtendDto> GetAuditsByEndpointMethodCreationDate(AuditDto audit)
-        {
-            IAuditRepository auditRepository = UnitOfWork.AuditRepository();
-            List<AuditExtendDto> auditsSearch = auditRepository.GetAuditsByEndpointMethodCreationDate(audit);
-
-            if (auditsSearch.Count != 0)
-            {
-                return auditsSearch;
-            }
-            else
-            {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            }
-        }
-
-        public List<AuditExtendDto> GetAuditsByEndpointMethodCreationDateStatus(AuditDto audit)
-        {
-            IAuditRepository auditRepository = UnitOfWork.AuditRepository();
-            List<AuditExtendDto> auditsSearch = auditRepository.GetAuditsByEndpointMethodCreationDateStatus(audit);
+            List<AuditDto> auditsSearch = auditRepository.GetAuditsByEndpointMethodCreationDate(audit);
 
             if (auditsSearch.Count != 0)
             {
@@ -143,15 +112,11 @@
         }
 
         public AuditDto SaveAudit(AuditDto audit)
-        {            
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
-
-            if (audit == null || DateTime.Now < audit.CreationDate)
+        {       
+            if (audit == null)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
-
-            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = audit.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             Audit saveAudit = new()
             {
@@ -159,8 +124,7 @@
                 Endpoint = audit.Endpoint?.Trim() ?? string.Empty,
                 Agent = audit.Agent?.Trim() ?? string.Empty,
                 Method = audit.Method?.Trim() ?? string.Empty,
-                CreationDate = audit.CreationDate,               
-                IdStatus = statusSearch.IdStatus
+                CreationDate = audit.CreationDate            
             };
 
             UnitOfWork.BaseRepository<Audit>().Add(saveAudit);
@@ -180,14 +144,9 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
-                      
-            AuditExtendDto? auditSearch = auditRepository.GetAuditById(audit) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            if (auditSearch == null)
-            {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            }
-
+            AuditDto? auditSearch = (auditRepository.GetAuditById(audit) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL));
+            
             Audit updateAudit = new()
             {
                 IdAudit = auditSearch.IdAudit,
@@ -195,44 +154,10 @@
                 Endpoint = audit.Endpoint?.Trim() ?? string.Empty,
                 Agent = audit.Agent?.Trim() ?? string.Empty,
                 Method = audit.Method?.Trim() ?? string.Empty,
-                CreationDate = auditSearch.CreationDate,
-                IdStatus = auditSearch.IdStatus
+                CreationDate = auditSearch.CreationDate                
             };
 
             UnitOfWork.BaseRepository<Audit>().Update(updateAudit);
-
-            if (UnitOfWork.SaveChanges() <= 0)
-            {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            }
-            return audit;
-        }
-
-        public AuditDto DeleteAudit(AuditDto audit)
-        {
-            IAuditRepository auditRepository = UnitOfWork.AuditRepository();
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
-
-            AuditExtendDto? auditSearch = auditRepository.GetAuditById(audit) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = audit.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-
-            if (auditSearch.IdStatus == statusSearch.IdStatus)
-            {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            }
-
-            Audit deleteAudit = new()
-            {
-                IdAudit = auditSearch.IdAudit,
-                Host = auditSearch.Host?.Trim() ?? string.Empty,
-                Endpoint = auditSearch.Endpoint?.Trim() ?? string.Empty,
-                Agent = auditSearch.Agent?.Trim() ?? string.Empty,
-                Method = auditSearch.Method?.Trim() ?? string.Empty,
-                CreationDate = auditSearch.CreationDate,
-                IdStatus = audit.IdStatus
-            };
-
-            UnitOfWork.BaseRepository<Audit>().Update(deleteAudit);
 
             if (UnitOfWork.SaveChanges() <= 0)
             {

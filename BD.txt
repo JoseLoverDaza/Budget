@@ -22,18 +22,12 @@ CREATE TABLE [Security].[Audit](
 	[Endpoint] [nvarchar](255) NULL,
 	[Agent] [nvarchar](255) NULL,
 	[Method] [nvarchar](20) NULL,
-	[CreationDate] [date] NOT NULL,
-	[IdStatus] [int] NOT NULL,
+	[CreationDate] [datetime] NOT NULL,	
 PRIMARY KEY CLUSTERED 
 (
 	[IdAudit] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
-
-ALTER TABLE [Security].[Audit] WITH CHECK ADD CONSTRAINT [FK_Audit_Status] FOREIGN KEY([IdStatus])
-REFERENCES [Parameterization ].[Status] ([IdStatus])
-
-ALTER TABLE [Security].[Audit] CHECK CONSTRAINT [FK_Audit_Status]
 
 CREATE TABLE [Security].[Log](
 	[IdLog] [bigint] IDENTITY(1,1) NOT NULL,
@@ -41,7 +35,7 @@ CREATE TABLE [Security].[Log](
 	[PreviousValues] NVARCHAR(MAX),
     [NewValues] NVARCHAR(MAX),
 	[EntityAction] [nvarchar](20) NULL,
-	[CreationDate] [date] NOT NULL,
+	[CreationDate] [datetime] NOT NULL,
 	[IdStatus] [int] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (

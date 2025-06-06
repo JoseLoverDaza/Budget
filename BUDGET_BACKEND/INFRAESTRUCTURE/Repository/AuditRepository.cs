@@ -2,8 +2,7 @@
 {
 
     #region Librerias
-
-    using CORE.Dto;
+        
     using CORE.Interfaces.Repositories;
     using Domain.Context;
     using Domain.Dto;
@@ -40,165 +39,94 @@
 
         #region Métodos y Funciones
 
-        public AuditExtendDto? GetAuditById(AuditDto audit)
+        public AuditDto? GetAuditById(AuditDto audit)
         {
             return (
-                    from a in _context.Audits.AsNoTracking()                    
-                    join s in _context.Status.AsNoTracking()
-                    on a.IdStatus equals s.IdStatus
+                    from a in _context.Audits.AsNoTracking()    
                     where a.IdAudit == audit.IdAudit
-                    select new AuditExtendDto
+                    select new AuditDto
                     {
                         IdAudit = a.IdAudit,
                         Host = a.Host,
                         Endpoint = a.Endpoint,
                         Agent = a.Agent,
                         Method = a.Method,
-                        CreationDate = a.CreationDate,                         
-                        IdStatus = a.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        CreationDate = a.CreationDate   
                     }
                 )
                 .FirstOrDefault();
         }
 
-        public List<AuditExtendDto> GetAuditsByCreationDate(AuditDto audit)
+        public List<AuditDto> GetAuditsByCreationDate(AuditDto audit)
         {
             return (
-                   from a in _context.Audits.AsNoTracking()
-                   join s in _context.Status.AsNoTracking()
-                   on a.IdStatus equals s.IdStatus
+                   from a in _context.Audits.AsNoTracking()                  
                    where a.CreationDate == audit.CreationDate
-                   select new AuditExtendDto
+                   select new AuditDto
                    {
                        IdAudit = a.IdAudit,
                        Host = a.Host,
                        Endpoint = a.Endpoint,
                        Agent = a.Agent,
                        Method = a.Method,
-                       CreationDate = a.CreationDate,
-                       IdStatus = a.IdStatus,
-                       NameStatus = s.Name,
-                       DescriptionStatus = s.Description
+                       CreationDate = a.CreationDate                      
                    }
                   )
                  .ToList();
         }
 
-        public List<AuditExtendDto> GetAuditsByStatus(AuditDto audit)
+        public List<AuditDto> GetAuditsByMethodCreationDate(AuditDto audit)
         {
             return (
-                  from a in _context.Audits.AsNoTracking()
-                  join s in _context.Status.AsNoTracking()
-                  on a.IdStatus equals s.IdStatus
-                  where a.IdStatus == audit.IdStatus
-                  select new AuditExtendDto
-                  {
-                      IdAudit = a.IdAudit,
-                      Host = a.Host,
-                      Endpoint = a.Endpoint,
-                      Agent = a.Agent,
-                      Method = a.Method,
-                      CreationDate = a.CreationDate,
-                      IdStatus = a.IdStatus,
-                      NameStatus = s.Name,
-                      DescriptionStatus = s.Description
-                  }
-                 )
-                .ToList();
-        }
-
-        public List<AuditExtendDto> GetAuditsByMethodCreationDate(AuditDto audit)
-        {
-            return (
-                   from a in _context.Audits.AsNoTracking()
-                   join s in _context.Status.AsNoTracking()
-                   on a.IdStatus equals s.IdStatus
+                   from a in _context.Audits.AsNoTracking()                             
                    where a.Method == audit.Method && a.CreationDate == audit.CreationDate
-                   select new AuditExtendDto
+                   select new AuditDto
                    {
                        IdAudit = a.IdAudit,
                        Host = a.Host,
                        Endpoint = a.Endpoint,
                        Agent = a.Agent,
                        Method = a.Method,
-                       CreationDate = a.CreationDate,
-                       IdStatus = a.IdStatus,
-                       NameStatus = s.Name,
-                       DescriptionStatus = s.Description
+                       CreationDate = a.CreationDate                      
                    }
                   )
                  .ToList();
         }
 
-        public List<AuditExtendDto> GetAuditsByEndpointCreationDate(AuditDto audit)
+        public List<AuditDto> GetAuditsByEndpointCreationDate(AuditDto audit)
         {
             return (
-                   from a in _context.Audits.AsNoTracking()
-                   join s in _context.Status.AsNoTracking()
-                   on a.IdStatus equals s.IdStatus
+                   from a in _context.Audits.AsNoTracking()                  
                    where a.Endpoint == audit.Endpoint && a.CreationDate == audit.CreationDate
-                   select new AuditExtendDto
+                   select new AuditDto
                    {
                        IdAudit = a.IdAudit,
                        Host = a.Host,
                        Endpoint = a.Endpoint,
                        Agent = a.Agent,
                        Method = a.Method,
-                       CreationDate = a.CreationDate,
-                       IdStatus = a.IdStatus,
-                       NameStatus = s.Name,
-                       DescriptionStatus = s.Description
+                       CreationDate = a.CreationDate                       
                    }
                   )
                  .ToList();
         }
 
-        public List<AuditExtendDto> GetAuditsByEndpointMethodCreationDate(AuditDto audit)
+        public List<AuditDto> GetAuditsByEndpointMethodCreationDate(AuditDto audit)
         {
             return (
-                   from a in _context.Audits.AsNoTracking()
-                   join s in _context.Status.AsNoTracking()
-                   on a.IdStatus equals s.IdStatus
+                   from a in _context.Audits.AsNoTracking()                   
                    where a.Endpoint == audit.Endpoint && a.Method == audit.Method && a.CreationDate == audit.CreationDate
-                   select new AuditExtendDto
+                   select new AuditDto
                    {
                        IdAudit = a.IdAudit,
                        Host = a.Host,
                        Endpoint = a.Endpoint,
                        Agent = a.Agent,
                        Method = a.Method,
-                       CreationDate = a.CreationDate,
-                       IdStatus = a.IdStatus,
-                       NameStatus = s.Name,
-                       DescriptionStatus = s.Description
+                       CreationDate = a.CreationDate                      
                    }
                   )
                  .ToList();
-        }
-
-        public List<AuditExtendDto> GetAuditsByEndpointMethodCreationDateStatus(AuditDto audit)
-        {
-            return (
-                  from a in _context.Audits.AsNoTracking()
-                  join s in _context.Status.AsNoTracking()
-                  on a.IdStatus equals s.IdStatus
-                  where a.Endpoint == audit.Endpoint && a.Method == audit.Method && a.CreationDate == audit.CreationDate && a.IdStatus == audit.IdStatus
-                  select new AuditExtendDto
-                  {
-                      IdAudit = a.IdAudit,
-                      Host = a.Host,
-                      Endpoint = a.Endpoint,
-                      Agent = a.Agent,
-                      Method = a.Method,
-                      CreationDate = a.CreationDate,
-                      IdStatus = a.IdStatus,
-                      NameStatus = s.Name,
-                      DescriptionStatus = s.Description
-                  }
-                 )
-                .ToList();
         }
 
         #endregion

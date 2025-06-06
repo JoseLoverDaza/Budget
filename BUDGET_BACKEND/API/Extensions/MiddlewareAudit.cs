@@ -1,4 +1,10 @@
-﻿namespace API.Extensions
+﻿using CORE.Interfaces.Services;
+using CORE.Utils;
+using Domain.Dto;
+using Microsoft.AspNetCore.Http;
+using System.Runtime.InteropServices;
+
+namespace API.Extensions
 {
 
     /// <summary>
@@ -7,32 +13,58 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class MiddlewareAudit(RequestDelegate next, ILogger<MiddlewareAudit> logger)
+    public class MiddlewareAudit(RequestDelegate next)
     {
 
         #region Atributos y Propiedades
 
         private readonly RequestDelegate _next = next;
-        
+       
         #endregion
 
         #region Métodos y Funciones
 
         public async Task InvokeAsync(HttpContext context)
-        {
+        {            
             var ip = context.Connection.RemoteIpAddress?.ToString();
-
-            if (context.Request.Headers.TryGetValue("X-Forwarded-For", out Microsoft.Extensions.Primitives.StringValues value))
+            if (context.Request.Headers.TryGetValue("X-Forwarded-For", out var forwardedFor))
             {
-                ip = value.ToString().Split(',')[0].Trim();
+                ip = forwardedFor.ToString().Split(',')[0].Trim();
             }
 
-            var usuario = context.User.Identity?.Name ?? "Anónimo";
+            DateTime fechaUtc = DateTime.UtcNow;
+            TimeZoneInfo zonaHoraria = TimeZoneInfo.FindSystemTimeZoneById("SA Pacific Standard Time");
+            DateTime fechaLocal = TimeZoneInfo.ConvertTimeFromUtc(fechaUtc, zonaHoraria);
+
             var endpoint = context.Request.Path;
             var metodo = context.Request.Method;
-            var fecha = DateTime.UtcNow;
-                                  
-            await _next(context);
+            var agente = context.Request.Headers.UserAgent.ToString();
+            var fecha = fechaLocal;
+
+            try
+            {               
+                await _next(context);                
+            }
+            catch (Exception)
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+            finally
+            {
+                if (context.RequestServices.GetService(typeof(IAuditService)) is IAuditService auditService)
+                {
+                    var auditDto = new AuditDto
+                    {
+                        Host = ip,
+                        Endpoint = endpoint,
+                        Method = metodo,
+                        Agent = agente,
+                        CreationDate = fecha                        
+                    };
+
+                    auditService.SaveAudit(auditDto);
+                }
+            }
         }
 
         #endregion

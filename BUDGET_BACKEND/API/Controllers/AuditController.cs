@@ -75,23 +75,6 @@
         }
 
         [HttpPost]
-        [Route("GetAuditsByStatus")]
-        [SwaggerOperation(Summary = "Get Audits By Status")]
-        public ResponseDto GetAuditsByStatus(AuditDto audit)
-        {
-            try
-            {
-                response.Data = _auditService.GetAuditsByStatus(audit);
-                response.Message = Constants.General.SUCCESSUL;
-            }
-            catch (Exception ex)
-            {
-                ResponseError(ex, true);
-            }
-            return response;
-        }
-
-        [HttpPost]
         [Route("GetAuditsByMethodCreationDate")]
         [SwaggerOperation(Summary = "Get Audits By Method Creation Date")]
         public ResponseDto GetAuditsByMethodCreationDate(AuditDto audit)
@@ -143,13 +126,30 @@
         }
 
         [HttpPost]
-        [Route("GetAuditsByEndpointMethodCreationDateStatus")]
-        [SwaggerOperation(Summary = "Get Audits By Endpoint Method Creation Date Status")]
-        public ResponseDto GetAuditsByEndpointMethodCreationDateStatus(AuditDto audit)
+        [Route("SaveAudit")]
+        [SwaggerOperation(Summary = "Save Audit")]
+        public ResponseDto SaveAudit(AuditDto audit)
         {
             try
             {
-                response.Data = _auditService.GetAuditsByEndpointMethodCreationDateStatus(audit);
+                response.Data = _auditService.SaveAudit(audit);
+                response.Message = Constants.General.SUCCESSUL;
+            }
+            catch (Exception ex)
+            {
+                ResponseError(ex, true);
+            }
+            return response;
+        }
+
+        [HttpPost]
+        [Route("UpdateAudit")]
+        [SwaggerOperation(Summary = "Update Audit")]
+        public ResponseDto UpdateAudit(AuditDto audit)
+        {
+            try
+            {
+                response.Data = _auditService.UpdateAudit(audit);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)

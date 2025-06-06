@@ -1,10 +1,8 @@
 ﻿namespace CORE.Interfaces.Repositories
 {
 
-
     #region Librerias
 
-    using CORE.Dto;
     using Domain.Dto;
 
     #endregion
@@ -20,19 +18,15 @@
 
         #region Métodos y Funciones
 
-        public AuditExtendDto? GetAuditById(AuditDto audit);
+        public AuditDto? GetAuditById(AuditDto audit);
         
-        public List<AuditExtendDto> GetAuditsByCreationDate(AuditDto audit);
+        public List<AuditDto> GetAuditsByCreationDate(AuditDto audit);
 
-        public List<AuditExtendDto> GetAuditsByStatus(AuditDto audit);
+        public List<AuditDto> GetAuditsByMethodCreationDate(AuditDto audit);
 
-        public List<AuditExtendDto> GetAuditsByMethodCreationDate(AuditDto audit);
+        public List<AuditDto> GetAuditsByEndpointCreationDate(AuditDto audit);
 
-        public List<AuditExtendDto> GetAuditsByEndpointCreationDate(AuditDto audit);
-
-        public List<AuditExtendDto> GetAuditsByEndpointMethodCreationDate(AuditDto audit);
-
-        public List<AuditExtendDto> GetAuditsByEndpointMethodCreationDateStatus(AuditDto audit);
+        public List<AuditDto> GetAuditsByEndpointMethodCreationDate(AuditDto audit);
 
         #endregion
 

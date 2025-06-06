@@ -19,8 +19,6 @@
         public string? Method { get; set; }
         public DateTime CreationDate { get; set; }
 
-        public int IdStatus { get; set; }
-
         #endregion
 
     }
