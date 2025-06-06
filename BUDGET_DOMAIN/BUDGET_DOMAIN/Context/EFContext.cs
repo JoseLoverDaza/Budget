@@ -47,10 +47,10 @@
         public virtual DbSet<TokenApi> TokenApis { get; set; }
         public virtual DbSet<Audit> Audits { get; set; }
         public virtual DbSet<Log> Logs { get; set; }
-
-        public virtual DbSet<FinancialInstitution> FinancialInstitutions { get; set; }
+        
         public virtual DbSet<TypeAccount> TypeAccounts { get; set; }
         public virtual DbSet<TypeExpense> TypeExpenses { get; set; }
+        public virtual DbSet<FinancialInstitution> FinancialInstitutions { get; set; }
 
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Deposit> Deposits { get; set; }
@@ -67,10 +67,14 @@
             modelBuilder.ApplyConfiguration(new Configurations.RoleConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.UserConfiguration());
 
-            modelBuilder.ApplyConfiguration(new Configurations.UserConfiguration());
-            modelBuilder.ApplyConfiguration(new Configurations.UserConfiguration());
-            modelBuilder.ApplyConfiguration(new Configurations.UserConfiguration());
+            modelBuilder.ApplyConfiguration(new Configurations.TokenApiConfiguration());
+            modelBuilder.ApplyConfiguration(new Configurations.AuditConfiguration());            
+            modelBuilder.ApplyConfiguration(new Configurations.LogConfiguration());
 
+            modelBuilder.ApplyConfiguration(new Configurations.TypeAccountConfiguration());
+            modelBuilder.ApplyConfiguration(new Configurations.TypeExpenseConfiguration());
+            modelBuilder.ApplyConfiguration(new Configurations.FinancialInstitutionConfiguration());
+            
             modelBuilder.ApplyConfiguration(new Configurations.TokenApiConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.AuditConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.LogConfiguration());
@@ -81,7 +85,7 @@
             modelBuilder.ApplyConfiguration(new Configurations.BudgetConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.BudgetDetailsConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.BillingConfiguration());
-            modelBuilder.ApplyConfiguration(new Configurations.BillingDetailsConfiguration());
+            modelBuilder.ApplyConfiguration(new Configurations.BillingDetailsConfiguration());            
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

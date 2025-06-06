@@ -168,7 +168,7 @@
             {
                 IdTypeAccount = typeAccountSearch.IdTypeAccount,
                 Name = typeAccountSearch.Name.Trim(),
-                Description = typeAccount.Description?.Trim() ?? string.Empty,
+                Description = typeAccountSearch.Description?.Trim() ?? string.Empty,
                 IdStatus = statusSearch.IdStatus
             };
 

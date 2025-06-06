@@ -8,6 +8,7 @@
     using CORE.Interfaces.Services;
     using CORE.Services;
     using Domain.Context;
+    using Domain.Dto;
     using Domain.Entities;
     using INFRAESTRUCTURE.Context;
     using Microsoft.EntityFrameworkCore;
@@ -102,10 +103,13 @@
         public void GetFinancialInstitutionByIdOK()
         {
             ///Arrange   
-            int Id = 1;
-
+            FinancialInstitutionDto financialInstitution = new()
+            {
+                IdFinancialInstitution = 1
+            };
+            
             ///Act
-            var result = _financialInstitutionController!.GetFinancialInstitutionById(Id);
+            var result = _financialInstitutionController!.GetFinancialInstitutionById(financialInstitution);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -117,10 +121,13 @@
         public void GetFinancialInstitutionByIdFail()
         {
             ///Arrange   
-            int Id = -1;
+            FinancialInstitutionDto financialInstitution = new()
+            {
+                IdFinancialInstitution = -1
+            };
 
             ///Act
-            var result = _financialInstitutionController!.GetFinancialInstitutionById(Id);
+            var result = _financialInstitutionController!.GetFinancialInstitutionById(financialInstitution);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -132,10 +139,13 @@
         public void GetFinancialInstitutionByNameOK()
         {
             ///Arrange   
-            string Name = "Test";
-
+            FinancialInstitutionDto financialInstitution = new()
+            {
+                Name = "Test"
+            };
+            
             ///Act
-            var result = _financialInstitutionController!.GetFinancialInstitutionByName(Name);
+            var result = _financialInstitutionController!.GetFinancialInstitutionByName(financialInstitution);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -147,10 +157,13 @@
         public void GetFinancialInstitutionByNameFail()
         {
             ///Arrange   
-            string Name = "";
+            FinancialInstitutionDto financialInstitution = new()
+            {
+                Name = "T"
+            };
 
             ///Act
-            var result = _financialInstitutionController!.GetFinancialInstitutionByName(Name);
+            var result = _financialInstitutionController!.GetFinancialInstitutionByName(financialInstitution);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -162,10 +175,13 @@
         public void GetFinancialInstitutionsByStatusOK()
         {
             ///Arrange   
-            int IdStatus = 1;
-
+            FinancialInstitutionDto financialInstitution = new()
+            {
+                IdStatus = 1
+            };
+            
             ///Act
-            var result = _financialInstitutionController!.GetFinancialInstitutionsByStatus(IdStatus);
+            var result = _financialInstitutionController!.GetFinancialInstitutionsByStatus(financialInstitution);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -177,10 +193,13 @@
         public void GetFinancialInstitutionsByStatusFail()
         {
             ///Arrange   
-            int IdStatus = -1;
+            FinancialInstitutionDto financialInstitution = new()
+            {
+                IdStatus = -1
+            };
 
             ///Act
-            var result = _financialInstitutionController!.GetFinancialInstitutionsByStatus(IdStatus);
+            var result = _financialInstitutionController!.GetFinancialInstitutionsByStatus(financialInstitution);
 
             ///Assert
             Assert.IsNotNull(result);

@@ -153,7 +153,7 @@
                 Email = user.Email.Trim(),
                 Phone = user.Phone.Trim(),
                 Login = user.Login.Trim(),
-                Password = user.Password!.Trim(),
+                Password = user.Password.Trim(),
                 IdRole = rolSearch.IdRole,
                 IdStatus = statusSearch.IdStatus
             };
@@ -190,7 +190,7 @@
                 Email = user.Email.Trim(),
                 Phone = user.Phone.Trim(),
                 Login = user.Login.Trim(),
-                Password = user.Password!.Trim(),
+                Password = user.Password.Trim(),
                 IdRole = userSearch.IdRole,
                 IdStatus = userSearch.IdStatus
             };
@@ -223,7 +223,7 @@
                 Email = userSearch.Email.Trim(),
                 Phone = userSearch.Phone.Trim(),
                 Login = userSearch.Login.Trim(),
-                Password = userSearch.Password!.Trim(),
+                Password = userSearch.Password.Trim(),
                 IdRole = userSearch.IdRole,               
                 IdStatus = statusSearch.IdStatus
             };

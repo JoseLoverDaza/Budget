@@ -313,7 +313,7 @@
             DepositExtendDto? depositSearch = depositRepository.GetDepositById(deposit) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = deposit.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            if (statusSearch.IdStatus == deposit.IdStatus)
+            if (depositSearch.IdStatus == deposit.IdStatus)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }

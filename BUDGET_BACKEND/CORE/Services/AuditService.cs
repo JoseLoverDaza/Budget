@@ -155,10 +155,10 @@
 
             Audit saveAudit = new()
             {
-                Host = audit.Host!.Trim() ?? string.Empty,
-                Endpoint = audit.Endpoint!.Trim() ?? string.Empty,
-                Agent = audit.Agent!.Trim() ?? string.Empty,
-                Method = audit.Method!.Trim() ?? string.Empty,
+                Host = audit.Host?.Trim() ?? string.Empty,                
+                Endpoint = audit.Endpoint?.Trim() ?? string.Empty,
+                Agent = audit.Agent?.Trim() ?? string.Empty,
+                Method = audit.Method?.Trim() ?? string.Empty,
                 CreationDate = audit.CreationDate,               
                 IdStatus = statusSearch.IdStatus
             };
@@ -191,10 +191,10 @@
             Audit updateAudit = new()
             {
                 IdAudit = auditSearch.IdAudit,
-                Host = audit.Host!.Trim() ?? string.Empty,
-                Endpoint = audit.Endpoint!.Trim() ?? string.Empty,
-                Agent = audit.Agent!.Trim() ?? string.Empty,
-                Method = audit.Method!.Trim() ?? string.Empty,
+                Host = audit.Host?.Trim() ?? string.Empty,
+                Endpoint = audit.Endpoint?.Trim() ?? string.Empty,
+                Agent = audit.Agent?.Trim() ?? string.Empty,
+                Method = audit.Method?.Trim() ?? string.Empty,
                 CreationDate = auditSearch.CreationDate,
                 IdStatus = auditSearch.IdStatus
             };
@@ -224,10 +224,10 @@
             Audit deleteAudit = new()
             {
                 IdAudit = auditSearch.IdAudit,
-                Host = auditSearch.Host!.Trim() ?? string.Empty,
-                Endpoint = auditSearch.Endpoint!.Trim() ?? string.Empty,
-                Agent = auditSearch.Agent!.Trim() ?? string.Empty,
-                Method = auditSearch.Method!.Trim() ?? string.Empty,
+                Host = auditSearch.Host?.Trim() ?? string.Empty,
+                Endpoint = auditSearch.Endpoint?.Trim() ?? string.Empty,
+                Agent = auditSearch.Agent?.Trim() ?? string.Empty,
+                Method = auditSearch.Method?.Trim() ?? string.Empty,
                 CreationDate = auditSearch.CreationDate,
                 IdStatus = audit.IdStatus
             };

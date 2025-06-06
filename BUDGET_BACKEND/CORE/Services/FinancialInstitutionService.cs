@@ -168,7 +168,7 @@
             {
                 IdFinancialInstitution = financialInstitutionSearch.IdFinancialInstitution,
                 Name = financialInstitutionSearch.Name.Trim(),
-                Description = financialInstitution.Description?.Trim() ?? string.Empty,
+                Description = financialInstitutionSearch.Description?.Trim() ?? string.Empty,
                 IdStatus = statusSearch.IdStatus
             };
 

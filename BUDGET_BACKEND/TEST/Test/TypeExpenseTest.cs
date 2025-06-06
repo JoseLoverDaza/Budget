@@ -8,6 +8,7 @@
     using CORE.Interfaces.Services;
     using CORE.Services;
     using Domain.Context;
+    using Domain.Dto;
     using Domain.Entities;
     using INFRAESTRUCTURE.Context;
     using Microsoft.EntityFrameworkCore;
@@ -101,11 +102,14 @@
         [TestMethod]
         public void GetTypeExpenseByIdOK()
         {
-            ///Arrange   
-            int Id = 1;
+            ///Arrange  
+            TypeExpenseDto typeExpense = new()
+            {
+                IdTypeExpense = 1
+            };
 
             ///Act
-            var result = _typeExpenseController!.GetTypeExpenseById(Id);
+            var result = _typeExpenseController!.GetTypeExpenseById(typeExpense);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -117,10 +121,13 @@
         public void GetTypeExpenseByIdFail()
         {
             ///Arrange   
-            int Id = -1;
+            TypeExpenseDto typeExpense = new()
+            {
+                IdTypeExpense = -1
+            };
 
             ///Act
-            var result = _typeExpenseController!.GetTypeExpenseById(Id);
+            var result = _typeExpenseController!.GetTypeExpenseById(typeExpense);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -132,10 +139,13 @@
         public void GetTypeExpenseByNameOK()
         {
             ///Arrange   
-            string Name = "Test";
-
+            TypeExpenseDto typeExpense = new()
+            {
+                Name = "Test"
+            };
+            
             ///Act
-            var result = _typeExpenseController!.GetTypeExpenseByName(Name);
+            var result = _typeExpenseController!.GetTypeExpenseByName(typeExpense);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -147,10 +157,13 @@
         public void GetTypeExpenseByNameFail()
         {
             ///Arrange   
-            string Name = "";
+            TypeExpenseDto typeExpense = new()
+            {
+                Name = "T"
+            };
 
             ///Act
-            var result = _typeExpenseController!.GetTypeExpenseByName(Name);
+            var result = _typeExpenseController!.GetTypeExpenseByName(typeExpense);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -162,10 +175,13 @@
         public void GetTypeExpensesByStatusOK()
         {
             ///Arrange   
-            int IdStatus = 1;
-
+            TypeExpenseDto typeExpense = new()
+            {
+                IdStatus = 1
+            };
+           
             ///Act
-            var result = _typeExpenseController!.GetTypeExpensesByStatus(IdStatus);
+            var result = _typeExpenseController!.GetTypeExpensesByStatus(typeExpense);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -177,10 +193,13 @@
         public void GetTypeExpensesByStatusFail()
         {
             ///Arrange   
-            int IdStatus = -1;
+            TypeExpenseDto typeExpense = new()
+            {
+                IdStatus = -1
+            };
 
             ///Act
-            var result = _typeExpenseController!.GetTypeExpensesByStatus(IdStatus);
+            var result = _typeExpenseController!.GetTypeExpensesByStatus(typeExpense);
 
             ///Assert
             Assert.IsNotNull(result);

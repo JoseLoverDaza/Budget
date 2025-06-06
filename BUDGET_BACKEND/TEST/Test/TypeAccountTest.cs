@@ -8,6 +8,7 @@
     using CORE.Interfaces.Services;
     using CORE.Services;
     using Domain.Context;
+    using Domain.Dto;
     using Domain.Entities;
     using INFRAESTRUCTURE.Context;
     using Microsoft.EntityFrameworkCore;
@@ -101,11 +102,14 @@
         [TestMethod]
         public void GetTypeAccountByIdOK()
         {
-            ///Arrange   
-            int Id = 1;
+            ///Arrange           
+            TypeAccountDto typeAccount = new()
+            {
+                IdTypeAccount = 1
+            };
 
             ///Act
-            var result = _typeAccountController!.GetTypeAccountById(Id);
+            var result = _typeAccountController!.GetTypeAccountById(typeAccount);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -117,10 +121,13 @@
         public void GetTypeAccountByIdFail()
         {
             ///Arrange   
-            int Id = -1;
+            TypeAccountDto typeAccount = new()
+            {
+                IdTypeAccount = -1
+            };
 
             ///Act
-            var result = _typeAccountController!.GetTypeAccountById(Id);
+            var result = _typeAccountController!.GetTypeAccountById(typeAccount);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -132,10 +139,13 @@
         public void GetTypeAccountByNameOK()
         {
             ///Arrange   
-            string Name = "Test";
-
+            TypeAccountDto typeAccount = new()
+            {
+                Name = "Test"
+            };
+           
             ///Act
-            var result = _typeAccountController!.GetTypeAccountByName(Name);
+            var result = _typeAccountController!.GetTypeAccountByName(typeAccount);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -147,10 +157,13 @@
         public void GetTypeAccountByNameFail()
         {
             ///Arrange   
-            string Name = "";
+            TypeAccountDto typeAccount = new()
+            {
+                Name = "T"
+            };
 
             ///Act
-            var result = _typeAccountController!.GetTypeAccountByName(Name);
+            var result = _typeAccountController!.GetTypeAccountByName(typeAccount);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -162,10 +175,13 @@
         public void GetTypeAccountsByStatusOK()
         {
             ///Arrange   
-            int IdStatus = 1;
-
+            TypeAccountDto typeAccount = new()
+            {
+                IdStatus = 1
+            };
+            
             ///Act
-            var result = _typeAccountController!.GetTypeAccountsByStatus(IdStatus);
+            var result = _typeAccountController!.GetTypeAccountsByStatus(typeAccount);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -177,10 +193,13 @@
         public void GetTypeAccountsByStatusFail()
         {
             ///Arrange   
-            int IdStatus = -1;
+            TypeAccountDto typeAccount = new()
+            {
+                IdStatus = -1
+            };
 
             ///Act
-            var result = _typeAccountController!.GetTypeAccountsByStatus(IdStatus);
+            var result = _typeAccountController!.GetTypeAccountsByStatus(typeAccount);
 
             ///Assert
             Assert.IsNotNull(result);

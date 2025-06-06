@@ -169,7 +169,7 @@
             {
                 IdRole = roleSearch.IdRole,
                 Name = roleSearch.Name.Trim(),
-                Description = role.Description?.Trim() ?? string.Empty,
+                Description = roleSearch.Description?.Trim() ?? string.Empty,
                 IdStatus = statusSearch.IdStatus
             };
 
@@ -181,9 +181,7 @@
             }
             return role;
         }
-
         
-
         #endregion
 
     }

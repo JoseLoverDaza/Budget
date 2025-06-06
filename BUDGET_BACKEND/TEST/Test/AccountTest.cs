@@ -3,11 +3,11 @@
 
     #region Librerias
 
-    using API.Controllers;
-    using CORE.Dto;
+    using API.Controllers;    
     using CORE.Interfaces.Services;
     using CORE.Services;
     using Domain.Context;
+    using Domain.Dto;
     using Domain.Entities;
     using INFRAESTRUCTURE.Context;
     using Microsoft.EntityFrameworkCore;
@@ -144,6 +144,523 @@
             _context.SaveChanges();
 
             #endregion Data
+        }
+
+        #endregion
+
+        #region Métodos y Funciones
+
+        [TestMethod]
+        public void GetAccountByIdOK()
+        {
+            ///Arrange   
+            AccountDto account = new()
+            {
+                IdAccount = 1
+            };
+
+            ///Act
+            var result = _accountController!.GetAccountById(account);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.OK.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void GetAccountByIdFail()
+        {
+            ///Arrange   
+            AccountDto account = new()
+            {
+                IdAccount = -1
+            };
+
+            ///Act
+            var result = _accountController!.GetAccountById(account);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.InternalServerError.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void GetAccountsByFinancialInstitutionOK()
+        {
+            ///Arrange   
+            AccountDto account = new()
+            {
+                IdFinancialInstitution = 1
+            };
+
+            ///Act
+            var result = _accountController!.GetAccountsByFinancialInstitution(account);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.OK.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void GetAccountsByFinancialInstitutionFail()
+        {
+            ///Arrange   
+            AccountDto account = new()
+            {
+                IdFinancialInstitution = -1
+            };
+
+            ///Act
+            var result = _accountController!.GetAccountsByFinancialInstitution(account);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.InternalServerError.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void GetAccountsByTypeAccountOK()
+        {
+            ///Arrange   
+            AccountDto account = new()
+            {
+                IdTypeAccount = 1
+            };
+
+            ///Act
+            var result = _accountController!.GetAccountsByTypeAccount(account);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.OK.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void GetAccountsByTypeAccountFail()
+        {
+            ///Arrange   
+            AccountDto account = new()
+            {
+                IdTypeAccount = -1
+            };
+
+            ///Act
+            var result = _accountController!.GetAccountsByTypeAccount(account);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.InternalServerError.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void GetAccountsByUserOK()
+        {
+            ///Arrange   
+            AccountDto account = new()
+            {
+                IdUser = 1
+            };
+
+            ///Act
+            var result = _accountController!.GetAccountsByUser(account);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.OK.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void GetAccountsByUserFail()
+        {
+            ///Arrange   
+            AccountDto account = new()
+            {
+                IdUser = -1
+            };
+
+            ///Act
+            var result = _accountController!.GetAccountsByUser(account);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.InternalServerError.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void GetAccountsByStatusOK()
+        {
+            ///Arrange   
+            AccountDto account = new()
+            {
+                IdStatus = 1
+            };
+
+            ///Act
+            var result = _accountController!.GetAccountsByStatus(account);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.OK.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void GetAccountsByStatusFail()
+        {
+            ///Arrange   
+            AccountDto account = new()
+            {
+                IdStatus = -1
+            };
+
+            ///Act
+            var result = _accountController!.GetAccountsByStatus(account);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.InternalServerError.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void GetAccountsByFinancialInstitutionStatusOK()
+        {
+            ///Arrange   
+            AccountDto account = new()
+            {
+                IdFinancialInstitution = 1,
+                IdStatus = 1
+            };
+
+            ///Act
+            var result = _accountController!.GetAccountsByFinancialInstitutionStatus(account);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.OK.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void GetAccountsByFinancialInstitutionStatusFail()
+        {
+            ///Arrange   
+            AccountDto account = new()
+            {
+                IdFinancialInstitution = -1,
+                IdStatus = -1
+            };
+
+            ///Act
+            var result = _accountController!.GetAccountsByFinancialInstitutionStatus(account);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.InternalServerError.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void GetAccountsByTypeAccountStatusOK()
+        {
+            ///Arrange   
+            AccountDto account = new()
+            {
+                IdTypeAccount = 1,
+                IdStatus = 1
+            };
+
+            ///Act
+            var result = _accountController!.GetAccountsByTypeAccountStatus(account);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.OK.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void GetAccountsByTypeAccountStatusFail()
+        {
+            ///Arrange   
+            AccountDto account = new()
+            {
+                IdTypeAccount = -1,
+                IdStatus = -1
+            };
+
+            ///Act
+            var result = _accountController!.GetAccountsByTypeAccountStatus(account);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.InternalServerError.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void GetAccountsByUserStatusOK()
+        {
+            ///Arrange   
+            AccountDto account = new()
+            {
+                IdUser = 1,
+                IdStatus = 1
+            };
+
+            ///Act
+            var result = _accountController!.GetAccountsByUserStatus(account);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.OK.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void GetAccountsByUserStatusFail()
+        {
+            ///Arrange   
+            AccountDto account = new()
+            {
+                IdUser = -1,
+                IdStatus = -1
+            };
+
+            ///Act
+            var result = _accountController!.GetAccountsByUserStatus(account);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.InternalServerError.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void GetAccountsByNameFinancialInstitutionTypeAccountUserOK()
+        {
+            ///Arrange   
+            AccountDto account = new()
+            {
+                Name = "Test",
+                IdFinancialInstitution = 1,
+                IdTypeAccount = 1,
+                IdUser = 1
+            };
+
+            ///Act
+            var result = _accountController!.GetAccountsByNameFinancialInstitutionTypeAccountUser(account);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.OK.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void GetAccountsByNameFinancialInstitutionTypeAccountUserFail()
+        {
+            ///Arrange   
+            AccountDto account = new()
+            {
+                Name = "T",
+                IdFinancialInstitution = -1,
+                IdTypeAccount = -1,
+                IdUser = -1
+            };
+
+            ///Act
+            var result = _accountController!.GetAccountsByNameFinancialInstitutionTypeAccountUser(account);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.InternalServerError.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void GetAccountsByFinancialInstitutionTypeAccountUserOK()
+        {
+            ///Arrange   
+            AccountDto account = new()
+            {                
+                IdFinancialInstitution = 1,
+                IdTypeAccount = 1,
+                IdUser = 1
+            };
+
+            ///Act
+            var result = _accountController!.GetAccountsByFinancialInstitutionTypeAccountUser(account);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.OK.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void GetAccountsByFinancialInstitutionTypeAccountUserFail()
+        {
+            ///Arrange   
+            AccountDto account = new()
+            {                
+                IdFinancialInstitution = -1,
+                IdTypeAccount = -1,
+                IdUser = -1
+            };
+
+            ///Act
+            var result = _accountController!.GetAccountsByFinancialInstitutionTypeAccountUser(account);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.InternalServerError.GetHashCode(), result.Code);
+        }
+
+
+        [TestMethod]
+        public void SaveAccountOK()
+        {
+            ///Arrange   
+            AccountDto account = new()
+            {
+                Name = "Test2",
+                IdFinancialInstitution = 1,
+                IdTypeAccount = 1,
+                IdUser = 1,
+                IdStatus = 1
+            };
+
+            ///Act
+            var result = _accountController!.SaveAccount(account);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.OK.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void SaveAccountFail()
+        {
+            ///Arrange   
+            AccountDto account = new()
+            {
+                Name = "Test",
+                IdFinancialInstitution =1,
+                IdTypeAccount = 1,
+                IdUser =1,
+                IdStatus = 1
+            };
+
+            ///Act
+            var result = _accountController!.SaveAccount(account);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.InternalServerError.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void UpdateAccountOK()
+        {
+            ///Arrange   
+            AccountDto account = new()
+            {
+                IdAccount = 1,
+                Name = "Test",
+                IdFinancialInstitution = 1,
+                IdTypeAccount = 1,
+                IdUser = 1,
+                IdStatus = 1
+            };
+
+            ///Act
+            var result = _accountController!.UpdateAccount(account);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.OK.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void UpdateAccountFail()
+        {
+            ///Arrange   
+            AccountDto account = new()
+            {
+                IdAccount = -1,
+                Name = "Test",
+                IdFinancialInstitution = 1,
+                IdTypeAccount = 1,
+                IdUser = 1,
+                IdStatus = 1
+            };
+
+            ///Act
+            var result = _accountController!.UpdateAccount(account);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.InternalServerError.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void DeleteAccountOK()
+        {
+            ///Arrange   
+            AccountDto account = new()
+            {
+                IdAccount = 1,
+                Name = "Test",
+                IdFinancialInstitution = 1,
+                IdTypeAccount = 1,
+                IdUser = 1,
+                IdStatus = 3
+            };
+
+            ///Act
+            var result = _accountController!.DeleteAccount(account);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.OK.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void DeleteAccountFail()
+        {
+            ///Arrange   
+            AccountDto account = new()
+            {
+                IdAccount = -1,
+                Name = "Test",
+                IdFinancialInstitution = 1,
+                IdTypeAccount = 1,
+                IdUser = 1,
+                IdStatus = 1
+            };
+
+            ///Act
+            var result = _accountController!.DeleteAccount(account);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.InternalServerError.GetHashCode(), result.Code);
         }
 
         #endregion

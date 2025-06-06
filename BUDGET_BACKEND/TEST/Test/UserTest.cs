@@ -8,6 +8,7 @@
     using CORE.Interfaces.Services;
     using CORE.Services;
     using Domain.Context;
+    using Domain.Dto;
     using Domain.Entities;
     using INFRAESTRUCTURE.Context;
     using Microsoft.EntityFrameworkCore;
@@ -130,10 +131,13 @@
         public void GetUserByIdOK()
         {
             ///Arrange   
-            int Id = 1;
+            UserDto user = new()
+            {
+                IdUser = 1
+            };
 
             ///Act
-            var result = _userController!.GetUserById(Id);
+            var result = _userController!.GetUserById(user);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -145,10 +149,13 @@
         public void GetRoleByIdFail()
         {
             ///Arrange   
-            int Id = -1;
+            UserDto user = new()
+            {
+                IdUser = -1
+            };
 
             ///Act
-            var result = _userController!.GetUserById(Id);
+            var result = _userController!.GetUserById(user);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -160,10 +167,13 @@
         public void GetUserByEmailOK()
         {
             ///Arrange   
-            string Email = "Test";
-
+            UserDto user = new()
+            {
+                Email = "Test"
+            };
+            
             ///Act
-            var result = _userController!.GetUserByEmail(Email);
+            var result = _userController!.GetUserByEmail(user);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -175,10 +185,13 @@
         public void GetUserByEmailFail()
         {
             ///Arrange   
-            string Email = "T";
+            UserDto user = new()
+            {
+                Email = "T"
+            };
 
             ///Act
-            var result = _userController!.GetUserByEmail(Email);
+            var result = _userController!.GetUserByEmail(user);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -190,10 +203,13 @@
         public void GetUserByLoginOK()
         {
             ///Arrange   
-            string Login = "Test";
-
+            UserDto user = new()
+            {
+                Login = "Test"
+            };
+           
             ///Act
-            var result = _userController!.GetUserByLogin(Login);
+            var result = _userController!.GetUserByLogin(user);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -205,10 +221,13 @@
         public void GetUserByLoginFail()
         {
             ///Arrange   
-            string Login = "T";
+            UserDto user = new()
+            {
+                Login = "T"
+            };
 
             ///Act
-            var result = _userController!.GetUserByLogin(Login);
+            var result = _userController!.GetUserByLogin(user);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -220,10 +239,13 @@
         public void GetUsersByRoleOK()
         {
             ///Arrange   
-            int IdRole = 1;
-
+            UserDto user = new()
+            {
+                IdRole = 1
+            };
+            
             ///Act
-            var result = _userController!.GetUsersByRole(IdRole);
+            var result = _userController!.GetUsersByRole(user);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -235,10 +257,13 @@
         public void GetUsersByRoleFail()
         {
             ///Arrange   
-            int IdRole = -1;
+            UserDto user = new()
+            {
+                IdRole = -1
+            };
 
             ///Act
-            var result = _userController!.GetUsersByRole(IdRole);
+            var result = _userController!.GetUsersByRole(user);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -250,10 +275,13 @@
         public void GetUsersByStatusOK()
         {
             ///Arrange   
-            int IdStatus = 1;
+            UserDto user = new()
+            {
+                IdStatus = 1
+            };
 
             ///Act
-            var result = _userController!.GetUsersByStatus(IdStatus);
+            var result = _userController!.GetUsersByStatus(user);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -265,10 +293,13 @@
         public void GetUsersByStatusFail()
         {
             ///Arrange   
-            int IdStatus = -1;
+            UserDto user = new()
+            {
+                IdStatus = -1
+            };
 
             ///Act
-            var result = _userController!.GetUsersByStatus(IdStatus);
+            var result = _userController!.GetUsersByStatus(user);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -280,11 +311,14 @@
         public void GetUsersByRoleStatusOK()
         {
             ///Arrange   
-            int IdRole = 1;
-            int IdStatus = 1;
+            UserDto user = new()
+            {               
+                IdStatus = 1,
+                IdRole = 1
+            };
 
             ///Act
-            var result = _userController!.GetUsersByRoleStatus(IdRole, IdStatus);
+            var result = _userController!.GetUsersByRoleStatus(user);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -296,11 +330,14 @@
         public void GetUsersByRoleStatusFail()
         {
             ///Arrange   
-            int IdRole = -1;
-            int IdStatus = -1;
+            UserDto user = new()
+            {
+                IdStatus = -1,
+                IdRole = -1
+            };
 
             ///Act
-            var result = _userController!.GetUsersByRoleStatus(IdRole, IdStatus);
+            var result = _userController!.GetUsersByRoleStatus(user);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -312,7 +349,7 @@
         public void SaveUserOK()
         {
             ///Arrange   
-            UserExtendDto user = new()
+            UserDto user = new()
             {
                 Email = "Test1",
                 Phone = "Test1",
@@ -335,7 +372,7 @@
         public void SaveUserFail()
         {
             ///Arrange   
-            UserExtendDto user = new()
+            UserDto user = new()
             {                
                 Email = "Test",
                 Phone = "Test",
@@ -358,7 +395,7 @@
         public void UpdateUserOK()
         {
             ///Arrange   
-            UserExtendDto user = new()
+            UserDto user = new()
             {
                 IdUser = 1,
                 Email = "Test1",
@@ -382,7 +419,7 @@
         public void UpdateUserFail()
         {
             ///Arrange   
-            UserExtendDto user = new()
+            UserDto user = new()
             {
                 IdUser = -1,
                 Email = "Test1",
@@ -406,7 +443,7 @@
         public void DeleteUserOK()
         {
             ///Arrange   
-            UserExtendDto user = new()
+            UserDto user = new()
             {
                 IdUser = 2,
                 Email = "Test1",
@@ -430,7 +467,7 @@
         public void DeleteUserFail()
         {
             ///Arrange   
-            UserExtendDto user = new()
+            UserDto user = new()
             {
                 IdUser = -1,
                 Email = "Test1",

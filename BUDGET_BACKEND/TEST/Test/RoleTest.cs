@@ -8,10 +8,11 @@
     using CORE.Interfaces.Services;
     using CORE.Services;
     using Domain.Context;
+    using Domain.Dto;
     using Domain.Entities;
     using INFRAESTRUCTURE.Context;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;   
     using System.Net;
 
     #endregion
@@ -102,10 +103,13 @@
         public void GetRoleByIdOK()
         {
             ///Arrange   
-            int Id = 1;
+            RoleDto role = new()
+            {
+                IdRole = 1
+            };
 
             ///Act
-            var result = _roleController!.GetRoleById(Id);
+            var result = _roleController!.GetRoleById(role);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -117,10 +121,13 @@
         public void GetRoleByIdFail()
         {
             ///Arrange   
-            int Id = -1;
+            RoleDto role = new()
+            {
+                IdRole = -1
+            };
 
             ///Act
-            var result = _roleController!.GetRoleById(Id);
+            var result = _roleController!.GetRoleById(role);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -132,10 +139,13 @@
         public void GetRoleByNameOK()
         {
             ///Arrange   
-            string Name = "Test";
-
+            RoleDto role = new()
+            {
+                Name = "Test"
+            };
+            
             ///Act
-            var result = _roleController!.GetRoleByName(Name);
+            var result = _roleController!.GetRoleByName(role);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -147,10 +157,13 @@
         public void GetRoleByNameFail()
         {
             ///Arrange   
-            string Name = "";
+            RoleDto role = new()
+            {
+                Name = "T"
+            };
 
             ///Act
-            var result = _roleController!.GetRoleByName(Name);
+            var result = _roleController!.GetRoleByName(role);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -162,10 +175,13 @@
         public void GetRolesOK()
         {
             ///Arrange   
-            int IdStatus = 1;
-
+            RoleDto role = new()
+            {
+                IdStatus = 1
+            };
+            
             ///Act
-            var result = _roleController!.GetRolesByStatus(IdStatus);
+            var result = _roleController!.GetRolesByStatus(role);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -177,10 +193,13 @@
         public void GetRolesFail()
         {
             ///Arrange   
-            int IdStatus = -1;
+            RoleDto role = new()
+            {
+                IdStatus = -1
+            };
 
             ///Act
-            var result = _roleController!.GetRolesByStatus(IdStatus);
+            var result = _roleController!.GetRolesByStatus(role);
 
             ///Assert
             Assert.IsNotNull(result);

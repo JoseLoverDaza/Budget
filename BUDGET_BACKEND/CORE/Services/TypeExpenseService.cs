@@ -173,7 +173,7 @@
             {
                 IdTypeExpense = typeExpenseSearch.IdTypeExpense,
                 Name = typeExpenseSearch.Name.Trim(),
-                Description = typeExpense.Description?.Trim() ?? string.Empty,
+                Description = typeExpenseSearch.Description?.Trim() ?? string.Empty,
                 IdStatus = statusSearch.IdStatus
             };
 

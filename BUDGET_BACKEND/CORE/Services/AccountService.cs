@@ -216,7 +216,7 @@
             Account saveAccount = new()
             {
                 Name = account.Name.Trim(),
-                Description = account.Description!.Trim(),
+                Description = account.Description?.Trim() ?? string.Empty,
                 IdFinancialInstitution = financialInstitutionSearch.IdFinancialInstitution,
                 IdTypeAccount = typeAccountSearch.IdTypeAccount,
                 IdUser = userSearch.IdUser,
@@ -253,7 +253,7 @@
             {
                 IdAccount = accountSearch.IdAccount,
                 Name = account.Name.Trim(),
-                Description = account.Description!.Trim(),
+                Description = account.Description?.Trim() ?? string.Empty,
                 IdFinancialInstitution = accountSearch.IdFinancialInstitution,
                 IdTypeAccount = accountSearch.IdTypeAccount,
                 IdUser = accountSearch.IdUser,
@@ -277,15 +277,16 @@
             AccountExtendDto? accountSearch = accountRepository.GetAccountById(account) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = account.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            if (statusSearch.IdStatus == account.IdStatus)
+            if (accountSearch.IdStatus == account.IdStatus)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
             Account deleteAccount = new()
-            {
+            { 
+                IdAccount = accountSearch.IdAccount,
                 Name = accountSearch.Name.Trim(),
-                Description = accountSearch.Description!.Trim(),
+                Description = accountSearch.Description?.Trim() ?? string.Empty,
                 IdFinancialInstitution = accountSearch.IdFinancialInstitution,
                 IdTypeAccount = accountSearch.IdTypeAccount,
                 IdUser = accountSearch.IdUser,

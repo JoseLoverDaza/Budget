@@ -8,6 +8,7 @@
     using CORE.Interfaces.Services;
     using CORE.Services;
     using Domain.Context;
+    using Domain.Dto;
     using Domain.Entities;
     using INFRAESTRUCTURE.Context;
     using Microsoft.EntityFrameworkCore;
@@ -126,10 +127,13 @@
         public void GetExpenseByIdOK()
         {
             ///Arrange   
-            int Id = 1;
+            ExpenseDto expense = new()
+            {
+                IdExpense = 1
+            };
 
             ///Act
-            var result = _expenseController!.GetExpenseById(Id);
+            var result = _expenseController!.GetExpenseById(expense);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -141,40 +145,13 @@
         public void GetExpenseByIdFail()
         {
             ///Arrange   
-            int Id = -1;
+            ExpenseDto expense = new()
+            {
+                IdExpense = -1
+            };
 
             ///Act
-            var result = _expenseController!.GetExpenseById(Id);
-
-            ///Assert
-            Assert.IsNotNull(result);
-            Assert.IsNull(result.Data);
-            Assert.AreEqual(HttpStatusCode.InternalServerError.GetHashCode(), result.Code);
-        }
-
-        [TestMethod]
-        public void GetExpenseByNameOK()
-        {
-            ///Arrange   
-            string Name = "Test";
-
-            ///Act
-            var result = _expenseController!.GetExpenseByName(Name);
-
-            ///Assert
-            Assert.IsNotNull(result);
-            Assert.IsNotNull(result.Data);
-            Assert.AreEqual(HttpStatusCode.OK.GetHashCode(), result.Code);
-        }
-
-        [TestMethod]
-        public void GetExpenseByNameFail()
-        {
-            ///Arrange   
-            string Name = "";
-
-            ///Act
-            var result = _expenseController!.GetExpenseByName(Name);
+            var result = _expenseController!.GetExpenseById(expense);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -186,10 +163,14 @@
         public void GetExpensesByTypeExpenseOK()
         {
             ///Arrange   
-            int IdTypeExpense = 1;
+            ExpenseDto expense = new()
+            {
+                IdTypeExpense = 1
+            };
+
 
             ///Act
-            var result = _expenseController!.GetExpensesByTypeExpense(IdTypeExpense);
+            var result = _expenseController!.GetExpensesByTypeExpense(expense);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -201,10 +182,13 @@
         public void GetExpensesByTypeExpenseFail()
         {
             ///Arrange   
-            int IdTypeExpense = -1;
+            ExpenseDto expense = new()
+            {
+                IdTypeExpense = -1
+            };
 
             ///Act
-            var result = _expenseController!.GetExpensesByTypeExpense(IdTypeExpense);
+            var result = _expenseController!.GetExpensesByTypeExpense(expense);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -216,10 +200,13 @@
         public void GetExpensesByStatusOK()
         {
             ///Arrange   
-            int IdStatus = 1;
-
+            ExpenseDto expense = new()
+            {
+                IdStatus = 1
+            };
+            
             ///Act
-            var result = _expenseController!.GetExpensesByStatus(IdStatus);
+            var result = _expenseController!.GetExpensesByStatus(expense);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -231,10 +218,53 @@
         public void GetExpensesByStatusFail()
         {
             ///Arrange   
-            int IdStatus = -1;
+            ExpenseDto expense = new()
+            {
+                IdStatus = -1
+            };
 
             ///Act
-            var result = _expenseController!.GetExpensesByStatus(IdStatus);
+            var result = _expenseController!.GetExpensesByStatus(expense);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.InternalServerError.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void GetExpensesByNameTypeExpenseOK()
+        {
+            ///Arrange   
+            ExpenseDto expense = new()
+            {
+                Name = "Test",
+                IdTypeExpense = 1,
+                IdStatus = 1
+            };
+
+            ///Act
+            var result = _expenseController!.GetExpensesByNameTypeExpense(expense);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.OK.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void GetExpensesByNameTypeExpenseFail()
+        {
+            ///Arrange   
+            ExpenseDto expense = new()
+            {
+                Name = "T",
+                IdTypeExpense = -1,
+                IdStatus = -1
+            };
+
+            ///Act
+            var result = _expenseController!.GetExpensesByNameTypeExpense(expense);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -246,11 +276,14 @@
         public void GetExpensesByTypeExpenseStatusOK()
         {
             ///Arrange   
-            int IdTypeExpense = 1;
-            int IdStatus = 1;
+            ExpenseDto expense = new()
+            {
+                IdTypeExpense = 1,
+                IdStatus = 1
+            };
 
             ///Act
-            var result = _expenseController!.GetExpensesByTypeExpenseStatus(IdTypeExpense, IdStatus);
+            var result = _expenseController!.GetExpensesByTypeExpenseStatus(expense);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -262,11 +295,14 @@
         public void GetExpensesByTypeExpenseStatusFail()
         {
             ///Arrange
-            int IdTypeExpense = -1;
-            int IdStatus = -1;
+            ExpenseDto expense = new()
+            {
+                IdTypeExpense = -1,
+                IdStatus = -1
+            };
 
             ///Act
-            var result = _expenseController!.GetExpensesByTypeExpenseStatus(IdTypeExpense, IdStatus);
+            var result = _expenseController!.GetExpensesByTypeExpenseStatus(expense);
 
             ///Assert
             Assert.IsNotNull(result);

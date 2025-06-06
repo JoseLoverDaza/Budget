@@ -170,7 +170,7 @@
                 PreviousValues = log.PreviousValues?.Trim() ?? string.Empty,
                 NewValues = log.NewValues?.Trim() ?? string.Empty,
                 EntityAction = log.EntityAction?.Trim() ?? string.Empty,
-                CreationDate = log.CreationDate,
+                CreationDate = logSearch.CreationDate,
                 IdStatus = logSearch.IdStatus                
             };
 
