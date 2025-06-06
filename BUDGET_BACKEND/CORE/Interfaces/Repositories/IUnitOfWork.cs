@@ -34,7 +34,7 @@
 
         public ITokenApiRepository TokenApiRepository();
 
-        public ILogApiRepository LogRepository();
+        public ILogApiRepository LogApiRepository();
 
         public IFinancialInstitutionRepository FinancialInstitutionRepository();
 

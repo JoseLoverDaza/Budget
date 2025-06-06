@@ -47,10 +47,10 @@
                     on t.IdUser equals u.IdUser
                     join s in _context.Status.AsNoTracking()
                     on t.IdStatus equals s.IdStatus
-                    where t.IdToken == tokenApi.IdToken
+                    where t.IdTokenApi == tokenApi.IdTokenApi
                     select new TokenApiExtendDto
                     {
-                        IdToken = t.IdToken,
+                        IdTokenApi = t.IdTokenApi,
                         Token = t.Token,
                         CreationDate = t.CreationDate,
                         ExpirationDate = t.ExpirationDate,
@@ -76,7 +76,7 @@
                    where t.Token == tokenApi.Token
                    select new TokenApiExtendDto
                    {
-                       IdToken = t.IdToken,
+                       IdTokenApi = t.IdTokenApi,
                        Token = t.Token,
                        CreationDate = t.CreationDate,
                        ExpirationDate = t.ExpirationDate,
@@ -102,7 +102,7 @@
                    where t.CreationDate == tokenApi.CreationDate
                    select new TokenApiExtendDto
                    {
-                       IdToken = t.IdToken,
+                       IdTokenApi = t.IdTokenApi,
                        Token = t.Token,
                        CreationDate = t.CreationDate,
                        ExpirationDate = t.ExpirationDate,
@@ -128,7 +128,7 @@
                    where t.IdUser == tokenApi.IdUser
                    select new TokenApiExtendDto
                    {
-                       IdToken = t.IdToken,
+                       IdTokenApi = t.IdTokenApi,
                        Token = t.Token,
                        CreationDate = t.CreationDate,
                        ExpirationDate = t.ExpirationDate,
@@ -154,7 +154,7 @@
                    where t.IdStatus == tokenApi.IdStatus
                    select new TokenApiExtendDto
                    {
-                       IdToken = t.IdToken,
+                       IdTokenApi = t.IdTokenApi,
                        Token = t.Token,
                        CreationDate = t.CreationDate,
                        ExpirationDate = t.ExpirationDate,
@@ -180,7 +180,7 @@
                   where t.CreationDate == tokenApi.CreationDate && t.IdStatus == tokenApi.IdStatus
                   select new TokenApiExtendDto
                   {
-                      IdToken = t.IdToken,
+                      IdTokenApi = t.IdTokenApi,
                       Token = t.Token,
                       CreationDate = t.CreationDate,
                       ExpirationDate = t.ExpirationDate,
@@ -206,7 +206,7 @@
                  where t.ExpirationDate == tokenApi.ExpirationDate && t.IdStatus == tokenApi.IdStatus
                  select new TokenApiExtendDto
                  {
-                     IdToken = t.IdToken,
+                     IdTokenApi = t.IdTokenApi,
                      Token = t.Token,
                      CreationDate = t.CreationDate,
                      ExpirationDate = t.ExpirationDate,
@@ -232,7 +232,7 @@
                 where t.IdUser == tokenApi.IdUser && t.IdStatus == tokenApi.IdStatus
                 select new TokenApiExtendDto
                 {
-                    IdToken = t.IdToken,
+                    IdTokenApi = t.IdTokenApi,
                     Token = t.Token,
                     CreationDate = t.CreationDate,
                     ExpirationDate = t.ExpirationDate,
@@ -258,7 +258,7 @@
                 where t.CreationDate == tokenApi.CreationDate && t.IdUser == tokenApi.IdUser && t.IdStatus == tokenApi.IdStatus                
                 select new TokenApiExtendDto
                 {
-                    IdToken = t.IdToken,
+                    IdTokenApi = t.IdTokenApi,
                     Token = t.Token,
                     CreationDate = t.CreationDate,
                     ExpirationDate = t.ExpirationDate,
@@ -284,7 +284,7 @@
                 where t.ExpirationDate == tokenApi.ExpirationDate && t.IdUser == tokenApi.IdUser && t.IdStatus == tokenApi.IdStatus
                 select new TokenApiExtendDto
                 {
-                    IdToken = t.IdToken,
+                    IdTokenApi = t.IdTokenApi,
                     Token = t.Token,
                     CreationDate = t.CreationDate,
                     ExpirationDate = t.ExpirationDate,

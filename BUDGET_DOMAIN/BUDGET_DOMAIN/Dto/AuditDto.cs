@@ -12,7 +12,7 @@
 
         #region Atributos y Propiedades
 
-        public long IdAudit { get; set; }
+        public int IdAudit { get; set; }
         public string? Host { get; set; }
         public string? Endpoint { get; set; }
         public string? Agent { get; set; }

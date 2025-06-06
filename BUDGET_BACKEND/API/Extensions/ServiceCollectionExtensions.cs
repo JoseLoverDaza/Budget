@@ -48,7 +48,7 @@
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IAuditService, AuditService>();
             services.AddTransient<ITokenApiService, TokenApiService>();
-            services.AddTransient<ILogService, LogService>();
+            services.AddTransient<ILogApiService, LogApiService>();
             services.AddTransient<ITypeAccountService, TypeAccountService>();
             services.AddTransient<ITypeExpenseService, TypeExpenseService>();
             services.AddTransient<IFinancialInstitutionService, FinancialInstitutionService>();

@@ -19,25 +19,25 @@
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
-    /// Nombre: LogTest   
+    /// Nombre: LogApiTest   
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
     [TestClass]
-    public class LogTest
+    public class LogApiTest
     {
 
         #region  Atributos y Propiedades
 
-        private readonly ILogService _logService;
+        private readonly ILogApiService _logApiService;
         private readonly EFContext? _context;
-        private readonly LogController? _logController;
+        private readonly LogApiController? _logApiController;
 
         #endregion
 
         #region Constructor
 
-        public LogTest()
+        public LogApiTest()
         {
             var options = new DbContextOptionsBuilder<EFContext>()
            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
@@ -45,8 +45,8 @@
 
             _context = new EFContext(options);
             UnitOfWork unitOfWork = new(_context);
-            _logService = new LogService(unitOfWork);
-            _logController = new LogController(_logService);
+            _logApiService = new LogApiService(unitOfWork);
+            _logApiController = new LogApiController(_logApiService);
 
             #region Data
 
@@ -81,9 +81,9 @@
             _context.SaveChanges();
 
             /// Log Id 1
-            _context.Logs.Add(new Log()
+            _context.LogApis.Add(new LogApi()
             {
-                IdLog = 1,
+                IdLogApi = 1,
                 Entity = "Test",
                 EntityAction = "Test",
                 PreviousValues = "Test",
@@ -102,16 +102,16 @@
         #region Métodos y Funciones
 
         [TestMethod]
-        public void GetLogByIdOK()
+        public void GetLogApiByIdOK()
         {
             ///Arrange   
-            LogDto log = new()
+            LogApiDto logApi = new()
             {
-                IdLog = 1
+                IdLogApi = 1
             };
 
             ///Act
-            var result = _logController!.GetLogById(log);
+            var result = _logApiController!.GetLogApiById(logApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -120,16 +120,16 @@
         }
 
         [TestMethod]
-        public void GetLogByIdFail()
+        public void GetLogApiByIdFail()
         {
             ///Arrange   
-            LogDto log = new()
+            LogApiDto logApi = new()
             {
-                IdLog = -1
+                IdLogApi = -1
             };
 
             ///Act
-            var result = _logController!.GetLogById(log);
+            var result = _logApiController!.GetLogApiById(logApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -138,16 +138,16 @@
         }
 
         [TestMethod]
-        public void GetLogsByCreationDateOK()
+        public void GetLogApisByCreationDateOK()
         {
             ///Arrange   
-            LogDto log = new()
+            LogApiDto logApi = new()
             {
                 CreationDate = new DateTime(2026, 1, 1)
             };
 
             ///Act
-            var result = _logController!.GetLogsByCreationDate(log);
+            var result = _logApiController!.GetLogApisByCreationDate(logApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -156,16 +156,16 @@
         }
 
         [TestMethod]
-        public void GetLogsByCreationDateFail()
+        public void GetLogApisByCreationDateFail()
         {
             ///Arrange   
-            LogDto log = new()
+            LogApiDto logApi = new()
             {
                 CreationDate = new DateTime(2025, 1, 1)
             };
 
             ///Act
-            var result = _logController!.GetLogsByCreationDate(log);
+            var result = _logApiController!.GetLogApisByCreationDate(logApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -174,16 +174,16 @@
         }
 
         [TestMethod]
-        public void GetLogsByStatusOK()
+        public void GetLogApisByStatusOK()
         {
             ///Arrange   
-            LogDto log = new()
+            LogApiDto logApi = new()
             {
                 IdStatus = 1
             };
 
             ///Act
-            var result = _logController!.GetLogsByStatus(log);
+            var result = _logApiController!.GetLogApisByStatus(logApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -192,16 +192,16 @@
         }
 
         [TestMethod]
-        public void GetLogsByStatusFail()
+        public void GetLogApisByStatusFail()
         {
             ///Arrange   
-            LogDto log = new()
+            LogApiDto logApi = new()
             {
                 IdStatus = -1
             };
 
             ///Act
-            var result = _logController!.GetLogsByStatus(log);
+            var result = _logApiController!.GetLogApisByStatus(logApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -210,17 +210,17 @@
         }
 
         [TestMethod]
-        public void GetLogsByEntityCreationDateOK()
+        public void GetLogApisByEntityCreationDateOK()
         {
             ///Arrange   
-            LogDto log = new()
+            LogApiDto logApi = new()
             {                
                 EntityAction = "Test",
                 CreationDate = new DateTime(2026, 1, 1)
             };
 
             ///Act
-            var result = _logController!.GetLogsByEntityCreationDate(log);
+            var result = _logApiController!.GetLogApisByEntityCreationDate(logApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -229,17 +229,17 @@
         }
 
         [TestMethod]
-        public void GetLogsByEntityCreationDateFail()
+        public void GetLogApisByEntityCreationDateFail()
         {
             ///Arrange   
-            LogDto log = new()
+            LogApiDto logApi = new()
             {
                 EntityAction = "T",
                 CreationDate = new DateTime(2025, 1, 1)
             };
 
             ///Act
-            var result = _logController!.GetLogsByEntityCreationDate(log);
+            var result = _logApiController!.GetLogApisByEntityCreationDate(logApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -248,17 +248,17 @@
         }
 
         [TestMethod]
-        public void GetLogsByCreationDateStatusOK()
+        public void GetLogApisByCreationDateStatusOK()
         {
             ///Arrange   
-            LogDto log = new()
+            LogApiDto logApi = new()
             {                
                 CreationDate = new DateTime(2026, 1, 1),
                 IdStatus = 1
             };
 
             ///Act
-            var result = _logController!.GetLogsByCreationDateStatus(log);
+            var result = _logApiController!.GetLogApisByCreationDateStatus(logApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -267,17 +267,17 @@
         }
 
         [TestMethod]
-        public void GetLogsByCreationDateStatusFail()
+        public void GetLogApisByCreationDateStatusFail()
         {
             ///Arrange   
-            LogDto log = new()
+            LogApiDto logApi = new()
             {
                 CreationDate = new DateTime(2025, 1, 1),
                 IdStatus = -1
             };
 
             ///Act
-            var result = _logController!.GetLogsByCreationDateStatus(log);
+            var result = _logApiController!.GetLogApisByCreationDateStatus(logApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -286,10 +286,10 @@
         }
 
         [TestMethod]
-        public void GetLogsByEntityCreationDateStatusOK()
+        public void GetLogApisByEntityCreationDateStatusOK()
         {
             ///Arrange   
-            LogDto log = new()
+            LogApiDto logApi = new()
             {
                 EntityAction = "Test",
                 CreationDate = new DateTime(2026, 1, 1),
@@ -297,7 +297,7 @@
             };
 
             ///Act
-            var result = _logController!.GetLogsByEntityCreationDateStatus(log);
+            var result = _logApiController!.GetLogApisByEntityCreationDateStatus(logApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -306,10 +306,10 @@
         }
 
         [TestMethod]
-        public void GetLogsByEntityCreationDateStatusFail()
+        public void GetLogApisByEntityCreationDateStatusFail()
         {
             ///Arrange   
-            LogDto log = new()
+            LogApiDto logApi = new()
             {
                 EntityAction = "T",
                 CreationDate = new DateTime(2025, 1, 1),
@@ -317,7 +317,7 @@
             };
 
             ///Act
-            var result = _logController!.GetLogsByEntityCreationDateStatus(log);
+            var result = _logApiController!.GetLogApisByEntityCreationDateStatus(logApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -326,10 +326,10 @@
         }
 
         [TestMethod]
-        public void SaveLogOK()
+        public void SaveLogApiOK()
         {
             ///Arrange   
-            LogDto log = new()
+            LogApiDto logApi = new()
             {               
                 Entity = "Test",
                 EntityAction = "Test",
@@ -340,7 +340,7 @@
             };
 
             ///Act
-            var result = _logController!.SaveLog(log);
+            var result = _logApiController!.SaveLogApi(logApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -349,10 +349,10 @@
         }
 
         [TestMethod]
-        public void SaveLogFail()
+        public void SaveLogApiFail()
         {
             ///Arrange   
-            LogDto log = new()
+            LogApiDto logApi = new()
             {
                 Entity = "Test",
                 EntityAction = "Test",
@@ -363,7 +363,7 @@
             };
 
             ///Act
-            var result = _logController!.SaveLog(log);
+            var result = _logApiController!.SaveLogApi(logApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -372,12 +372,12 @@
         }
 
         [TestMethod]
-        public void UpdateLogFail()
+        public void UpdateLogApiFail()
         {
             ///Arrange   
-            LogDto log = new()
+            LogApiDto logApi = new()
             {
-                IdLog = -1,
+                IdLogApi = -1,
                 Entity = "Test",
                 EntityAction = "Test",
                 PreviousValues = "Test",
@@ -387,7 +387,7 @@
             };
 
             ///Act
-            var result = _logController!.UpdateLog(log);
+            var result = _logApiController!.UpdateLogApi(logApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -396,12 +396,12 @@
         }
 
         [TestMethod]
-        public void DeleteLogOK()
+        public void DeleteLogApiOK()
         {
             ///Arrange   
-            LogDto log = new()
+            LogApiDto logApi = new()
             {
-                IdLog = 1,
+                IdLogApi = 1,
                 Entity = "Test",
                 EntityAction = "Test",
                 PreviousValues = "Test",
@@ -411,7 +411,7 @@
             };
 
             ///Act
-            var result = _logController!.DeleteLog(log);
+            var result = _logApiController!.DeleteLogApi(logApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -420,12 +420,12 @@
         }
 
         [TestMethod]
-        public void DeleteLogFail()
+        public void DeleteLogApiFail()
         {
             ///Arrange   
-            LogDto log = new()
+            LogApiDto logApi = new()
             {
-                IdLog = -1,
+                IdLogApi = -1,
                 Entity = "Test",
                 EntityAction = "Test",
                 PreviousValues = "Test",
@@ -435,7 +435,7 @@
             };
 
             ///Act
-            var result = _logController!.DeleteLog(log);
+            var result = _logApiController!.DeleteLogApi(logApi);
 
             ///Assert
             Assert.IsNotNull(result);

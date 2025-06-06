@@ -39,16 +39,16 @@
 
         #region Métodos y Funciones
 
-        public LogApiExtendDto? GetLogById(LogDto log)
+        public LogApiExtendDto? GetLogApiById(LogApiDto logApi)
         {
             return (
-                    from l in _context.Logs.AsNoTracking()                   
+                    from l in _context.LogApis.AsNoTracking()                   
                     join s in _context.Status.AsNoTracking()
                     on l.IdStatus equals s.IdStatus
-                    where l.IdLog == log.IdLog
+                    where l.IdLogApi == logApi.IdLogApi
                     select new LogApiExtendDto
                     {
-                        IdLog = l.IdLog,     
+                        IdLogApi = l.IdLogApi,     
                         Entity = l.Entity,
                         PreviousValues = l.PreviousValues,
                         NewValues = l.NewValues,
@@ -58,20 +58,20 @@
                         NameStatus = s.Name,
                         DescriptionStatus = s.Description
                     }
-                )
-                .FirstOrDefault();
+                  )
+                  .FirstOrDefault();
         }
 
-        public List<LogApiExtendDto> GetLogsByCreationDate(LogDto log)
+        public List<LogApiExtendDto> GetLogApisByCreationDate(LogApiDto logApi)
         {
             return (
-                   from l in _context.Logs.AsNoTracking()
-                   join s in _context.Status.AsNoTracking()
-                   on l.IdStatus equals s.IdStatus
-                   where l.CreationDate == log.CreationDate
-                   select new LogApiExtendDto
-                   {
-                       IdLog = l.IdLog,
+                    from l in _context.LogApis.AsNoTracking()
+                    join s in _context.Status.AsNoTracking()
+                    on l.IdStatus equals s.IdStatus
+                    where l.CreationDate == logApi.CreationDate
+                    select new LogApiExtendDto
+                    {
+                       IdLogApi = l.IdLogApi,
                        Entity = l.Entity,
                        PreviousValues = l.PreviousValues,
                        NewValues = l.NewValues,
@@ -80,21 +80,21 @@
                        IdStatus = l.IdStatus,
                        NameStatus = s.Name,
                        DescriptionStatus = s.Description
-                   }
-               )
-               .ToList();
+                    }
+                  )
+                  .ToList();
         }
 
-        public List<LogApiExtendDto> GetLogsByStatus(LogDto log)
+        public List<LogApiExtendDto> GetLogApisByStatus(LogApiDto logApi)
         {
             return (
-                   from l in _context.Logs.AsNoTracking()
-                   join s in _context.Status.AsNoTracking()
-                   on l.IdStatus equals s.IdStatus
-                   where l.IdStatus == log.IdStatus
-                   select new LogApiExtendDto
-                   {
-                       IdLog = l.IdLog,
+                    from l in _context.LogApis.AsNoTracking()
+                    join s in _context.Status.AsNoTracking()
+                    on l.IdStatus equals s.IdStatus
+                    where l.IdStatus == logApi.IdStatus
+                    select new LogApiExtendDto
+                    {
+                       IdLogApi = l.IdLogApi,
                        Entity = l.Entity,
                        PreviousValues = l.PreviousValues,
                        NewValues = l.NewValues,
@@ -103,21 +103,44 @@
                        IdStatus = l.IdStatus,
                        NameStatus = s.Name,
                        DescriptionStatus = s.Description
-                   }
-               )
-               .ToList();
+                    }
+                   )
+                   .ToList();
         }
 
-        public List<LogApiExtendDto> GetLogsByEntityCreationDate(LogDto log)
+        public List<LogApiExtendDto> GetLogApisByEntityCreationDate(LogApiDto logApi)
         {
             return (
-                   from l in _context.Logs.AsNoTracking()
-                   join s in _context.Status.AsNoTracking()
-                   on l.IdStatus equals s.IdStatus
-                   where l.EntityAction == log.EntityAction && l.CreationDate == log.CreationDate
-                   select new LogApiExtendDto
-                   {
-                       IdLog = l.IdLog,
+                    from l in _context.LogApis.AsNoTracking()
+                    join s in _context.Status.AsNoTracking()
+                    on l.IdStatus equals s.IdStatus
+                    where l.EntityAction == logApi.EntityAction && l.CreationDate == logApi.CreationDate
+                    select new LogApiExtendDto
+                    {
+                        IdLogApi = l.IdLogApi,
+                        Entity = l.Entity,
+                        PreviousValues = l.PreviousValues,
+                        NewValues = l.NewValues,
+                        EntityAction = l.EntityAction,
+                        CreationDate = l.CreationDate,
+                        IdStatus = l.IdStatus,
+                        NameStatus = s.Name,
+                        DescriptionStatus = s.Description
+                    }
+                   )
+                   .ToList();
+        }
+
+        public List<LogApiExtendDto> GetLogApisByCreationDateStatus(LogApiDto logApi)
+        {
+            return (
+                    from l in _context.LogApis.AsNoTracking()
+                    join s in _context.Status.AsNoTracking()
+                    on l.IdStatus equals s.IdStatus
+                    where l.CreationDate == logApi.CreationDate && l.IdStatus == logApi.IdStatus
+                    select new LogApiExtendDto
+                    {
+                       IdLogApi = l.IdLogApi,
                        Entity = l.Entity,
                        PreviousValues = l.PreviousValues,
                        NewValues = l.NewValues,
@@ -126,21 +149,21 @@
                        IdStatus = l.IdStatus,
                        NameStatus = s.Name,
                        DescriptionStatus = s.Description
-                   }
-               )
-               .ToList();
+                    }
+                   )
+                   .ToList();
         }
 
-        public List<LogApiExtendDto> GetLogsByCreationDateStatus(LogDto log)
+        public List<LogApiExtendDto> GetLogApisByEntityCreationDateStatus(LogApiDto logApi)
         {
             return (
-                   from l in _context.Logs.AsNoTracking()
-                   join s in _context.Status.AsNoTracking()
-                   on l.IdStatus equals s.IdStatus
-                   where l.CreationDate == log.CreationDate && l.IdStatus == log.IdStatus
-                   select new LogApiExtendDto
-                   {
-                       IdLog = l.IdLog,
+                    from l in _context.LogApis.AsNoTracking()
+                    join s in _context.Status.AsNoTracking()
+                    on l.IdStatus equals s.IdStatus
+                    where l.EntityAction == logApi.EntityAction && l.CreationDate == logApi.CreationDate && l.IdStatus == logApi.IdStatus
+                    select new LogApiExtendDto
+                    {
+                       IdLogApi = l.IdLogApi,
                        Entity = l.Entity,
                        PreviousValues = l.PreviousValues,
                        NewValues = l.NewValues,
@@ -149,32 +172,9 @@
                        IdStatus = l.IdStatus,
                        NameStatus = s.Name,
                        DescriptionStatus = s.Description
-                   }
-               )
-               .ToList();
-        }
-
-        public List<LogApiExtendDto> GetLogsByEntityCreationDateStatus(LogDto log)
-        {
-            return (
-                  from l in _context.Logs.AsNoTracking()
-                  join s in _context.Status.AsNoTracking()
-                  on l.IdStatus equals s.IdStatus
-                  where l.EntityAction == log.EntityAction && l.CreationDate == log.CreationDate && l.IdStatus == log.IdStatus
-                  select new LogApiExtendDto
-                  {
-                      IdLog = l.IdLog,
-                      Entity = l.Entity,
-                      PreviousValues = l.PreviousValues,
-                      NewValues = l.NewValues,
-                      EntityAction = l.EntityAction,
-                      CreationDate = l.CreationDate,
-                      IdStatus = l.IdStatus,
-                      NameStatus = s.Name,
-                      DescriptionStatus = s.Description
-                  }
-              )
-              .ToList();
+                    }
+                  )
+                  .ToList();
         }
 
         #endregion

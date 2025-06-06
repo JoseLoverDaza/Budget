@@ -1,4 +1,4 @@
-﻿namespace CORE.Interfaces.Repositories
+﻿namespace CORE.Interfaces.Services
 {
 
     #region Librerias
@@ -10,11 +10,11 @@
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
-    /// Nombre: ILogApiRepository   
+    /// Nombre: ILogApiService   
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public interface ILogApiRepository
+    public interface ILogApiService
     {
 
         #region Métodos y Funciones
@@ -30,6 +30,12 @@
         public List<LogApiExtendDto> GetLogApisByCreationDateStatus(LogApiDto logApi);
 
         public List<LogApiExtendDto> GetLogApisByEntityCreationDateStatus(LogApiDto logApi);
+
+        public LogApiDto SaveLogApi(LogApiDto logApi);
+
+        public LogApiDto UpdateLogApi(LogApiDto logApi);
+
+        public LogApiDto DeleteLogApi(LogApiDto logApi);
 
         #endregion
 

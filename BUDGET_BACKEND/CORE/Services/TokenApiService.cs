@@ -230,7 +230,7 @@
         {
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
             
-            if (tokenApi == null || tokenApi.IdToken <= 0 || string.IsNullOrWhiteSpace(tokenApi.Token.Trim()))
+            if (tokenApi == null || tokenApi.IdTokenApi <= 0 || string.IsNullOrWhiteSpace(tokenApi.Token.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -238,14 +238,14 @@
             TokenApiExtendDto? tokenApiDuplicado = tokenApiRepository.GetTokenApiByToken(tokenApi);
             TokenApiExtendDto? tokenApiSearch = tokenApiRepository.GetTokenApiById(tokenApi) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            if (tokenApiDuplicado != null && tokenApiDuplicado.IdToken != tokenApiSearch.IdToken)
+            if (tokenApiDuplicado != null && tokenApiDuplicado.IdTokenApi != tokenApiSearch.IdTokenApi)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
             TokenApi updateTokenApi = new()
             {
-                IdToken = tokenApiSearch.IdToken,
+                IdTokenApi = tokenApiSearch.IdTokenApi,
                 Token = tokenApi.Token,
                 CreationDate = tokenApi.CreationDate,
                 ExpirationDate = tokenApi.ExpirationDate,
@@ -277,7 +277,7 @@
 
             TokenApi deleteTokenApi = new()
             {
-                IdToken = tokenApiSearch.IdToken,
+                IdTokenApi = tokenApiSearch.IdTokenApi,
                 Token = tokenApiSearch.Token,
                 CreationDate = tokenApiSearch.CreationDate,
                 ExpirationDate = tokenApiSearch.ExpirationDate,

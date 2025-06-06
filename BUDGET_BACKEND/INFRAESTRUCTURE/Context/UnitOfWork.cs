@@ -89,7 +89,7 @@
             return new TokenApiRepository(_dbContext);
         }
 
-        public ILogApiRepository LogRepository()
+        public ILogApiRepository LogApiRepository()
         {
             return new LogApiApiRepository(_dbContext);
         }

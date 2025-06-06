@@ -17,7 +17,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 CREATE TABLE [Security].[Audit](
-	[IdAudit] [bigint] IDENTITY(1,1) NOT NULL,
+	[IdAudit] [int] IDENTITY(1,1) NOT NULL,
 	[Host] [nvarchar](255) NULL,
 	[Endpoint] [nvarchar](255) NULL,
 	[Agent] [nvarchar](255) NULL,

@@ -28,10 +28,6 @@
 
             entity.HasKey(e => e.IdLogApi);
 
-            entity.Property(e => e.IdLogApi)
-                  .IsRequired()
-                  .ValueGeneratedOnAdd();
-
             entity.Property(e => e.Entity)
                   .IsRequired()
                   .HasMaxLength(100);
