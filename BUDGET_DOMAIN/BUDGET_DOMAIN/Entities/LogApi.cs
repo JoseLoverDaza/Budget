@@ -3,16 +3,16 @@
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
-    /// Nombre: Log   
+    /// Nombre: LogApi   
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class Log
+    public class LogApi
     {
 
         #region Atributos y Propiedades
 
-        public long IdLog { get; set; }
+        public int IdLogApi { get; set; }
         public string Entity { get; set; } = null!;
         public string PreviousValues { get; set; } = null!;
         public string NewValues { get; set; } = null!;

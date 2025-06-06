@@ -3,16 +3,16 @@
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
-    /// Nombre: LogDto   
+    /// Nombre: LogApiDto   
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class LogDto
+    public class LogApiDto
     {
 
         #region Atributos y Propiedades
 
-        public long IdLog { get; set; }
+        public int IdLogApi { get; set; }
         public string Entity { get; set; } = null!;
         public string PreviousValues { get; set; } = null!;
         public string NewValues { get; set; } = null!;

@@ -19,17 +19,17 @@
 
         #region Métodos y Funciones
 
-        public LogExtendDto? GetLogById(LogDto log);
+        public LogApiExtendDto? GetLogById(LogDto log);
 
-        public List<LogExtendDto> GetLogsByCreationDate(LogDto log);
+        public List<LogApiExtendDto> GetLogsByCreationDate(LogDto log);
 
-        public List<LogExtendDto> GetLogsByStatus(LogDto log);
+        public List<LogApiExtendDto> GetLogsByStatus(LogDto log);
 
-        public List<LogExtendDto> GetLogsByEntityCreationDate(LogDto log);
+        public List<LogApiExtendDto> GetLogsByEntityCreationDate(LogDto log);
 
-        public List<LogExtendDto> GetLogsByCreationDateStatus(LogDto log);
+        public List<LogApiExtendDto> GetLogsByCreationDateStatus(LogDto log);
 
-        public List<LogExtendDto> GetLogsByEntityCreationDateStatus(LogDto log);
+        public List<LogApiExtendDto> GetLogsByEntityCreationDateStatus(LogDto log);
 
         public LogDto SaveLog(LogDto log);
 

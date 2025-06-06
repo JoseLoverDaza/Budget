@@ -46,7 +46,7 @@
 
         public virtual DbSet<TokenApi> TokenApis { get; set; }
         public virtual DbSet<Audit> Audits { get; set; }
-        public virtual DbSet<Log> Logs { get; set; }
+        public virtual DbSet<LogApi> LogApis { get; set; }
         
         public virtual DbSet<TypeAccount> TypeAccounts { get; set; }
         public virtual DbSet<TypeExpense> TypeExpenses { get; set; }
@@ -69,7 +69,7 @@
 
             modelBuilder.ApplyConfiguration(new Configurations.TokenApiConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.AuditConfiguration());            
-            modelBuilder.ApplyConfiguration(new Configurations.LogConfiguration());
+            modelBuilder.ApplyConfiguration(new Configurations.LogApiConfiguration());
 
             modelBuilder.ApplyConfiguration(new Configurations.TypeAccountConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.TypeExpenseConfiguration());
@@ -77,7 +77,7 @@
             
             modelBuilder.ApplyConfiguration(new Configurations.TokenApiConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.AuditConfiguration());
-            modelBuilder.ApplyConfiguration(new Configurations.LogConfiguration());
+            modelBuilder.ApplyConfiguration(new Configurations.LogApiConfiguration());
 
             modelBuilder.ApplyConfiguration(new Configurations.AccountConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.DepositConfiguration());

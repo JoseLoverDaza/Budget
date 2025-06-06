@@ -8,8 +8,7 @@
     using Domain.Context;
     using Domain.Dto;
     using Domain.Entities;
-    using Microsoft.EntityFrameworkCore;
-    using Serilog;
+    using Microsoft.EntityFrameworkCore;   
     using System.Collections.Generic;
 
     #endregion

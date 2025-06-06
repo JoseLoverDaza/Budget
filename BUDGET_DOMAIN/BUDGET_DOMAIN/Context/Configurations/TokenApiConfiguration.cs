@@ -26,7 +26,7 @@
 
             entity.ToTable("TokenApi", "Security");
 
-            entity.HasKey(e => e.IdToken);
+            entity.HasKey(e => e.IdTokenApi);
 
             entity.Property(e => e.Token)
                   .IsRequired()

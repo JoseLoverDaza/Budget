@@ -37,10 +37,10 @@
 
         #region Métodos y Funciones
 
-        public LogExtendDto? GetLogById(LogDto log)
+        public LogApiExtendDto? GetLogById(LogDto log)
         {
-            ILogRepository logRepository = UnitOfWork.LogRepository();
-            LogExtendDto? logSearch = logRepository.GetLogById(log);
+            ILogApiRepository logRepository = UnitOfWork.LogRepository();
+            LogApiExtendDto? logSearch = logRepository.GetLogById(log);
 
             if (logSearch != null)
             {
@@ -52,10 +52,10 @@
             }
         }
 
-        public List<LogExtendDto> GetLogsByCreationDate(LogDto log)
+        public List<LogApiExtendDto> GetLogsByCreationDate(LogDto log)
         {
-            ILogRepository logRepository = UnitOfWork.LogRepository();
-            List<LogExtendDto> logsSearch = logRepository.GetLogsByCreationDate(log);
+            ILogApiRepository logRepository = UnitOfWork.LogRepository();
+            List<LogApiExtendDto> logsSearch = logRepository.GetLogsByCreationDate(log);
 
             if (logsSearch.Count != 0)
             {
@@ -67,10 +67,10 @@
             }
         }
 
-        public List<LogExtendDto> GetLogsByStatus(LogDto log)
+        public List<LogApiExtendDto> GetLogsByStatus(LogDto log)
         {
-            ILogRepository logRepository = UnitOfWork.LogRepository();
-            List<LogExtendDto> logsSearch = logRepository.GetLogsByStatus(log);
+            ILogApiRepository logRepository = UnitOfWork.LogRepository();
+            List<LogApiExtendDto> logsSearch = logRepository.GetLogsByStatus(log);
 
             if (logsSearch.Count != 0)
             {
@@ -82,10 +82,10 @@
             }
         }
 
-        public List<LogExtendDto> GetLogsByEntityCreationDate(LogDto log)
+        public List<LogApiExtendDto> GetLogsByEntityCreationDate(LogDto log)
         {
-            ILogRepository logRepository = UnitOfWork.LogRepository();
-            List<LogExtendDto> logsSearch = logRepository.GetLogsByEntityCreationDate(log);
+            ILogApiRepository logRepository = UnitOfWork.LogRepository();
+            List<LogApiExtendDto> logsSearch = logRepository.GetLogsByEntityCreationDate(log);
 
             if (logsSearch.Count != 0)
             {
@@ -97,10 +97,10 @@
             }
         }
 
-        public List<LogExtendDto> GetLogsByCreationDateStatus(LogDto log)
+        public List<LogApiExtendDto> GetLogsByCreationDateStatus(LogDto log)
         {
-            ILogRepository logRepository = UnitOfWork.LogRepository();
-            List<LogExtendDto> logsSearch = logRepository.GetLogsByCreationDateStatus(log);
+            ILogApiRepository logRepository = UnitOfWork.LogRepository();
+            List<LogApiExtendDto> logsSearch = logRepository.GetLogsByCreationDateStatus(log);
 
             if (logsSearch.Count != 0)
             {
@@ -112,10 +112,10 @@
             }
         }
 
-        public List<LogExtendDto> GetLogsByEntityCreationDateStatus(LogDto log)
+        public List<LogApiExtendDto> GetLogsByEntityCreationDateStatus(LogDto log)
         {
-            ILogRepository logRepository = UnitOfWork.LogRepository();
-            List<LogExtendDto> logsSearch = logRepository.GetLogsByEntityCreationDateStatus(log);
+            ILogApiRepository logRepository = UnitOfWork.LogRepository();
+            List<LogApiExtendDto> logsSearch = logRepository.GetLogsByEntityCreationDateStatus(log);
 
             if (logsSearch.Count != 0)
             {
@@ -154,14 +154,14 @@
 
         public LogDto UpdateLog(LogDto log)
         {
-            ILogRepository logRepository = UnitOfWork.LogRepository();
+            ILogApiRepository logRepository = UnitOfWork.LogRepository();
 
             if (log == null || log.IdLog <= 0)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
                         
-            LogExtendDto? logSearch = logRepository.GetLogById(log) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            LogApiExtendDto? logSearch = logRepository.GetLogById(log) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
                        
             Log updateLog = new()
             {
@@ -185,10 +185,10 @@
 
         public LogDto DeleteLog(LogDto log)
         {
-            ILogRepository logRepository = UnitOfWork.LogRepository();
+            ILogApiRepository logRepository = UnitOfWork.LogRepository();
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();
 
-            LogExtendDto? logSearch = logRepository.GetLogById(log) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            LogApiExtendDto? logSearch = logRepository.GetLogById(log) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = log.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (logSearch.IdStatus == statusSearch.IdStatus)

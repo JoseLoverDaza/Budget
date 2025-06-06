@@ -89,9 +89,9 @@
             return new TokenApiRepository(_dbContext);
         }
 
-        public ILogRepository LogRepository()
+        public ILogApiRepository LogRepository()
         {
-            return new LogRepository(_dbContext);
+            return new LogApiApiRepository(_dbContext);
         }
 
         public ITypeAccountRepository TypeAccountRepository()

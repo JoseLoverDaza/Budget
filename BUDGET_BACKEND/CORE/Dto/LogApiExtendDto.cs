@@ -9,11 +9,11 @@
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
-    /// Nombre: LogExtendDto   
+    /// Nombre: LogApiExtendDto   
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class LogExtendDto : LogDto
+    public class LogApiExtendDto : LogApiDto
     {
 
         #region Atributos y Propiedades

@@ -1,11 +1,14 @@
-﻿using CORE.Interfaces.Services;
-using CORE.Utils;
-using Domain.Dto;
-using Microsoft.AspNetCore.Http;
-using System.Runtime.InteropServices;
-
-namespace API.Extensions
+﻿namespace API.Extensions
 {
+
+    #region Librerias
+
+    using CORE.Interfaces.Services;
+    using CORE.Utils;
+    using Domain.Dto;
+    using System.Runtime.InteropServices;
+
+    #endregion
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
@@ -59,7 +62,7 @@ namespace API.Extensions
                         Endpoint = endpoint,
                         Method = metodo,
                         Agent = agente,
-                        CreationDate = fecha                        
+                        CreationDate = fecha
                     };
 
                     auditService.SaveAudit(auditDto);

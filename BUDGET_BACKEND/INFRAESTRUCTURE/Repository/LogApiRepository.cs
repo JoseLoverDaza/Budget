@@ -15,11 +15,11 @@
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
-    /// Nombre: LogRepository   
+    /// Nombre: LogApiRepository   
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class LogRepository : BaseRepository<Log>, ILogRepository
+    public class LogApiApiRepository : BaseRepository<LogApi>, ILogApiRepository
     {
 
         #region Atributos y Propiedades
@@ -30,7 +30,7 @@
 
         #region Constructor
 
-        public LogRepository(EFContext context) : base(context)
+        public LogApiApiRepository(EFContext context) : base(context)
         {
             _context = context;
         }
@@ -39,14 +39,14 @@
 
         #region Métodos y Funciones
 
-        public LogExtendDto? GetLogById(LogDto log)
+        public LogApiExtendDto? GetLogById(LogDto log)
         {
             return (
                     from l in _context.Logs.AsNoTracking()                   
                     join s in _context.Status.AsNoTracking()
                     on l.IdStatus equals s.IdStatus
                     where l.IdLog == log.IdLog
-                    select new LogExtendDto
+                    select new LogApiExtendDto
                     {
                         IdLog = l.IdLog,     
                         Entity = l.Entity,
@@ -62,14 +62,14 @@
                 .FirstOrDefault();
         }
 
-        public List<LogExtendDto> GetLogsByCreationDate(LogDto log)
+        public List<LogApiExtendDto> GetLogsByCreationDate(LogDto log)
         {
             return (
                    from l in _context.Logs.AsNoTracking()
                    join s in _context.Status.AsNoTracking()
                    on l.IdStatus equals s.IdStatus
                    where l.CreationDate == log.CreationDate
-                   select new LogExtendDto
+                   select new LogApiExtendDto
                    {
                        IdLog = l.IdLog,
                        Entity = l.Entity,
@@ -85,14 +85,14 @@
                .ToList();
         }
 
-        public List<LogExtendDto> GetLogsByStatus(LogDto log)
+        public List<LogApiExtendDto> GetLogsByStatus(LogDto log)
         {
             return (
                    from l in _context.Logs.AsNoTracking()
                    join s in _context.Status.AsNoTracking()
                    on l.IdStatus equals s.IdStatus
                    where l.IdStatus == log.IdStatus
-                   select new LogExtendDto
+                   select new LogApiExtendDto
                    {
                        IdLog = l.IdLog,
                        Entity = l.Entity,
@@ -108,14 +108,14 @@
                .ToList();
         }
 
-        public List<LogExtendDto> GetLogsByEntityCreationDate(LogDto log)
+        public List<LogApiExtendDto> GetLogsByEntityCreationDate(LogDto log)
         {
             return (
                    from l in _context.Logs.AsNoTracking()
                    join s in _context.Status.AsNoTracking()
                    on l.IdStatus equals s.IdStatus
                    where l.EntityAction == log.EntityAction && l.CreationDate == log.CreationDate
-                   select new LogExtendDto
+                   select new LogApiExtendDto
                    {
                        IdLog = l.IdLog,
                        Entity = l.Entity,
@@ -131,14 +131,14 @@
                .ToList();
         }
 
-        public List<LogExtendDto> GetLogsByCreationDateStatus(LogDto log)
+        public List<LogApiExtendDto> GetLogsByCreationDateStatus(LogDto log)
         {
             return (
                    from l in _context.Logs.AsNoTracking()
                    join s in _context.Status.AsNoTracking()
                    on l.IdStatus equals s.IdStatus
                    where l.CreationDate == log.CreationDate && l.IdStatus == log.IdStatus
-                   select new LogExtendDto
+                   select new LogApiExtendDto
                    {
                        IdLog = l.IdLog,
                        Entity = l.Entity,
@@ -154,14 +154,14 @@
                .ToList();
         }
 
-        public List<LogExtendDto> GetLogsByEntityCreationDateStatus(LogDto log)
+        public List<LogApiExtendDto> GetLogsByEntityCreationDateStatus(LogDto log)
         {
             return (
                   from l in _context.Logs.AsNoTracking()
                   join s in _context.Status.AsNoTracking()
                   on l.IdStatus equals s.IdStatus
                   where l.EntityAction == log.EntityAction && l.CreationDate == log.CreationDate && l.IdStatus == log.IdStatus
-                  select new LogExtendDto
+                  select new LogApiExtendDto
                   {
                       IdLog = l.IdLog,
                       Entity = l.Entity,

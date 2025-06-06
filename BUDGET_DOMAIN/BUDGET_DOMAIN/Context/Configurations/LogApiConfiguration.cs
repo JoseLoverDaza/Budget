@@ -15,20 +15,20 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public partial class LogConfiguration : IEntityTypeConfiguration<Log>
+    public partial class LogApiConfiguration : IEntityTypeConfiguration<LogApi>
     {
 
         #region Métodos y Funciones
 
-        public void Configure(EntityTypeBuilder<Log> entity)
+        public void Configure(EntityTypeBuilder<LogApi> entity)
         {
-            /// Tabla [Log].[Security]
+            /// Tabla [LogApi].[Security]
 
-            entity.ToTable("Log", "Security");
+            entity.ToTable("LogApi", "Security");
 
-            entity.HasKey(e => e.IdLog);
+            entity.HasKey(e => e.IdLogApi);
 
-            entity.Property(e => e.IdLog)
+            entity.Property(e => e.IdLogApi)
                   .IsRequired()
                   .ValueGeneratedOnAdd();
 

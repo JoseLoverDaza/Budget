@@ -12,7 +12,7 @@
 
         #region Atributos y Propiedades
 
-        public long IdToken { get; set; }
+        public int IdTokenApi { get; set; }
         public string Token { get; set; } = null!;
         public DateTime CreationDate { get; set; } = DateTime.Now;
         public DateTime ExpirationDate { get; set; } = DateTime.Now;

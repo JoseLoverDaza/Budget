@@ -27,6 +27,18 @@
 
         }
 
+        public static class Status
+        {
+            public const string INACTIVO = "Inactivo";
+            public const string ACTIVO = "Activo";
+        }
+
+        public static class Method
+        {
+            public const string GET = "GET";
+            public const string POST = "POST";
+        }
+
         #endregion
 
     }
