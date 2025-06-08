@@ -56,7 +56,7 @@
                         ExpirationDate = t.ExpirationDate,
                         IdUser = t.IdUser,
                         EmailUser = u.Email,
-                        LoginUser = u.Login,
+                        UsernameUser = u.Username,
                         IdStatus = t.IdStatus,
                         NameStatus = s.Name,
                         DescriptionStatus = s.Description
@@ -82,7 +82,7 @@
                        ExpirationDate = t.ExpirationDate,
                        IdUser = t.IdUser,
                        EmailUser = u.Email,
-                       LoginUser = u.Login,
+                       UsernameUser = u.Username,
                        IdStatus = t.IdStatus,
                        NameStatus = s.Name,
                        DescriptionStatus = s.Description
@@ -108,7 +108,7 @@
                        ExpirationDate = t.ExpirationDate,
                        IdUser = t.IdUser,
                        EmailUser = u.Email,
-                       LoginUser = u.Login,
+                       UsernameUser = u.Username,
                        IdStatus = t.IdStatus,
                        NameStatus = s.Name,
                        DescriptionStatus = s.Description
@@ -134,7 +134,7 @@
                        ExpirationDate = t.ExpirationDate,
                        IdUser = t.IdUser,
                        EmailUser = u.Email,
-                       LoginUser = u.Login,
+                       UsernameUser = u.Username,
                        IdStatus = t.IdStatus,
                        NameStatus = s.Name,
                        DescriptionStatus = s.Description
@@ -160,7 +160,7 @@
                        ExpirationDate = t.ExpirationDate,
                        IdUser = t.IdUser,
                        EmailUser = u.Email,
-                       LoginUser = u.Login,
+                       UsernameUser = u.Username,
                        IdStatus = t.IdStatus,
                        NameStatus = s.Name,
                        DescriptionStatus = s.Description
@@ -186,7 +186,7 @@
                       ExpirationDate = t.ExpirationDate,
                       IdUser = t.IdUser,
                       EmailUser = u.Email,
-                      LoginUser = u.Login,
+                      UsernameUser = u.Username,
                       IdStatus = t.IdStatus,
                       NameStatus = s.Name,
                       DescriptionStatus = s.Description
@@ -212,7 +212,7 @@
                      ExpirationDate = t.ExpirationDate,
                      IdUser = t.IdUser,
                      EmailUser = u.Email,
-                     LoginUser = u.Login,
+                     UsernameUser = u.Username,
                      IdStatus = t.IdStatus,
                      NameStatus = s.Name,
                      DescriptionStatus = s.Description
@@ -238,7 +238,7 @@
                     ExpirationDate = t.ExpirationDate,
                     IdUser = t.IdUser,
                     EmailUser = u.Email,
-                    LoginUser = u.Login,
+                    UsernameUser = u.Username,
                     IdStatus = t.IdStatus,
                     NameStatus = s.Name,
                     DescriptionStatus = s.Description
@@ -264,7 +264,7 @@
                     ExpirationDate = t.ExpirationDate,
                     IdUser = t.IdUser,
                     EmailUser = u.Email,
-                    LoginUser = u.Login,
+                    UsernameUser = u.Username,
                     IdStatus = t.IdStatus,
                     NameStatus = s.Name,
                     DescriptionStatus = s.Description
@@ -290,7 +290,7 @@
                     ExpirationDate = t.ExpirationDate,
                     IdUser = t.IdUser,
                     EmailUser = u.Email,
-                    LoginUser = u.Login,
+                    UsernameUser = u.Username,
                     IdStatus = t.IdStatus,
                     NameStatus = s.Name,
                     DescriptionStatus = s.Description

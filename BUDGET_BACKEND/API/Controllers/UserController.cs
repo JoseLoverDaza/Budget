@@ -75,13 +75,13 @@
         }
 
         [HttpPost]
-        [Route("GetUserByLogin")]
-        [SwaggerOperation(Summary = "Get User By Login")]
-        public ResponseDto GetUserByLogin(UserDto user)
+        [Route("GetUserByUsername")]
+        [SwaggerOperation(Summary = "Get User By Username")]
+        public ResponseDto GetUserByUsername(UserDto user)
         {
             try
             {
-                response.Data = _userService.GetUserByLogin(user);
+                response.Data = _userService.GetUserByUsername(user);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)

@@ -58,7 +58,7 @@
                          Observation = b.Observation,
                          IdUser = b.IdUser,
                          EmailUser = u.Email,
-                         LoginUser = u.Login,
+                         UsernameUser = u.Username,
                          IdStatus = b.IdStatus,
                          NameStatus = s.Name,
                          DescriptionStatus = s.Description
@@ -86,7 +86,7 @@
                          Observation = b.Observation,
                          IdUser = b.IdUser,
                          EmailUser = u.Email,
-                         LoginUser = u.Login,
+                         UsernameUser = u.Username,
                          IdStatus = b.IdStatus,
                          NameStatus = s.Name,
                          DescriptionStatus = s.Description
@@ -114,7 +114,7 @@
                          Observation = b.Observation,
                          IdUser = b.IdUser,
                          EmailUser = u.Email,
-                         LoginUser = u.Login,
+                         UsernameUser = u.Username,
                          IdStatus = b.IdStatus,
                          NameStatus = s.Name,
                          DescriptionStatus = s.Description
@@ -142,7 +142,7 @@
                          Observation = b.Observation,
                          IdUser = b.IdUser,
                          EmailUser = u.Email,
-                         LoginUser = u.Login,
+                         UsernameUser = u.Username,
                          IdStatus = b.IdStatus,
                          NameStatus = s.Name,
                          DescriptionStatus = s.Description
@@ -170,7 +170,7 @@
                          Observation = b.Observation,
                          IdUser = b.IdUser,
                          EmailUser = u.Email,
-                         LoginUser = u.Login,
+                         UsernameUser = u.Username,
                          IdStatus = b.IdStatus,
                          NameStatus = s.Name,
                          DescriptionStatus = s.Description
@@ -198,7 +198,7 @@
                          Observation = b.Observation,
                          IdUser = b.IdUser,
                          EmailUser = u.Email,
-                         LoginUser = u.Login,
+                         UsernameUser = u.Username,
                          IdStatus = b.IdStatus,
                          NameStatus = s.Name,
                          DescriptionStatus = s.Description
@@ -226,7 +226,7 @@
                          Observation = b.Observation,
                          IdUser = b.IdUser,
                          EmailUser = u.Email,
-                         LoginUser = u.Login,
+                         UsernameUser = u.Username,
                          IdStatus = b.IdStatus,
                          NameStatus = s.Name,
                          DescriptionStatus = s.Description
@@ -254,7 +254,7 @@
                         Observation = b.Observation,
                         IdUser = b.IdUser,
                         EmailUser = u.Email,
-                        LoginUser = u.Login,
+                        UsernameUser = u.Username,
                         IdStatus = b.IdStatus,
                         NameStatus = s.Name,
                         DescriptionStatus = s.Description

@@ -54,7 +54,7 @@
                            IdUser = u.IdUser,
                            Email = u.Email,
                            Phone = u.Phone,
-                           Login = u.Login,
+                           Username = u.Username,
                            Password = u.Password,
                            IdRole = u.IdRole,
                            NameRole = r.Name,
@@ -81,7 +81,7 @@
                           IdUser = u.IdUser,
                           Email = u.Email,
                           Phone = u.Phone,
-                          Login = u.Login,
+                          Username = u.Username,
                           Password = u.Password,
                           IdRole = u.IdRole,
                           NameRole = r.Name,
@@ -94,7 +94,7 @@
                   .FirstOrDefault();
         }
 
-        public UserExtendDto? GetUserByLogin(UserDto user)
+        public UserExtendDto? GetUserByUsername(UserDto user)
         {
             return (
                       from u in _context.Users.AsNoTracking()
@@ -102,13 +102,13 @@
                       on u.IdRole equals r.IdRole
                       join s in _context.Status.AsNoTracking()
                       on u.IdStatus equals s.IdStatus
-                      where u.Login == user.Login
+                      where u.Username == user.Username
                       select new UserExtendDto
                       {
                           IdUser = u.IdUser,
                           Email = u.Email,
                           Phone = u.Phone,
-                          Login = u.Login,
+                          Username = u.Username,
                           Password = u.Password,
                           IdRole = u.IdRole,
                           NameRole = r.Name,
@@ -135,7 +135,7 @@
                          IdUser = u.IdUser,
                          Email = u.Email,
                          Phone = u.Phone,
-                         Login = u.Login,
+                         Username = u.Username,
                          Password = u.Password,
                          IdRole = u.IdRole,
                          NameRole = r.Name,
@@ -162,7 +162,7 @@
                          IdUser = u.IdUser,
                          Email = u.Email,
                          Phone = u.Phone,
-                         Login = u.Login,
+                         Username = u.Username,
                          Password = u.Password,
                          IdRole = u.IdRole,
                          NameRole = r.Name,
@@ -189,7 +189,7 @@
                          IdUser = u.IdUser,
                          Email = u.Email,
                          Phone = u.Phone,
-                         Login = u.Login,
+                         Username = u.Username,
                          Password = u.Password,
                          IdRole = u.IdRole,
                          NameRole = r.Name,

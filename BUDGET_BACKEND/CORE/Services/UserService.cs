@@ -67,10 +67,10 @@
             }
         }
 
-        public UserExtendDto? GetUserByLogin(UserDto user)
+        public UserExtendDto? GetUserByUsername(UserDto user)
         {
             IUserRepository userRepository = UnitOfWork.UserRepository();
-            UserExtendDto? userSearch = userRepository.GetUserByLogin(user);
+            UserExtendDto? userSearch = userRepository.GetUserByUsername(user);
 
             if (userSearch != null)
             {
@@ -133,13 +133,13 @@
             IRoleRepository roleRepository = UnitOfWork.RoleRepository();
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();
             
-            if (user == null || string.IsNullOrWhiteSpace(user.Email.Trim()) || string.IsNullOrWhiteSpace(user.Phone.Trim()) || string.IsNullOrWhiteSpace(user.Login.Trim()) || string.IsNullOrWhiteSpace(user.Password.Trim()))
+            if (user == null || string.IsNullOrWhiteSpace(user.Email.Trim()) || string.IsNullOrWhiteSpace(user.Phone.Trim()) || string.IsNullOrWhiteSpace(user.Username.Trim()) || string.IsNullOrWhiteSpace(user.Password.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
             UserExtendDto? userEmailSearch = userRepository.GetUserByEmail(user);
-            UserExtendDto? userLoginSearch = userRepository.GetUserByLogin(user);
+            UserExtendDto? userLoginSearch = userRepository.GetUserByUsername(user);
 
             if (userEmailSearch != null || userLoginSearch != null)
             {
@@ -155,7 +155,7 @@
             {                
                 Email = user.Email.Trim(),
                 Phone = user.Phone.Trim(),
-                Login = user.Login.Trim(),
+                Username = user.Username.Trim(),
                 Password = !string.IsNullOrWhiteSpace(sHashPassword.Trim()) ? sHashPassword.Trim() : user.Password,
                 IdRole = rolSearch.IdRole,
                 IdStatus = statusSearch.IdStatus
@@ -174,13 +174,13 @@
         {
             IUserRepository userRepository = UnitOfWork.UserRepository();
            
-            if (user == null || user.IdUser <= 0 || string.IsNullOrWhiteSpace(user.Email.Trim()) || string.IsNullOrWhiteSpace(user.Phone.Trim()) || string.IsNullOrWhiteSpace(user.Login.Trim()) || string.IsNullOrWhiteSpace(user.Password.Trim()))
+            if (user == null || user.IdUser <= 0 || string.IsNullOrWhiteSpace(user.Email.Trim()) || string.IsNullOrWhiteSpace(user.Phone.Trim()) || string.IsNullOrWhiteSpace(user.Username.Trim()) || string.IsNullOrWhiteSpace(user.Password.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
             UserExtendDto? userEmailDuplicado = userRepository.GetUserByEmail(user);
-            UserExtendDto? userLoginDuplicado = userRepository.GetUserByLogin(user);
+            UserExtendDto? userLoginDuplicado = userRepository.GetUserByUsername(user);
             UserExtendDto? userSearch = userRepository.GetUserById(user) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (userEmailDuplicado != null && userSearch != null && userEmailDuplicado.IdUser != user.IdUser)
@@ -200,7 +200,7 @@
                 IdUser = userSearch!.IdUser,
                 Email = user.Email.Trim(),
                 Phone = user.Phone.Trim(),
-                Login = user.Login.Trim(),
+                Username = user.Username.Trim(),
                 Password = !string.IsNullOrWhiteSpace(sHashPassword.Trim()) ? sHashPassword.Trim() : user.Password,
                 IdRole = userSearch.IdRole,
                 IdStatus = userSearch.IdStatus
@@ -233,7 +233,7 @@
                 IdUser = userSearch!.IdUser,
                 Email = userSearch.Email.Trim(),
                 Phone = userSearch.Phone.Trim(),
-                Login = userSearch.Login.Trim(),
+                Username = userSearch.Username.Trim(),
                 Password = userSearch.Password.Trim(),
                 IdRole = userSearch.IdRole,               
                 IdStatus = statusSearch.IdStatus

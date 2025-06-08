@@ -36,13 +36,13 @@
                   .IsRequired()
                   .HasMaxLength(200);
 
-            entity.Property(e => e.Login)
+            entity.Property(e => e.Username)
                   .IsRequired()
                   .HasMaxLength(100);
 
             entity.Property(e => e.Password)
                   .IsRequired()
-                  .HasMaxLength(200);
+                  .HasMaxLength(255);
 
             entity.Property(e => e.IdRole).IsRequired();
             entity.Property(e => e.IdStatus).IsRequired();

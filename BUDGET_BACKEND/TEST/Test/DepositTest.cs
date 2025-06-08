@@ -97,7 +97,7 @@
                 IdUser = 1,
                 Email = "Test",
                 Phone = "Test",
-                Login = "Test",
+                Username = "Test",
                 Password = "Test",
                 IdRole = 1,
                 IdStatus = 1

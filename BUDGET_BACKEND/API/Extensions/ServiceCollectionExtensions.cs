@@ -43,6 +43,7 @@
 
         public static IServiceCollection AddBusinessServices(this IServiceCollection services)
         {            
+            services.AddTransient<IAuthenticationService, AuthenticationService>();
             services.AddTransient<IStatusService, StatusService>();
             services.AddTransient<IRoleService, RoleService>();
             services.AddTransient<IUserService, UserService>();

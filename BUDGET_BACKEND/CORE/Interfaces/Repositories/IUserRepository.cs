@@ -23,7 +23,7 @@
 
         public UserExtendDto? GetUserByEmail(UserDto user);
 
-        public UserExtendDto? GetUserByLogin(UserDto user);
+        public UserExtendDto? GetUserByUsername(UserDto user);
 
         public List<UserExtendDto> GetUsersByRole(UserDto user);
 

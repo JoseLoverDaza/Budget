@@ -65,7 +65,7 @@
                          DescriptionTypeAccount = t.Description,                         
                          IdUser = a.IdUser,
                          EmailUser = u.Email,
-                         LoginUser = u.Login,                        
+                         UsernameUser = u.Username,                        
                          IdStatus = a.IdStatus,
                          NameStatus = s.Name,
                          DescriptionStatus = s.Description
@@ -100,7 +100,7 @@
                         DescriptionTypeAccount = t.Description,
                         IdUser = a.IdUser,
                         EmailUser = u.Email,
-                        LoginUser = u.Login,
+                        UsernameUser = u.Username,
                         IdStatus = a.IdStatus,
                         NameStatus = s.Name,
                         DescriptionStatus = s.Description
@@ -135,7 +135,7 @@
                         DescriptionTypeAccount = t.Description,
                         IdUser = a.IdUser,
                         EmailUser = u.Email,
-                        LoginUser = u.Login,
+                        UsernameUser = u.Username,
                         IdStatus = a.IdStatus,
                         NameStatus = s.Name,
                         DescriptionStatus = s.Description
@@ -170,7 +170,7 @@
                         DescriptionTypeAccount = t.Description,
                         IdUser = a.IdUser,
                         EmailUser = u.Email,
-                        LoginUser = u.Login,
+                        UsernameUser = u.Username,
                         IdStatus = a.IdStatus,
                         NameStatus = s.Name,
                         DescriptionStatus = s.Description
@@ -205,7 +205,7 @@
                         DescriptionTypeAccount = t.Description,
                         IdUser = a.IdUser,
                         EmailUser = u.Email,
-                        LoginUser = u.Login,
+                        UsernameUser = u.Username,
                         IdStatus = a.IdStatus,
                         NameStatus = s.Name,
                         DescriptionStatus = s.Description
@@ -240,7 +240,7 @@
                        DescriptionTypeAccount = t.Description,
                        IdUser = a.IdUser,
                        EmailUser = u.Email,
-                       LoginUser = u.Login,
+                       UsernameUser = u.Username,
                        IdStatus = a.IdStatus,
                        NameStatus = s.Name,
                        DescriptionStatus = s.Description
@@ -275,7 +275,7 @@
                       DescriptionTypeAccount = t.Description,
                       IdUser = a.IdUser,
                       EmailUser = u.Email,
-                      LoginUser = u.Login,
+                      UsernameUser = u.Username,
                       IdStatus = a.IdStatus,
                       NameStatus = s.Name,
                       DescriptionStatus = s.Description
@@ -310,7 +310,7 @@
                       DescriptionTypeAccount = t.Description,
                       IdUser = a.IdUser,
                       EmailUser = u.Email,
-                      LoginUser = u.Login,
+                      UsernameUser = u.Username,
                       IdStatus = a.IdStatus,
                       NameStatus = s.Name,
                       DescriptionStatus = s.Description
@@ -345,7 +345,7 @@
                      DescriptionTypeAccount = t.Description,
                      IdUser = a.IdUser,
                      EmailUser = u.Email,
-                     LoginUser = u.Login,
+                     UsernameUser = u.Username,
                      IdStatus = a.IdStatus,
                      NameStatus = s.Name,
                      DescriptionStatus = s.Description
@@ -380,7 +380,7 @@
                      DescriptionTypeAccount = t.Description,
                      IdUser = a.IdUser,
                      EmailUser = u.Email,
-                     LoginUser = u.Login,
+                     UsernameUser = u.Username,
                      IdStatus = a.IdStatus,
                      NameStatus = s.Name,
                      DescriptionStatus = s.Description

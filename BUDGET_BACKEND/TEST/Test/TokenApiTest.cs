@@ -97,7 +97,7 @@
                 IdUser = 1,
                 Email = "Test",
                 Phone = "1234567890",
-                Login = "Test",
+                Username = "Test",
                 Password = "A7Ws/sQDVsXXi/xheT1IufcXPN5rJUKXmPWvnJTGzjRgOzD+vAt1GAMXoD0/mlrD",
                 IdRole = 1,
                 IdStatus = 1

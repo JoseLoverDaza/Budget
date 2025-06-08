@@ -97,7 +97,7 @@
                 IdUser = 1,
                 Email = "Test",
                 Phone = "1234567890",
-                Login = "Test",                 
+                Username = "Test",                 
                 Password = "A7Ws/sQDVsXXi/xheT1IufcXPN5rJUKXmPWvnJTGzjRgOzD+vAt1GAMXoD0/mlrD",
                 IdRole = 1,
                 IdStatus = 1
@@ -111,7 +111,7 @@
                 IdUser = 2,
                 Email = "Test",
                 Phone = "1234567890",
-                Login = "Test1",
+                Username = "Test1",
                 Password = "Test",
                 IdRole = 1,
                 IdStatus = 2
@@ -199,16 +199,16 @@
         }
 
         [TestMethod]
-        public void GetUserByLoginOK()
+        public void GetUserByUsernameOK()
         {
             ///Arrange   
             UserDto user = new()
             {
-                Login = "Test"
+                Username = "Test"
             };
            
             ///Act
-            var result = _userController!.GetUserByLogin(user);
+            var result = _userController!.GetUserByUsername(user);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -217,16 +217,16 @@
         }
 
         [TestMethod]
-        public void GetUserByLoginFail()
+        public void GetUserByUsernameFail()
         {
             ///Arrange   
             UserDto user = new()
             {
-                Login = "T"
+                Username = "T"
             };
 
             ///Act
-            var result = _userController!.GetUserByLogin(user);
+            var result = _userController!.GetUserByUsername(user);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -352,7 +352,7 @@
             {
                 Email = "Test1",
                 Phone = "Test1",
-                Login = "Test2",
+                Username = "Test2",
                 Password = "Test",
                 IdRole = 1,
                 IdStatus = 1
@@ -375,7 +375,7 @@
             {                
                 Email = "Test",
                 Phone = "Test",
-                Login = "Test",
+                Username = "Test",
                 Password = "Test",
                 IdRole = 1,
                 IdStatus = 1
@@ -399,7 +399,7 @@
                 IdUser = 1,
                 Email = "Test1",
                 Phone = "Test1",
-                Login = "Test",
+                Username = "Test",
                 Password = "Test",
                 IdRole = 1,
                 IdStatus = 1
@@ -423,7 +423,7 @@
                 IdUser = -1,
                 Email = "Test1",
                 Phone = "Test1",
-                Login = "Test1",
+                Username = "Test1",
                 Password = "Test",
                 IdRole = 1,
                 IdStatus = 1
@@ -447,7 +447,7 @@
                 IdUser = 2,
                 Email = "Test1",
                 Phone = "Test1",
-                Login = "Test1",
+                Username = "Test1",
                 Password = "Test",
                 IdRole = 1,
                 IdStatus = 3
@@ -471,7 +471,7 @@
                 IdUser = -1,
                 Email = "Test1",
                 Phone = "Test1",
-                Login = "Test1",
+                Username = "Test1",
                 Password = "Test",
                 IdRole = 1,
                 IdStatus = 1
