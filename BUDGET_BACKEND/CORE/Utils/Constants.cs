@@ -31,6 +31,7 @@
         {
             public const string INACTIVO = "Inactivo";
             public const string ACTIVO = "Activo";
+            public const string CANCELADO = "Cancelado";
         }
 
         public static class Method

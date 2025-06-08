@@ -6,6 +6,7 @@
     using API.Controllers;   
     using CORE.Interfaces.Services;
     using CORE.Services;
+    using CORE.Utils;
     using Domain.Context;
     using Domain.Dto;
     using Domain.Entities;
@@ -53,8 +54,8 @@
             _context.Status.Add(new Status()
             {
                 IdStatus = 1,
-                Name = "Test",
-                Description = "Test"
+                Name = Constants.Status.INACTIVO,
+                Description = Constants.Status.INACTIVO
             });
 
             _context.SaveChanges();
@@ -109,7 +110,7 @@
             ///Arrange   
             StatusDto status = new()
             {
-                Name = "Test"
+                Name = Constants.Status.INACTIVO
             };
             
             ///Act
@@ -127,7 +128,7 @@
             ///Arrange   
             StatusDto status = new()
             {
-                Name = ""
+                Name = "T"
             };
 
             ///Act
@@ -159,7 +160,7 @@
             ///Arrange   
             StatusDto status = new()
             {
-                Name = "Test1"               
+                Name = Constants.Status.ACTIVO
             };
 
             ///Act
@@ -177,7 +178,7 @@
             ///Arrange   
             StatusDto status = new()
             {
-                Name = "Test",
+                Name = Constants.Status.INACTIVO,
                 IdStatus = -1
             };
 

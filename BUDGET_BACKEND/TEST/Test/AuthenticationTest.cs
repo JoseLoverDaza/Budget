@@ -7,8 +7,8 @@
     using CORE.Dto;
     using CORE.Interfaces.Services;
     using CORE.Services;
-    using Domain.Context;
-    using Domain.Dto;
+    using CORE.Utils;
+    using Domain.Context; 
     using Domain.Entities;
     using INFRAESTRUCTURE.Context;
     using Microsoft.EntityFrameworkCore;
@@ -55,8 +55,8 @@
             _context.Status.Add(new Status()
             {
                 IdStatus = 1,
-                Name = "Test",
-                Description = "Test"
+                Name = Constants.Status.INACTIVO,
+                Description = Constants.Status.INACTIVO
             });
 
             _context.SaveChanges();
@@ -65,8 +65,8 @@
             _context.Status.Add(new Status()
             {
                 IdStatus = 2,
-                Name = "Test1",
-                Description = "Test1"
+                Name = Constants.Status.ACTIVO,
+                Description = Constants.Status.ACTIVO
             });
 
             _context.SaveChanges();
@@ -75,8 +75,8 @@
             _context.Status.Add(new Status()
             {
                 IdStatus = 3,
-                Name = "Test2",
-                Description = "Test2"
+                Name = Constants.Status.CANCELADO,
+                Description = Constants.Status.CANCELADO
             });
 
             _context.SaveChanges();
@@ -86,7 +86,8 @@
             {
                 IdRole = 1,
                 Name = "Test",
-                Description = "Test"
+                Description = "Test",
+                IdStatus = 2
             });
 
             _context.SaveChanges();
@@ -100,7 +101,20 @@
                 Username = "Test",
                 Password = "A7Ws/sQDVsXXi/xheT1IufcXPN5rJUKXmPWvnJTGzjRgOzD+vAt1GAMXoD0/mlrD",
                 IdRole = 1,
-                IdStatus = 1
+                IdStatus = 2
+            });
+
+            _context.SaveChanges();
+
+            /// Token Id 1
+            _context.TokenApis.Add(new TokenApi()
+            {
+                IdTokenApi = 1,
+                Token = "Test",
+                CreationDate = DateTime.Now,
+                ExpirationDate = DateTime.Now.AddDays(1),
+                IdUser = 1,              
+                IdStatus = 2
             });
 
             _context.SaveChanges();
@@ -119,8 +133,8 @@
             ///Arrange   
             AuthenticationDto authentication = new()
             {
-                Username = "T",
-                Password = "T"
+                Username = "Test",
+                Password = "Test"
             };
 
             ///Act
@@ -157,8 +171,7 @@
             ///Arrange   
             AuthenticationDto authentication = new()
             {
-                Username = "T",
-                Password = "T"
+                Token = "Test"
             };
 
             ///Act
@@ -176,8 +189,7 @@
             ///Arrange   
             AuthenticationDto authentication = new()
             {
-                Username = "Test",
-                Password = "Test"
+                Token = "T"                
             };
 
             ///Act
