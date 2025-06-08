@@ -9,6 +9,7 @@
     using CORE.Utils;
     using Domain.Dto;
     using Domain.Entities;
+    using Microsoft.Extensions.Configuration;
     using System.Runtime.InteropServices;
 
     #endregion
@@ -24,12 +25,15 @@
 
         #region Atributos y Propiedades
 
+        private readonly IConfiguration _configuration;
+
         #endregion
 
         #region Constructor
 
-        public AuthenticationService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public AuthenticationService(IUnitOfWork unitOfWork, IConfiguration configuration) : base(unitOfWork)
         {
+            _configuration = configuration;
         }
 
         #endregion
@@ -53,10 +57,18 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
-              
+
+            string secretKey = _configuration["Encryption:SecretKey"]!;
+            string sToken = PasswordHash.GenerateJwtToken(userSearch, secretKey);
+
+            if (string.IsNullOrWhiteSpace(secretKey) || string.IsNullOrWhiteSpace(sToken))
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+
             TokenApi saveTokenApi = new ()
             {
-                Token = "Test",
+                Token = sToken,
                 CreationDate = DateTime.Now,
                 ExpirationDate = DateTime.Now.AddDays(1),
                 IdUser = userSearch.IdUser,
@@ -70,6 +82,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
+            authentication.Token = sToken;
             authentication.CreationDate = DateTime.Now;
             authentication.ExpirationDate = DateTime.Now.AddDays(1);
             authentication.IsAuthenticated = true;
@@ -98,6 +111,7 @@
             }
 
             authentication.Username = userSearch.Username;
+            authentication.Password = string.Empty;
             authentication.CreationDate = tokenApiSearch.CreationDate;
             authentication.ExpirationDate = tokenApiSearch.ExpirationDate;
             authentication.IsAuthenticated = tokenApiSearch.ExpirationDate >= DateTime.Now;

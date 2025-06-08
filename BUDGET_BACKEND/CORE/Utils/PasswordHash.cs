@@ -1,9 +1,14 @@
 ﻿namespace CORE.Utils
 {
+    using CORE.Dto;
 
     #region Librerias
 
+    using Microsoft.IdentityModel.Tokens;
+    using System.IdentityModel.Tokens.Jwt;
+    using System.Security.Claims;
     using System.Security.Cryptography;
+    using System.Text;
 
     #endregion
 
@@ -41,6 +46,29 @@
             byte[] computedHash = pbkdf2.GetBytes(32);
 
             return CryptographicOperations.FixedTimeEquals(storedHash, computedHash);
+        }
+
+        public static string GenerateJwtToken(UserExtendDto user, string secretKey)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.UTF8.GetBytes(secretKey);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(
+                [
+                    new Claim(ClaimTypes.Role, user.NameRole),
+                    new Claim(ClaimTypes.NameIdentifier, user.IdUser.ToString()),
+                    new Claim(ClaimTypes.Name, user.Username)
+                ]),
+                Expires = DateTime.UtcNow.AddDays(1),
+                SigningCredentials = new SigningCredentials(
+                    new SymmetricSecurityKey(key),
+                    SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
         }
 
         #endregion

@@ -12,6 +12,7 @@
     using Domain.Entities;
     using INFRAESTRUCTURE.Context;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
     using System.Net;
@@ -44,9 +45,18 @@
             .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
             .Options;
 
+            var inMemorySettings = new Dictionary<string, string> 
+            {
+                {"JwtSettings:SecretKey", "clave_falsa_para_tests"}
+            };
+
+            IConfiguration configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(inMemorySettings!)
+                .Build();
+
             _context = new EFContext(options);
             UnitOfWork unitOfWork = new(_context);
-            _authenticationService = new AuthenticationService(unitOfWork);
+            _authenticationService = new AuthenticationService(unitOfWork, configuration);
             _authenticationController = new AuthenticationController(_authenticationService);
 
             #region Data
