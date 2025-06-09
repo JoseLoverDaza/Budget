@@ -11,6 +11,7 @@
     using Domain.Entities;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
+    using System.Text.Json;
 
     #endregion
 
@@ -45,6 +46,8 @@
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
             TokenApiExtendDto? tokenApiSearch = tokenApiRepository.GetTokenApiById(tokenApi);
 
+            _logApiService.TraceLog(typeof(TokenApi).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+
             if (tokenApiSearch != null)
             {
                 return tokenApiSearch;
@@ -59,6 +62,8 @@
         {
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
             TokenApiExtendDto? tokenApiSearch = tokenApiRepository.GetTokenApiByToken(tokenApi);
+
+            _logApiService.TraceLog(typeof(TokenApi).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             if (tokenApiSearch != null)
             {
@@ -75,6 +80,8 @@
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
             List<TokenApiExtendDto> tokenApisSearch = tokenApiRepository.GetTokenApisByCreationDate(tokenApi);
 
+            _logApiService.TraceLog(typeof(TokenApi).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+
             if (tokenApisSearch.Count != 0)
             {
                 return tokenApisSearch;
@@ -89,6 +96,8 @@
         {
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
             List<TokenApiExtendDto> tokenApisSearch = tokenApiRepository.GetTokenApisByUser(tokenApi);
+
+            _logApiService.TraceLog(typeof(TokenApi).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             if (tokenApisSearch.Count != 0)
             {
@@ -105,6 +114,8 @@
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
             List<TokenApiExtendDto> tokenApisSearch = tokenApiRepository.GetTokenApisByStatus(tokenApi);
 
+            _logApiService.TraceLog(typeof(TokenApi).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+
             if (tokenApisSearch.Count != 0)
             {
                 return tokenApisSearch;
@@ -119,6 +130,8 @@
         {
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
             List<TokenApiExtendDto> tokenApisSearch = tokenApiRepository.GetTokenApisByCreationDateStatus(tokenApi);
+
+            _logApiService.TraceLog(typeof(TokenApi).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             if (tokenApisSearch.Count != 0)
             {
@@ -135,6 +148,8 @@
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
             List<TokenApiExtendDto> tokenApisSearch = tokenApiRepository.GetTokenApisByExpirationDateStatus(tokenApi);
 
+            _logApiService.TraceLog(typeof(TokenApi).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+
             if (tokenApisSearch.Count != 0)
             {
                 return tokenApisSearch;
@@ -149,6 +164,8 @@
         {
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
             List<TokenApiExtendDto> tokenApisSearch = tokenApiRepository.GetTokenApisByUserStatus(tokenApi);
+
+            _logApiService.TraceLog(typeof(TokenApi).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             if (tokenApisSearch.Count != 0)
             {
@@ -165,6 +182,8 @@
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
             List<TokenApiExtendDto> tokenApisSearch = tokenApiRepository.GetTokenApisByCreationDateUserStatus(tokenApi);
 
+            _logApiService.TraceLog(typeof(TokenApi).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+
             if (tokenApisSearch.Count != 0)
             {
                 return tokenApisSearch;
@@ -179,6 +198,8 @@
         {
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
             List<TokenApiExtendDto> tokenApisSearch = tokenApiRepository.GetTokenApisByExpirationDateUserStatus(tokenApi);
+
+            _logApiService.TraceLog(typeof(TokenApi).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             if (tokenApisSearch.Count != 0)
             {
@@ -226,6 +247,9 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+
+            _logApiService.TraceLog(typeof(TokenApi).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(saveTokenApi), DateTime.Now, null);
+
             return tokenApi;
         }
 
@@ -262,6 +286,9 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+
+            _logApiService.TraceLog(typeof(TokenApi).Name, Constants.Method.POST, JsonSerializer.Serialize(tokenApiSearch), JsonSerializer.Serialize(updateTokenApi), DateTime.Now, null);
+
             return tokenApi;
         }
 
@@ -294,6 +321,9 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+
+            _logApiService.TraceLog(typeof(TokenApi).Name, Constants.Method.POST, JsonSerializer.Serialize(tokenApiSearch), JsonSerializer.Serialize(deleteTokenApi), DateTime.Now, null);
+
             return tokenApi;
         }
 

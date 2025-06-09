@@ -10,6 +10,7 @@
     using Domain.Entities;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
+    using System.Text.Json;
 
     #endregion
 
@@ -42,8 +43,9 @@
         public StatusDto? GetStatusById(StatusDto status)
         {
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();
-
             StatusDto? statusSearch = statusRepository.GetStatusById(status);
+
+            _logApiService.TraceLog(typeof(Status).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             if (statusSearch != null)
             {
@@ -58,8 +60,9 @@
         public StatusDto? GetStatusByName(StatusDto status)
         {
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();
-
             StatusDto? statusSearch = statusRepository.GetStatusByName(status);
+
+            _logApiService.TraceLog(typeof(Status).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             if (statusSearch != null)
             {
@@ -74,8 +77,9 @@
         public List<StatusDto> GetStatus()
         {
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();
-
             List<StatusDto> status = statusRepository.GetStatus();
+
+            _logApiService.TraceLog(typeof(Status).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             if (status.Count != 0)
             {
@@ -115,6 +119,9 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+
+            _logApiService.TraceLog(typeof(Status).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(saveStatus), DateTime.Now, null);
+
             return status;
         }
 
@@ -148,6 +155,8 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+            _logApiService.TraceLog(typeof(Status).Name, Constants.Method.POST, JsonSerializer.Serialize(statusSearch), JsonSerializer.Serialize(updateStatus), DateTime.Now, null);
+
             return status;
         }
 

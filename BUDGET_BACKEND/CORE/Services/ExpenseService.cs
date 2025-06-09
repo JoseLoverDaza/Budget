@@ -11,6 +11,7 @@
     using Domain.Entities;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
+    using System.Text.Json;
 
     #endregion
 
@@ -43,8 +44,9 @@
         public ExpenseExtendDto? GetExpenseById(ExpenseDto expense)
         {
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
-
             ExpenseExtendDto? expenseSearch = expenseRepository.GetExpenseById(expense);
+
+            _logApiService.TraceLog(typeof(Expense).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             if (expenseSearch != null)
             {
@@ -61,6 +63,8 @@
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
             List<ExpenseExtendDto> expensesSearch = expenseRepository.GetExpensesByTypeExpense(expense);
 
+            _logApiService.TraceLog(typeof(Expense).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+
             if (expensesSearch.Count != 0)
             {
                 return expensesSearch;
@@ -75,6 +79,8 @@
         {
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
             List<ExpenseExtendDto> expensesSearch = expenseRepository.GetExpensesByStatus(expense);
+
+            _logApiService.TraceLog(typeof(Expense).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             if (expensesSearch.Count != 0)
             {
@@ -91,6 +97,8 @@
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
             List<ExpenseExtendDto> expensesSearch = expenseRepository.GetExpensesByNameTypeExpense(expense);
 
+            _logApiService.TraceLog(typeof(Expense).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+
             if (expensesSearch.Count != 0)
             {
                 return expensesSearch;
@@ -105,6 +113,8 @@
         {
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
             List<ExpenseExtendDto> expensesSearch = expenseRepository.GetExpensesByTypeExpenseStatus(expense);
+
+            _logApiService.TraceLog(typeof(Expense).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             if (expensesSearch.Count != 0)
             {
@@ -156,6 +166,9 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+
+            _logApiService.TraceLog(typeof(Deposit).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(saveExpense), DateTime.Now, null);
+
             return expense;
         }
 
@@ -190,6 +203,9 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+
+            _logApiService.TraceLog(typeof(Account).Name, Constants.Method.POST, JsonSerializer.Serialize(expenseSearch), JsonSerializer.Serialize(updateExpense), DateTime.Now, null);
+
             return expense;
         }
 
@@ -221,6 +237,9 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+
+            _logApiService.TraceLog(typeof(Expense).Name, Constants.Method.POST, JsonSerializer.Serialize(expenseSearch), JsonSerializer.Serialize(deleteExpense), DateTime.Now, null);
+
             return expense;
         }
 

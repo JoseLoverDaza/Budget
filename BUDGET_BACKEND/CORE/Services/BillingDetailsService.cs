@@ -11,6 +11,7 @@
     using Domain.Entities;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
+    using System.Text.Json;
 
     #endregion
 
@@ -45,6 +46,8 @@
             IBillingDetailsRepository billingDetailRepository = UnitOfWork.BillingDetailsRepository();
             BillingDetailExtendDto? billingDetailsSearch = billingDetailRepository.GetBillingDetailsById(billingDetails);
 
+            _logApiService.TraceLog(typeof(BillingDetails).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+
             if (billingDetailsSearch != null)
             {
                 return billingDetailsSearch;
@@ -59,6 +62,8 @@
         {
             IBillingDetailsRepository billingDetailRepository = UnitOfWork.BillingDetailsRepository();
             List<BillingDetailExtendDto> billingDetailsSearch = billingDetailRepository.GetBillingDetailsByBilling(billingDetails);
+
+            _logApiService.TraceLog(typeof(BillingDetails).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             if (billingDetailsSearch.Count != 0)
             {
@@ -75,6 +80,8 @@
             IBillingDetailsRepository billingDetailRepository = UnitOfWork.BillingDetailsRepository();
             List<BillingDetailExtendDto> billingDetailsSearch = billingDetailRepository.GetBillingDetailsByExpense(billingDetails);
 
+            _logApiService.TraceLog(typeof(BillingDetails).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+
             if (billingDetailsSearch.Count != 0)
             {
                 return billingDetailsSearch;
@@ -89,6 +96,8 @@
         {
             IBillingDetailsRepository billingDetailRepository = UnitOfWork.BillingDetailsRepository();
             List<BillingDetailExtendDto> billingDetailsSearch = billingDetailRepository.GetBillingDetailsByStatus(billingDetails);
+
+            _logApiService.TraceLog(typeof(BillingDetails).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             if (billingDetailsSearch.Count != 0)
             {
@@ -105,6 +114,8 @@
             IBillingDetailsRepository billingDetailRepository = UnitOfWork.BillingDetailsRepository();
             List<BillingDetailExtendDto> billingDetailsSearch = billingDetailRepository.GetBillingDetailsByBillingExpense(billingDetails);
 
+            _logApiService.TraceLog(typeof(BillingDetails).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+
             if (billingDetailsSearch.Count != 0)
             {
                 return billingDetailsSearch;
@@ -120,6 +131,8 @@
             IBillingDetailsRepository billingDetailRepository = UnitOfWork.BillingDetailsRepository();
             List<BillingDetailExtendDto> billingDetailsSearch = billingDetailRepository.GetBillingDetailsByExpenseStatus(billingDetails);
 
+            _logApiService.TraceLog(typeof(BillingDetails).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+
             if (billingDetailsSearch.Count != 0)
             {
                 return billingDetailsSearch;
@@ -134,6 +147,8 @@
         {
             IBillingDetailsRepository billingDetailRepository = UnitOfWork.BillingDetailsRepository();
             List<BillingDetailExtendDto> billingDetailsSearch = billingDetailRepository.GetBillingDetailsByBillingExpenseStatus(billingDetails);
+
+            _logApiService.TraceLog(typeof(BillingDetails).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             if (billingDetailsSearch.Count != 0)
             {
@@ -184,6 +199,8 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
+            _logApiService.TraceLog(typeof(BillingDetails).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(saveBillingDetails), DateTime.Now, null);
+
             return billingDetails;
         }
 
@@ -214,6 +231,8 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+
+            _logApiService.TraceLog(typeof(BillingDetails).Name, Constants.Method.POST, JsonSerializer.Serialize(billingDetailSearch), JsonSerializer.Serialize(updateBillingDetails), DateTime.Now, null);
 
             return billingDetails;
         }
@@ -247,6 +266,9 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+
+            _logApiService.TraceLog(typeof(Audit).Name, Constants.Method.POST, JsonSerializer.Serialize(billingDetailSearch), JsonSerializer.Serialize(deleteBillingDetails), DateTime.Now, null);
+
             return billingDetails;
         }
 

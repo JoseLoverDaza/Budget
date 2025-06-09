@@ -6,6 +6,7 @@
     using API.Controllers;
     using CORE.Interfaces.Services;
     using CORE.Services;
+    using CORE.Utils;
     using Domain.Context;
     using Domain.Dto;
     using Domain.Entities;
@@ -51,6 +52,36 @@
             _auditController = new AuditController(_auditService);
 
             #region Data
+
+            /// Status Id 1
+            _context.Status.Add(new Status()
+            {
+                IdStatus = 1,
+                Name = Constants.Status.INACTIVO,
+                Description = Constants.Status.INACTIVO
+            });
+
+            _context.SaveChanges();
+
+            /// Status Id 2
+            _context.Status.Add(new Status()
+            {
+                IdStatus = 2,
+                Name = Constants.Status.ACTIVO,
+                Description = Constants.Status.ACTIVO
+            });
+
+            _context.SaveChanges();
+
+            /// Status Id 3
+            _context.Status.Add(new Status()
+            {
+                IdStatus = 3,
+                Name = Constants.Status.CANCELADO,
+                Description = Constants.Status.CANCELADO
+            });
+
+            _context.SaveChanges();
 
             /// Audit Id 1
             _context.Audits.Add(new Audit()

@@ -11,6 +11,7 @@
     using Domain.Entities;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
+    using System.Text.Json;
 
     #endregion
 
@@ -45,6 +46,8 @@
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
             BillingExtendDto? billingSearch = billingRepository.GetBillingById(billing);
 
+            _logApiService.TraceLog(typeof(Billing).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+
             if (billingSearch != null)
             {
                 return billingSearch;
@@ -59,6 +62,8 @@
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
             List<BillingExtendDto> billings = billingRepository.GetBillingsByYearMonth(billing);
+
+            _logApiService.TraceLog(typeof(Billing).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             if (billings.Count != 0)
             {
@@ -75,6 +80,8 @@
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
             List<BillingExtendDto> billings = billingRepository.GetBillingsByYearUser(billing);
 
+            _logApiService.TraceLog(typeof(Billing).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+
             if (billings.Count != 0)
             {
                 return billings;
@@ -89,6 +96,8 @@
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
             List<BillingExtendDto> billings = billingRepository.GetBillingsByMonthUser(billing);
+
+            _logApiService.TraceLog(typeof(Billing).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             if (billings.Count != 0)
             {
@@ -105,6 +114,8 @@
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
             List<BillingExtendDto> billings = billingRepository.GetBillingsByYearMonthUser(billing);
 
+            _logApiService.TraceLog(typeof(Billing).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+
             if (billings.Count != 0)
             {
                 return billings;
@@ -119,6 +130,8 @@
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
             List<BillingExtendDto> billings = billingRepository.GetBillingsByUser(billing);
+
+            _logApiService.TraceLog(typeof(Billing).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             if (billings.Count != 0)
             {
@@ -135,6 +148,8 @@
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
             List<BillingExtendDto> billings = billingRepository.GetBillingsByStatus(billing);
 
+            _logApiService.TraceLog(typeof(Billing).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+
             if (billings.Count != 0)
             {
                 return billings;
@@ -149,6 +164,8 @@
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
             List<BillingExtendDto> billings = billingRepository.GetBillingsByUserStatus(billing);
+
+            _logApiService.TraceLog(typeof(Billing).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             if (billings.Count != 0)
             {
@@ -198,6 +215,9 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+
+            _logApiService.TraceLog(typeof(Billing).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(saveBilling), DateTime.Now, null);
+
             return billing;
         }
 
@@ -230,6 +250,9 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+
+            _logApiService.TraceLog(typeof(Billing).Name, Constants.Method.POST, JsonSerializer.Serialize(billingSearch), JsonSerializer.Serialize(updateBilling), DateTime.Now, null);
+
             return billing;
         }
 
@@ -264,6 +287,8 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+
+            _logApiService.TraceLog(typeof(Billing).Name, Constants.Method.POST, JsonSerializer.Serialize(billingSearch), JsonSerializer.Serialize(deleteBilling), DateTime.Now, null);
 
             return billing;
         }

@@ -11,6 +11,7 @@
     using Domain.Entities;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
+    using System.Text.Json;
 
     #endregion
 
@@ -45,6 +46,8 @@
             ITypeAccountRepository typeAccountRepository = UnitOfWork.TypeAccountRepository();
             TypeAccountExtendDto? typeAccountSearch = typeAccountRepository.GetTypeAccountById(typeAccount);
 
+            _logApiService.TraceLog(typeof(TypeAccount).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+
             if (typeAccountSearch != null)
             {
                 return typeAccountSearch;
@@ -60,6 +63,8 @@
             ITypeAccountRepository typeAccountRepository = UnitOfWork.TypeAccountRepository();
             TypeAccountExtendDto? typeAccountSearch = typeAccountRepository.GetTypeAccountByName(typeAccount);
 
+            _logApiService.TraceLog(typeof(TypeAccount).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+
             if (typeAccountSearch != null)
             {
                 return typeAccountSearch;
@@ -74,6 +79,8 @@
         {
             ITypeAccountRepository typeAccountRepository = UnitOfWork.TypeAccountRepository();
             List<TypeAccountExtendDto> typeAccountsSearch = typeAccountRepository.GetTypeAccountsByStatus(typeAccount);
+
+            _logApiService.TraceLog(typeof(TypeAccount).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             if (typeAccountsSearch.Count != 0)
             {
@@ -117,6 +124,9 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+
+            _logApiService.TraceLog(typeof(TypeAccount).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(saveTypeAccount), DateTime.Now, null);
+
             return typeAccount;
         }
 
@@ -151,6 +161,9 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+
+            _logApiService.TraceLog(typeof(TypeAccount).Name, Constants.Method.POST, JsonSerializer.Serialize(typeAccountSearch), JsonSerializer.Serialize(updateTypeAccount), DateTime.Now, null);
+
             return typeAccount;
         }
 
@@ -181,6 +194,9 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+
+            _logApiService.TraceLog(typeof(TypeAccount).Name, Constants.Method.POST, JsonSerializer.Serialize(typeAccountSearch), JsonSerializer.Serialize(deleteTypeAccount), DateTime.Now, null);
+
             return typeAccount;
         }
 

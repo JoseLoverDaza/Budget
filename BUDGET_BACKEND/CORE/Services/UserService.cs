@@ -11,6 +11,7 @@
     using Domain.Entities;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
+    using System.Text.Json;
 
     #endregion
 
@@ -45,6 +46,8 @@
             IUserRepository userRepository = UnitOfWork.UserRepository();
             UserExtendDto? userSearch = userRepository.GetUserById(user);
 
+            _logApiService.TraceLog(typeof(User).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+
             if (userSearch != null)
             {
                 return userSearch;
@@ -59,6 +62,8 @@
         {
             IUserRepository userRepository = UnitOfWork.UserRepository();
             UserExtendDto? userSearch = userRepository.GetUserByEmail(user);
+
+            _logApiService.TraceLog(typeof(User).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             if (userSearch != null)
             {
@@ -75,6 +80,8 @@
             IUserRepository userRepository = UnitOfWork.UserRepository();
             UserExtendDto? userSearch = userRepository.GetUserByUsername(user);
 
+            _logApiService.TraceLog(typeof(User).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+
             if (userSearch != null)
             {
                 return userSearch;
@@ -89,6 +96,8 @@
         {
             IUserRepository userRepository = UnitOfWork.UserRepository();
             List<UserExtendDto> usersSearch = userRepository.GetUsersByRole(user);
+
+            _logApiService.TraceLog(typeof(User).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             if (usersSearch.Count != 0)
             {
@@ -105,6 +114,8 @@
             IUserRepository userRepository = UnitOfWork.UserRepository();
             List<UserExtendDto> usersSearch = userRepository.GetUsersByStatus(user);
 
+            _logApiService.TraceLog(typeof(User).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+
             if (usersSearch.Count != 0)
             {
                 return usersSearch;
@@ -119,6 +130,8 @@
         {
             IUserRepository userRepository = UnitOfWork.UserRepository();
             List<UserExtendDto> usersSearch = userRepository.GetUsersByRoleStatus(user);
+
+            _logApiService.TraceLog(typeof(User).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             if (usersSearch.Count != 0)
             {
@@ -170,6 +183,9 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+
+            _logApiService.TraceLog(typeof(User).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(saveUser), DateTime.Now, null);
+
             return user;
         }
 
@@ -215,6 +231,9 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+
+            _logApiService.TraceLog(typeof(User).Name, Constants.Method.POST, JsonSerializer.Serialize(userSearch), JsonSerializer.Serialize(updateUser), DateTime.Now, null);
+
             return user;
         }
 
@@ -248,6 +267,9 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+
+            _logApiService.TraceLog(typeof(User).Name, Constants.Method.POST, JsonSerializer.Serialize(userSearch), JsonSerializer.Serialize(deleteUser), DateTime.Now, null);
+
             return user;
         }
 

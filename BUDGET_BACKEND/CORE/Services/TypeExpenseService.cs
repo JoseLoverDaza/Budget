@@ -11,6 +11,7 @@
     using Domain.Entities;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
+    using System.Text.Json;
 
     #endregion
 
@@ -45,6 +46,8 @@
             ITypeExpenseRepository typeExpenseRepository = UnitOfWork.TypeExpenseRepository();
             TypeExpenseExtendDto? typeExpenseSearch = typeExpenseRepository.GetTypeExpenseById(typeExpense);
 
+            _logApiService.TraceLog(typeof(TypeExpense).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+
             if (typeExpenseSearch != null)
             {
                 return typeExpenseSearch;
@@ -60,6 +63,8 @@
             ITypeExpenseRepository typeExpenseRepository = UnitOfWork.TypeExpenseRepository();
             TypeExpenseExtendDto? typeExpenseSearch = typeExpenseRepository.GetTypeExpenseByName(typeExpense);
 
+            _logApiService.TraceLog(typeof(TypeExpense).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+
             if (typeExpenseSearch != null)
             {
                 return typeExpenseSearch;
@@ -74,6 +79,8 @@
         {
             ITypeExpenseRepository typeExpenseRepository = UnitOfWork.TypeExpenseRepository();
             List<TypeExpenseExtendDto> typeExpensesSearch = typeExpenseRepository.GetTypeExpensesByStatus(typeExpense);
+
+            _logApiService.TraceLog(typeof(TypeExpense).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             if (typeExpensesSearch.Count != 0)
             {
@@ -117,6 +124,9 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+
+            _logApiService.TraceLog(typeof(TypeExpense).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(saveTypeExpense), DateTime.Now, null);
+
             return typeExpense;
         }
 
@@ -156,6 +166,9 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+
+            _logApiService.TraceLog(typeof(TypeExpense).Name, Constants.Method.POST, JsonSerializer.Serialize(typeExpenseSearch), JsonSerializer.Serialize(updateTypeExpense), DateTime.Now, null);
+
             return typeExpense;
         }
 
@@ -186,6 +199,9 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+
+            _logApiService.TraceLog(typeof(TypeExpense).Name, Constants.Method.POST, JsonSerializer.Serialize(typeExpenseSearch), JsonSerializer.Serialize(deleteTypeExpense), DateTime.Now, null);
+
             return typeExpense;
         }
 

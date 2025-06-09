@@ -11,6 +11,7 @@
     using Domain.Entities;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
+    using System.Text.Json;
 
     #endregion
 
@@ -45,6 +46,8 @@
             IBudgetDetailsRepository budgetDetailRepository = UnitOfWork.BudgetDetailsRepository();
             BudgetDetailExtendDto? budgetDetailsSearch = budgetDetailRepository.GetBudgetDetailsById(budgetDetails);
 
+            _logApiService.TraceLog(typeof(BillingDetails).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+
             if (budgetDetailsSearch != null)
             {
                 return budgetDetailsSearch;
@@ -59,6 +62,8 @@
         {
             IBudgetDetailsRepository budgetDetailRepository = UnitOfWork.BudgetDetailsRepository();
             List<BudgetDetailExtendDto> budgetDetailsSearch = budgetDetailRepository.GetBudgetDetailsByBudget(budgetDetails);
+
+            _logApiService.TraceLog(typeof(BillingDetails).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             if (budgetDetailsSearch.Count != 0)
             {
@@ -75,6 +80,8 @@
             IBudgetDetailsRepository budgetDetailRepository = UnitOfWork.BudgetDetailsRepository();
             List<BudgetDetailExtendDto> budgetDetailsSearch = budgetDetailRepository.GetBudgetDetailsByExpense(budgetDetails);
 
+            _logApiService.TraceLog(typeof(BillingDetails).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+
             if (budgetDetailsSearch.Count != 0)
             {
                 return budgetDetailsSearch;
@@ -89,6 +96,8 @@
         {
             IBudgetDetailsRepository budgetDetailRepository = UnitOfWork.BudgetDetailsRepository();
             List<BudgetDetailExtendDto> budgetDetailsSearch = budgetDetailRepository.GetBudgetDetailsByStatus(budgetDetails);
+
+            _logApiService.TraceLog(typeof(BillingDetails).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             if (budgetDetailsSearch.Count != 0)
             {
@@ -105,6 +114,8 @@
             IBudgetDetailsRepository budgetDetailRepository = UnitOfWork.BudgetDetailsRepository();
             List<BudgetDetailExtendDto> budgetDetailsSearch = budgetDetailRepository.GetBudgetDetailsByBudgetExpense(budgetDetails);
 
+            _logApiService.TraceLog(typeof(BillingDetails).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+
             if (budgetDetailsSearch.Count != 0)
             {
                 return budgetDetailsSearch;
@@ -120,6 +131,8 @@
             IBudgetDetailsRepository budgetDetailRepository = UnitOfWork.BudgetDetailsRepository();
             List<BudgetDetailExtendDto> budgetDetailsSearch = budgetDetailRepository.GetBudgetDetailsByExpenseStatus(budgetDetails);
 
+            _logApiService.TraceLog(typeof(BillingDetails).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+
             if (budgetDetailsSearch.Count != 0)
             {
                 return budgetDetailsSearch;
@@ -134,6 +147,8 @@
         {
             IBudgetDetailsRepository budgetDetailRepository = UnitOfWork.BudgetDetailsRepository();
             List<BudgetDetailExtendDto> budgetDetailsSearch = budgetDetailRepository.GetBudgetDetailsByBudgetExpenseStatus(budgetDetails);
+
+            _logApiService.TraceLog(typeof(BillingDetails).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             if (budgetDetailsSearch.Count != 0)
             {
@@ -184,6 +199,8 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
+            _logApiService.TraceLog(typeof(BudgetDetails).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(saveBudgetDetails), DateTime.Now, null);
+
             return budgetDetails;
         }
 
@@ -214,6 +231,8 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+
+            _logApiService.TraceLog(typeof(BudgetDetails).Name, Constants.Method.POST, JsonSerializer.Serialize(budgetDetailSearch), JsonSerializer.Serialize(updateBudgetDetails), DateTime.Now, null);
 
             return budgetDetails;
         }
@@ -247,6 +266,9 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+
+            _logApiService.TraceLog(typeof(BudgetDetails).Name, Constants.Method.POST, JsonSerializer.Serialize(budgetDetailSearch), JsonSerializer.Serialize(deleteBudgetDetails), DateTime.Now, null);
+
             return budgetDetails;
         }
 

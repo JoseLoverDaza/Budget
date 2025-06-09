@@ -62,6 +62,16 @@
 
             _context.SaveChanges();
 
+            /// Status Id 2
+            _context.Status.Add(new Status()
+            {
+                IdStatus = 2,
+                Name = Constants.Status.ACTIVO,
+                Description = Constants.Status.ACTIVO
+            });
+
+            _context.SaveChanges();
+
             #endregion Data
 
         }
@@ -76,7 +86,7 @@
             ///Arrange 
             StatusDto status = new()
             {
-                IdStatus = 1
+                IdStatus = 2
             };
 
             ///Act
@@ -112,7 +122,7 @@
             ///Arrange   
             StatusDto status = new()
             {
-                Name = Constants.Status.INACTIVO
+                Name = Constants.Status.ACTIVO
             };
 
             ///Act
@@ -162,7 +172,7 @@
             ///Arrange   
             StatusDto status = new()
             {
-                Name = Constants.Status.ACTIVO
+                Name = Constants.Status.CANCELADO
             };
 
             ///Act

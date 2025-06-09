@@ -11,6 +11,7 @@
     using Domain.Entities;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
+    using System.Text.Json;
 
     #endregion
 
@@ -43,8 +44,9 @@
         public RoleExtendDto? GetRoleById(RoleDto role)
         {
             IRoleRepository roleRepository = UnitOfWork.RoleRepository();
-
             RoleExtendDto? roleSearch = roleRepository.GetRoleById(role);
+
+            _logApiService.TraceLog(typeof(Role).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             if (roleSearch != null)
             {
@@ -61,6 +63,8 @@
             IRoleRepository roleRepository = UnitOfWork.RoleRepository();
             RoleExtendDto? roleSearch = roleRepository.GetRoleByName(role);
 
+            _logApiService.TraceLog(typeof(Role).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+
             if (roleSearch != null)
             {
                 return roleSearch;
@@ -75,6 +79,8 @@
         {
             IRoleRepository roleRepository = UnitOfWork.RoleRepository();
             List<RoleExtendDto> rolesSearch = roleRepository.GetRolesByStatus(role);
+
+            _logApiService.TraceLog(typeof(Role).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             if (rolesSearch.Count != 0)
             {
@@ -118,6 +124,9 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+
+            _logApiService.TraceLog(typeof(Role).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(saveRole), DateTime.Now, null);
+
             return role;
         }
 
@@ -152,6 +161,9 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+
+            _logApiService.TraceLog(typeof(Role).Name, Constants.Method.POST, JsonSerializer.Serialize(roleSearch), JsonSerializer.Serialize(updateRole), DateTime.Now, null);
+
             return role;
         }
 
@@ -182,6 +194,8 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+            _logApiService.TraceLog(typeof(Role).Name, Constants.Method.POST, JsonSerializer.Serialize(roleSearch), JsonSerializer.Serialize(deleteRole), DateTime.Now, null);
+
             return role;
         }
 

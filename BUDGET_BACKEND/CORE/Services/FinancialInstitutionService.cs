@@ -11,6 +11,7 @@
     using Domain.Entities;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
+    using System.Text.Json;
 
     #endregion
 
@@ -45,6 +46,8 @@
             IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
             FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionById(financialInstitution);
 
+            _logApiService.TraceLog(typeof(FinancialInstitution).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+
             if (financialInstitutionSearch != null)
             {
                 return financialInstitutionSearch;
@@ -60,6 +63,8 @@
             IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
             FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionByName(financialInstitution);
 
+            _logApiService.TraceLog(typeof(FinancialInstitution).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+
             if (financialInstitutionSearch != null)
             {
                 return financialInstitutionSearch;
@@ -74,6 +79,8 @@
         {
             IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
             List<FinancialInstitutionExtendDto> financialInstitutionsSearch = financialInstitutionRepository.GetFinancialInstitutionsByStatus(financialInstitution);
+
+            _logApiService.TraceLog(typeof(FinancialInstitution).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             if (financialInstitutionsSearch.Count != 0)
             {
@@ -117,6 +124,9 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+
+            _logApiService.TraceLog(typeof(FinancialInstitution).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(saveFinancialInstitution), DateTime.Now, null);
+
             return financialInstitution;
         }
 
@@ -151,6 +161,9 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+
+            _logApiService.TraceLog(typeof(FinancialInstitution).Name, Constants.Method.POST, JsonSerializer.Serialize(financialInstitutionSearch), JsonSerializer.Serialize(updateFinancialInstitution), DateTime.Now, null);
+
             return financialInstitution;
         }
 
@@ -181,6 +194,9 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
+
+            _logApiService.TraceLog(typeof(FinancialInstitution).Name, Constants.Method.POST, JsonSerializer.Serialize(financialInstitutionSearch), JsonSerializer.Serialize(deleteFinancialInstitution), DateTime.Now, null);
+
             return financialInstitution;
         }
 
