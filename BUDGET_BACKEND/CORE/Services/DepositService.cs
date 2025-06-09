@@ -10,7 +10,7 @@
     using Domain.Dto;
     using Domain.Entities;
     using System.Collections.Generic;
-    using System.Runtime.InteropServices;   
+    using System.Runtime.InteropServices;
 
     #endregion
 
@@ -25,12 +25,15 @@
 
         #region Atributos y Propiedades
 
+        private readonly ILogApiService _logApiService;
+
         #endregion
 
         #region Constructor
 
-        public DepositService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {           
+        public DepositService(IUnitOfWork unitOfWork, ILogApiService logApiService) : base(unitOfWork)
+        {
+            _logApiService = logApiService;
         }
 
         #endregion
@@ -236,17 +239,17 @@
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
             IUserRepository userRepository = UnitOfWork.UserRepository();
-            IAccountRepository accountRepository = UnitOfWork.AccountRepository();            
+            IAccountRepository accountRepository = UnitOfWork.AccountRepository();
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();
 
             if (deposit == null || string.IsNullOrWhiteSpace(deposit.Amount.ToString().Trim()) || deposit.Year <= 0 || deposit.Month <= 0)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
-                     
+
             AccountExtendDto? accountSearch = accountRepository.GetAccountById(new AccountDto { IdAccount = deposit.IdAccount }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             UserExtendDto? userSearch = userRepository.GetUserById(new UserDto { IdUser = deposit.IdUser }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto{ IdStatus = deposit.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = deposit.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             List<DepositExtendDto>? depositSearch = depositRepository.GetDepositsByYearMonthUserAccount(deposit);
 
@@ -254,14 +257,14 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
-                       
+
             Deposit saveDeposit = new()
             {
                 Year = deposit.Year,
-                Month = deposit.Month, 
+                Month = deposit.Month,
                 Amount = deposit.Amount,
                 IdUser = userSearch.IdUser,
-                IdAccount = accountSearch.IdAccount,                
+                IdAccount = accountSearch.IdAccount,
                 IdStatus = statusSearch.IdStatus
             };
 
@@ -325,7 +328,7 @@
                 Month = depositSearch.Month,
                 Amount = depositSearch.Amount,
                 IdUser = depositSearch.IdUser,
-                IdAccount = depositSearch.IdAccount,               
+                IdAccount = depositSearch.IdAccount,
                 IdStatus = statusSearch.IdStatus
             };
 

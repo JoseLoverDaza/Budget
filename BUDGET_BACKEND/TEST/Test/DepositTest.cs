@@ -31,6 +31,7 @@
         #region  Atributos y Propiedades
 
         private readonly IDepositService _depositService;
+        private readonly ILogApiService _logApiService;
         private readonly EFContext? _context;
         private readonly DepositController? _depositController;
 
@@ -46,7 +47,8 @@
 
             _context = new EFContext(options);
             UnitOfWork unitOfWork = new(_context);
-            _depositService = new DepositService(unitOfWork);
+            _logApiService = new LogApiService(unitOfWork);
+            _depositService = new DepositService(unitOfWork, _logApiService);            
             _depositController = new DepositController(_depositService);
 
             #region Data
@@ -150,7 +152,7 @@
                 Month = 1,
                 Amount = 1000,
                 IdUser = 1,
-                IdAccount = 1,               
+                IdAccount = 1,
                 IdStatus = 1
             });
 
@@ -480,8 +482,8 @@
         {
             ///Arrange   
             DepositDto deposit = new()
-            {                
-                IdUser = 1                
+            {
+                IdUser = 1
             };
 
             ///Act
@@ -627,7 +629,7 @@
             ///Arrange   
             DepositDto deposit = new()
             {
-                IdAccount = 1,                
+                IdAccount = 1,
                 IdStatus = 1
             };
 
@@ -667,9 +669,9 @@
             {
                 Year = 1,
                 Month = 1,
-                Amount =1,
+                Amount = 1,
                 IdUser = 1,
-                IdAccount = 1,      
+                IdAccount = 1,
                 IdStatus = 1
             };
 

@@ -5,6 +5,7 @@
 
     using CORE.Dto;
     using Domain.Dto;
+    using Domain.Entities;
 
     #endregion
 
@@ -36,6 +37,8 @@
         public LogApiDto UpdateLogApi(LogApiDto logApi);
 
         public LogApiDto DeleteLogApi(LogApiDto logApi);
+
+        public void TraceLog(string entity, string entityAction, string previousValues, string newValues, DateTime creationDate, int? idStatus);
 
         #endregion
 

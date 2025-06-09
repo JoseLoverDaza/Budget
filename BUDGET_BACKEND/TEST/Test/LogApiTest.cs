@@ -12,7 +12,7 @@
     using Domain.Entities;
     using INFRAESTRUCTURE.Context;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;    
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
     using System.Net;
 
@@ -215,7 +215,7 @@
         {
             ///Arrange   
             LogApiDto logApi = new()
-            {                
+            {
                 EntityAction = "Test",
                 CreationDate = new DateTime(2026, 1, 1)
             };
@@ -253,7 +253,7 @@
         {
             ///Arrange   
             LogApiDto logApi = new()
-            {                
+            {
                 CreationDate = new DateTime(2026, 1, 1),
                 IdStatus = 1
             };
@@ -331,7 +331,7 @@
         {
             ///Arrange   
             LogApiDto logApi = new()
-            {               
+            {
                 Entity = "Test",
                 EntityAction = "Test",
                 PreviousValues = "Test",

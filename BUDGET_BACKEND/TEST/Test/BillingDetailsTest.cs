@@ -31,6 +31,7 @@
         #region  Atributos y Propiedades
 
         private readonly IBillingDetailsService _billingDetailsService;
+        private readonly ILogApiService _logApiService;
         private readonly EFContext? _context;
         private readonly BillingDetailsController? _billingDetailsController;
 
@@ -46,7 +47,8 @@
 
             _context = new EFContext(options);
             UnitOfWork unitOfWork = new(_context);
-            _billingDetailsService = new BillingDetailsService(unitOfWork);
+            _logApiService = new LogApiService(unitOfWork);
+            _billingDetailsService = new BillingDetailsService(unitOfWork, _logApiService);            
             _billingDetailsController = new BillingDetailsController(_billingDetailsService);
 
             #region Data
@@ -158,7 +160,7 @@
                 IdBillingDetails = 1,
                 IdBilling = 1,
                 CreationDate = new DateTime(2026, 1, 1),
-                Amount = 1000,                
+                Amount = 1000,
                 IdExpense = 1,
                 IdStatus = 1
             });
@@ -360,7 +362,7 @@
         {
             ///Arrange   
             BillingDetailsDto billingDetails = new()
-            {               
+            {
                 IdExpense = 1,
                 IdStatus = 1
             };
@@ -476,7 +478,7 @@
             Assert.IsNull(result.Data);
             Assert.AreEqual(HttpStatusCode.InternalServerError.GetHashCode(), result.Code);
         }
-                
+
         [TestMethod]
         public void UpdateBillingDetailFail()
         {

@@ -32,6 +32,7 @@
         #region  Atributos y Propiedades
 
         private readonly IExpenseService _expenseService;
+        private readonly ILogApiService _logApiService;
         private readonly EFContext? _context;
         private readonly ExpenseController? _expenseController;
 
@@ -47,7 +48,8 @@
 
             _context = new EFContext(options);
             UnitOfWork unitOfWork = new(_context);
-            _expenseService = new ExpenseService(unitOfWork);
+            _logApiService = new LogApiService(unitOfWork);
+            _expenseService = new ExpenseService(unitOfWork, _logApiService);           
             _expenseController = new ExpenseController(_expenseService);
 
             #region Data
@@ -205,7 +207,7 @@
             {
                 IdStatus = 1
             };
-            
+
             ///Act
             var result = _expenseController!.GetExpensesByStatus(expense);
 

@@ -31,6 +31,7 @@
         #region  Atributos y Propiedades
 
         private readonly IBillingService _billingService;
+        private readonly ILogApiService _logApiService;
         private readonly EFContext? _context;
         private readonly BillingController? _billingController;
 
@@ -46,7 +47,8 @@
 
             _context = new EFContext(options);
             UnitOfWork unitOfWork = new(_context);
-            _billingService = new BillingService(unitOfWork);
+            _logApiService = new LogApiService(unitOfWork);
+            _billingService = new BillingService(unitOfWork, _logApiService);            
             _billingController = new BillingController(_billingService);
 
             #region Data
@@ -322,7 +324,7 @@
         {
             ///Arrange   
             BillingDto billing = new()
-            {                
+            {
                 IdUser = 1
             };
 
@@ -340,7 +342,7 @@
         {
             ///Arrange   
             BillingDto billing = new()
-            {               
+            {
                 IdUser = -1
             };
 

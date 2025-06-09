@@ -7,8 +7,8 @@
     using Domain.Context;
     using Domain.Dto;
     using Domain.Entities;
-    using System.Collections.Generic;
     using Microsoft.EntityFrameworkCore;
+    using System.Collections.Generic;
 
     #endregion
 
@@ -18,7 +18,7 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class StatusRepository : BaseRepository<Status>, IStatusRepository 
+    public class StatusRepository : BaseRepository<Status>, IStatusRepository
     {
 
         #region Atributos y Propiedades
@@ -49,7 +49,7 @@
                            Name = s.Name,
                            Description = s.Description
                        }
-                   )                  
+                   )
                    .FirstOrDefault();
         }
 
@@ -64,7 +64,7 @@
                            Name = s.Name,
                            Description = s.Description
                        }
-                   )                   
+                   )
                    .FirstOrDefault();
         }
 
@@ -78,7 +78,7 @@
                          Name = s.Name,
                          Description = s.Description
                      }
-                 )                               
+                 )
                  .ToList();
         }
 

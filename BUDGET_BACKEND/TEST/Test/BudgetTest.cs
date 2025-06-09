@@ -31,6 +31,7 @@
         #region  Atributos y Propiedades
 
         private readonly IBudgetService _budgetService;
+        private readonly ILogApiService _logApiService;
         private readonly EFContext? _context;
         private readonly BudgetController? _budgetController;
 
@@ -38,7 +39,7 @@
 
         #region Constructor
 
-        public BudgetTest() 
+        public BudgetTest()
         {
             var options = new DbContextOptionsBuilder<EFContext>()
             .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
@@ -46,7 +47,8 @@
 
             _context = new EFContext(options);
             UnitOfWork unitOfWork = new(_context);
-            _budgetService = new BudgetService(unitOfWork);
+            _logApiService = new LogApiService(unitOfWork);
+            _budgetService = new BudgetService(unitOfWork, _logApiService);            
             _budgetController = new BudgetController(_budgetService);
 
             #region Data
@@ -112,7 +114,7 @@
                 Month = 1,
                 CreationDate = new DateTime(2026, 1, 1),
                 Description = "Test",
-                IdUser = 1,                
+                IdUser = 1,
                 IdStatus = 1
             });
 
@@ -281,7 +283,7 @@
             ///Arrange   
             BudgetDto budget = new()
             {
-                Year = 2026,   
+                Year = 2026,
                 Month = 1,
                 IdUser = 1
             };
@@ -320,7 +322,7 @@
         {
             ///Arrange   
             BudgetDto budget = new()
-            {                
+            {
                 IdUser = 1
             };
 
@@ -432,7 +434,7 @@
             BudgetDto budget = new()
             {
                 Year = 2026,
-                Month = 2,  
+                Month = 2,
                 CreationDate = DateTime.Now,
                 IdUser = 1,
                 IdStatus = 1

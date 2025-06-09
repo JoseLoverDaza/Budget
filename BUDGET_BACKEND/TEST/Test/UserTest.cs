@@ -3,7 +3,7 @@
 
     #region Librerias
 
-    using API.Controllers;    
+    using API.Controllers;
     using CORE.Interfaces.Services;
     using CORE.Services;
     using CORE.Utils;
@@ -15,7 +15,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
     using System.Net;
-    
+
     #endregion
 
     /// <summary>
@@ -31,6 +31,7 @@
         #region  Atributos y Propiedades
 
         private readonly IUserService _userService;
+        private readonly ILogApiService _logApiService;
         private readonly EFContext? _context;
         private readonly UserController? _userController;
 
@@ -46,7 +47,8 @@
 
             _context = new EFContext(options);
             UnitOfWork unitOfWork = new(_context);
-            _userService = new UserService(unitOfWork);
+            _logApiService = new LogApiService(unitOfWork);
+            _userService = new UserService(unitOfWork, _logApiService);            
             _userController = new UserController(_userService);
 
             #region Data
@@ -98,7 +100,7 @@
                 IdUser = 1,
                 Email = "Test",
                 Phone = "1234567890",
-                Username = "Test",                 
+                Username = "Test",
                 Password = "A7Ws/sQDVsXXi/xheT1IufcXPN5rJUKXmPWvnJTGzjRgOzD+vAt1GAMXoD0/mlrD",
                 IdRole = 1,
                 IdStatus = 1
@@ -171,7 +173,7 @@
             {
                 Email = "Test"
             };
-            
+
             ///Act
             var result = _userController!.GetUserByEmail(user);
 
@@ -207,7 +209,7 @@
             {
                 Username = "Test"
             };
-           
+
             ///Act
             var result = _userController!.GetUserByUsername(user);
 
@@ -243,7 +245,7 @@
             {
                 IdRole = 1
             };
-            
+
             ///Act
             var result = _userController!.GetUsersByRole(user);
 
@@ -312,7 +314,7 @@
         {
             ///Arrange   
             UserDto user = new()
-            {               
+            {
                 IdStatus = 1,
                 IdRole = 1
             };
@@ -373,7 +375,7 @@
         {
             ///Arrange   
             UserDto user = new()
-            {                
+            {
                 Email = "Test",
                 Phone = "Test",
                 Username = "Test",

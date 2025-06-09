@@ -42,18 +42,18 @@
         public LogApiExtendDto? GetLogApiById(LogApiDto logApi)
         {
             return (
-                    from l in _context.LogApis.AsNoTracking()                   
+                    from l in _context.LogApis.AsNoTracking()
                     join s in _context.Status.AsNoTracking()
                     on l.IdStatus equals s.IdStatus
                     where l.IdLogApi == logApi.IdLogApi
                     select new LogApiExtendDto
                     {
-                        IdLogApi = l.IdLogApi,     
+                        IdLogApi = l.IdLogApi,
                         Entity = l.Entity,
                         PreviousValues = l.PreviousValues,
                         NewValues = l.NewValues,
                         EntityAction = l.EntityAction,
-                        CreationDate = l.CreationDate,                         
+                        CreationDate = l.CreationDate,
                         IdStatus = l.IdStatus,
                         NameStatus = s.Name,
                         DescriptionStatus = s.Description
@@ -71,15 +71,15 @@
                     where l.CreationDate == logApi.CreationDate
                     select new LogApiExtendDto
                     {
-                       IdLogApi = l.IdLogApi,
-                       Entity = l.Entity,
-                       PreviousValues = l.PreviousValues,
-                       NewValues = l.NewValues,
-                       EntityAction = l.EntityAction,
-                       CreationDate = l.CreationDate,
-                       IdStatus = l.IdStatus,
-                       NameStatus = s.Name,
-                       DescriptionStatus = s.Description
+                        IdLogApi = l.IdLogApi,
+                        Entity = l.Entity,
+                        PreviousValues = l.PreviousValues,
+                        NewValues = l.NewValues,
+                        EntityAction = l.EntityAction,
+                        CreationDate = l.CreationDate,
+                        IdStatus = l.IdStatus,
+                        NameStatus = s.Name,
+                        DescriptionStatus = s.Description
                     }
                   )
                   .ToList();
@@ -94,15 +94,15 @@
                     where l.IdStatus == logApi.IdStatus
                     select new LogApiExtendDto
                     {
-                       IdLogApi = l.IdLogApi,
-                       Entity = l.Entity,
-                       PreviousValues = l.PreviousValues,
-                       NewValues = l.NewValues,
-                       EntityAction = l.EntityAction,
-                       CreationDate = l.CreationDate,
-                       IdStatus = l.IdStatus,
-                       NameStatus = s.Name,
-                       DescriptionStatus = s.Description
+                        IdLogApi = l.IdLogApi,
+                        Entity = l.Entity,
+                        PreviousValues = l.PreviousValues,
+                        NewValues = l.NewValues,
+                        EntityAction = l.EntityAction,
+                        CreationDate = l.CreationDate,
+                        IdStatus = l.IdStatus,
+                        NameStatus = s.Name,
+                        DescriptionStatus = s.Description
                     }
                    )
                    .ToList();
@@ -140,15 +140,15 @@
                     where l.CreationDate == logApi.CreationDate && l.IdStatus == logApi.IdStatus
                     select new LogApiExtendDto
                     {
-                       IdLogApi = l.IdLogApi,
-                       Entity = l.Entity,
-                       PreviousValues = l.PreviousValues,
-                       NewValues = l.NewValues,
-                       EntityAction = l.EntityAction,
-                       CreationDate = l.CreationDate,
-                       IdStatus = l.IdStatus,
-                       NameStatus = s.Name,
-                       DescriptionStatus = s.Description
+                        IdLogApi = l.IdLogApi,
+                        Entity = l.Entity,
+                        PreviousValues = l.PreviousValues,
+                        NewValues = l.NewValues,
+                        EntityAction = l.EntityAction,
+                        CreationDate = l.CreationDate,
+                        IdStatus = l.IdStatus,
+                        NameStatus = s.Name,
+                        DescriptionStatus = s.Description
                     }
                    )
                    .ToList();
@@ -163,15 +163,15 @@
                     where l.EntityAction == logApi.EntityAction && l.CreationDate == logApi.CreationDate && l.IdStatus == logApi.IdStatus
                     select new LogApiExtendDto
                     {
-                       IdLogApi = l.IdLogApi,
-                       Entity = l.Entity,
-                       PreviousValues = l.PreviousValues,
-                       NewValues = l.NewValues,
-                       EntityAction = l.EntityAction,
-                       CreationDate = l.CreationDate,
-                       IdStatus = l.IdStatus,
-                       NameStatus = s.Name,
-                       DescriptionStatus = s.Description
+                        IdLogApi = l.IdLogApi,
+                        Entity = l.Entity,
+                        PreviousValues = l.PreviousValues,
+                        NewValues = l.NewValues,
+                        EntityAction = l.EntityAction,
+                        CreationDate = l.CreationDate,
+                        IdStatus = l.IdStatus,
+                        NameStatus = s.Name,
+                        DescriptionStatus = s.Description
                     }
                   )
                   .ToList();

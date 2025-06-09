@@ -11,7 +11,7 @@
     using Domain.Entities;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
-    
+
     #endregion
 
     /// <summary>
@@ -25,12 +25,15 @@
 
         #region Atributos y Propiedades
 
+        private readonly ILogApiService _logApiService;
+
         #endregion
 
         #region Constructor
 
-        public TypeExpenseService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {           
+        public TypeExpenseService(IUnitOfWork unitOfWork, ILogApiService logApiService) : base(unitOfWork)
+        {
+            _logApiService = logApiService;
         }
 
         #endregion

@@ -1,6 +1,6 @@
 ﻿namespace CORE.Services
 {
-    
+
     #region Librerias
 
     using CORE.Dto;
@@ -11,6 +11,7 @@
     using Domain.Entities;
     using Microsoft.Extensions.Configuration;
     using System.Runtime.InteropServices;
+    using System.Text.Json;
 
     #endregion
 
@@ -26,14 +27,16 @@
         #region Atributos y Propiedades
 
         private readonly IConfiguration _configuration;
+        private readonly ILogApiService _logApiService;
 
         #endregion
 
         #region Constructor
 
-        public AuthenticationService(IUnitOfWork unitOfWork, IConfiguration configuration) : base(unitOfWork)
+        public AuthenticationService(IUnitOfWork unitOfWork, IConfiguration configuration, ILogApiService logApiService) : base(unitOfWork)
         {
             _configuration = configuration;
+            _logApiService = logApiService;
         }
 
         #endregion
@@ -42,7 +45,7 @@
 
         public AuthenticationDto? Authentication(AuthenticationDto authentication)
         {
-            IUserRepository userRepository = UnitOfWork.UserRepository();           
+            IUserRepository userRepository = UnitOfWork.UserRepository();
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();
 
             if (authentication == null || string.IsNullOrWhiteSpace(authentication.Username.Trim()) || string.IsNullOrWhiteSpace(authentication.Password.Trim()))
@@ -66,7 +69,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            TokenApi saveTokenApi = new ()
+            TokenApi saveTokenApi = new()
             {
                 Token = sToken,
                 CreationDate = DateTime.Now,
@@ -81,12 +84,14 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
-
+                        
             authentication.Token = sToken;
             authentication.CreationDate = DateTime.Now;
             authentication.ExpirationDate = DateTime.Now.AddDays(1);
             authentication.IsAuthenticated = true;
-            
+
+            _logApiService.TraceLog(typeof(Account).Name, Constants.Method.TOKEN, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(authentication), DateTime.Now, statusSearch.IdStatus);
+
             return authentication;
         }
 
@@ -109,15 +114,19 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
-
+                        
             authentication.Username = userSearch.Username;
             authentication.Password = string.Empty;
             authentication.CreationDate = tokenApiSearch.CreationDate;
             authentication.ExpirationDate = tokenApiSearch.ExpirationDate;
             authentication.IsAuthenticated = tokenApiSearch.ExpirationDate >= DateTime.Now;
 
+            _logApiService.TraceLog(typeof(Account).Name, Constants.Method.VERIFY, JsonSerializer.Serialize(tokenApiSearch), JsonSerializer.Serialize(authentication), DateTime.Now, statusSearch.IdStatus);
+
             return authentication;
         }
+
+        
 
         #endregion
 

@@ -9,7 +9,7 @@
     using CORE.Utils;
     using Domain.Dto;
     using Domain.Entities;
-    using System.Collections.Generic;    
+    using System.Collections.Generic;
     using System.Runtime.InteropServices;
 
     #endregion
@@ -25,12 +25,15 @@
 
         #region Atributos y Propiedades
 
+        private readonly ILogApiService _logApiService;
+
         #endregion
 
         #region Constructor
 
-        public BillingService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {             
+        public BillingService(IUnitOfWork unitOfWork, ILogApiService logApiService) : base(unitOfWork)
+        {
+            _logApiService = logApiService;
         }
 
         #endregion
@@ -111,7 +114,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
         }
-        
+
         public List<BillingExtendDto> GetBillingsByUser(BillingDto billing)
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
@@ -168,8 +171,8 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            UserExtendDto? userSearch = userRepository.GetUserById( new UserDto { IdUser = billing.IdUser} ) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById( new StatusDto { IdStatus = billing.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            UserExtendDto? userSearch = userRepository.GetUserById(new UserDto { IdUser = billing.IdUser }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = billing.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             List<BillingExtendDto> billingsSearch = billingRepository.GetBillingsByYearMonthUser(billing);
 
@@ -177,7 +180,7 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
-           
+
             Billing saveBilling = new()
             {
                 Year = billing.Year,

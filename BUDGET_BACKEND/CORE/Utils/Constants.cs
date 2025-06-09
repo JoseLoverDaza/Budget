@@ -24,7 +24,7 @@
             public const string SUCCESSUL_SAVE = "Successful Save";
             public const string SUCCESSUL_EDIT = "Successful Edit";
             public const string SUCCESSUL_DELETE = "Successful Delete";
-
+            public const string JSON_EMPTY = "{}";
         }
 
         public static class Status
@@ -38,6 +38,9 @@
         {
             public const string GET = "GET";
             public const string POST = "POST";
+            public const string DELETE = "DELETE";
+            public const string TOKEN = "TOKEN";
+            public const string VERIFY = "VERIFY";
         }
 
         #endregion

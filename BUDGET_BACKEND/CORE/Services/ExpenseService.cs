@@ -9,9 +9,9 @@
     using CORE.Utils;
     using Domain.Dto;
     using Domain.Entities;
-    using System.Collections.Generic;   
+    using System.Collections.Generic;
     using System.Runtime.InteropServices;
-    
+
     #endregion
 
     /// <summary>
@@ -25,12 +25,15 @@
 
         #region Atributos y Propiedades
 
+        private readonly ILogApiService _logApiService;
+
         #endregion
 
         #region Constructor
 
-        public ExpenseService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {           
+        public ExpenseService(IUnitOfWork unitOfWork, ILogApiService logApiService) : base(unitOfWork)
+        {
+            _logApiService = logApiService;
         }
 
         #endregion

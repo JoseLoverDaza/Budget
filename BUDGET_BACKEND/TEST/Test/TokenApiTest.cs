@@ -31,6 +31,7 @@
         #region  Atributos y Propiedades
 
         private readonly ITokenApiService _tokenApiService;
+        private readonly ILogApiService _logApiService;
         private readonly EFContext? _context;
         private readonly TokenApiController? _tokenApiController;
 
@@ -46,7 +47,8 @@
 
             _context = new EFContext(options);
             UnitOfWork unitOfWork = new(_context);
-            _tokenApiService = new TokenApiService(unitOfWork);
+            _logApiService = new LogApiService(unitOfWork);
+            _tokenApiService = new TokenApiService(unitOfWork, _logApiService);            
             _tokenApiController = new TokenApiController(_tokenApiService);
 
             #region Data
@@ -508,7 +510,7 @@
             {
                 Token = "Test1",
                 CreationDate = new DateTime(2025, 1, 1),
-                ExpirationDate = new DateTime(2025, 1, 1),               
+                ExpirationDate = new DateTime(2025, 1, 1),
                 IdUser = 1,
                 IdStatus = 1
             };

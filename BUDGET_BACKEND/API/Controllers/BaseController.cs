@@ -3,12 +3,11 @@
 
     #region Librerias
 
-    using Domain.Dto.Common;    
-    using Microsoft.AspNetCore.Mvc;  
+    using Domain.Dto.Common;
+    using Microsoft.AspNetCore.Mvc;
     using System.Net;
-    using System.Reflection.Metadata;
     using System.Runtime.InteropServices;
-    
+
     #endregion
 
     /// <summary>
@@ -48,7 +47,7 @@
         #region Métodos y Funciones
 
         protected void ResponseError(Exception ex, bool includeInnerException = false)
-        {            
+        {
             Serilog.Log.Error(ex, "Demo - {Message}", ex.Message);
             responseError.Message = typeof(ExternalException) != ex.GetType() ? CORE.Utils.Constants.General.MESSAGE_GENERAL : ex.Message;
             if (includeInnerException && ex.InnerException != null)

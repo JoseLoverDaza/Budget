@@ -9,7 +9,7 @@
     using CORE.Utils;
     using Domain.Dto;
     using Domain.Entities;
-    using System.Collections.Generic;    
+    using System.Collections.Generic;
     using System.Runtime.InteropServices;
 
     #endregion
@@ -25,12 +25,15 @@
 
         #region #region Atributos y Propiedades
 
+        private readonly ILogApiService _logApiService;
+
         #endregion
 
         #region Constructor
 
-        public BudgetService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {            
+        public BudgetService(IUnitOfWork unitOfWork, ILogApiService logApiService) : base(unitOfWork)
+        {
+            _logApiService = logApiService;
         }
 
         #endregion
@@ -168,8 +171,8 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            UserExtendDto? userSearch = userRepository.GetUserById(new UserDto { IdUser = budget.IdUser} ) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = budget.IdStatus} ) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            UserExtendDto? userSearch = userRepository.GetUserById(new UserDto { IdUser = budget.IdUser }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = budget.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             List<BudgetExtendDto> budgetsSearch = budgetRepository.GetBudgetsByYearMonthUser(budget);
 
@@ -185,7 +188,7 @@
                 CreationDate = budget.CreationDate,
                 Description = budget.Description?.Trim() ?? string.Empty,
                 Observation = budget.Observation?.Trim() ?? string.Empty,
-                IdUser = userSearch.IdUser,               
+                IdUser = userSearch.IdUser,
                 IdStatus = statusSearch.IdStatus
             };
 
@@ -202,7 +205,7 @@
         {
             IBudgetRepository budgetRepository = UnitOfWork.BudgetRepository();
 
-            if(budget == null || budget.Year <= 0 || budget.Month <= 0)
+            if (budget == null || budget.Year <= 0 || budget.Month <= 0)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }

@@ -10,7 +10,7 @@
     using Domain.Entities;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
-    
+
     #endregion
 
     /// <summary>
@@ -62,10 +62,10 @@
                          DescriptionFinancialInstitution = f.Description,
                          IdTypeAccount = a.IdTypeAccount,
                          NameTypeAccount = t.Name,
-                         DescriptionTypeAccount = t.Description,                         
+                         DescriptionTypeAccount = t.Description,
                          IdUser = a.IdUser,
                          EmailUser = u.Email,
-                         UsernameUser = u.Username,                        
+                         UsernameUser = u.Username,
                          IdStatus = a.IdStatus,
                          NameStatus = s.Name,
                          DescriptionStatus = s.Description

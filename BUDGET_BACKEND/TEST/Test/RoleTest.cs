@@ -13,7 +13,7 @@
     using Domain.Entities;
     using INFRAESTRUCTURE.Context;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;   
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System.Net;
 
     #endregion
@@ -30,7 +30,8 @@
 
         #region Atributos y Propiedades
 
-        private readonly IRoleService _roleService;      
+        private readonly IRoleService _roleService;
+        private readonly ILogApiService _logApiService;
         private readonly EFContext? _context;
         private readonly RoleController? _roleController;
 
@@ -45,8 +46,9 @@
            .Options;
 
             _context = new EFContext(options);
-            UnitOfWork unitOfWork = new(_context);            
-            _roleService = new RoleService(unitOfWork);           
+            UnitOfWork unitOfWork = new(_context);
+            _logApiService = new LogApiService(unitOfWork);
+            _roleService = new RoleService(unitOfWork, _logApiService);            
             _roleController = new RoleController(_roleService);
 
             #region Data
@@ -144,7 +146,7 @@
             {
                 Name = "Test"
             };
-            
+
             ///Act
             var result = _roleController!.GetRoleByName(role);
 
@@ -180,7 +182,7 @@
             {
                 IdStatus = 1
             };
-            
+
             ///Act
             var result = _roleController!.GetRolesByStatus(role);
 

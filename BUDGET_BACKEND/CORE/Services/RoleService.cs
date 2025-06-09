@@ -11,7 +11,7 @@
     using Domain.Entities;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
-    
+
     #endregion
 
     /// <summary>
@@ -25,20 +25,23 @@
 
         #region Atributos y Propiedades
 
+        private readonly ILogApiService _logApiService;
+
         #endregion
 
         #region Constructor
 
-        public RoleService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {            
+        public RoleService(IUnitOfWork unitOfWork, ILogApiService logApiService) : base(unitOfWork)
+        {
+            _logApiService = logApiService;
         }
 
         #endregion
 
         #region Métodos y Funciones
-        
+
         public RoleExtendDto? GetRoleById(RoleDto role)
-        { 
+        {
             IRoleRepository roleRepository = UnitOfWork.RoleRepository();
 
             RoleExtendDto? roleSearch = roleRepository.GetRoleById(role);
@@ -84,7 +87,7 @@
         }
 
         public RoleDto SaveRole(RoleDto role)
-        {           
+        {
             IRoleRepository roleRepository = UnitOfWork.RoleRepository();
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();
 
@@ -121,7 +124,7 @@
         public RoleDto UpdateRole(RoleDto role)
         {
             IRoleRepository roleRepository = UnitOfWork.RoleRepository();
-            
+
             if (role == null || role.IdRole <= 0 || string.IsNullOrWhiteSpace(role.Name.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
@@ -181,7 +184,7 @@
             }
             return role;
         }
-        
+
         #endregion
 
     }

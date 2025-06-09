@@ -8,9 +8,9 @@
     using CORE.Utils;
     using Domain.Dto;
     using Domain.Entities;
-    using System.Collections.Generic;    
+    using System.Collections.Generic;
     using System.Runtime.InteropServices;
-       
+
     #endregion
 
     /// <summary>
@@ -24,12 +24,15 @@
 
         #region Atributos y Propiedades
 
+        private readonly ILogApiService _logApiService;
+
         #endregion
 
         #region Constructor
 
-        public StatusService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public StatusService(IUnitOfWork unitOfWork, ILogApiService logApiService) : base(unitOfWork)
         {
+            _logApiService = logApiService;
         }
 
         #endregion
@@ -111,7 +114,7 @@
             if (UnitOfWork.SaveChanges() <= 0)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            }             
+            }
             return status;
         }
 

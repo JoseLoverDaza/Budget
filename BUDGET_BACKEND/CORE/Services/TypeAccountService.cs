@@ -9,9 +9,9 @@
     using CORE.Utils;
     using Domain.Dto;
     using Domain.Entities;
-    using System.Collections.Generic;    
+    using System.Collections.Generic;
     using System.Runtime.InteropServices;
-   
+
     #endregion
 
     /// <summary>
@@ -24,19 +24,22 @@
     {
 
         #region Atributos y Propiedades
-               
-        #endregion 
+
+        private readonly ILogApiService _logApiService;
+
+        #endregion
 
         #region Constructor
 
-        public TypeAccountService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {           
+        public TypeAccountService(IUnitOfWork unitOfWork, ILogApiService logApiService) : base(unitOfWork)
+        {
+            _logApiService = logApiService;
         }
 
         #endregion
 
         #region Métodos y Funciones
-               
+
         public TypeAccountExtendDto? GetTypeAccountById(TypeAccountDto typeAccount)
         {
             ITypeAccountRepository typeAccountRepository = UnitOfWork.TypeAccountRepository();
@@ -120,7 +123,7 @@
         public TypeAccountDto UpdateTypeAccount(TypeAccountDto typeAccount)
         {
             ITypeAccountRepository typeAccountRepository = UnitOfWork.TypeAccountRepository();
-            
+
             if (typeAccount == null || typeAccount.IdTypeAccount <= 0 || string.IsNullOrWhiteSpace(typeAccount.Name.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);

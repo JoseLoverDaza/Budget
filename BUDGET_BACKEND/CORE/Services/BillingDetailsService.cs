@@ -9,7 +9,7 @@
     using CORE.Utils;
     using Domain.Dto;
     using Domain.Entities;
-    using System.Collections.Generic;   
+    using System.Collections.Generic;
     using System.Runtime.InteropServices;
 
     #endregion
@@ -25,12 +25,15 @@
 
         #region Atributos y Propiedades
 
+        private readonly ILogApiService _logApiService;
+
         #endregion
 
         #region Constructor
 
-        public BillingDetailsService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {            
+        public BillingDetailsService(IUnitOfWork unitOfWork, ILogApiService logApiService) : base(unitOfWork)
+        {
+            _logApiService = logApiService;
         }
 
         #endregion
@@ -221,7 +224,7 @@
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();
 
             BillingDetailExtendDto? billingDetailSearch = billingDetailRepository.GetBillingDetailsById(billingDetails) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById( new StatusDto { IdStatus = billingDetails.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = billingDetails.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (billingDetailSearch.IdStatus == billingDetails.IdStatus)
             {

@@ -9,9 +9,9 @@
     using CORE.Utils;
     using Domain.Dto;
     using Domain.Entities;
-    using System.Collections.Generic;    
+    using System.Collections.Generic;
     using System.Runtime.InteropServices;
-    
+
     #endregion
 
     /// <summary>
@@ -25,12 +25,15 @@
 
         #region Atributos y Propiedades
 
+        private readonly ILogApiService _logApiService;
+
         #endregion
 
         #region Constructor
 
-        public UserService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {            
+        public UserService(IUnitOfWork unitOfWork, ILogApiService logApiService) : base(unitOfWork)
+        {
+            _logApiService = logApiService;
         }
 
         #endregion
@@ -132,7 +135,7 @@
             IUserRepository userRepository = UnitOfWork.UserRepository();
             IRoleRepository roleRepository = UnitOfWork.RoleRepository();
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();
-            
+
             if (user == null || string.IsNullOrWhiteSpace(user.Email.Trim()) || string.IsNullOrWhiteSpace(user.Phone.Trim()) || string.IsNullOrWhiteSpace(user.Username.Trim()) || string.IsNullOrWhiteSpace(user.Password.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
@@ -152,7 +155,7 @@
             string sHashPassword = PasswordHash.HashPassword(user.Password);
 
             User saveUser = new()
-            {                
+            {
                 Email = user.Email.Trim(),
                 Phone = user.Phone.Trim(),
                 Username = user.Username.Trim(),
@@ -173,7 +176,7 @@
         public UserDto UpdateUser(UserDto user)
         {
             IUserRepository userRepository = UnitOfWork.UserRepository();
-           
+
             if (user == null || user.IdUser <= 0 || string.IsNullOrWhiteSpace(user.Email.Trim()) || string.IsNullOrWhiteSpace(user.Phone.Trim()) || string.IsNullOrWhiteSpace(user.Username.Trim()) || string.IsNullOrWhiteSpace(user.Password.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
@@ -235,7 +238,7 @@
                 Phone = userSearch.Phone.Trim(),
                 Username = userSearch.Username.Trim(),
                 Password = userSearch.Password.Trim(),
-                IdRole = userSearch.IdRole,               
+                IdRole = userSearch.IdRole,
                 IdStatus = statusSearch.IdStatus
             };
 

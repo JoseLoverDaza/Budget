@@ -31,6 +31,7 @@
         #region Atributos y Propiedades
 
         private readonly IFinancialInstitutionService _financialInstitutionService;
+        private readonly ILogApiService _logApiService;
         private readonly EFContext? _context;
         private readonly FinancialInstitutionController? _financialInstitutionController;
 
@@ -46,7 +47,8 @@
 
             _context = new EFContext(options);
             UnitOfWork unitOfWork = new(_context);
-            _financialInstitutionService = new FinancialInstitutionService(unitOfWork);
+            _logApiService = new LogApiService(unitOfWork);
+            _financialInstitutionService = new FinancialInstitutionService(unitOfWork, _logApiService);           
             _financialInstitutionController = new FinancialInstitutionController(_financialInstitutionService);
 
             #region Data
@@ -107,7 +109,7 @@
             {
                 IdFinancialInstitution = 1
             };
-            
+
             ///Act
             var result = _financialInstitutionController!.GetFinancialInstitutionById(financialInstitution);
 
@@ -143,7 +145,7 @@
             {
                 Name = "Test"
             };
-            
+
             ///Act
             var result = _financialInstitutionController!.GetFinancialInstitutionByName(financialInstitution);
 
@@ -179,7 +181,7 @@
             {
                 IdStatus = 1
             };
-            
+
             ///Act
             var result = _financialInstitutionController!.GetFinancialInstitutionsByStatus(financialInstitution);
 

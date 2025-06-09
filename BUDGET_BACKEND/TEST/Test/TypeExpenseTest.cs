@@ -31,6 +31,7 @@
         #region Atributos y Propiedades
 
         private readonly ITypeExpenseService _typeExpenseService;
+        private readonly ILogApiService _logApiService;
         private readonly EFContext? _context;
         private readonly TypeExpenseController? _typeExpenseController;
 
@@ -46,7 +47,8 @@
 
             _context = new EFContext(options);
             UnitOfWork unitOfWork = new(_context);
-            _typeExpenseService = new TypeExpenseService(unitOfWork);
+            _logApiService = new LogApiService(unitOfWork);
+            _typeExpenseService = new TypeExpenseService(unitOfWork, _logApiService);           
             _typeExpenseController = new TypeExpenseController(_typeExpenseService);
 
             #region Data
@@ -143,7 +145,7 @@
             {
                 Name = "Test"
             };
-            
+
             ///Act
             var result = _typeExpenseController!.GetTypeExpenseByName(typeExpense);
 
@@ -179,7 +181,7 @@
             {
                 IdStatus = 1
             };
-           
+
             ///Act
             var result = _typeExpenseController!.GetTypeExpensesByStatus(typeExpense);
 

@@ -19,7 +19,7 @@
         #region  Métodos y Funciones
 
         public StatusDto? GetStatusById(StatusDto status);
-                
+
         public StatusDto? GetStatusByName(StatusDto status);
 
         public List<StatusDto> GetStatus();

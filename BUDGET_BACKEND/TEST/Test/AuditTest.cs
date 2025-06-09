@@ -30,6 +30,7 @@
         #region  Atributos y Propiedades
 
         private readonly IAuditService _auditService;
+        private readonly ILogApiService _logApiService;
         private readonly EFContext? _context;
         private readonly AuditController? _auditController;
 
@@ -45,7 +46,8 @@
 
             _context = new EFContext(options);
             UnitOfWork unitOfWork = new(_context);
-            _auditService = new AuditService(unitOfWork);
+            _logApiService = new LogApiService(unitOfWork);
+            _auditService = new AuditService(unitOfWork, _logApiService);           
             _auditController = new AuditController(_auditService);
 
             #region Data
@@ -58,7 +60,7 @@
                 Endpoint = "Test",
                 Agent = "Test",
                 Method = "Test",
-                CreationDate = new DateTime(2026, 1, 1)                
+                CreationDate = new DateTime(2026, 1, 1)
             });
 
             _context.SaveChanges();
@@ -266,9 +268,9 @@
             {
                 Host = "Test",
                 Endpoint = "Test",
-                Agent = "Test", 
+                Agent = "Test",
                 Method = "Test",
-                CreationDate= DateTime.Now                
+                CreationDate = DateTime.Now
             };
 
             ///Act
@@ -291,7 +293,7 @@
                 Endpoint = "Test",
                 Agent = "Test",
                 Method = "Test",
-                CreationDate = DateTime.Now              
+                CreationDate = DateTime.Now
             };
 
             ///Act
@@ -314,7 +316,7 @@
                 Endpoint = "Test",
                 Agent = "Test",
                 Method = "Test",
-                CreationDate = DateTime.Now               
+                CreationDate = DateTime.Now
             };
 
             ///Act

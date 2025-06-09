@@ -8,7 +8,7 @@
     using CORE.Interfaces.Services;
     using CORE.Services;
     using CORE.Utils;
-    using Domain.Context; 
+    using Domain.Context;
     using Domain.Entities;
     using INFRAESTRUCTURE.Context;
     using Microsoft.EntityFrameworkCore;
@@ -32,6 +32,7 @@
         #region  Atributos y Propiedades
 
         private readonly IAuthenticationService _authenticationService;
+        private readonly ILogApiService _logApiService;
         private readonly EFContext? _context;
         private readonly AuthenticationController? _authenticationController;
 
@@ -45,9 +46,9 @@
             .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
             .Options;
 
-            var inMemorySettings = new Dictionary<string, string> 
-            {
-                {"JwtSettings:SecretKey", "clave_falsa_para_tests"}
+            var inMemorySettings = new Dictionary<string, string>
+            {               
+                {"Encryption:SecretKey", "1c6225ec7092ad2f4a4acd79f8fc6854aa10653763fb053a6cf2bb2d2a4148ab"}
             };
 
             IConfiguration configuration = new ConfigurationBuilder()
@@ -56,7 +57,9 @@
 
             _context = new EFContext(options);
             UnitOfWork unitOfWork = new(_context);
-            _authenticationService = new AuthenticationService(unitOfWork, configuration);
+            _logApiService = new LogApiService(unitOfWork);
+            _authenticationService = new AuthenticationService(unitOfWork, configuration, _logApiService);
+            
             _authenticationController = new AuthenticationController(_authenticationService);
 
             #region Data
@@ -123,7 +126,7 @@
                 Token = "Test",
                 CreationDate = DateTime.Now,
                 ExpirationDate = DateTime.Now.AddDays(1),
-                IdUser = 1,              
+                IdUser = 1,
                 IdStatus = 2
             });
 
@@ -199,7 +202,7 @@
             ///Arrange   
             AuthenticationDto authentication = new()
             {
-                Token = "T"                
+                Token = "T"
             };
 
             ///Act

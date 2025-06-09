@@ -10,7 +10,7 @@
     using Domain.Entities;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
-   
+
     #endregion
 
     /// <summary>
@@ -62,7 +62,7 @@
                        }
                    )
                    .FirstOrDefault();
-        }       
+        }
 
         public List<ExpenseExtendDto> GetExpensesByTypeExpense(ExpenseDto expense)
         {

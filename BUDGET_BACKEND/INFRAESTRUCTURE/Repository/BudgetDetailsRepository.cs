@@ -10,7 +10,7 @@
     using Domain.Entities;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
-    
+
     #endregion
 
     /// <summary>
@@ -58,7 +58,7 @@
                          MonthBudget = b.Month,
                          CreationDate = bd.CreationDate,
                          Amount = bd.Amount,
-                         IdExpense = bd.IdExpense,                         
+                         IdExpense = bd.IdExpense,
                          NameExpense = e.Name,
                          DescriptionExpense = e.Description,
                          IdStatus = bd.IdStatus,

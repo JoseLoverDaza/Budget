@@ -19,7 +19,7 @@
     {
 
         #region Métodos y Funciones
-                
+
         public static IServiceCollection AddSwaggerDocumentation(this IServiceCollection services)
         {
             services.AddSwaggerGen(c =>

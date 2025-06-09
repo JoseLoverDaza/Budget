@@ -31,6 +31,7 @@
         #region  Atributos y Propiedades
 
         private readonly IBudgetDetailsService _budgetDetailsService;
+        private readonly ILogApiService _logApiService;
         private readonly EFContext? _context;
         private readonly BudgetDetailsController? _budgetDetailsController;
 
@@ -46,7 +47,8 @@
 
             _context = new EFContext(options);
             UnitOfWork unitOfWork = new(_context);
-            _budgetDetailsService = new BudgetDetailsService(unitOfWork);
+            _logApiService = new LogApiService(unitOfWork);
+            _budgetDetailsService = new BudgetDetailsService(unitOfWork, _logApiService);            
             _budgetDetailsController = new BudgetDetailsController(_budgetDetailsService);
 
             #region Data
@@ -160,7 +162,7 @@
                 IdBudgetDetails = 1,
                 IdBudget = 1,
                 CreationDate = new DateTime(2026, 1, 1),
-                Amount = 1000,               
+                Amount = 1000,
                 IdExpense = 1,
                 IdStatus = 1
             });
@@ -362,7 +364,7 @@
         {
             ///Arrange   
             BudgetDetailsDto budgetDetails = new()
-            {               
+            {
                 IdExpense = 1,
                 IdStatus = 1
             };
@@ -441,7 +443,7 @@
             ///Arrange   
             BudgetDetailsDto budgetDetails = new()
             {
-                IdBudget = 1,                
+                IdBudget = 1,
                 CreationDate = DateTime.Now,
                 Amount = 1000,
                 IdExpense = 2,

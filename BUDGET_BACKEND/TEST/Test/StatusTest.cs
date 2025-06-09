@@ -3,17 +3,17 @@
 
     #region Librerias
 
-    using API.Controllers;   
+    using API.Controllers;
     using CORE.Interfaces.Services;
     using CORE.Services;
     using CORE.Utils;
     using Domain.Context;
     using Domain.Dto;
     using Domain.Entities;
-    using INFRAESTRUCTURE.Context;    
-    using Microsoft.EntityFrameworkCore;   
+    using INFRAESTRUCTURE.Context;
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using System.Net;    
+    using System.Net;
 
     #endregion
 
@@ -29,7 +29,8 @@
 
         #region Atributos y Propiedades
 
-        private readonly IStatusService _statusService;       
+        private readonly IStatusService _statusService;
+        private readonly ILogApiService _logApiService;
         private readonly EFContext? _context;
         private readonly StatusController? _statusController;
 
@@ -44,8 +45,9 @@
            .Options;
 
             _context = new EFContext(options);
-            UnitOfWork unitOfWork = new(_context);            
-            _statusService = new StatusService(unitOfWork);            
+            UnitOfWork unitOfWork = new(_context);
+            _logApiService = new LogApiService(unitOfWork);
+            _statusService = new StatusService(unitOfWork, _logApiService);            
             _statusController = new StatusController(_statusService);
 
             #region Data
@@ -112,7 +114,7 @@
             {
                 Name = Constants.Status.INACTIVO
             };
-            
+
             ///Act
             var result = _statusController!.GetStatusByName(status);
 

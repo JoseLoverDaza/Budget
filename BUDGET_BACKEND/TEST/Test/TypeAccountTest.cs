@@ -31,6 +31,7 @@
         #region Atributos y Propiedades
 
         private readonly ITypeAccountService _typeAccountService;
+        private readonly ILogApiService _logApiService;
         private readonly EFContext? _context;
         private readonly TypeAccountController? _typeAccountController;
 
@@ -46,7 +47,8 @@
 
             _context = new EFContext(options);
             UnitOfWork unitOfWork = new(_context);
-            _typeAccountService = new TypeAccountService(unitOfWork);
+            _logApiService = new LogApiService(unitOfWork);
+            _typeAccountService = new TypeAccountService(unitOfWork, _logApiService);            
             _typeAccountController = new TypeAccountController(_typeAccountService);
 
             #region Data
@@ -144,7 +146,7 @@
             {
                 Name = "Test"
             };
-           
+
             ///Act
             var result = _typeAccountController!.GetTypeAccountByName(typeAccount);
 
@@ -180,7 +182,7 @@
             {
                 IdStatus = 1
             };
-            
+
             ///Act
             var result = _typeAccountController!.GetTypeAccountsByStatus(typeAccount);
 

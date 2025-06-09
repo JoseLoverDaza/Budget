@@ -22,13 +22,13 @@
         #region Atributos y Propiedades
 
         private readonly RequestDelegate _next = next;
-       
+
         #endregion
 
         #region Métodos y Funciones
 
         public async Task InvokeAsync(HttpContext context)
-        {            
+        {
             var ip = context.Connection.RemoteIpAddress?.ToString();
             if (context.Request.Headers.TryGetValue("X-Forwarded-For", out var forwardedFor))
             {
@@ -45,8 +45,8 @@
             var fecha = fechaLocal;
 
             try
-            {               
-                await _next(context);                
+            {
+                await _next(context);
             }
             catch (Exception)
             {

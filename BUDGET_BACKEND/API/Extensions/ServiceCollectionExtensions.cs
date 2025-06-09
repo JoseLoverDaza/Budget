@@ -42,7 +42,7 @@
         }
 
         public static IServiceCollection AddBusinessServices(this IServiceCollection services)
-        {            
+        {
             services.AddTransient<IAuthenticationService, AuthenticationService>();
             services.AddTransient<IStatusService, StatusService>();
             services.AddTransient<IRoleService, RoleService>();
@@ -83,8 +83,8 @@
         }
 
         private static string GetDecryptedConnectionString(IConfiguration configuration)
-        {       
-            EncryptionHelper.Configure(configuration); 
+        {
+            EncryptionHelper.Configure(configuration);
             string encrypted = configuration.GetConnectionString(Constants.General.CONNECTION_STRING_DATABASE_NAME)!;
             return EncryptionHelper.Decrypt(encrypted);
         }

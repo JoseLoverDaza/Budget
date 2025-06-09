@@ -25,12 +25,15 @@
 
         #region Atributos y Propiedades
 
+        private readonly ILogApiService _logApiService;
+
         #endregion
 
         #region Constructor
 
-        public TokenApiService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public TokenApiService(IUnitOfWork unitOfWork, ILogApiService logApiService) : base(unitOfWork)
         {
+            _logApiService = logApiService;
         }
 
         #endregion
@@ -229,7 +232,7 @@
         public TokenApiDto UpdateTokenApi(TokenApiDto tokenApi)
         {
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
-            
+
             if (tokenApi == null || tokenApi.IdTokenApi <= 0 || string.IsNullOrWhiteSpace(tokenApi.Token.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);

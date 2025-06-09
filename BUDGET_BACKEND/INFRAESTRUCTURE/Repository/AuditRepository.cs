@@ -2,7 +2,7 @@
 {
 
     #region Librerias
-        
+
     using CORE.Interfaces.Repositories;
     using Domain.Context;
     using Domain.Dto;
@@ -42,7 +42,7 @@
         public AuditDto? GetAuditById(AuditDto audit)
         {
             return (
-                    from a in _context.Audits.AsNoTracking()    
+                    from a in _context.Audits.AsNoTracking()
                     where a.IdAudit == audit.IdAudit
                     select new AuditDto
                     {
@@ -51,7 +51,7 @@
                         Endpoint = a.Endpoint,
                         Agent = a.Agent,
                         Method = a.Method,
-                        CreationDate = a.CreationDate   
+                        CreationDate = a.CreationDate
                     }
                 )
                 .FirstOrDefault();
@@ -60,7 +60,7 @@
         public List<AuditDto> GetAuditsByCreationDate(AuditDto audit)
         {
             return (
-                   from a in _context.Audits.AsNoTracking()                  
+                   from a in _context.Audits.AsNoTracking()
                    where a.CreationDate == audit.CreationDate
                    select new AuditDto
                    {
@@ -69,7 +69,7 @@
                        Endpoint = a.Endpoint,
                        Agent = a.Agent,
                        Method = a.Method,
-                       CreationDate = a.CreationDate                      
+                       CreationDate = a.CreationDate
                    }
                   )
                  .ToList();
@@ -78,7 +78,7 @@
         public List<AuditDto> GetAuditsByMethodCreationDate(AuditDto audit)
         {
             return (
-                   from a in _context.Audits.AsNoTracking()                             
+                   from a in _context.Audits.AsNoTracking()
                    where a.Method == audit.Method && a.CreationDate == audit.CreationDate
                    select new AuditDto
                    {
@@ -87,7 +87,7 @@
                        Endpoint = a.Endpoint,
                        Agent = a.Agent,
                        Method = a.Method,
-                       CreationDate = a.CreationDate                      
+                       CreationDate = a.CreationDate
                    }
                   )
                  .ToList();
@@ -96,7 +96,7 @@
         public List<AuditDto> GetAuditsByEndpointCreationDate(AuditDto audit)
         {
             return (
-                   from a in _context.Audits.AsNoTracking()                  
+                   from a in _context.Audits.AsNoTracking()
                    where a.Endpoint == audit.Endpoint && a.CreationDate == audit.CreationDate
                    select new AuditDto
                    {
@@ -105,7 +105,7 @@
                        Endpoint = a.Endpoint,
                        Agent = a.Agent,
                        Method = a.Method,
-                       CreationDate = a.CreationDate                       
+                       CreationDate = a.CreationDate
                    }
                   )
                  .ToList();
@@ -114,7 +114,7 @@
         public List<AuditDto> GetAuditsByEndpointMethodCreationDate(AuditDto audit)
         {
             return (
-                   from a in _context.Audits.AsNoTracking()                   
+                   from a in _context.Audits.AsNoTracking()
                    where a.Endpoint == audit.Endpoint && a.Method == audit.Method && a.CreationDate == audit.CreationDate
                    select new AuditDto
                    {
@@ -123,7 +123,7 @@
                        Endpoint = a.Endpoint,
                        Agent = a.Agent,
                        Method = a.Method,
-                       CreationDate = a.CreationDate                      
+                       CreationDate = a.CreationDate
                    }
                   )
                  .ToList();

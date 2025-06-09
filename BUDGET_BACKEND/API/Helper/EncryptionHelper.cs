@@ -3,9 +3,9 @@
 
     #region Librerias
 
+    using Microsoft.Extensions.Configuration;
     using System.Security.Cryptography;
     using System.Text;
-    using Microsoft.Extensions.Configuration;
 
     #endregion
 
@@ -21,7 +21,7 @@
         #region Atributos y Propiedades
 
         private static IConfiguration? _configuration;
-        
+
         #endregion
 
         #region Métodos y Funciones
@@ -45,7 +45,7 @@
             aes.Key = key;
             aes.GenerateIV();
 
-            using MemoryStream ms = new();            
+            using MemoryStream ms = new();
             ms.Write(aes.IV, 0, aes.IV.Length);
 
             using (CryptoStream cs = new(ms, aes.CreateEncryptor(), CryptoStreamMode.Write))

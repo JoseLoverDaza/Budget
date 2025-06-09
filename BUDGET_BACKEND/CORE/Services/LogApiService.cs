@@ -11,6 +11,7 @@
     using Domain.Entities;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
+    using System.Text.Json;
 
     #endregion
 
@@ -128,14 +129,14 @@
         }
 
         public LogApiDto SaveLogApi(LogApiDto logApi)
-        {            
+        {
             IStatusRepository statusRepository = UnitOfWork.StatusRepository();
 
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = logApi.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             LogApi saveApiLog = new()
             {
-                Entity = logApi.Entity?.Trim() ?? string.Empty,               
+                Entity = logApi.Entity?.Trim() ?? string.Empty,
                 PreviousValues = logApi.PreviousValues?.Trim() ?? string.Empty,
                 NewValues = logApi.NewValues?.Trim() ?? string.Empty,
                 EntityAction = logApi.EntityAction?.Trim() ?? string.Empty,
@@ -160,9 +161,9 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
-                        
+
             LogApiExtendDto? logApiSearch = logApiRepository.GetLogApiById(logApi) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-                       
+
             LogApi updateLogApi = new()
             {
                 IdLogApi = logApiSearch.IdLogApi,
@@ -171,7 +172,7 @@
                 NewValues = logApi.NewValues?.Trim() ?? string.Empty,
                 EntityAction = logApi.EntityAction?.Trim() ?? string.Empty,
                 CreationDate = logApiSearch.CreationDate,
-                IdStatus = logApiSearch.IdStatus                
+                IdStatus = logApiSearch.IdStatus
             };
 
             UnitOfWork.BaseRepository<LogApi>().Update(updateLogApi);
@@ -214,6 +215,50 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
             return logApi;
+        }
+
+        public void TraceLog(string entity, string entityAction, string previousValues, string newValues, DateTime creationDate, int? idStatus)
+        {
+            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+
+            StatusDto? statusSearch = idStatus != null ? new StatusDto { IdStatus = (int)idStatus }  : statusRepository.GetStatusByName(new StatusDto { Name = Constants.Status.ACTIVO }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+
+            LogApi saveLogApi = new()
+            {
+                Entity = entity,
+                EntityAction = entityAction,
+                PreviousValues = previousValues,
+                NewValues = newValues,
+                CreationDate = creationDate,
+                IdStatus = statusSearch.IdStatus
+            };
+
+            UnitOfWork.BaseRepository<LogApi>().Add(saveLogApi);
+
+            if (UnitOfWork.SaveChanges() <= 0)
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+        }
+
+        public void TraceLog(string entity, string entityAction, TokenApi? tokenApiPrevious, TokenApi? tokenApiNew, DateTime creationDate, int idStatus)
+        {           
+            LogApi saveLogApi = new()
+            {
+                Entity = entity,
+                EntityAction = entityAction,
+                PreviousValues = tokenApiPrevious != null ? JsonSerializer.Serialize(tokenApiPrevious) : JsonSerializer.Serialize(Constants.General.JSON_EMPTY),
+                NewValues = tokenApiNew != null ? JsonSerializer.Serialize(tokenApiNew) : JsonSerializer.Serialize(Constants.General.JSON_EMPTY),
+                CreationDate = creationDate,
+                IdStatus = idStatus
+            };
+
+            UnitOfWork.BaseRepository<LogApi>().Add(saveLogApi);
+
+            if (UnitOfWork.SaveChanges() <= 0)
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
         }
 
         #endregion

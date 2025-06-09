@@ -3,7 +3,7 @@
 
     #region Librerias
 
-    
+
     using CORE.Interfaces.Repositories;
     using Domain.Context;
     using Microsoft.EntityFrameworkCore;
@@ -40,34 +40,34 @@
         #endregion
 
         #region #region Métodos y Funciones
-                
+
         public T Get(Expression<Func<T, bool>> expression)
         {
             return _dbSet.FirstOrDefault(expression)!;
         }
-                
+
         public List<T> List(Expression<Func<T, bool>> expression)
         {
             return _dbSet.Where(expression).ToList();
         }
-                
+
         public IEnumerable<T> IEnumerable(Expression<Func<T, bool>> expression)
         {
             return _dbSet.Where(expression);
         }
-               
+
         public T Add(T entity)
         {
             _dbSet.Add(entity);
             return entity;
         }
-                
+
         public IEnumerable<T> AddRange(IEnumerable<T> entity)
         {
             _dbSet.AddRange(entity);
             return entity;
         }
-               
+
         public T Update(T entity)
         {
             var keyProperty = _context.Model.FindEntityType(typeof(T))?.FindPrimaryKey()?.Properties[0];
@@ -91,7 +91,7 @@
             _context.Entry(entity).State = EntityState.Modified;
             return entity;
         }
-               
+
         public IEnumerable<T> AddUpdate(IEnumerable<T> entity)
         {
             foreach (var item in entity)
@@ -100,13 +100,13 @@
             }
             return entity;
         }
-               
+
         public bool Delete(T entity)
         {
             _dbSet.Remove(entity);
             return true;
         }
-               
+
         public bool RemoveRange(IEnumerable<T> entity)
         {
             _dbSet.RemoveRange(entity);
@@ -119,7 +119,7 @@
             var entry = _dbSet.Attach(entity);
             entry.Reference(propiedad.Name).Load();
         }
-              
+
         public void LoadRelatedEntity(T entity, Expression<Func<T, object>> relatedProperty)
         {
             string entityProperty = string.Empty;
@@ -132,14 +132,14 @@
             var entry = _dbSet.Attach(entity);
             entry.Reference(entityProperty).Load();
         }
-               
+
         public void LoadRelatedCollection(T entity, string relatedProperty)
         {
             PropertyInfo property = entity.GetType().GetProperty(relatedProperty)!;
             var entry = _dbSet.Attach(entity);
             entry.Collection(property.Name).Load();
         }
-               
+
         public void LoadRelatedCollection(T entity, Expression<Func<T, object>> relatedProperty)
         {
             string propertyCollection = string.Empty;

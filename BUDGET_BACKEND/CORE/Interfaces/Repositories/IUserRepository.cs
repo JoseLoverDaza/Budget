@@ -28,7 +28,7 @@
         public List<UserExtendDto> GetUsersByRole(UserDto user);
 
         public List<UserExtendDto> GetUsersByStatus(UserDto user);
-              
+
         public List<UserExtendDto> GetUsersByRoleStatus(UserDto user);
 
         #endregion

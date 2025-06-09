@@ -8,7 +8,7 @@
     using Domain.Context;
     using Domain.Dto;
     using Domain.Entities;
-    using Microsoft.EntityFrameworkCore;   
+    using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
 
     #endregion
@@ -43,7 +43,7 @@
         {
             return (
                     from t in _context.TokenApis.AsNoTracking()
-                    join u in _context .Users.AsNoTracking()
+                    join u in _context.Users.AsNoTracking()
                     on t.IdUser equals u.IdUser
                     join s in _context.Status.AsNoTracking()
                     on t.IdStatus equals s.IdStatus
@@ -255,7 +255,7 @@
                 on t.IdUser equals u.IdUser
                 join s in _context.Status.AsNoTracking()
                 on t.IdStatus equals s.IdStatus
-                where t.CreationDate == tokenApi.CreationDate && t.IdUser == tokenApi.IdUser && t.IdStatus == tokenApi.IdStatus                
+                where t.CreationDate == tokenApi.CreationDate && t.IdUser == tokenApi.IdUser && t.IdStatus == tokenApi.IdStatus
                 select new TokenApiExtendDto
                 {
                     IdTokenApi = t.IdTokenApi,

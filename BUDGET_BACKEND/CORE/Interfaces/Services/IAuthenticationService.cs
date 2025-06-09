@@ -1,11 +1,10 @@
 ﻿using CORE.Dto;
-using Domain.Dto;
 
 namespace CORE.Interfaces.Services
 {
 
     #region Librerias
-        
+
     #endregion
 
     /// <summary>

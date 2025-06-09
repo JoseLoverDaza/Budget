@@ -13,7 +13,7 @@ namespace CORE.Dto
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class UserExtendDto: UserDto
+    public class UserExtendDto : UserDto
     {
 
         #region Atributos y Propiedades

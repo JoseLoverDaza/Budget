@@ -13,7 +13,7 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class TypeExpenseExtendDto: TypeExpenseDto
+    public class TypeExpenseExtendDto : TypeExpenseDto
     {
 
         #region Atributos y Propiedades

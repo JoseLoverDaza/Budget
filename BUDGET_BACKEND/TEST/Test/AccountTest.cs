@@ -3,7 +3,7 @@
 
     #region Librerias
 
-    using API.Controllers;    
+    using API.Controllers;
     using CORE.Interfaces.Services;
     using CORE.Services;
     using CORE.Utils;
@@ -31,6 +31,7 @@
         #region  Atributos y Propiedades
 
         private readonly IAccountService _accountService;
+        private readonly ILogApiService _logApiService;
         private readonly EFContext? _context;
         private readonly AccountController? _accountController;
 
@@ -46,7 +47,8 @@
 
             _context = new EFContext(options);
             UnitOfWork unitOfWork = new(_context);
-            _accountService = new AccountService(unitOfWork);
+            _logApiService = new LogApiService(unitOfWork);
+            _accountService = new AccountService(unitOfWork, _logApiService);            
             _accountController = new AccountController(_accountService);
 
             #region Data
@@ -489,7 +491,7 @@
         {
             ///Arrange   
             AccountDto account = new()
-            {                
+            {
                 IdFinancialInstitution = 1,
                 IdTypeAccount = 1,
                 IdUser = 1
@@ -509,7 +511,7 @@
         {
             ///Arrange   
             AccountDto account = new()
-            {                
+            {
                 IdFinancialInstitution = -1,
                 IdTypeAccount = -1,
                 IdUser = -1
@@ -553,9 +555,9 @@
             AccountDto account = new()
             {
                 Name = "Test",
-                IdFinancialInstitution =1,
+                IdFinancialInstitution = 1,
                 IdTypeAccount = 1,
-                IdUser =1,
+                IdUser = 1,
                 IdStatus = 1
             };
 

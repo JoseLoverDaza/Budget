@@ -4,8 +4,8 @@
     #region Librerias
 
     using CORE.Dto;
-    using CORE.Interfaces.Services;   
-    using CORE.Utils;   
+    using CORE.Interfaces.Services;
+    using CORE.Utils;
     using Domain.Dto.Common;
     using Microsoft.AspNetCore.Mvc;
     using Swashbuckle.AspNetCore.Annotations;

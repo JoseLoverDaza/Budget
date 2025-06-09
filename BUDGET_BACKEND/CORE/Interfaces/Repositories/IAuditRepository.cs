@@ -19,7 +19,7 @@
         #region Métodos y Funciones
 
         public AuditDto? GetAuditById(AuditDto audit);
-        
+
         public List<AuditDto> GetAuditsByCreationDate(AuditDto audit);
 
         public List<AuditDto> GetAuditsByMethodCreationDate(AuditDto audit);

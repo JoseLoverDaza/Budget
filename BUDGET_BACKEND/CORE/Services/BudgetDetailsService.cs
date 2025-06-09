@@ -9,7 +9,7 @@
     using CORE.Utils;
     using Domain.Dto;
     using Domain.Entities;
-    using System.Collections.Generic;   
+    using System.Collections.Generic;
     using System.Runtime.InteropServices;
 
     #endregion
@@ -25,12 +25,15 @@
 
         #region Atributos y Propiedades
 
+        private readonly ILogApiService _logApiService;
+
         #endregion
 
         #region Constructor
 
-        public BudgetDetailsService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public BudgetDetailsService(IUnitOfWork unitOfWork, ILogApiService logApiService) : base(unitOfWork)
         {
+            _logApiService = logApiService;
         }
 
         #endregion
@@ -162,7 +165,7 @@
             }
 
             BudgetExtendDto? budgetSearch = budgetRepository.GetBudgetById(new BudgetDto { IdBudget = budgetDetails.IdBudget }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            ExpenseExtendDto? expenseSearch = expenseRepository.GetExpenseById(new ExpenseDto { IdExpense = budgetDetails.IdExpense } ) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            ExpenseExtendDto? expenseSearch = expenseRepository.GetExpenseById(new ExpenseDto { IdExpense = budgetDetails.IdExpense }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = budgetDetails.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             BudgetDetails saveBudgetDetails = new()

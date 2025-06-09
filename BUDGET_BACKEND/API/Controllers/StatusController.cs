@@ -3,7 +3,7 @@
 
     #region Librerias
 
-    using CORE.Interfaces.Services;    
+    using CORE.Interfaces.Services;
     using CORE.Utils;
     using Domain.Dto;
     using Domain.Dto.Common;
@@ -46,7 +46,7 @@
         public ResponseDto GetStatusById(StatusDto status)
         {
             try
-            {                
+            {
                 response.Data = _statusService.GetStatusById(status);
                 response.Message = Constants.General.SUCCESSUL;
             }
