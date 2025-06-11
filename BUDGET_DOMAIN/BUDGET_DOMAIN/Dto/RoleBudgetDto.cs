@@ -1,13 +1,19 @@
 ﻿namespace Domain.Dto
 {
 
+    #region Librerias
+
+    using Domain.Dto.Common;
+
+    #endregion
+
     /// <summary>
     /// Fecha: 01 de enero de 2026
     /// Nombre: RoleBudgetDto   
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class RoleBudgetDto
+    public class RoleBudgetDto : BaseDto
     {
 
         #region Atributos y Propiedades

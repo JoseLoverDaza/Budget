@@ -1,6 +1,10 @@
 ﻿namespace Domain.Dto
 {
 
+    #region Librerias
+
+    #endregion
+
     /// <summary>
     /// Fecha: 01 de enero de 2026
     /// Nombre: StatusBudgetDto   

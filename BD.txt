@@ -10,6 +10,10 @@ CREATE TABLE [ParameterizationBudget].[StatusBudget](
 	[IdStatusBudget] [int] IDENTITY(1,1) NOT NULL,
 	[NameStatus] [nvarchar](100) NOT NULL,
 	[DescriptionStatus] [nvarchar](255) NULL,
+	[CreationUser] INT NOT NULL,
+	[CreationDate] DATETIME NOT NULL,
+	[ModificationUser] INT NULL,
+	[ModificationDate] DATETIME NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[IdStatusBudget] ASC
@@ -21,6 +25,10 @@ CREATE TABLE [SecurityBudget].[RoleBudget](
 	[NameRole] [nvarchar](100) NOT NULL,
 	[DescriptionRole] [nvarchar](255) NULL,
 	[IdStatusBudget] [int] NOT NULL,
+	[CreationUser] INT NOT NULL,
+	[CreationDate] DATETIME NOT NULL,
+	[ModificationUser] INT NULL,
+	[ModificationDate] DATETIME NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[IdRoleBudget] ASC

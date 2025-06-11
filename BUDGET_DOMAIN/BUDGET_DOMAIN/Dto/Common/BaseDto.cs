@@ -1,13 +1,13 @@
-﻿namespace Domain.Entities
+﻿namespace Domain.Dto.Common
 {
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
-    /// Nombre: BaseEntity   
+    /// Nombre: BaseDto   
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public abstract class BaseEntity
+    public class BaseDto
     {
 
         #region Atributos y Propiedades

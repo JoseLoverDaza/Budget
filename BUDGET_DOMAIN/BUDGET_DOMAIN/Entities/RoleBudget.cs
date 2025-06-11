@@ -7,7 +7,7 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class RoleBudget
+    public class RoleBudget : BaseEntity
     {
 
         #region Atributos y Propiedades

@@ -38,6 +38,20 @@
             entity.Property(e => e.IdStatusBudget)
                   .IsRequired();
 
+            entity.Property(e => e.CreationUser)
+                 .IsRequired();
+
+            entity.Property(e => e.CreationDate)
+                  .HasColumnType("datetime")
+                  .IsRequired();
+
+            entity.Property(e => e.ModificationUser)
+                  .IsRequired(false);
+
+            entity.Property(e => e.ModificationDate)
+                  .HasColumnType("datetime")
+                  .IsRequired(false);
+
         }
 
         #endregion
