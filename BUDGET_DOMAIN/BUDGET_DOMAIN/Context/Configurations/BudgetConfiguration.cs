@@ -28,26 +28,38 @@
 
             entity.HasKey(e => e.IdBudget);
 
-            entity.Property(e => e.Year)
+            entity.Property(e => e.YearBudget)
                   .IsRequired();
 
-            entity.Property(e => e.Month)
+            entity.Property(e => e.MonthBudget)
+                  .IsRequired();
+
+            entity.Property(e => e.DescriptionBudget)
+                   .HasMaxLength(255);
+
+            entity.Property(e => e.ObservationBudget)
+                  .HasMaxLength(255);
+
+            entity.Property(e => e.IdUserBudget)
+                  .IsRequired();
+
+            entity.Property(e => e.IdStatusBudget)
+                  .IsRequired();
+
+            entity.Property(e => e.CreationUser)
                   .IsRequired();
 
             entity.Property(e => e.CreationDate)
-                 .IsRequired();
-
-            entity.Property(e => e.Description)
-                   .HasMaxLength(255);
-
-            entity.Property(e => e.Observation)
-                  .HasMaxLength(255);
-
-            entity.Property(e => e.IdUser)
+                  .HasColumnType("datetime")
                   .IsRequired();
 
-            entity.Property(e => e.IdStatus)
+            entity.Property(e => e.ModificationUser)
                   .IsRequired();
+
+            entity.Property(e => e.ModificationDate)
+                  .HasColumnType("datetime")
+                  .IsRequired();
+
         }
 
         #endregion

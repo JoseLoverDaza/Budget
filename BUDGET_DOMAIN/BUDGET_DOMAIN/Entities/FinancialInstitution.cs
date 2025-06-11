@@ -7,7 +7,7 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class FinancialInstitution
+    public class FinancialInstitution : BaseEntity
     {
 
         #region Atributos y Propiedades

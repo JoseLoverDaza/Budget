@@ -32,10 +32,6 @@
                   .IsRequired()
                   .HasColumnType("nvarchar(max)");
 
-            entity.Property(e => e.CreationDate)
-                  .IsRequired()
-                  .HasColumnType("datetime");
-
             entity.Property(e => e.ExpirationDate)
                   .IsRequired()
                   .HasColumnType("datetime");
@@ -45,6 +41,20 @@
 
             entity.Property(e => e.IdStatusBudget)
                   .IsRequired();
+
+            entity.Property(e => e.CreationUser)
+                    .IsRequired();
+
+            entity.Property(e => e.CreationDate)
+                    .HasColumnType("datetime")
+                    .IsRequired();
+
+            entity.Property(e => e.ModificationUser)
+                    .IsRequired();
+
+            entity.Property(e => e.ModificationDate)
+                    .HasColumnType("datetime")
+                    .IsRequired();
 
         }
 

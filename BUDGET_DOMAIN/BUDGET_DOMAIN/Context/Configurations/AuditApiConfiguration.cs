@@ -29,10 +29,10 @@
             entity.HasKey(e => e.IdAuditApi);
 
             entity.Property(e => e.Host)
-                     .HasMaxLength(255);
+                    .HasMaxLength(255);
 
             entity.Property(e => e.EndpointUrl)
-                     .HasMaxLength(255);
+                    .HasMaxLength(255);
 
             entity.Property(e => e.Agent)
                     .HasMaxLength(255);
@@ -40,9 +40,19 @@
             entity.Property(e => e.Method)
                     .HasMaxLength(255);
 
+            entity.Property(e => e.CreationUser)
+                    .IsRequired();
+
             entity.Property(e => e.CreationDate)
-                 .IsRequired()
-                 .HasColumnType("datetime");
+                    .HasColumnType("datetime")
+                    .IsRequired();
+
+            entity.Property(e => e.ModificationUser)
+                    .IsRequired();
+
+            entity.Property(e => e.ModificationDate)
+                    .HasColumnType("datetime")
+                    .IsRequired();
 
         }
 

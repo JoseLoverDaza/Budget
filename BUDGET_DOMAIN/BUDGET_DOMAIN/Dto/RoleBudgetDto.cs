@@ -3,8 +3,6 @@
 
     #region Librerias
 
-    using Domain.Dto.Common;
-
     #endregion
 
     /// <summary>
@@ -13,7 +11,7 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class RoleBudgetDto : BaseDto
+    public class RoleBudgetDto
     {
 
         #region Atributos y Propiedades

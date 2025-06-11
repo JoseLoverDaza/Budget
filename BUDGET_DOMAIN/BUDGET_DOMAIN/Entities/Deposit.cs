@@ -7,21 +7,21 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class Deposit
+    public class Deposit : BaseEntity
     {
 
         #region Atributos y Propiedades
 
         public int IdDeposit { get; set; }
-        public short Year { get; set; }
-        public byte Month { get; set; }
+        public short YearDeposit { get; set; }
+        public byte MonthDeposit { get; set; }
         public decimal Amount { get; set; }
 
-        public int IdUser { get; set; }    
+        public int IdUserBudget { get; set; }    
 
         public int IdAccount { get; set; }
        
-        public int IdStatus { get; set; }
+        public int IdStatusBudget { get; set; }
 
         #endregion
 

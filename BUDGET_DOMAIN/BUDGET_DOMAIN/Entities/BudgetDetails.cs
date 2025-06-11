@@ -7,19 +7,18 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class BudgetDetails
+    public class BudgetDetails : BaseEntity
     {
 
         #region Atributos y Propiedades
 
         public int IdBudgetDetails { get; set; }
-        public int IdBudget { get; set; }
-        public DateTime CreationDate { get; set; }
+        public int IdBudget { get; set; }       
         public decimal Amount { get; set; }
 
         public int IdExpense { get; set; }       
 
-        public int IdStatus { get; set; }
+        public int IdStatusBudget { get; set; }
         
         #endregion
 

@@ -7,7 +7,7 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class TypeExpense
+    public class TypeExpense : BaseEntity
     {
 
         #region Atributos y Propiedades

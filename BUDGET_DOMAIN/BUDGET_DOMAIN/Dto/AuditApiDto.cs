@@ -1,13 +1,19 @@
 ﻿namespace Domain.Dto
 {
 
+    #region Librerias
+
+    using Domain.Dto.Common;
+
+    #endregion
+
     /// <summary>
     /// Fecha: 01 de enero de 2026
     /// Nombre: AuditApiDto   
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class AuditApiDto
+    public class AuditApiDto : BaseDto
     {
 
         #region Atributos y Propiedades
@@ -17,8 +23,7 @@
         public string? EndpointUrl { get; set; }
         public string? Agent { get; set; }
         public string? Method { get; set; }
-        public DateTime CreationDate { get; set; }
-
+        
         #endregion
 
     }

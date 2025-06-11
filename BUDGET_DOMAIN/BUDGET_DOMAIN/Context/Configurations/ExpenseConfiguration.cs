@@ -28,15 +28,33 @@
 
             entity.HasKey(e => e.IdExpense);
 
-            entity.Property(e => e.Name)
+            entity.Property(e => e.NameExpense)
                   .IsRequired()
                   .HasMaxLength(100);
 
-            entity.Property(e => e.Description)
+            entity.Property(e => e.DescriptionExpense)
                   .HasMaxLength(255);
 
-            entity.Property(e => e.IdTypeExpense).IsRequired();
-            entity.Property(e => e.IdStatus).IsRequired();
+            entity.Property(e => e.IdTypeExpense)
+                  .IsRequired();
+
+            entity.Property(e => e.IdStatusBudget)
+                  .IsRequired();
+
+            entity.Property(e => e.CreationUser)
+                 .IsRequired();
+
+            entity.Property(e => e.CreationDate)
+                  .HasColumnType("datetime")
+                  .IsRequired();
+
+            entity.Property(e => e.ModificationUser)
+                  .IsRequired();
+
+            entity.Property(e => e.ModificationDate)
+                  .HasColumnType("datetime")
+                  .IsRequired();
+
         }
 
         #endregion

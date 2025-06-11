@@ -1,13 +1,19 @@
 ﻿namespace Domain.Dto
 {
 
+    #region Librerias
+
+    using Domain.Dto.Common;
+
+    #endregion
+
     /// <summary>
     /// Fecha: 01 de enero de 2026
     /// Nombre: TypeExpenseDto   
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class TypeExpenseDto
+    public class TypeExpenseDto : BaseDto
     {
 
         #region Atributos y Propiedades

@@ -7,7 +7,7 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class AuditApi
+    public class AuditApi: BaseEntity
     {
 
         #region Atributos y Propiedades
@@ -17,8 +17,7 @@
         public string? EndpointUrl { get; set; }               
         public string? Agent { get; set; }               
         public string? Method { get; set; }               
-        public DateTime CreationDate { get; set; }
-
+      
         #endregion
 
     }

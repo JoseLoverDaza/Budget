@@ -7,7 +7,7 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class Account
+    public class Account : BaseEntity
     {
 
         #region Atributos y Propiedades

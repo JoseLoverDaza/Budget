@@ -9,11 +9,7 @@ CREATE SCHEMA [SecurityBudget]
 CREATE TABLE [ParameterizationBudget].[StatusBudget](
 	[IdStatusBudget] [int] IDENTITY(1,1) NOT NULL,
 	[NameStatus] [nvarchar](100) NOT NULL,
-	[DescriptionStatus] [nvarchar](255) NULL,
-	[CreationUser] INT NOT NULL,
-	[CreationDate] DATETIME NOT NULL,
-	[ModificationUser] INT NULL,
-	[ModificationDate] DATETIME NULL,
+	[DescriptionStatus] [nvarchar](255) NULL,	
 PRIMARY KEY CLUSTERED 
 (
 	[IdStatusBudget] ASC
@@ -25,10 +21,7 @@ CREATE TABLE [SecurityBudget].[RoleBudget](
 	[NameRole] [nvarchar](100) NOT NULL,
 	[DescriptionRole] [nvarchar](255) NULL,
 	[IdStatusBudget] [int] NOT NULL,
-	[CreationUser] INT NOT NULL,
-	[CreationDate] DATETIME NOT NULL,
-	[ModificationUser] INT NULL,
-	[ModificationDate] DATETIME NULL,
+	
 PRIMARY KEY CLUSTERED 
 (
 	[IdRoleBudget] ASC
@@ -73,7 +66,10 @@ CREATE TABLE [SecurityBudget].[AuditApi](
 	[EndpointUrl] [nvarchar](255) NULL,
 	[Agent] [nvarchar](255) NULL,
 	[Method] [nvarchar](20) NULL,
-	[CreationDate] [datetime] NOT NULL,	
+	[CreationUser] [int] NOT NULL,
+	[CreationDate] [datetime] NOT NULL,
+	[ModificationUser] [int] NOT NULL,
+	[ModificationDate] [datetime] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[IdAuditApi] ASC
@@ -82,11 +78,14 @@ PRIMARY KEY CLUSTERED
 
 CREATE TABLE [SecurityBudget].[TokenApi] (
     [IdTokenApi] [int] IDENTITY(1,1) PRIMARY KEY,    
-    [Token] [nvarchar](MAX) NOT NULL,
-    [CreationDate] [datetime] NOT NULL,
+    [Token] [nvarchar](MAX) NOT NULL,  
 	[ExpirationDate] [datetime] NOT NULL,	
     [IdUserBudget] [int] NOT NULL,
 	[IdStatusBudget] [int] NOT NULL,
+	[CreationUser] [int] NOT NULL,
+	[CreationDate] [datetime] NOT NULL,
+	[ModificationUser] [int] NOT NULL,
+	[ModificationDate] [datetime] NOT NULL,
 );
 
 ALTER TABLE [SecurityBudget].[TokenApi]  WITH CHECK ADD CONSTRAINT [FK_TokenApi_UserBudget] FOREIGN KEY([IdUserBudget])
@@ -105,8 +104,11 @@ CREATE TABLE [SecurityBudget].[LogApi](
 	[EntityAction] [nvarchar](10) NULL,
 	[PreviousValues] NVARCHAR(MAX),
     [NewValues] NVARCHAR(MAX),	
-	[CreationDate] [datetime] NOT NULL,
 	[IdStatusBudget] [int] NOT NULL,
+	[CreationUser] [int] NOT NULL,
+	[CreationDate] [datetime] NOT NULL,
+	[ModificationUser] [int] NOT NULL,
+	[ModificationDate] [datetime] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[IdLogApi] ASC
@@ -123,6 +125,10 @@ CREATE TABLE [Budget].[TypeAccount](
 	[NameTypeAccount] [nvarchar](100) NOT NULL,
 	[DescriptionTypeAccount] [nvarchar](255) NULL,
 	[IdStatusBudget] [int] NOT NULL,
+	[CreationUser] [int] NOT NULL,
+	[CreationDate] [datetime] NOT NULL,
+	[ModificationUser] [int] NOT NULL,
+	[ModificationDate] [datetime] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[IdTypeAccount] ASC
@@ -144,6 +150,10 @@ CREATE TABLE [Budget].[TypeExpense](
 	[NameTypeExpense] [nvarchar](100) NOT NULL,
 	[DescriptionTypeExpense] [nvarchar](255) NULL,
 	[IdStatusBudget] [int] NOT NULL,
+	[CreationUser] [int] NOT NULL,
+	[CreationDate] [datetime] NOT NULL,
+	[ModificationUser] [int] NOT NULL,
+	[ModificationDate] [datetime] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[IdTypeExpense] ASC
@@ -165,6 +175,10 @@ CREATE TABLE [Budget].[FinancialInstitution](
 	[NameFinancialInstitution] [nvarchar](100) NOT NULL,
 	[DescriptionFinancialInstitution] [nvarchar](255) NULL,
 	[IdStatusBudget] [int] NOT NULL,
+	[CreationUser] [int] NOT NULL,
+	[CreationDate] [datetime] NOT NULL,
+	[ModificationUser] [int] NOT NULL,
+	[ModificationDate] [datetime] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[IdFinancialInstitution] ASC
@@ -189,6 +203,10 @@ CREATE TABLE [Budget].[Account](
 	[IdTypeAccount] [int] NOT NULL,
 	[IdUserBudget] [int] NOT NULL,
 	[IdStatusBudget] [int] NOT NULL,
+	[CreationUser] [int] NOT NULL,
+	[CreationDate] [datetime] NOT NULL,
+	[ModificationUser] [int] NOT NULL,
+	[ModificationDate] [datetime] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[IdAccount] ASC
@@ -225,12 +243,16 @@ ALTER TABLE [Budget].[Account] ADD CONSTRAINT [UQ_Account_NameAccount] UNIQUE NO
 
 CREATE TABLE [Budget].[Deposit](
 	[IdDeposit] [int] IDENTITY(1,1) NOT NULL,
-	[Year] [smallint] NOT NULL,
-	[Month] [tinyint] NOT NULL,
+	[YearDeposit] [smallint] NOT NULL,
+	[MonthDeposit] [tinyint] NOT NULL,
 	[Amount] [decimal](18, 2) NOT NULL,
 	[IdUserBudget] [int] NOT NULL,
 	[IdAccount] [int] NOT NULL,
 	[IdStatusBudget] [int] NOT NULL,
+	[CreationUser] [int] NOT NULL,
+	[CreationDate] [datetime] NOT NULL,
+	[ModificationUser] [int] NOT NULL,
+	[ModificationDate] [datetime] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[IdDeposit] ASC
@@ -256,10 +278,14 @@ ALTER TABLE [Budget].[Deposit] ADD  DEFAULT ((0)) FOR [Amount]
 
 CREATE TABLE [Budget].[Expense](
 	[IdExpense] [int] IDENTITY(1,1) NOT NULL,
-	[Name] [nvarchar](100) NOT NULL,
-	[Description] [nvarchar](255) NULL,
+	[NameExpense] [nvarchar](100) NOT NULL,
+	[DescriptionExpense] [nvarchar](255) NULL,
 	[IdTypeExpense] [int] NOT NULL,
 	[IdStatusBudget] [int] NOT NULL,
+	[CreationUser] [int] NOT NULL,
+	[CreationDate] [datetime] NOT NULL,
+	[ModificationUser] [int] NOT NULL,
+	[ModificationDate] [datetime] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[IdExpense] ASC
@@ -271,20 +297,23 @@ REFERENCES [ParameterizationBudget ].[StatusBudget] ([IdStatusBudget])
 
 ALTER TABLE [Budget].[Expense] CHECK CONSTRAINT [FK_Expense_StatusBudget]
 
-ALTER TABLE [Budget].[Expense] ADD  CONSTRAINT [UQ_Expense_Name] UNIQUE NONCLUSTERED 
+ALTER TABLE [Budget].[Expense] ADD  CONSTRAINT [UQ_Expense_NameExpense] UNIQUE NONCLUSTERED 
 (
-	[Name] ASC
+	[NameExpense] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 
 CREATE TABLE [Budget].[Billing](
 	[IdBilling] [int] IDENTITY(1,1) NOT NULL,	
-	[Year] [smallint] NOT NULL,
-	[Month] [tinyint] NOT NULL,
-	[CreationDate] [date] NOT NULL,
-	[Description] [nvarchar](255) NULL,
-	[Observation] [varchar](255) NULL,
+	[YearBilling] [smallint] NOT NULL,
+	[MonthBilling] [tinyint] NOT NULL,	
+	[DescriptionBilling] [nvarchar](255) NULL,
+	[ObservationBilling] [varchar](255) NULL,
 	[IdUserBudget] [int] NOT NULL,
 	[IdStatusBudget] [int] NOT NULL,
+	[CreationUser] [int] NOT NULL,
+	[CreationDate] [datetime] NOT NULL,
+	[ModificationUser] [int] NOT NULL,
+	[ModificationDate] [datetime] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[IdBilling] ASC
@@ -303,11 +332,14 @@ ALTER TABLE [Budget].[Billing] CHECK CONSTRAINT [FK_Billing_UserBudget]
 
 CREATE TABLE [Budget].[BillingDetails](
 	[IdBillingDetails] [int] IDENTITY(1,1) NOT NULL,
-	[IdBilling] [int] NOT NULL,
-	[CreationDate] [date] NOT NULL,
+	[IdBilling] [int] NOT NULL,	
 	[Amount] [decimal](18, 2) NOT NULL,
 	[IdExpense] [int] NOT NULL,
 	[IdStatusBudget] [int] NOT NULL,
+	[CreationUser] [int] NOT NULL,
+	[CreationDate] [datetime] NOT NULL,
+	[ModificationUser] [int] NOT NULL,
+	[ModificationDate] [datetime] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[IdBillingDetails] ASC
@@ -331,13 +363,16 @@ ALTER TABLE [Budget].[BillingDetails] CHECK CONSTRAINT [FK_BillingDetails_Status
 
 CREATE TABLE [Budget].[Budget](
 	[IdBudget] [int] IDENTITY(1,1) NOT NULL,
-	[Year] [smallint] NOT NULL,
-	[Month] [tinyint] NOT NULL,
-	[CreationDate] [date] NOT NULL,
-	[Description] [nvarchar](255) NULL,
-	[Observation] [varchar](255) NULL,
+	[YearBudget] [smallint] NOT NULL,
+	[MonthBudget] [tinyint] NOT NULL,	
+	[DescriptionBudget] [nvarchar](255) NULL,
+	[ObservationBudget] [varchar](255) NULL,
 	[IdUserBudget] [int] NOT NULL,
 	[IdStatusBudget] [int] NOT NULL,
+	[CreationUser] [int] NOT NULL,
+	[CreationDate] [datetime] NOT NULL,
+	[ModificationUser] [int] NOT NULL,
+	[ModificationDate] [datetime] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[IdBudget] ASC
@@ -356,11 +391,14 @@ ALTER TABLE [Budget].[Budget] CHECK CONSTRAINT [FK_Budget_UserBudget]
 
 CREATE TABLE [Budget].[BudgetDetails](
 	[IdBudgetDetails] [int] IDENTITY(1,1) NOT NULL,
-	[IdBudget] [int] NOT NULL,
-	[CreationDate] [date] NOT NULL,
+	[IdBudget] [int] NOT NULL,	
 	[Amount] [decimal](18, 2) NOT NULL,
 	[IdExpense] [int] NOT NULL,
 	[IdStatusBudget] [int] NOT NULL,
+	[CreationUser] [int] NOT NULL,
+	[CreationDate] [datetime] NOT NULL,
+	[ModificationUser] [int] NOT NULL,
+	[ModificationDate] [datetime] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[IdBudgetDetails] ASC

@@ -28,10 +28,10 @@
 
             entity.HasKey(e => e.IdDeposit);
 
-            entity.Property(e => e.Year)
+            entity.Property(e => e.YearDeposit)
                   .IsRequired();
 
-            entity.Property(e => e.Month)
+            entity.Property(e => e.MonthDeposit)
                   .IsRequired();
 
             entity.Property(e => e.Amount)
@@ -39,9 +39,29 @@
                   .HasDefaultValue(0)
                   .IsRequired();
 
-            entity.Property(e => e.IdUser).IsRequired();
-            entity.Property(e => e.IdAccount).IsRequired();
-            entity.Property(e => e.IdStatus).IsRequired();
+            entity.Property(e => e.IdUserBudget)
+                  .IsRequired();
+
+            entity.Property(e => e.IdAccount)
+                  .IsRequired();
+
+            entity.Property(e => e.IdStatusBudget)
+                  .IsRequired();
+
+            entity.Property(e => e.CreationUser)
+                  .IsRequired();
+
+            entity.Property(e => e.CreationDate)
+                  .HasColumnType("datetime")
+                  .IsRequired();
+
+            entity.Property(e => e.ModificationUser)
+                  .IsRequired();
+
+            entity.Property(e => e.ModificationDate)
+                  .HasColumnType("datetime")
+                  .IsRequired();
+
         }
 
         #endregion

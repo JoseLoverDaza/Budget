@@ -7,19 +7,18 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class BillingDetails
+    public class BillingDetails : BaseEntity
     {
 
         #region Atributos y Propiedades
 
         public int IdBillingDetails { get; set; }
-        public int IdBilling { get; set; }
-        public DateTime CreationDate { get; set; }
+        public int IdBilling { get; set; }        
         public decimal Amount { get; set; }
 
         public int IdExpense { get; set; }
 
-        public int IdStatus { get; set; }
+        public int IdStatusBudget { get; set; }
 
         #endregion
 

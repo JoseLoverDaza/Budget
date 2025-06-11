@@ -28,16 +28,33 @@
 
             entity.HasKey(e => e.IdBillingDetails);
 
-            entity.Property(e => e.CreationDate)
+            entity.Property(e => e.IdBilling)
                  .IsRequired();
 
             entity.Property(e => e.Amount)
                   .HasColumnType("decimal(18,2)")
                   .IsRequired();
 
-            entity.Property(e => e.IdBilling).IsRequired();
-            entity.Property(e => e.IdExpense).IsRequired();
-            entity.Property(e => e.IdStatus).IsRequired();
+            entity.Property(e => e.IdExpense)
+                  .IsRequired();
+
+            entity.Property(e => e.IdStatusBudget)
+                  .IsRequired();
+
+            entity.Property(e => e.CreationUser)
+                 .IsRequired();
+
+            entity.Property(e => e.CreationDate)
+                  .HasColumnType("datetime")
+                  .IsRequired();
+
+            entity.Property(e => e.ModificationUser)
+                  .IsRequired();
+
+            entity.Property(e => e.ModificationDate)
+                  .HasColumnType("datetime")
+                  .IsRequired();
+
         }
 
         #endregion

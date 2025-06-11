@@ -7,14 +7,13 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class TokenApi
+    public class TokenApi : BaseEntity
     {
 
         #region Atributos y Propiedades
 
         public int IdTokenApi { get; set; }
-        public string Token { get; set; } = null!;
-        public DateTime CreationDate { get; set; } = DateTime.Now;
+        public string Token { get; set; } = null!;       
         public DateTime ExpirationDate { get; set; } = DateTime.Now;
 
         public int IdUserBudget { get; set; }
