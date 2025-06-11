@@ -19,11 +19,11 @@
 
         #region Métodos y Funciones
 
-        public TypeAccountExtendDto? GetTypeAccountById(TypeAccountDto typeAccount);
+        public TypeAccountExtendDto? GetTypeAccountByIdTypeAccount(TypeAccountDto typeAccount);
 
-        public TypeAccountExtendDto? GetTypeAccountByName(TypeAccountDto typeAccount);
+        public TypeAccountExtendDto? GetTypeAccountByNameTypeAccount(TypeAccountDto typeAccount);
 
-        public List<TypeAccountExtendDto> GetTypeAccountsByStatus(TypeAccountDto typeAccount);
+        public List<TypeAccountExtendDto> GetTypeAccountsByStatusBudget(TypeAccountDto typeAccount);
 
         public TypeAccountDto SaveTypeAccount(TypeAccountDto typeAccount);
 

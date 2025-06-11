@@ -20,14 +20,15 @@
 
         public string NameFinancialInstitution { get; set; } = null!;
         public string? DescriptionFinancialInstitution { get; set; }
+
         public string NameTypeAccount { get; set; } = null!;
         public string? DescriptionTypeAccount { get; set; }
 
-        public string EmailUser { get; set; } = null!;
-        public string UsernameUser { get; set; } = null!;
+        public string EmailUserBudget { get; set; } = null!;
+        public string UsernameUserBudget { get; set; } = null!;
 
-        public string NameStatus { get; set; } = null!;
-        public string? DescriptionStatus { get; set; }
+        public string NameStatusBudget { get; set; } = null!;
+        public string? DescriptionStatusBudget { get; set; }
 
         #endregion
 

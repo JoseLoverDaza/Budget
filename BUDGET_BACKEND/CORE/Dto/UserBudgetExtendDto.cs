@@ -1,5 +1,6 @@
 ﻿namespace CORE.Dto
 {
+
     #region Librerias
 
     using Domain.Dto;
@@ -8,20 +9,17 @@
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
-    /// Nombre: BillingDetailExtendDto   
+    /// Nombre: UserExtendDto   
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class BillingDetailExtendDto : BillingDetailsDto
+    public class UserBudgetExtendDto : UserBudgetDto
     {
 
         #region Atributos y Propiedades
 
-        public short YearBilling { get; set; }
-        public byte MonthBilling { get; set; }
-
-        public string NameExpense { get; set; } = null!;
-        public string? DescriptionExpense { get; set; }
+        public string NameRoleBudget { get; set; } = null!;
+        public string? DescriptionRoleBudget { get; set; }
 
         public string NameStatusBudget { get; set; } = null!;
         public string? DescriptionStatusBudget { get; set; }

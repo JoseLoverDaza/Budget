@@ -25,13 +25,13 @@
 
         #region Atributos y Propiedades
 
-        private readonly IRoleService _roleService;
+        private readonly IRoleBudgetService _roleService;
 
         #endregion
 
         #region Constructor
 
-        public RoleController(IRoleService roleService)
+        public RoleController(IRoleBudgetService roleService)
         {
             _roleService = roleService;
         }

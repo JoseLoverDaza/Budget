@@ -62,8 +62,8 @@
                          NameExpense = e.Name,
                          DescriptionExpense = e.Description,
                          IdStatus = bd.IdStatus,
-                         NameStatus = s.Name,
-                         DescriptionStatus = s.Description
+                         NameStatusBudget = s.Name,
+                         DescriptionStatusBudget = s.Description
                      }
                 )
                 .FirstOrDefault();
@@ -92,8 +92,8 @@
                          NameExpense = e.Name,
                          DescriptionExpense = e.Description,
                          IdStatus = bd.IdStatus,
-                         NameStatus = s.Name,
-                         DescriptionStatus = s.Description
+                         NameStatusBudget = s.Name,
+                         DescriptionStatusBudget = s.Description
                      }
                 )
                 .ToList();
@@ -122,8 +122,8 @@
                          NameExpense = e.Name,
                          DescriptionExpense = e.Description,
                          IdStatus = bd.IdStatus,
-                         NameStatus = s.Name,
-                         DescriptionStatus = s.Description
+                         NameStatusBudget = s.Name,
+                         DescriptionStatusBudget = s.Description
                      }
                 )
                 .ToList();
@@ -152,8 +152,8 @@
                          NameExpense = e.Name,
                          DescriptionExpense = e.Description,
                          IdStatus = bd.IdStatus,
-                         NameStatus = s.Name,
-                         DescriptionStatus = s.Description
+                         NameStatusBudget = s.Name,
+                         DescriptionStatusBudget = s.Description
                      }
                 )
                 .ToList();
@@ -182,8 +182,8 @@
                          NameExpense = e.Name,
                          DescriptionExpense = e.Description,
                          IdStatus = bd.IdStatus,
-                         NameStatus = s.Name,
-                         DescriptionStatus = s.Description
+                         NameStatusBudget = s.Name,
+                         DescriptionStatusBudget = s.Description
                      }
                 )
                 .ToList();
@@ -212,8 +212,8 @@
                          NameExpense = e.Name,
                          DescriptionExpense = e.Description,
                          IdStatus = bd.IdStatus,
-                         NameStatus = s.Name,
-                         DescriptionStatus = s.Description
+                         NameStatusBudget = s.Name,
+                         DescriptionStatusBudget = s.Description
                      }
                 )
                 .ToList();
@@ -242,8 +242,8 @@
                         NameExpense = e.Name,
                         DescriptionExpense = e.Description,
                         IdStatus = bd.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                )
                .ToList();

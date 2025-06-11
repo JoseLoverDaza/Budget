@@ -39,7 +39,7 @@
 
         #region Métodos y Funciones
 
-        public BillingDetailExtendDto? GetBillingDetailsById(BillingDetailsDto billingDetails)
+        public BillingDetailExtendDto? GetBillingDetailsByIdBillingDetails(BillingDetailsDto billingDetails)
         {
             return (
                      from bd in _context.BillingDetails.AsNoTracking()
@@ -62,8 +62,8 @@
                          NameExpense = e.Name,
                          DescriptionExpense = e.Description,
                          IdStatus = bd.IdStatus,
-                         NameStatus = s.Name,
-                         DescriptionStatus = s.Description
+                         NameStatusBudget = s.Name,
+                         DescriptionStatusBudget = s.Description
                      }
                 )
                 .FirstOrDefault();
@@ -92,8 +92,8 @@
                          NameExpense = e.Name,
                          DescriptionExpense = e.Description,
                          IdStatus = bd.IdStatus,
-                         NameStatus = s.Name,
-                         DescriptionStatus = s.Description
+                         NameStatusBudget = s.Name,
+                         DescriptionStatusBudget = s.Description
                      }
                 )
                 .ToList();
@@ -122,14 +122,14 @@
                          NameExpense = e.Name,
                          DescriptionExpense = e.Description,
                          IdStatus = bd.IdStatus,
-                         NameStatus = s.Name,
-                         DescriptionStatus = s.Description
+                         NameStatusBudget = s.Name,
+                         DescriptionStatusBudget = s.Description
                      }
                 )
                 .ToList();
         }
 
-        public List<BillingDetailExtendDto> GetBillingDetailsByStatus(BillingDetailsDto billingDetails)
+        public List<BillingDetailExtendDto> GetBillingDetailsByStatusBudget(BillingDetailsDto billingDetails)
         {
             return (
                      from bd in _context.BillingDetails.AsNoTracking()
@@ -152,8 +152,8 @@
                          NameExpense = e.Name,
                          DescriptionExpense = e.Description,
                          IdStatus = bd.IdStatus,
-                         NameStatus = s.Name,
-                         DescriptionStatus = s.Description
+                         NameStatusBudget = s.Name,
+                         DescriptionStatusBudget = s.Description
                      }
                 )
                 .ToList();
@@ -182,14 +182,14 @@
                          NameExpense = e.Name,
                          DescriptionExpense = e.Description,
                          IdStatus = bd.IdStatus,
-                         NameStatus = s.Name,
-                         DescriptionStatus = s.Description
+                         NameStatusBudget = s.Name,
+                         DescriptionStatusBudget = s.Description
                      }
                 )
                 .ToList();
         }
 
-        public List<BillingDetailExtendDto> GetBillingDetailsByExpenseStatus(BillingDetailsDto billingDetails)
+        public List<BillingDetailExtendDto> GetBillingDetailsByExpenseStatusBudget(BillingDetailsDto billingDetails)
         {
             return (
                      from bd in _context.BillingDetails.AsNoTracking()
@@ -212,14 +212,14 @@
                          NameExpense = e.Name,
                          DescriptionExpense = e.Description,
                          IdStatus = bd.IdStatus,
-                         NameStatus = s.Name,
-                         DescriptionStatus = s.Description
+                         NameStatusBudget = s.Name,
+                         DescriptionStatusBudget = s.Description
                      }
                 )
                 .ToList();
         }
 
-        public List<BillingDetailExtendDto> GetBillingDetailsByBillingExpenseStatus(BillingDetailsDto billingDetails)
+        public List<BillingDetailExtendDto> GetBillingDetailsByBillingExpenseStatusBudget(BillingDetailsDto billingDetails)
         {
             return (
                      from bd in _context.BillingDetails.AsNoTracking()
@@ -242,8 +242,8 @@
                          NameExpense = e.Name,
                          DescriptionExpense = e.Description,
                          IdStatus = bd.IdStatus,
-                         NameStatus = s.Name,
-                         DescriptionStatus = s.Description
+                         NameStatusBudget = s.Name,
+                         DescriptionStatusBudget = s.Description
                      }
                 )
                 .ToList();

@@ -9,17 +9,17 @@
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
-    /// Nombre: RoleExtendDto   
+    /// Nombre: RoleBudgetExtendDto   
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class RoleExtendDto : RoleDto
+    public class RoleBudgetExtendDto : RoleBudgetDto
     {
 
         #region Atributos y Propiedades
 
-        public string NameStatus { get; set; } = null!;
-        public string? DescriptionStatus { get; set; }
+        public string NameStatusBudget { get; set; } = null!;
+        public string? DescriptionStatusBudget { get; set; }
 
         #endregion
 

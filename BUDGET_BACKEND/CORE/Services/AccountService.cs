@@ -44,7 +44,7 @@
         public AccountExtendDto? GetAccountById(AccountDto account)
         {
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();            
-            AccountExtendDto? accountSearch = accountRepository.GetAccountById(account);
+            AccountExtendDto? accountSearch = accountRepository.GetAccountByIdAccount(account);
 
             _logApiService.TraceLog(typeof(Account).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -95,7 +95,7 @@
         public List<AccountExtendDto> GetAccountsByUser(AccountDto account)
         {
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
-            List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByUser(account);
+            List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByUserBudget(account);
 
             _logApiService.TraceLog(typeof(Account).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -112,7 +112,7 @@
         public List<AccountExtendDto> GetAccountsByStatus(AccountDto account)
         {
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
-            List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByStatus(account);
+            List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByStatusBudget(account);
 
             _logApiService.TraceLog(typeof(Account).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -129,7 +129,7 @@
         public List<AccountExtendDto> GetAccountsByFinancialInstitutionStatus(AccountDto account)
         {
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
-            List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByFinancialInstitutionStatus(account);
+            List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByFinancialInstitutionStatusBudget(account);
 
             _logApiService.TraceLog(typeof(Account).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -146,7 +146,7 @@
         public List<AccountExtendDto> GetAccountsByTypeAccountStatus(AccountDto account)
         {
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
-            List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByTypeAccountStatus(account);
+            List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByTypeAccountStatusBudget(account);
 
             _logApiService.TraceLog(typeof(Account).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -163,7 +163,7 @@
         public List<AccountExtendDto> GetAccountsByUserStatus(AccountDto account)
         {
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
-            List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByUserStatus(account);
+            List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByUserBudgetStatusBudget(account);
 
             _logApiService.TraceLog(typeof(Account).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -180,7 +180,7 @@
         public List<AccountExtendDto> GetAccountsByNameFinancialInstitutionTypeAccountUser(AccountDto account)
         {
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
-            List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByNameFinancialInstitutionTypeAccountUser(account);
+            List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByNameFinancialInstitutionTypeAccountUserBudget(account);
 
             _logApiService.TraceLog(typeof(Account).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -197,7 +197,7 @@
         public List<AccountExtendDto> GetAccountsByFinancialInstitutionTypeAccountUser(AccountDto account)
         {
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
-            List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByFinancialInstitutionTypeAccountUser(account);
+            List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByFinancialInstitutionTypeAccountUserBudget(account);
 
             _logApiService.TraceLog(typeof(Account).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -216,24 +216,24 @@
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
             IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
             ITypeAccountRepository typeAccountRepository = UnitOfWork.TypeAccountRepository();
-            IUserRepository userRepository = UnitOfWork.UserRepository();
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IUserBudgetRepository userRepository = UnitOfWork.UserRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
             if (account == null || string.IsNullOrWhiteSpace(account.Name.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByNameFinancialInstitutionTypeAccountUser(account);
+            List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByNameFinancialInstitutionTypeAccountUserBudget(account);
 
             if (accountsSearch.Count != 0)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionById(new FinancialInstitutionDto { IdFinancialInstitution = account.IdFinancialInstitution }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            TypeAccountExtendDto? typeAccountSearch = typeAccountRepository.GetTypeAccountById(new TypeAccountDto { IdTypeAccount = account.IdTypeAccount }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            UserExtendDto? userSearch = userRepository.GetUserById(new UserDto { IdUser = account.IdUser }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionByIdFinancialInstitution(new FinancialInstitutionDto { IdFinancialInstitution = account.IdFinancialInstitution }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            TypeAccountExtendDto? typeAccountSearch = typeAccountRepository.GetTypeAccountByIdTypeAccount(new TypeAccountDto { IdTypeAccount = account.IdTypeAccount }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            UserBudgetExtendDto? userSearch = userRepository.GetUserById(new UserDto { IdUser = account.IdUser }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = account.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             Account saveAccount = new()
@@ -267,8 +267,8 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            List<AccountExtendDto> accountsDuplicados = accountRepository.GetAccountsByNameFinancialInstitutionTypeAccountUser(account);
-            AccountExtendDto? accountSearch = accountRepository.GetAccountById(account) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            List<AccountExtendDto> accountsDuplicados = accountRepository.GetAccountsByNameFinancialInstitutionTypeAccountUserBudget(account);
+            AccountExtendDto? accountSearch = accountRepository.GetAccountByIdAccount(account) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (accountsDuplicados.Count != 0 && accountsDuplicados.FirstOrDefault()!.IdAccount != accountSearch.IdAccount)
             {
@@ -301,9 +301,9 @@
         public AccountDto DeleteAccount(AccountDto account)
         {
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
-            AccountExtendDto? accountSearch = accountRepository.GetAccountById(account) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            AccountExtendDto? accountSearch = accountRepository.GetAccountByIdAccount(account) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = account.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (accountSearch.IdStatus == account.IdStatus)

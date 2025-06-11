@@ -44,7 +44,7 @@
         public DepositExtendDto? GetDepositById(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
-            DepositExtendDto? depositSearch = depositRepository.GetDepositById(deposit);
+            DepositExtendDto? depositSearch = depositRepository.GetDepositByIdDeposit(deposit);
 
             _logApiService.TraceLog(typeof(Deposit).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -78,7 +78,7 @@
         public List<DepositExtendDto> GetDepositsByYearUser(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
-            List<DepositExtendDto> depositsSearch = depositRepository.GetDepositsByYearUser(deposit);
+            List<DepositExtendDto> depositsSearch = depositRepository.GetDepositsByYearUserBudget(deposit);
 
             _logApiService.TraceLog(typeof(Deposit).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -95,7 +95,7 @@
         public List<DepositExtendDto> GetDepositsByMonthUser(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
-            List<DepositExtendDto> depositsSearch = depositRepository.GetDepositsByMonthUser(deposit);
+            List<DepositExtendDto> depositsSearch = depositRepository.GetDepositsByMonthUserBudget(deposit);
 
             _logApiService.TraceLog(typeof(Deposit).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -112,7 +112,7 @@
         public List<DepositExtendDto> GetDepositsByYearMonthUser(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
-            List<DepositExtendDto> depositsSearch = depositRepository.GetDepositsByYearMonthUser(deposit);
+            List<DepositExtendDto> depositsSearch = depositRepository.GetDepositsByYearMonthUserBudget(deposit);
 
             _logApiService.TraceLog(typeof(Deposit).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -146,7 +146,7 @@
         public List<DepositExtendDto> GetDepositsByYearMonthStatus(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
-            List<DepositExtendDto> depositsSearch = depositRepository.GetDepositsByYearMonthStatus(deposit);
+            List<DepositExtendDto> depositsSearch = depositRepository.GetDepositsByYearMonthStatusBudget(deposit);
 
             _logApiService.TraceLog(typeof(Deposit).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -163,7 +163,7 @@
         public List<DepositExtendDto> GetDepositsByYearMonthUserAccount(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
-            List<DepositExtendDto> deposits = depositRepository.GetDepositsByYearMonthUserAccount(deposit);
+            List<DepositExtendDto> deposits = depositRepository.GetDepositsByYearMonthUserBudgetAccount(deposit);
 
             _logApiService.TraceLog(typeof(Deposit).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -180,7 +180,7 @@
         public List<DepositExtendDto> GetDepositsByUser(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
-            List<DepositExtendDto> deposits = depositRepository.GetDepositsByUser(deposit);
+            List<DepositExtendDto> deposits = depositRepository.GetDepositsByUserBudget(deposit);
 
             _logApiService.TraceLog(typeof(Deposit).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -214,7 +214,7 @@
         public List<DepositExtendDto> GetDepositsByStatus(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
-            List<DepositExtendDto> deposits = depositRepository.GetDepositsByStatus(deposit);
+            List<DepositExtendDto> deposits = depositRepository.GetDepositsByStatusBudget(deposit);
 
             _logApiService.TraceLog(typeof(Deposit).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -231,7 +231,7 @@
         public List<DepositExtendDto> GetDepositsByUserStatus(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
-            List<DepositExtendDto> deposits = depositRepository.GetDepositsByUserStatus(deposit);
+            List<DepositExtendDto> deposits = depositRepository.GetDepositsByUserBudgetStatusBudget(deposit);
 
             _logApiService.TraceLog(typeof(Deposit).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -248,7 +248,7 @@
         public List<DepositExtendDto> GetDepositsByAccountStatus(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
-            List<DepositExtendDto> deposits = depositRepository.GetDepositsByAccountStatus(deposit);
+            List<DepositExtendDto> deposits = depositRepository.GetDepositsByAccountStatusBudget(deposit);
 
             _logApiService.TraceLog(typeof(Deposit).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -265,20 +265,20 @@
         public DepositDto SaveDeposit(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
-            IUserRepository userRepository = UnitOfWork.UserRepository();
+            IUserBudgetRepository userRepository = UnitOfWork.UserRepository();
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
             if (deposit == null || string.IsNullOrWhiteSpace(deposit.Amount.ToString().Trim()) || deposit.Year <= 0 || deposit.Month <= 0)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            AccountExtendDto? accountSearch = accountRepository.GetAccountById(new AccountDto { IdAccount = deposit.IdAccount }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            UserExtendDto? userSearch = userRepository.GetUserById(new UserDto { IdUser = deposit.IdUser }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            AccountExtendDto? accountSearch = accountRepository.GetAccountByIdAccount(new AccountDto { IdAccount = deposit.IdAccount }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            UserBudgetExtendDto? userSearch = userRepository.GetUserById(new UserDto { IdUser = deposit.IdUser }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = deposit.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            List<DepositExtendDto>? depositSearch = depositRepository.GetDepositsByYearMonthUserAccount(deposit);
+            List<DepositExtendDto>? depositSearch = depositRepository.GetDepositsByYearMonthUserBudgetAccount(deposit);
 
             if (depositSearch.Count != 0)
             {
@@ -316,7 +316,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            DepositExtendDto? depositSearch = depositRepository.GetDepositById(deposit) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            DepositExtendDto? depositSearch = depositRepository.GetDepositByIdDeposit(deposit) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             Deposit updateDeposit = new()
             {
@@ -344,9 +344,9 @@
         public DepositDto DeleteDeposit(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
-            DepositExtendDto? depositSearch = depositRepository.GetDepositById(deposit) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            DepositExtendDto? depositSearch = depositRepository.GetDepositByIdDeposit(deposit) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = deposit.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (depositSearch.IdStatus == deposit.IdStatus)

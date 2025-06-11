@@ -39,7 +39,7 @@
 
         #region Métodos y Funciones
 
-        public AccountExtendDto? GetAccountById(AccountDto account)
+        public AccountExtendDto? GetAccountByIdAccount(AccountDto account)
         {
             return (
                      from a in _context.Accounts.AsNoTracking()
@@ -64,11 +64,11 @@
                          NameTypeAccount = t.Name,
                          DescriptionTypeAccount = t.Description,
                          IdUser = a.IdUser,
-                         EmailUser = u.Email,
-                         UsernameUser = u.Username,
+                         EmailUserBudget = u.Email,
+                         UsernameUserBudget = u.Username,
                          IdStatus = a.IdStatus,
-                         NameStatus = s.Name,
-                         DescriptionStatus = s.Description
+                         NameStatusBudget = s.Name,
+                         DescriptionStatusBudget = s.Description
                      }
                  )
                  .FirstOrDefault();
@@ -99,11 +99,11 @@
                         NameTypeAccount = t.Name,
                         DescriptionTypeAccount = t.Description,
                         IdUser = a.IdUser,
-                        EmailUser = u.Email,
-                        UsernameUser = u.Username,
+                        EmailUserBudget = u.Email,
+                        UsernameUserBudget = u.Username,
                         IdStatus = a.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                   )
                  .ToList();
@@ -134,17 +134,17 @@
                         NameTypeAccount = t.Name,
                         DescriptionTypeAccount = t.Description,
                         IdUser = a.IdUser,
-                        EmailUser = u.Email,
-                        UsernameUser = u.Username,
+                        EmailUserBudget = u.Email,
+                        UsernameUserBudget = u.Username,
                         IdStatus = a.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                   )
                  .ToList();
         }
 
-        public List<AccountExtendDto> GetAccountsByUser(AccountDto account)
+        public List<AccountExtendDto> GetAccountsByUserBudget(AccountDto account)
         {
             return (
                     from a in _context.Accounts.AsNoTracking()
@@ -169,17 +169,17 @@
                         NameTypeAccount = t.Name,
                         DescriptionTypeAccount = t.Description,
                         IdUser = a.IdUser,
-                        EmailUser = u.Email,
-                        UsernameUser = u.Username,
+                        EmailUserBudget = u.Email,
+                        UsernameUserBudget = u.Username,
                         IdStatus = a.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                   )
                  .ToList();
         }
 
-        public List<AccountExtendDto> GetAccountsByStatus(AccountDto account)
+        public List<AccountExtendDto> GetAccountsByStatusBudget(AccountDto account)
         {
             return (
                     from a in _context.Accounts.AsNoTracking()
@@ -204,17 +204,17 @@
                         NameTypeAccount = t.Name,
                         DescriptionTypeAccount = t.Description,
                         IdUser = a.IdUser,
-                        EmailUser = u.Email,
-                        UsernameUser = u.Username,
+                        EmailUserBudget = u.Email,
+                        UsernameUserBudget = u.Username,
                         IdStatus = a.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                   )
                  .ToList();
         }
 
-        public List<AccountExtendDto> GetAccountsByFinancialInstitutionStatus(AccountDto account)
+        public List<AccountExtendDto> GetAccountsByFinancialInstitutionStatusBudget(AccountDto account)
         {
             return (
                    from a in _context.Accounts.AsNoTracking()
@@ -239,17 +239,17 @@
                        NameTypeAccount = t.Name,
                        DescriptionTypeAccount = t.Description,
                        IdUser = a.IdUser,
-                       EmailUser = u.Email,
-                       UsernameUser = u.Username,
+                       EmailUserBudget = u.Email,
+                       UsernameUserBudget = u.Username,
                        IdStatus = a.IdStatus,
-                       NameStatus = s.Name,
-                       DescriptionStatus = s.Description
+                       NameStatusBudget = s.Name,
+                       DescriptionStatusBudget = s.Description
                    }
                  )
                 .ToList();
         }
 
-        public List<AccountExtendDto> GetAccountsByTypeAccountStatus(AccountDto account)
+        public List<AccountExtendDto> GetAccountsByTypeAccountStatusBudget(AccountDto account)
         {
             return (
                   from a in _context.Accounts.AsNoTracking()
@@ -274,17 +274,17 @@
                       NameTypeAccount = t.Name,
                       DescriptionTypeAccount = t.Description,
                       IdUser = a.IdUser,
-                      EmailUser = u.Email,
-                      UsernameUser = u.Username,
+                      EmailUserBudget = u.Email,
+                      UsernameUserBudget = u.Username,
                       IdStatus = a.IdStatus,
-                      NameStatus = s.Name,
-                      DescriptionStatus = s.Description
+                      NameStatusBudget = s.Name,
+                      DescriptionStatusBudget = s.Description
                   }
                 )
                .ToList();
         }
 
-        public List<AccountExtendDto> GetAccountsByUserStatus(AccountDto account)
+        public List<AccountExtendDto> GetAccountsByUserBudgetStatusBudget(AccountDto account)
         {
             return (
                   from a in _context.Accounts.AsNoTracking()
@@ -309,17 +309,17 @@
                       NameTypeAccount = t.Name,
                       DescriptionTypeAccount = t.Description,
                       IdUser = a.IdUser,
-                      EmailUser = u.Email,
-                      UsernameUser = u.Username,
+                      EmailUserBudget = u.Email,
+                      UsernameUserBudget = u.Username,
                       IdStatus = a.IdStatus,
-                      NameStatus = s.Name,
-                      DescriptionStatus = s.Description
+                      NameStatusBudget = s.Name,
+                      DescriptionStatusBudget = s.Description
                   }
                 )
                .ToList();
         }
 
-        public List<AccountExtendDto> GetAccountsByNameFinancialInstitutionTypeAccountUser(AccountDto account)
+        public List<AccountExtendDto> GetAccountsByNameFinancialInstitutionTypeAccountUserBudget(AccountDto account)
         {
             return (
                  from a in _context.Accounts.AsNoTracking()
@@ -344,17 +344,17 @@
                      NameTypeAccount = t.Name,
                      DescriptionTypeAccount = t.Description,
                      IdUser = a.IdUser,
-                     EmailUser = u.Email,
-                     UsernameUser = u.Username,
+                     EmailUserBudget = u.Email,
+                     UsernameUserBudget = u.Username,
                      IdStatus = a.IdStatus,
-                     NameStatus = s.Name,
-                     DescriptionStatus = s.Description
+                     NameStatusBudget = s.Name,
+                     DescriptionStatusBudget = s.Description
                  }
                )
               .ToList();
         }
 
-        public List<AccountExtendDto> GetAccountsByFinancialInstitutionTypeAccountUser(AccountDto account)
+        public List<AccountExtendDto> GetAccountsByFinancialInstitutionTypeAccountUserBudget(AccountDto account)
         {
             return (
                  from a in _context.Accounts.AsNoTracking()
@@ -379,11 +379,11 @@
                      NameTypeAccount = t.Name,
                      DescriptionTypeAccount = t.Description,
                      IdUser = a.IdUser,
-                     EmailUser = u.Email,
-                     UsernameUser = u.Username,
+                     EmailUserBudget = u.Email,
+                     UsernameUserBudget = u.Username,
                      IdStatus = a.IdStatus,
-                     NameStatus = s.Name,
-                     DescriptionStatus = s.Description
+                     NameStatusBudget = s.Name,
+                     DescriptionStatusBudget = s.Description
                  }
                )
               .ToList();

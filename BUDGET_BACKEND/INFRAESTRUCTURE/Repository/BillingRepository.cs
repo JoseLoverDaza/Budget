@@ -39,7 +39,7 @@
 
         #region Métodos y Funciones
 
-        public BillingExtendDto? GetBillingById(BillingDto billing)
+        public BillingExtendDto? GetBillingByIdBilling(BillingDto billing)
         {
             return (
                      from b in _context.Billings.AsNoTracking()
@@ -57,11 +57,11 @@
                          Description = b.Description,
                          Observation = b.Observation,
                          IdUser = b.IdUser,
-                         EmailUser = u.Email,
-                         UsernameUser = u.Username,
+                         EmailUserBudget = u.Email,
+                         UsernameUserBudget = u.Username,
                          IdStatus = b.IdStatus,
-                         NameStatus = s.Name,
-                         DescriptionStatus = s.Description
+                         NameStatusBudget = s.Name,
+                         DescriptionStatusBudget = s.Description
                      }
                 )
                 .FirstOrDefault();
@@ -85,17 +85,17 @@
                          Description = b.Description,
                          Observation = b.Observation,
                          IdUser = b.IdUser,
-                         EmailUser = u.Email,
-                         UsernameUser = u.Username,
+                         EmailUserBudget = u.Email,
+                         UsernameUserBudget = u.Username,
                          IdStatus = b.IdStatus,
-                         NameStatus = s.Name,
-                         DescriptionStatus = s.Description
+                         NameStatusBudget = s.Name,
+                         DescriptionStatusBudget = s.Description
                      }
                    )
                    .ToList();
         }
 
-        public List<BillingExtendDto> GetBillingsByYearUser(BillingDto billing)
+        public List<BillingExtendDto> GetBillingsByYearUserBudget(BillingDto billing)
         {
             return (
                      from b in _context.Billings.AsNoTracking()
@@ -113,17 +113,17 @@
                          Description = b.Description,
                          Observation = b.Observation,
                          IdUser = b.IdUser,
-                         EmailUser = u.Email,
-                         UsernameUser = u.Username,
+                         EmailUserBudget = u.Email,
+                         UsernameUserBudget = u.Username,
                          IdStatus = b.IdStatus,
-                         NameStatus = s.Name,
-                         DescriptionStatus = s.Description
+                         NameStatusBudget = s.Name,
+                         DescriptionStatusBudget = s.Description
                      }
                    )
                    .ToList();
         }
 
-        public List<BillingExtendDto> GetBillingsByMonthUser(BillingDto billing)
+        public List<BillingExtendDto> GetBillingsByMonthUserBudget(BillingDto billing)
         {
             return (
                      from b in _context.Billings.AsNoTracking()
@@ -141,17 +141,17 @@
                          Description = b.Description,
                          Observation = b.Observation,
                          IdUser = b.IdUser,
-                         EmailUser = u.Email,
-                         UsernameUser = u.Username,
+                         EmailUserBudget = u.Email,
+                         UsernameUserBudget = u.Username,
                          IdStatus = b.IdStatus,
-                         NameStatus = s.Name,
-                         DescriptionStatus = s.Description
+                         NameStatusBudget = s.Name,
+                         DescriptionStatusBudget = s.Description
                      }
                    )
                    .ToList();
         }
 
-        public List<BillingExtendDto> GetBillingsByYearMonthUser(BillingDto billing)
+        public List<BillingExtendDto> GetBillingsByYearMonthUserBudget(BillingDto billing)
         {
             return (
                      from b in _context.Billings.AsNoTracking()
@@ -169,17 +169,17 @@
                          Description = b.Description,
                          Observation = b.Observation,
                          IdUser = b.IdUser,
-                         EmailUser = u.Email,
-                         UsernameUser = u.Username,
+                         EmailUserBudget = u.Email,
+                         UsernameUserBudget = u.Username,
                          IdStatus = b.IdStatus,
-                         NameStatus = s.Name,
-                         DescriptionStatus = s.Description
+                         NameStatusBudget = s.Name,
+                         DescriptionStatusBudget = s.Description
                      }
                 )
                 .ToList();
         }
 
-        public List<BillingExtendDto> GetBillingsByUser(BillingDto billing)
+        public List<BillingExtendDto> GetBillingsByUserBudget(BillingDto billing)
         {
             return (
                      from b in _context.Billings.AsNoTracking()
@@ -197,17 +197,17 @@
                          Description = b.Description,
                          Observation = b.Observation,
                          IdUser = b.IdUser,
-                         EmailUser = u.Email,
-                         UsernameUser = u.Username,
+                         EmailUserBudget = u.Email,
+                         UsernameUserBudget = u.Username,
                          IdStatus = b.IdStatus,
-                         NameStatus = s.Name,
-                         DescriptionStatus = s.Description
+                         NameStatusBudget = s.Name,
+                         DescriptionStatusBudget = s.Description
                      }
                    )
                    .ToList();
         }
 
-        public List<BillingExtendDto> GetBillingsByStatus(BillingDto billing)
+        public List<BillingExtendDto> GetBillingsByStatusBudget(BillingDto billing)
         {
             return (
                      from b in _context.Billings.AsNoTracking()
@@ -225,17 +225,17 @@
                          Description = b.Description,
                          Observation = b.Observation,
                          IdUser = b.IdUser,
-                         EmailUser = u.Email,
-                         UsernameUser = u.Username,
+                         EmailUserBudget = u.Email,
+                         UsernameUserBudget = u.Username,
                          IdStatus = b.IdStatus,
-                         NameStatus = s.Name,
-                         DescriptionStatus = s.Description
+                         NameStatusBudget = s.Name,
+                         DescriptionStatusBudget = s.Description
                      }
                    )
                    .ToList();
         }
 
-        public List<BillingExtendDto> GetBillingsByUserStatus(BillingDto billing)
+        public List<BillingExtendDto> GetBillingsByUserBudgetStatusBudget(BillingDto billing)
         {
             return (
                     from b in _context.Billings.AsNoTracking()
@@ -253,11 +253,11 @@
                         Description = b.Description,
                         Observation = b.Observation,
                         IdUser = b.IdUser,
-                        EmailUser = u.Email,
-                        UsernameUser = u.Username,
+                        EmailUserBudget = u.Email,
+                        UsernameUserBudget = u.Username,
                         IdStatus = b.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                   )
                   .ToList();

@@ -18,7 +18,7 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class StatusRepository : BaseRepository<Status>, IStatusRepository
+    public class StatusRepository : BaseRepository<Status>, IStatusBudgetRepository
     {
 
         #region Atributos y Propiedades

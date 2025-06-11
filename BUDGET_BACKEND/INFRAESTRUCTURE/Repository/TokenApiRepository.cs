@@ -39,7 +39,7 @@
 
         #region Métodos y Funciones
 
-        public TokenApiExtendDto? GetTokenApiById(TokenApiDto tokenApi)
+        public TokenApiExtendDto? GetTokenApiByIdTokenApi(TokenApiDto tokenApi)
         {
             return (
                     from t in _context.TokenApis.AsNoTracking()
@@ -55,8 +55,8 @@
                         CreationDate = t.CreationDate,
                         ExpirationDate = t.ExpirationDate,
                         IdUser = t.IdUser,
-                        EmailUser = u.Email,
-                        UsernameUser = u.Username,
+                        EmailUserBudget = u.Email,
+                        UsernameUserBudget = u.Username,
                         IdStatus = t.IdStatus,
                         NameStatus = s.Name,
                         DescriptionStatus = s.Description
@@ -81,8 +81,8 @@
                        CreationDate = t.CreationDate,
                        ExpirationDate = t.ExpirationDate,
                        IdUser = t.IdUser,
-                       EmailUser = u.Email,
-                       UsernameUser = u.Username,
+                       EmailUserBudget = u.Email,
+                       UsernameUserBudget = u.Username,
                        IdStatus = t.IdStatus,
                        NameStatus = s.Name,
                        DescriptionStatus = s.Description
@@ -107,8 +107,8 @@
                        CreationDate = t.CreationDate,
                        ExpirationDate = t.ExpirationDate,
                        IdUser = t.IdUser,
-                       EmailUser = u.Email,
-                       UsernameUser = u.Username,
+                       EmailUserBudget = u.Email,
+                       UsernameUserBudget = u.Username,
                        IdStatus = t.IdStatus,
                        NameStatus = s.Name,
                        DescriptionStatus = s.Description
@@ -117,7 +117,7 @@
                .ToList();
         }
 
-        public List<TokenApiExtendDto> GetTokenApisByUser(TokenApiDto tokenApi)
+        public List<TokenApiExtendDto> GetTokenApisByUserBudget(TokenApiDto tokenApi)
         {
             return (
                    from t in _context.TokenApis.AsNoTracking()
@@ -133,8 +133,8 @@
                        CreationDate = t.CreationDate,
                        ExpirationDate = t.ExpirationDate,
                        IdUser = t.IdUser,
-                       EmailUser = u.Email,
-                       UsernameUser = u.Username,
+                       EmailUserBudget = u.Email,
+                       UsernameUserBudget = u.Username,
                        IdStatus = t.IdStatus,
                        NameStatus = s.Name,
                        DescriptionStatus = s.Description
@@ -143,7 +143,7 @@
                .ToList();
         }
 
-        public List<TokenApiExtendDto> GetTokenApisByStatus(TokenApiDto tokenApi)
+        public List<TokenApiExtendDto> GetTokenApisByStatusBudget(TokenApiDto tokenApi)
         {
             return (
                    from t in _context.TokenApis.AsNoTracking()
@@ -159,8 +159,8 @@
                        CreationDate = t.CreationDate,
                        ExpirationDate = t.ExpirationDate,
                        IdUser = t.IdUser,
-                       EmailUser = u.Email,
-                       UsernameUser = u.Username,
+                       EmailUserBudget = u.Email,
+                       UsernameUserBudget = u.Username,
                        IdStatus = t.IdStatus,
                        NameStatus = s.Name,
                        DescriptionStatus = s.Description
@@ -169,7 +169,7 @@
                .ToList();
         }
 
-        public List<TokenApiExtendDto> GetTokenApisByCreationDateStatus(TokenApiDto tokenApi)
+        public List<TokenApiExtendDto> GetTokenApisByCreationDateStatusBudget(TokenApiDto tokenApi)
         {
             return (
                   from t in _context.TokenApis.AsNoTracking()
@@ -185,8 +185,8 @@
                       CreationDate = t.CreationDate,
                       ExpirationDate = t.ExpirationDate,
                       IdUser = t.IdUser,
-                      EmailUser = u.Email,
-                      UsernameUser = u.Username,
+                      EmailUserBudget = u.Email,
+                      UsernameUserBudget = u.Username,
                       IdStatus = t.IdStatus,
                       NameStatus = s.Name,
                       DescriptionStatus = s.Description
@@ -195,7 +195,7 @@
               .ToList();
         }
 
-        public List<TokenApiExtendDto> GetTokenApisByExpirationDateStatus(TokenApiDto tokenApi)
+        public List<TokenApiExtendDto> GetTokenApisByExpirationDateStatusBudget(TokenApiDto tokenApi)
         {
             return (
                  from t in _context.TokenApis.AsNoTracking()
@@ -211,8 +211,8 @@
                      CreationDate = t.CreationDate,
                      ExpirationDate = t.ExpirationDate,
                      IdUser = t.IdUser,
-                     EmailUser = u.Email,
-                     UsernameUser = u.Username,
+                     EmailUserBudget = u.Email,
+                     UsernameUserBudget = u.Username,
                      IdStatus = t.IdStatus,
                      NameStatus = s.Name,
                      DescriptionStatus = s.Description
@@ -221,7 +221,7 @@
              .ToList();
         }
 
-        public List<TokenApiExtendDto> GetTokenApisByUserStatus(TokenApiDto tokenApi)
+        public List<TokenApiExtendDto> GetTokenApisByUserBudgetStatusBudget(TokenApiDto tokenApi)
         {
             return (
                 from t in _context.TokenApis.AsNoTracking()
@@ -237,8 +237,8 @@
                     CreationDate = t.CreationDate,
                     ExpirationDate = t.ExpirationDate,
                     IdUser = t.IdUser,
-                    EmailUser = u.Email,
-                    UsernameUser = u.Username,
+                    EmailUserBudget = u.Email,
+                    UsernameUserBudget = u.Username,
                     IdStatus = t.IdStatus,
                     NameStatus = s.Name,
                     DescriptionStatus = s.Description
@@ -247,7 +247,7 @@
             .ToList();
         }
 
-        public List<TokenApiExtendDto> GetTokenApisByCreationDateUserStatus(TokenApiDto tokenApi)
+        public List<TokenApiExtendDto> GetTokenApisByCreationDateUserBudgetStatusBudget(TokenApiDto tokenApi)
         {
             return (
                 from t in _context.TokenApis.AsNoTracking()
@@ -263,8 +263,8 @@
                     CreationDate = t.CreationDate,
                     ExpirationDate = t.ExpirationDate,
                     IdUser = t.IdUser,
-                    EmailUser = u.Email,
-                    UsernameUser = u.Username,
+                    EmailUserBudget = u.Email,
+                    UsernameUserBudget = u.Username,
                     IdStatus = t.IdStatus,
                     NameStatus = s.Name,
                     DescriptionStatus = s.Description
@@ -273,7 +273,7 @@
             .ToList();
         }
 
-        public List<TokenApiExtendDto> GetTokenApisByExpirationDateUserStatus(TokenApiDto tokenApi)
+        public List<TokenApiExtendDto> GetTokenApisByExpirationDateUserBudgetStatusBudget(TokenApiDto tokenApi)
         {
             return (
                 from t in _context.TokenApis.AsNoTracking()
@@ -289,8 +289,8 @@
                     CreationDate = t.CreationDate,
                     ExpirationDate = t.ExpirationDate,
                     IdUser = t.IdUser,
-                    EmailUser = u.Email,
-                    UsernameUser = u.Username,
+                    EmailUserBudget = u.Email,
+                    UsernameUserBudget = u.Username,
                     IdStatus = t.IdStatus,
                     NameStatus = s.Name,
                     DescriptionStatus = s.Description

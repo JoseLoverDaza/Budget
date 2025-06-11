@@ -19,31 +19,31 @@
 
         #region Métodos y Funciones
 
-        public DepositExtendDto? GetDepositById(DepositDto deposit);
+        public DepositExtendDto? GetDepositByIdDeposit(DepositDto deposit);
 
         public List<DepositExtendDto> GetDepositsByYearMonth(DepositDto deposit);
 
-        public List<DepositExtendDto> GetDepositsByYearUser(DepositDto deposit);
+        public List<DepositExtendDto> GetDepositsByYearUserBudget(DepositDto deposit);
 
-        public List<DepositExtendDto> GetDepositsByMonthUser(DepositDto deposit);
+        public List<DepositExtendDto> GetDepositsByMonthUserBudget(DepositDto deposit);
 
-        public List<DepositExtendDto> GetDepositsByYearMonthUser(DepositDto deposit);
+        public List<DepositExtendDto> GetDepositsByYearMonthUserBudget(DepositDto deposit);
 
         public List<DepositExtendDto> GetDepositsByYearMonthAccount(DepositDto deposit);
 
-        public List<DepositExtendDto> GetDepositsByYearMonthStatus(DepositDto deposit);
+        public List<DepositExtendDto> GetDepositsByYearMonthStatusBudget(DepositDto deposit);
 
-        public List<DepositExtendDto> GetDepositsByYearMonthUserAccount(DepositDto deposit);
+        public List<DepositExtendDto> GetDepositsByYearMonthUserBudgetAccount(DepositDto deposit);
 
-        public List<DepositExtendDto> GetDepositsByUser(DepositDto deposit);
+        public List<DepositExtendDto> GetDepositsByUserBudget(DepositDto deposit);
 
         public List<DepositExtendDto> GetDepositsByAccount(DepositDto deposit);
 
-        public List<DepositExtendDto> GetDepositsByStatus(DepositDto deposit);
+        public List<DepositExtendDto> GetDepositsByStatusBudget(DepositDto deposit);
 
-        public List<DepositExtendDto> GetDepositsByUserStatus(DepositDto deposit);
+        public List<DepositExtendDto> GetDepositsByUserBudgetStatusBudget(DepositDto deposit);
 
-        public List<DepositExtendDto> GetDepositsByAccountStatus(DepositDto deposit);
+        public List<DepositExtendDto> GetDepositsByAccountStatusBudget(DepositDto deposit);
 
         public DepositDto SaveDeposit(DepositDto deposit);
 

@@ -20,10 +20,12 @@
 
         public short YearBudget { get; set; }
         public byte MonthBudget { get; set; }
+
         public string NameExpense { get; set; } = null!;
         public string? DescriptionExpense { get; set; }
-        public string NameStatus { get; set; } = null!;
-        public string? DescriptionStatus { get; set; }
+
+        public string NameStatusBudget { get; set; } = null!;
+        public string? DescriptionStatusBudget { get; set; }
 
         #endregion
 

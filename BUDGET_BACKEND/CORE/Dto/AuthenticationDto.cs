@@ -17,7 +17,7 @@
         #region Atributos y Propiedades
 
         public string Username { get; set; } = null!;
-        public string Password { get; set; } = null!;
+        public string EncryptedPassword { get; set; } = null!;
         public string Token { get; set; } = null!;
         public DateTime CreationDate { get; set; } = DateTime.Now;
         public DateTime ExpirationDate { get; set; } = DateTime.Now;

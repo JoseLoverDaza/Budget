@@ -21,7 +21,7 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public partial class RoleService : BaseService, IRoleService
+    public partial class RoleService : BaseService, IRoleBudgetService
     {
 
         #region Atributos y Propiedades
@@ -41,10 +41,10 @@
 
         #region Métodos y Funciones
 
-        public RoleExtendDto? GetRoleById(RoleDto role)
+        public RoleBudgetExtendDto? GetRoleById(RoleDto role)
         {
-            IRoleRepository roleRepository = UnitOfWork.RoleRepository();
-            RoleExtendDto? roleSearch = roleRepository.GetRoleById(role);
+            IRoleBudgetRepository roleRepository = UnitOfWork.RoleRepository();
+            RoleBudgetExtendDto? roleSearch = roleRepository.GetRoleById(role);
 
             _logApiService.TraceLog(typeof(Role).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -58,10 +58,10 @@
             }
         }
 
-        public RoleExtendDto? GetRoleByName(RoleDto role)
+        public RoleBudgetExtendDto? GetRoleByName(RoleDto role)
         {
-            IRoleRepository roleRepository = UnitOfWork.RoleRepository();
-            RoleExtendDto? roleSearch = roleRepository.GetRoleByName(role);
+            IRoleBudgetRepository roleRepository = UnitOfWork.RoleRepository();
+            RoleBudgetExtendDto? roleSearch = roleRepository.GetRoleByName(role);
 
             _logApiService.TraceLog(typeof(Role).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -75,10 +75,10 @@
             }
         }
 
-        public List<RoleExtendDto> GetRolesByStatus(RoleDto role)
+        public List<RoleBudgetExtendDto> GetRolesByStatus(RoleDto role)
         {
-            IRoleRepository roleRepository = UnitOfWork.RoleRepository();
-            List<RoleExtendDto> rolesSearch = roleRepository.GetRolesByStatus(role);
+            IRoleBudgetRepository roleRepository = UnitOfWork.RoleRepository();
+            List<RoleBudgetExtendDto> rolesSearch = roleRepository.GetRolesByStatus(role);
 
             _logApiService.TraceLog(typeof(Role).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -94,15 +94,15 @@
 
         public RoleDto SaveRole(RoleDto role)
         {
-            IRoleRepository roleRepository = UnitOfWork.RoleRepository();
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IRoleBudgetRepository roleRepository = UnitOfWork.RoleRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
             if (role == null || string.IsNullOrWhiteSpace(role.Name.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            RoleExtendDto? roleSearch = roleRepository.GetRoleByName(role);
+            RoleBudgetExtendDto? roleSearch = roleRepository.GetRoleByName(role);
 
             if (roleSearch != null)
             {
@@ -132,15 +132,15 @@
 
         public RoleDto UpdateRole(RoleDto role)
         {
-            IRoleRepository roleRepository = UnitOfWork.RoleRepository();
+            IRoleBudgetRepository roleRepository = UnitOfWork.RoleRepository();
 
             if (role == null || role.IdRole <= 0 || string.IsNullOrWhiteSpace(role.Name.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            RoleExtendDto? roleDuplicado = roleRepository.GetRoleByName(role);
-            RoleExtendDto? roleSearch = roleRepository.GetRoleById(role) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            RoleBudgetExtendDto? roleDuplicado = roleRepository.GetRoleByName(role);
+            RoleBudgetExtendDto? roleSearch = roleRepository.GetRoleById(role) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (roleDuplicado != null && roleDuplicado.IdRole != roleSearch.IdRole)
             {
@@ -169,10 +169,10 @@
 
         public RoleDto DeleteRole(RoleDto role)
         {
-            IRoleRepository roleRepository = UnitOfWork.RoleRepository();
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IRoleBudgetRepository roleRepository = UnitOfWork.RoleRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
-            RoleExtendDto? roleSearch = roleRepository.GetRoleById(role) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            RoleBudgetExtendDto? roleSearch = roleRepository.GetRoleById(role) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = role.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (roleSearch.IdStatus == role.IdStatus)

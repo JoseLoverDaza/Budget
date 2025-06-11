@@ -44,7 +44,7 @@
         public BudgetExtendDto? GetBudgetById(BudgetDto budget)
         {
             IBudgetRepository budgetRepository = UnitOfWork.BudgetRepository();
-            BudgetExtendDto? budgetSearch = budgetRepository.GetBudgetById(budget);
+            BudgetExtendDto? budgetSearch = budgetRepository.GetBudgetByIdBudget(budget);
 
             _logApiService.TraceLog(typeof(Budget).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -78,7 +78,7 @@
         public List<BudgetExtendDto> GetBudgetsByYearUser(BudgetDto budget)
         {
             IBudgetRepository budgetRepository = UnitOfWork.BudgetRepository();
-            List<BudgetExtendDto> budgets = budgetRepository.GetBudgetsByYearUser(budget);
+            List<BudgetExtendDto> budgets = budgetRepository.GetBudgetsByYearUserBudget(budget);
 
             _logApiService.TraceLog(typeof(Budget).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -95,7 +95,7 @@
         public List<BudgetExtendDto> GetBudgetsByMonthUser(BudgetDto budget)
         {
             IBudgetRepository budgetRepository = UnitOfWork.BudgetRepository();
-            List<BudgetExtendDto> budgets = budgetRepository.GetBudgetsByMonthUser(budget);
+            List<BudgetExtendDto> budgets = budgetRepository.GetBudgetsByMonthUserBudget(budget);
 
             _logApiService.TraceLog(typeof(Budget).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -112,7 +112,7 @@
         public List<BudgetExtendDto> GetBudgetsByYearMonthUser(BudgetDto budget)
         {
             IBudgetRepository budgetRepository = UnitOfWork.BudgetRepository();
-            List<BudgetExtendDto> budgets = budgetRepository.GetBudgetsByYearMonthUser(budget);
+            List<BudgetExtendDto> budgets = budgetRepository.GetBudgetsByYearMonthUserBudget(budget);
 
             _logApiService.TraceLog(typeof(Budget).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -129,7 +129,7 @@
         public List<BudgetExtendDto> GetBudgetsByUser(BudgetDto budget)
         {
             IBudgetRepository budgetRepository = UnitOfWork.BudgetRepository();
-            List<BudgetExtendDto> budgets = budgetRepository.GetBudgetsByUser(budget);
+            List<BudgetExtendDto> budgets = budgetRepository.GetBudgetsByUserBudget(budget);
 
             _logApiService.TraceLog(typeof(Budget).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -146,7 +146,7 @@
         public List<BudgetExtendDto> GetBudgetsByStatus(BudgetDto budget)
         {
             IBudgetRepository budgetRepository = UnitOfWork.BudgetRepository();
-            List<BudgetExtendDto> budgets = budgetRepository.GetBudgetsByStatus(budget);
+            List<BudgetExtendDto> budgets = budgetRepository.GetBudgetsByStatusBudget(budget);
 
             _logApiService.TraceLog(typeof(Budget).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -163,7 +163,7 @@
         public List<BudgetExtendDto> GetBudgetsByUserStatus(BudgetDto budget)
         {
             IBudgetRepository budgetRepository = UnitOfWork.BudgetRepository();
-            List<BudgetExtendDto> budgets = budgetRepository.GetBudgetsByUserStatus(budget);
+            List<BudgetExtendDto> budgets = budgetRepository.GetBudgetsByUserBudgetStatusBudget(budget);
 
             _logApiService.TraceLog(typeof(Budget).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -180,18 +180,18 @@
         public BudgetDto SaveBudget(BudgetDto budget)
         {
             IBudgetRepository budgetRepository = UnitOfWork.BudgetRepository();
-            IUserRepository userRepository = UnitOfWork.UserRepository();
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IUserBudgetRepository userRepository = UnitOfWork.UserRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
             if (budget == null || budget.Year <= 0 || budget.Month <= 0)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            UserExtendDto? userSearch = userRepository.GetUserById(new UserDto { IdUser = budget.IdUser }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            UserBudgetExtendDto? userSearch = userRepository.GetUserById(new UserDto { IdUser = budget.IdUser }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = budget.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            List<BudgetExtendDto> budgetsSearch = budgetRepository.GetBudgetsByYearMonthUser(budget);
+            List<BudgetExtendDto> budgetsSearch = budgetRepository.GetBudgetsByYearMonthUserBudget(budget);
 
             if (budgetsSearch.Count != 0)
             {
@@ -230,7 +230,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            BudgetExtendDto? budgetSearch = budgetRepository.GetBudgetById(budget) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            BudgetExtendDto? budgetSearch = budgetRepository.GetBudgetByIdBudget(budget) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             Budget updateBudget = new()
             {
@@ -259,9 +259,9 @@
         public BudgetDto DeleteBudget(BudgetDto budget)
         {
             IBudgetRepository budgetRepository = UnitOfWork.BudgetRepository();
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
-            BudgetExtendDto? budgetSearch = budgetRepository.GetBudgetById(budget) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            BudgetExtendDto? budgetSearch = budgetRepository.GetBudgetByIdBudget(budget) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = budget.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (budgetSearch.IdStatus == budget.IdStatus)

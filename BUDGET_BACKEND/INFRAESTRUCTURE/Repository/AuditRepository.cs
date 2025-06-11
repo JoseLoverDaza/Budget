@@ -18,7 +18,7 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class AuditRepository : BaseRepository<Audit>, IAuditRepository
+    public class AuditRepository : BaseRepository<Audit>, IAuditApiRepository
     {
 
         #region Atributos y Propiedades

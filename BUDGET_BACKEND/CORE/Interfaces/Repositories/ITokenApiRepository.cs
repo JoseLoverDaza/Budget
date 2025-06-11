@@ -19,25 +19,25 @@
 
         #region Métodos y Funciones
 
-        public TokenApiExtendDto? GetTokenApiById(TokenApiDto tokenApi);
+        public TokenApiExtendDto? GetTokenApiByIdTokenApi(TokenApiDto tokenApi);
 
         public TokenApiExtendDto? GetTokenApiByToken(TokenApiDto tokenApi);
 
         public List<TokenApiExtendDto> GetTokenApisByCreationDate(TokenApiDto tokenApi);
 
-        public List<TokenApiExtendDto> GetTokenApisByUser(TokenApiDto tokenApi);
+        public List<TokenApiExtendDto> GetTokenApisByUserBudget(TokenApiDto tokenApi);
 
-        public List<TokenApiExtendDto> GetTokenApisByStatus(TokenApiDto tokenApi);
+        public List<TokenApiExtendDto> GetTokenApisByStatusBudget(TokenApiDto tokenApi);
 
-        public List<TokenApiExtendDto> GetTokenApisByCreationDateStatus(TokenApiDto tokenApi);
+        public List<TokenApiExtendDto> GetTokenApisByCreationDateStatusBudget(TokenApiDto tokenApi);
 
-        public List<TokenApiExtendDto> GetTokenApisByExpirationDateStatus(TokenApiDto tokenApi);
+        public List<TokenApiExtendDto> GetTokenApisByExpirationDateStatusBudget(TokenApiDto tokenApi);
 
-        public List<TokenApiExtendDto> GetTokenApisByUserStatus(TokenApiDto tokenApi);
+        public List<TokenApiExtendDto> GetTokenApisByUserBudgetStatusBudget(TokenApiDto tokenApi);
 
-        public List<TokenApiExtendDto> GetTokenApisByCreationDateUserStatus(TokenApiDto tokenApi);
+        public List<TokenApiExtendDto> GetTokenApisByCreationDateUserBudgetStatusBudget(TokenApiDto tokenApi);
 
-        public List<TokenApiExtendDto> GetTokenApisByExpirationDateUserStatus(TokenApiDto tokenApi);
+        public List<TokenApiExtendDto> GetTokenApisByExpirationDateUserBudgetStatusBudget(TokenApiDto tokenApi);
 
         #endregion
 

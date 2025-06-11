@@ -14,24 +14,24 @@
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
-    /// Nombre: StatusController   
+    /// Nombre: StatusBudgetController   
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
     [Route("api/[controller]")]
     [ApiController]
-    public class StatusController : BaseController
+    public class StatusBudgetController : BaseController
     {
 
         #region Atributos y Propiedades
 
-        private readonly IStatusService _statusService;
+        private readonly IStatusBudgetService _statusService;
 
         #endregion
 
         #region Constructor
 
-        public StatusController(IStatusService statusService)
+        public StatusBudgetController(IStatusBudgetService statusService)
         {
             _statusService = statusService;
         }

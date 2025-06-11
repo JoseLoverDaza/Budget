@@ -30,7 +30,7 @@
 
         #region  Atributos y Propiedades
 
-        private readonly IAuditService _auditService;
+        private readonly IAuditApiService _auditService;
         private readonly ILogApiService _logApiService;
         private readonly EFContext? _context;
         private readonly AuditController? _auditController;

@@ -44,7 +44,7 @@
         public FinancialInstitutionExtendDto? GetFinancialInstitutionById(FinancialInstitutionDto financialInstitution)
         {
             IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
-            FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionById(financialInstitution);
+            FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionByIdFinancialInstitution(financialInstitution);
 
             _logApiService.TraceLog(typeof(FinancialInstitution).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -61,7 +61,7 @@
         public FinancialInstitutionExtendDto? GetFinancialInstitutionByName(FinancialInstitutionDto financialInstitution)
         {
             IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
-            FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionByName(financialInstitution);
+            FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionByNameFinancialInstitution(financialInstitution);
 
             _logApiService.TraceLog(typeof(FinancialInstitution).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -78,7 +78,7 @@
         public List<FinancialInstitutionExtendDto> GetFinancialInstitutionsByStatus(FinancialInstitutionDto financialInstitution)
         {
             IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
-            List<FinancialInstitutionExtendDto> financialInstitutionsSearch = financialInstitutionRepository.GetFinancialInstitutionsByStatus(financialInstitution);
+            List<FinancialInstitutionExtendDto> financialInstitutionsSearch = financialInstitutionRepository.GetFinancialInstitutionsByStatusBudget(financialInstitution);
 
             _logApiService.TraceLog(typeof(FinancialInstitution).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -95,14 +95,14 @@
         public FinancialInstitutionDto SaveFinancialInstitution(FinancialInstitutionDto financialInstitution)
         {
             IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
             if (financialInstitution == null || string.IsNullOrWhiteSpace(financialInstitution.Name.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionByName(financialInstitution);
+            FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionByNameFinancialInstitution(financialInstitution);
 
             if (financialInstitutionSearch != null)
             {
@@ -139,8 +139,8 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            FinancialInstitutionExtendDto? financialInstitutionDuplicado = financialInstitutionRepository.GetFinancialInstitutionByName(financialInstitution);
-            FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionById(financialInstitution) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            FinancialInstitutionExtendDto? financialInstitutionDuplicado = financialInstitutionRepository.GetFinancialInstitutionByNameFinancialInstitution(financialInstitution);
+            FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionByIdFinancialInstitution(financialInstitution) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (financialInstitutionDuplicado != null && financialInstitutionDuplicado.IdFinancialInstitution != financialInstitution.IdFinancialInstitution)
             {
@@ -170,9 +170,9 @@
         public FinancialInstitutionDto DeleteFinancialInstitution(FinancialInstitutionDto financialInstitution)
         {
             IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
-            FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionById(financialInstitution) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionByIdFinancialInstitution(financialInstitution) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = financialInstitution.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (financialInstitutionSearch.IdStatus == statusSearch.IdStatus)

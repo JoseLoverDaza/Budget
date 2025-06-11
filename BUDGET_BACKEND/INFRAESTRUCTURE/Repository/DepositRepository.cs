@@ -39,7 +39,7 @@
 
         #region Métodos y Funciones
 
-        public DepositExtendDto? GetDepositById(DepositDto deposit)
+        public DepositExtendDto? GetDepositByIdDeposit(DepositDto deposit)
         {
             return (
                       from d in _context.Deposits.AsNoTracking()
@@ -57,14 +57,14 @@
                           Month = d.Month,
                           Amount = d.Amount,
                           IdUser = d.IdUser,
-                          EmailUser = u.Email,
-                          UsernameUser = u.Username,
+                          EmailUserBudget = u.Email,
+                          UsernameUserBudget = u.Username,
                           IdAccount = d.IdAccount,
                           NameAccount = a.Name,
                           DescriptionAccount = a.Description,
                           IdStatus = d.IdStatus,
-                          NameStatus = s.Name,
-                          DescriptionStatus = s.Description
+                          NameStatusBudget = s.Name,
+                          DescriptionStatusBudget = s.Description
                       }
                   )
                   .FirstOrDefault();
@@ -88,20 +88,20 @@
                         Month = d.Month,
                         Amount = d.Amount,
                         IdUser = d.IdUser,
-                        EmailUser = u.Email,
-                        UsernameUser = u.Username,
+                        EmailUserBudget = u.Email,
+                        UsernameUserBudget = u.Username,
                         IdAccount = d.IdAccount,
                         NameAccount = a.Name,
                         DescriptionAccount = a.Description,
                         IdStatus = d.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                   )
                  .ToList();
         }
 
-        public List<DepositExtendDto> GetDepositsByYearUser(DepositDto deposit)
+        public List<DepositExtendDto> GetDepositsByYearUserBudget(DepositDto deposit)
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
@@ -119,20 +119,20 @@
                         Month = d.Month,
                         Amount = d.Amount,
                         IdUser = d.IdUser,
-                        EmailUser = u.Email,
-                        UsernameUser = u.Username,
+                        EmailUserBudget = u.Email,
+                        UsernameUserBudget = u.Username,
                         IdAccount = d.IdAccount,
                         NameAccount = a.Name,
                         DescriptionAccount = a.Description,
                         IdStatus = d.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                   )
                  .ToList();
         }
 
-        public List<DepositExtendDto> GetDepositsByMonthUser(DepositDto deposit)
+        public List<DepositExtendDto> GetDepositsByMonthUserBudget(DepositDto deposit)
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
@@ -150,20 +150,20 @@
                         Month = d.Month,
                         Amount = d.Amount,
                         IdUser = d.IdUser,
-                        EmailUser = u.Email,
-                        UsernameUser = u.Username,
+                        EmailUserBudget = u.Email,
+                        UsernameUserBudget = u.Username,
                         IdAccount = d.IdAccount,
                         NameAccount = a.Name,
                         DescriptionAccount = a.Description,
                         IdStatus = d.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                   )
                  .ToList();
         }
 
-        public List<DepositExtendDto> GetDepositsByYearMonthUser(DepositDto deposit)
+        public List<DepositExtendDto> GetDepositsByYearMonthUserBudget(DepositDto deposit)
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
@@ -181,14 +181,14 @@
                         Month = d.Month,
                         Amount = d.Amount,
                         IdUser = d.IdUser,
-                        EmailUser = u.Email,
-                        UsernameUser = u.Username,
+                        EmailUserBudget = u.Email,
+                        UsernameUserBudget = u.Username,
                         IdAccount = d.IdAccount,
                         NameAccount = a.Name,
                         DescriptionAccount = a.Description,
                         IdStatus = d.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                   )
                  .ToList();
@@ -212,20 +212,20 @@
                         Month = d.Month,
                         Amount = d.Amount,
                         IdUser = d.IdUser,
-                        EmailUser = u.Email,
-                        UsernameUser = u.Username,
+                        EmailUserBudget = u.Email,
+                        UsernameUserBudget = u.Username,
                         IdAccount = d.IdAccount,
                         NameAccount = a.Name,
                         DescriptionAccount = a.Description,
                         IdStatus = d.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                   )
                  .ToList();
         }
 
-        public List<DepositExtendDto> GetDepositsByYearMonthStatus(DepositDto deposit)
+        public List<DepositExtendDto> GetDepositsByYearMonthStatusBudget(DepositDto deposit)
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
@@ -243,20 +243,20 @@
                         Month = d.Month,
                         Amount = d.Amount,
                         IdUser = d.IdUser,
-                        EmailUser = u.Email,
-                        UsernameUser = u.Username,
+                        EmailUserBudget = u.Email,
+                        UsernameUserBudget = u.Username,
                         IdAccount = d.IdAccount,
                         NameAccount = a.Name,
                         DescriptionAccount = a.Description,
                         IdStatus = d.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                   )
                  .ToList();
         }
 
-        public List<DepositExtendDto> GetDepositsByYearMonthUserAccount(DepositDto deposit)
+        public List<DepositExtendDto> GetDepositsByYearMonthUserBudgetAccount(DepositDto deposit)
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
@@ -274,20 +274,20 @@
                         Month = d.Month,
                         Amount = d.Amount,
                         IdUser = d.IdUser,
-                        EmailUser = u.Email,
-                        UsernameUser = u.Username,
+                        EmailUserBudget = u.Email,
+                        UsernameUserBudget = u.Username,
                         IdAccount = d.IdAccount,
                         NameAccount = a.Name,
                         DescriptionAccount = a.Description,
                         IdStatus = d.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                   )
                  .ToList();
         }
 
-        public List<DepositExtendDto> GetDepositsByUser(DepositDto deposit)
+        public List<DepositExtendDto> GetDepositsByUserBudget(DepositDto deposit)
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
@@ -305,14 +305,14 @@
                         Month = d.Month,
                         Amount = d.Amount,
                         IdUser = d.IdUser,
-                        EmailUser = u.Email,
-                        UsernameUser = u.Username,
+                        EmailUserBudget = u.Email,
+                        UsernameUserBudget = u.Username,
                         IdAccount = d.IdAccount,
                         NameAccount = a.Name,
                         DescriptionAccount = a.Description,
                         IdStatus = d.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                   )
                  .ToList();
@@ -336,20 +336,20 @@
                         Month = d.Month,
                         Amount = d.Amount,
                         IdUser = d.IdUser,
-                        EmailUser = u.Email,
-                        UsernameUser = u.Username,
+                        EmailUserBudget = u.Email,
+                        UsernameUserBudget = u.Username,
                         IdAccount = d.IdAccount,
                         NameAccount = a.Name,
                         DescriptionAccount = a.Description,
                         IdStatus = d.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                   )
                  .ToList();
         }
 
-        public List<DepositExtendDto> GetDepositsByStatus(DepositDto deposit)
+        public List<DepositExtendDto> GetDepositsByStatusBudget(DepositDto deposit)
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
@@ -367,20 +367,20 @@
                         Month = d.Month,
                         Amount = d.Amount,
                         IdUser = d.IdUser,
-                        EmailUser = u.Email,
-                        UsernameUser = u.Username,
+                        EmailUserBudget = u.Email,
+                        UsernameUserBudget = u.Username,
                         IdAccount = d.IdAccount,
                         NameAccount = a.Name,
                         DescriptionAccount = a.Description,
                         IdStatus = d.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                   )
                  .ToList();
         }
 
-        public List<DepositExtendDto> GetDepositsByUserStatus(DepositDto deposit)
+        public List<DepositExtendDto> GetDepositsByUserBudgetStatusBudget(DepositDto deposit)
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
@@ -398,20 +398,20 @@
                         Month = d.Month,
                         Amount = d.Amount,
                         IdUser = d.IdUser,
-                        EmailUser = u.Email,
-                        UsernameUser = u.Username,
+                        EmailUserBudget = u.Email,
+                        UsernameUserBudget = u.Username,
                         IdAccount = d.IdAccount,
                         NameAccount = a.Name,
                         DescriptionAccount = a.Description,
                         IdStatus = d.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                   )
                  .ToList();
         }
 
-        public List<DepositExtendDto> GetDepositsByAccountStatus(DepositDto deposit)
+        public List<DepositExtendDto> GetDepositsByAccountStatusBudget(DepositDto deposit)
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
@@ -429,14 +429,14 @@
                         Month = d.Month,
                         Amount = d.Amount,
                         IdUser = d.IdUser,
-                        EmailUser = u.Email,
-                        UsernameUser = u.Username,
+                        EmailUserBudget = u.Email,
+                        UsernameUserBudget = u.Username,
                         IdAccount = d.IdAccount,
                         NameAccount = a.Name,
                         DescriptionAccount = a.Description,
                         IdStatus = d.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                   )
                  .ToList();

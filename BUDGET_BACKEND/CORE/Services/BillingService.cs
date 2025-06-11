@@ -44,7 +44,7 @@
         public BillingExtendDto? GetBillingById(BillingDto billing)
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
-            BillingExtendDto? billingSearch = billingRepository.GetBillingById(billing);
+            BillingExtendDto? billingSearch = billingRepository.GetBillingByIdBilling(billing);
 
             _logApiService.TraceLog(typeof(Billing).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -78,7 +78,7 @@
         public List<BillingExtendDto> GetBillingsByYearUser(BillingDto billing)
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
-            List<BillingExtendDto> billings = billingRepository.GetBillingsByYearUser(billing);
+            List<BillingExtendDto> billings = billingRepository.GetBillingsByYearUserBudget(billing);
 
             _logApiService.TraceLog(typeof(Billing).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -95,7 +95,7 @@
         public List<BillingExtendDto> GetBillingsByMonthUser(BillingDto billing)
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
-            List<BillingExtendDto> billings = billingRepository.GetBillingsByMonthUser(billing);
+            List<BillingExtendDto> billings = billingRepository.GetBillingsByMonthUserBudget(billing);
 
             _logApiService.TraceLog(typeof(Billing).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -112,7 +112,7 @@
         public List<BillingExtendDto> GetBillingsByYearMonthUser(BillingDto billing)
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
-            List<BillingExtendDto> billings = billingRepository.GetBillingsByYearMonthUser(billing);
+            List<BillingExtendDto> billings = billingRepository.GetBillingsByYearMonthUserBudget(billing);
 
             _logApiService.TraceLog(typeof(Billing).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -129,7 +129,7 @@
         public List<BillingExtendDto> GetBillingsByUser(BillingDto billing)
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
-            List<BillingExtendDto> billings = billingRepository.GetBillingsByUser(billing);
+            List<BillingExtendDto> billings = billingRepository.GetBillingsByUserBudget(billing);
 
             _logApiService.TraceLog(typeof(Billing).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -146,7 +146,7 @@
         public List<BillingExtendDto> GetBillingsByStatus(BillingDto billing)
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
-            List<BillingExtendDto> billings = billingRepository.GetBillingsByStatus(billing);
+            List<BillingExtendDto> billings = billingRepository.GetBillingsByStatusBudget(billing);
 
             _logApiService.TraceLog(typeof(Billing).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -163,7 +163,7 @@
         public List<BillingExtendDto> GetBillingsByUserStatus(BillingDto billing)
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
-            List<BillingExtendDto> billings = billingRepository.GetBillingsByUserStatus(billing);
+            List<BillingExtendDto> billings = billingRepository.GetBillingsByUserBudgetStatusBudget(billing);
 
             _logApiService.TraceLog(typeof(Billing).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -180,18 +180,18 @@
         public BillingDto SaveBilling(BillingDto billing)
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
-            IUserRepository userRepository = UnitOfWork.UserRepository();
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IUserBudgetRepository userRepository = UnitOfWork.UserRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
             if (billing == null || billing.Year <= 0 || billing.Month <= 0)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            UserExtendDto? userSearch = userRepository.GetUserById(new UserDto { IdUser = billing.IdUser }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            UserBudgetExtendDto? userSearch = userRepository.GetUserById(new UserDto { IdUser = billing.IdUser }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = billing.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            List<BillingExtendDto> billingsSearch = billingRepository.GetBillingsByYearMonthUser(billing);
+            List<BillingExtendDto> billingsSearch = billingRepository.GetBillingsByYearMonthUserBudget(billing);
 
             if (billingsSearch.Count != 0)
             {
@@ -230,7 +230,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            BillingExtendDto? billingSearch = billingRepository.GetBillingById(billing) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            BillingExtendDto? billingSearch = billingRepository.GetBillingByIdBilling(billing) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             Billing updateBilling = new()
             {
@@ -259,9 +259,9 @@
         public BillingDto DeleteBilling(BillingDto billing)
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
-            BillingExtendDto? billingSearch = billingRepository.GetBillingById(billing) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            BillingExtendDto? billingSearch = billingRepository.GetBillingByIdBilling(billing) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = billing.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (billingSearch.IdStatus == billing.IdStatus)

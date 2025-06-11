@@ -39,7 +39,7 @@
 
         #region Métodos y Funciones
 
-        public TypeAccountExtendDto? GetTypeAccountById(TypeAccountDto typeAccount)
+        public TypeAccountExtendDto? GetTypeAccountByIdTypeAccount(TypeAccountDto typeAccount)
         {
             return (
                        from t in _context.TypeAccounts.AsNoTracking()
@@ -51,14 +51,14 @@
                            IdTypeAccount = t.IdTypeAccount,
                            Name = t.Name,
                            IdStatus = t.IdStatus,
-                           NameStatus = s.Name,
-                           DescriptionStatus = s.Description
+                           NameStatusBudget = s.Name,
+                           DescriptionStatusBudget = s.Description
                        }
                    )
                    .FirstOrDefault();
         }
 
-        public TypeAccountExtendDto? GetTypeAccountByName(TypeAccountDto typeAccount)
+        public TypeAccountExtendDto? GetTypeAccountByNameTypeAccount(TypeAccountDto typeAccount)
         {
             return (
                       from t in _context.TypeAccounts.AsNoTracking()
@@ -70,14 +70,14 @@
                           IdTypeAccount = t.IdTypeAccount,
                           Name = t.Name,
                           IdStatus = t.IdStatus,
-                          NameStatus = s.Name,
-                          DescriptionStatus = s.Description
+                          NameStatusBudget = s.Name,
+                          DescriptionStatusBudget = s.Description
                       }
                   )
                   .FirstOrDefault();
         }
 
-        public List<TypeAccountExtendDto> GetTypeAccountsByStatus(TypeAccountDto typeAccount)
+        public List<TypeAccountExtendDto> GetTypeAccountsByStatusBudget(TypeAccountDto typeAccount)
         {
             return (
                      from t in _context.TypeAccounts.AsNoTracking()
@@ -89,8 +89,8 @@
                          IdTypeAccount = t.IdTypeAccount,
                          Name = t.Name,
                          IdStatus = t.IdStatus,
-                         NameStatus = s.Name,
-                         DescriptionStatus = s.Description
+                         NameStatusBudget = s.Name,
+                         DescriptionStatusBudget = s.Description
                      }
                   )
                  .ToList();

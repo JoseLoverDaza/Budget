@@ -39,7 +39,7 @@
 
         #region Métodos y Funciones
 
-        public LogApiExtendDto? GetLogApiById(LogApiDto logApi)
+        public LogApiExtendDto? GetLogApiByIdLogApi(LogApiDto logApi)
         {
             return (
                     from l in _context.LogApis.AsNoTracking()
@@ -55,8 +55,8 @@
                         EntityAction = l.EntityAction,
                         CreationDate = l.CreationDate,
                         IdStatus = l.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                   )
                   .FirstOrDefault();
@@ -78,14 +78,14 @@
                         EntityAction = l.EntityAction,
                         CreationDate = l.CreationDate,
                         IdStatus = l.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                   )
                   .ToList();
         }
 
-        public List<LogApiExtendDto> GetLogApisByStatus(LogApiDto logApi)
+        public List<LogApiExtendDto> GetLogApisByStatusBudget(LogApiDto logApi)
         {
             return (
                     from l in _context.LogApis.AsNoTracking()
@@ -101,8 +101,8 @@
                         EntityAction = l.EntityAction,
                         CreationDate = l.CreationDate,
                         IdStatus = l.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                    )
                    .ToList();
@@ -124,14 +124,14 @@
                         EntityAction = l.EntityAction,
                         CreationDate = l.CreationDate,
                         IdStatus = l.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                    )
                    .ToList();
         }
 
-        public List<LogApiExtendDto> GetLogApisByCreationDateStatus(LogApiDto logApi)
+        public List<LogApiExtendDto> GetLogApisByCreationDateStatusBudget(LogApiDto logApi)
         {
             return (
                     from l in _context.LogApis.AsNoTracking()
@@ -147,8 +147,8 @@
                         EntityAction = l.EntityAction,
                         CreationDate = l.CreationDate,
                         IdStatus = l.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                    )
                    .ToList();
@@ -170,8 +170,8 @@
                         EntityAction = l.EntityAction,
                         CreationDate = l.CreationDate,
                         IdStatus = l.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                   )
                   .ToList();

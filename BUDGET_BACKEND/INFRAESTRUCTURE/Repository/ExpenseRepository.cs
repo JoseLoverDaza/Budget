@@ -39,7 +39,7 @@
 
         #region Métodos y Funciones
 
-        public ExpenseExtendDto? GetExpenseById(ExpenseDto expense)
+        public ExpenseExtendDto? GetExpenseByIdExpense(ExpenseDto expense)
         {
             return (
                        from e in _context.Expenses.AsNoTracking()
@@ -57,8 +57,8 @@
                            NameTypeExpense = t.Name,
                            DescriptionTypeExpense = t.Description,
                            IdStatus = e.IdStatus,
-                           NameStatus = s.Name,
-                           DescriptionStatus = s.Description
+                           NameStatusBudget = s.Name,
+                           DescriptionStatusBudget = s.Description
                        }
                    )
                    .FirstOrDefault();
@@ -82,8 +82,8 @@
                        NameTypeExpense = t.Name,
                        DescriptionTypeExpense = t.Description,
                        IdStatus = e.IdStatus,
-                       NameStatus = s.Name,
-                       DescriptionStatus = s.Description
+                       NameStatusBudget = s.Name,
+                       DescriptionStatusBudget = s.Description
                    }
                  )
                 .ToList();
@@ -107,8 +107,8 @@
                         NameTypeExpense = t.Name,
                         DescriptionTypeExpense = t.Description,
                         IdStatus = e.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                   )
                  .ToList();
@@ -132,14 +132,14 @@
                        NameTypeExpense = t.Name,
                        DescriptionTypeExpense = t.Description,
                        IdStatus = e.IdStatus,
-                       NameStatus = s.Name,
-                       DescriptionStatus = s.Description
+                       NameStatusBudget = s.Name,
+                       DescriptionStatusBudget = s.Description
                    }
                  )
                 .ToList();
         }
 
-        public List<ExpenseExtendDto> GetExpensesByTypeExpenseStatus(ExpenseDto expense)
+        public List<ExpenseExtendDto> GetExpensesByTypeExpenseStatusBudget(ExpenseDto expense)
         {
             return (
                     from e in _context.Expenses.AsNoTracking()
@@ -157,8 +157,8 @@
                         NameTypeExpense = t.Name,
                         DescriptionTypeExpense = t.Description,
                         IdStatus = e.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                   )
                  .ToList();

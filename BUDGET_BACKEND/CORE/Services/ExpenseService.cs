@@ -44,7 +44,7 @@
         public ExpenseExtendDto? GetExpenseById(ExpenseDto expense)
         {
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
-            ExpenseExtendDto? expenseSearch = expenseRepository.GetExpenseById(expense);
+            ExpenseExtendDto? expenseSearch = expenseRepository.GetExpenseByIdExpense(expense);
 
             _logApiService.TraceLog(typeof(Expense).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -112,7 +112,7 @@
         public List<ExpenseExtendDto> GetExpensesByTypeExpenseStatus(ExpenseDto expense)
         {
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
-            List<ExpenseExtendDto> expensesSearch = expenseRepository.GetExpensesByTypeExpenseStatus(expense);
+            List<ExpenseExtendDto> expensesSearch = expenseRepository.GetExpensesByTypeExpenseStatusBudget(expense);
 
             _logApiService.TraceLog(typeof(Expense).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -130,7 +130,7 @@
         {
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
             ITypeExpenseRepository typeExpenseRepository = UnitOfWork.TypeExpenseRepository();
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
             if (expense == null || string.IsNullOrWhiteSpace(expense.Name.Trim()))
             {
@@ -149,7 +149,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            TypeExpenseExtendDto? typeExpenseSearch = typeExpenseRepository.GetTypeExpenseById(new TypeExpenseDto { IdTypeExpense = expense.IdTypeExpense }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            TypeExpenseExtendDto? typeExpenseSearch = typeExpenseRepository.GetTypeExpenseByIdTypeExpense(new TypeExpenseDto { IdTypeExpense = expense.IdTypeExpense }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = expense.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             Expense saveExpense = new()
@@ -182,7 +182,7 @@
             }
 
             List<ExpenseExtendDto> expenseDuplicados = expenseRepository.GetExpensesByNameTypeExpense(expense);
-            ExpenseExtendDto? expenseSearch = expenseRepository.GetExpenseById(expense) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            ExpenseExtendDto? expenseSearch = expenseRepository.GetExpenseByIdExpense(expense) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (expenseDuplicados.Count != 0 && expenseDuplicados.FirstOrDefault()!.IdExpense != expenseSearch.IdExpense)
             {
@@ -212,9 +212,9 @@
         public ExpenseDto DeleteExpense(ExpenseDto expense)
         {
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
-            ExpenseExtendDto? expenseSearch = expenseRepository.GetExpenseById(expense) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            ExpenseExtendDto? expenseSearch = expenseRepository.GetExpenseByIdExpense(expense) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = expense.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (expenseSearch.IdStatus == expense.IdStatus)

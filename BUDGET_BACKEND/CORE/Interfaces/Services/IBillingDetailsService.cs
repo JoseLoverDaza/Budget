@@ -19,19 +19,19 @@
 
         #region Métodos y Funciones
 
-        public BillingDetailExtendDto? GetBillingDetailsById(BillingDetailsDto billingDetails);
+        public BillingDetailExtendDto? GetBillingDetailsByIdBillingDetails(BillingDetailsDto billingDetails);
 
         public List<BillingDetailExtendDto> GetBillingDetailsByBilling(BillingDetailsDto billingDetails);
 
         public List<BillingDetailExtendDto> GetBillingDetailsByExpense(BillingDetailsDto billingDetails);
 
-        public List<BillingDetailExtendDto> GetBillingDetailsByStatus(BillingDetailsDto billingDetails);
+        public List<BillingDetailExtendDto> GetBillingDetailsByStatusBudget(BillingDetailsDto billingDetails);
 
         public List<BillingDetailExtendDto> GetBillingDetailsByBillingExpense(BillingDetailsDto billingDetails);
 
-        public List<BillingDetailExtendDto> GetBillingDetailsByExpenseStatus(BillingDetailsDto billingDetails);
+        public List<BillingDetailExtendDto> GetBillingDetailsByExpenseStatusBudget(BillingDetailsDto billingDetails);
 
-        public List<BillingDetailExtendDto> GetBillingDetailsByBillingExpenseStatus(BillingDetailsDto billingDetails);
+        public List<BillingDetailExtendDto> GetBillingDetailsByBillingExpenseStatusBudget(BillingDetailsDto billingDetails);
 
         public BillingDetailsDto SaveBillingDetail(BillingDetailsDto billingDetails);
 

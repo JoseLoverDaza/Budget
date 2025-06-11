@@ -165,7 +165,7 @@
             IBudgetDetailsRepository budgetDetailsRepository = UnitOfWork.BudgetDetailsRepository();
             IBudgetRepository budgetRepository = UnitOfWork.BudgetRepository();
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
             if (budgetDetails == null || budgetDetails.Amount <= 0)
             {
@@ -179,8 +179,8 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            BudgetExtendDto? budgetSearch = budgetRepository.GetBudgetById(new BudgetDto { IdBudget = budgetDetails.IdBudget }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            ExpenseExtendDto? expenseSearch = expenseRepository.GetExpenseById(new ExpenseDto { IdExpense = budgetDetails.IdExpense }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            BudgetExtendDto? budgetSearch = budgetRepository.GetBudgetByIdBudget(new BudgetDto { IdBudget = budgetDetails.IdBudget }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            ExpenseExtendDto? expenseSearch = expenseRepository.GetExpenseByIdExpense(new ExpenseDto { IdExpense = budgetDetails.IdExpense }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = budgetDetails.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             BudgetDetails saveBudgetDetails = new()
@@ -240,7 +240,7 @@
         public BudgetDetailsDto DeleteBudgetDetail(BudgetDetailsDto budgetDetails)
         {
             IBudgetDetailsRepository budgetDetailsRepository = UnitOfWork.BudgetDetailsRepository();
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
             BudgetDetailExtendDto? budgetDetailSearch = budgetDetailsRepository.GetBudgetDetailsById(budgetDetails) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = budgetDetails.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);

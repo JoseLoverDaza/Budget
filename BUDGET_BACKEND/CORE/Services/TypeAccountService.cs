@@ -44,7 +44,7 @@
         public TypeAccountExtendDto? GetTypeAccountById(TypeAccountDto typeAccount)
         {
             ITypeAccountRepository typeAccountRepository = UnitOfWork.TypeAccountRepository();
-            TypeAccountExtendDto? typeAccountSearch = typeAccountRepository.GetTypeAccountById(typeAccount);
+            TypeAccountExtendDto? typeAccountSearch = typeAccountRepository.GetTypeAccountByIdTypeAccount(typeAccount);
 
             _logApiService.TraceLog(typeof(TypeAccount).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -61,7 +61,7 @@
         public TypeAccountExtendDto? GetTypeAccountByName(TypeAccountDto typeAccount)
         {
             ITypeAccountRepository typeAccountRepository = UnitOfWork.TypeAccountRepository();
-            TypeAccountExtendDto? typeAccountSearch = typeAccountRepository.GetTypeAccountByName(typeAccount);
+            TypeAccountExtendDto? typeAccountSearch = typeAccountRepository.GetTypeAccountByNameTypeAccount(typeAccount);
 
             _logApiService.TraceLog(typeof(TypeAccount).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -78,7 +78,7 @@
         public List<TypeAccountExtendDto> GetTypeAccountsByStatus(TypeAccountDto typeAccount)
         {
             ITypeAccountRepository typeAccountRepository = UnitOfWork.TypeAccountRepository();
-            List<TypeAccountExtendDto> typeAccountsSearch = typeAccountRepository.GetTypeAccountsByStatus(typeAccount);
+            List<TypeAccountExtendDto> typeAccountsSearch = typeAccountRepository.GetTypeAccountsByStatusBudget(typeAccount);
 
             _logApiService.TraceLog(typeof(TypeAccount).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -95,14 +95,14 @@
         public TypeAccountDto SaveTypeAccount(TypeAccountDto typeAccount)
         {
             ITypeAccountRepository typeAccountRepository = UnitOfWork.TypeAccountRepository();
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
             if (typeAccount == null || string.IsNullOrWhiteSpace(typeAccount.Name.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            TypeAccountExtendDto? typeAccountSearch = typeAccountRepository.GetTypeAccountByName(typeAccount);
+            TypeAccountExtendDto? typeAccountSearch = typeAccountRepository.GetTypeAccountByNameTypeAccount(typeAccount);
 
             if (typeAccountSearch != null)
             {
@@ -139,8 +139,8 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            TypeAccountExtendDto? typeAccountDuplicado = typeAccountRepository.GetTypeAccountByName(typeAccount);
-            TypeAccountExtendDto? typeAccountSearch = typeAccountRepository.GetTypeAccountById(typeAccount) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            TypeAccountExtendDto? typeAccountDuplicado = typeAccountRepository.GetTypeAccountByNameTypeAccount(typeAccount);
+            TypeAccountExtendDto? typeAccountSearch = typeAccountRepository.GetTypeAccountByIdTypeAccount(typeAccount) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (typeAccountDuplicado != null && typeAccountDuplicado.IdTypeAccount != typeAccount.IdTypeAccount)
             {
@@ -170,9 +170,9 @@
         public TypeAccountDto DeleteTypeAccount(TypeAccountDto typeAccount)
         {
             ITypeAccountRepository typeAccountRepository = UnitOfWork.TypeAccountRepository();
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
-            TypeAccountExtendDto? typeAccountSearch = typeAccountRepository.GetTypeAccountById(typeAccount) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            TypeAccountExtendDto? typeAccountSearch = typeAccountRepository.GetTypeAccountByIdTypeAccount(typeAccount) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = typeAccount.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (typeAccountSearch.IdStatus == typeAccount.IdStatus)

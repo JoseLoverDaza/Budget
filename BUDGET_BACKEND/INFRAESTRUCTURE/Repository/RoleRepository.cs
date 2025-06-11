@@ -19,7 +19,7 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class RoleRepository : BaseRepository<Role>, IRoleRepository
+    public class RoleRepository : BaseRepository<Role>, IRoleBudgetRepository
     {
 
         #region Atributos y Propiedades
@@ -39,58 +39,58 @@
 
         #region Métodos y Funciones
 
-        public RoleExtendDto? GetRoleById(RoleDto role)
+        public RoleBudgetExtendDto? GetRoleById(RoleDto role)
         {
             return (
                        from r in _context.Roles.AsNoTracking()
                        join s in _context.Status.AsNoTracking()
                        on r.IdStatus equals s.IdStatus
                        where r.IdRole == role.IdRole
-                       select new RoleExtendDto
+                       select new RoleBudgetExtendDto
                        {
                            IdRole = r.IdRole,
                            Name = r.Name,
                            IdStatus = r.IdStatus,
                            NameStatus = s.Name,
-                           DescriptionStatus = s.Description
+                           DescriptionStatusBudget = s.Description
                        }
                    )
                    .FirstOrDefault();
         }
 
-        public RoleExtendDto? GetRoleByName(RoleDto role)
+        public RoleBudgetExtendDto? GetRoleByName(RoleDto role)
         {
             return (
                       from r in _context.Roles.AsNoTracking()
                       join s in _context.Status.AsNoTracking()
                       on r.IdStatus equals s.IdStatus
                       where r.Name == role.Name
-                      select new RoleExtendDto
+                      select new RoleBudgetExtendDto
                       {
                           IdRole = r.IdRole,
                           Name = r.Name,
                           IdStatus = r.IdStatus,
                           NameStatus = s.Name,
-                          DescriptionStatus = s.Description
+                          DescriptionStatusBudget = s.Description
                       }
                   )
                   .FirstOrDefault();
         }
 
-        public List<RoleExtendDto> GetRolesByStatus(RoleDto role)
+        public List<RoleBudgetExtendDto> GetRolesByStatus(RoleDto role)
         {
             return (
                      from r in _context.Roles.AsNoTracking()
                      join s in _context.Status.AsNoTracking()
                      on r.IdStatus equals s.IdStatus
                      where r.IdStatus == role.IdStatus
-                     select new RoleExtendDto
+                     select new RoleBudgetExtendDto
                      {
                          IdRole = r.IdRole,
                          Name = r.Name,
                          IdStatus = r.IdStatus,
                          NameStatus = s.Name,
-                         DescriptionStatus = s.Description
+                         DescriptionStatusBudget = s.Description
                      }
                   )
                  .ToList();

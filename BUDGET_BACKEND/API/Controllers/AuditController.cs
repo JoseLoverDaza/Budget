@@ -25,13 +25,13 @@
 
         #region Atributos y Propiedades
 
-        private readonly IAuditService _auditService;
+        private readonly IAuditApiService _auditService;
 
         #endregion
 
         #region Constructor
 
-        public AuditController(IAuditService auditService)
+        public AuditController(IAuditApiService auditService)
         {
             _auditService = auditService;
         }

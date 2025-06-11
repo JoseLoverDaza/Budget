@@ -39,7 +39,7 @@
 
         #region Métodos y Funciones
 
-        public FinancialInstitutionExtendDto? GetFinancialInstitutionById(FinancialInstitutionDto financialInstitution)
+        public FinancialInstitutionExtendDto? GetFinancialInstitutionByIdFinancialInstitution(FinancialInstitutionDto financialInstitution)
         {
             return (
                        from f in _context.FinancialInstitutions.AsNoTracking()
@@ -51,14 +51,14 @@
                            IdFinancialInstitution = f.IdFinancialInstitution,
                            Name = f.Name,
                            IdStatus = f.IdStatus,
-                           NameStatus = s.Name,
-                           DescriptionStatus = s.Description
+                           NameStatusBudget = s.Name,
+                           DescriptionStatusBudget = s.Description
                        }
                    )
                    .FirstOrDefault();
         }
 
-        public FinancialInstitutionExtendDto? GetFinancialInstitutionByName(FinancialInstitutionDto financialInstitution)
+        public FinancialInstitutionExtendDto? GetFinancialInstitutionByNameFinancialInstitution(FinancialInstitutionDto financialInstitution)
         {
             return (
                        from f in _context.FinancialInstitutions.AsNoTracking()
@@ -70,14 +70,14 @@
                            IdFinancialInstitution = f.IdFinancialInstitution,
                            Name = f.Name,
                            IdStatus = f.IdStatus,
-                           NameStatus = s.Name,
-                           DescriptionStatus = s.Description
+                           NameStatusBudget = s.Name,
+                           DescriptionStatusBudget = s.Description
                        }
                    )
                    .FirstOrDefault();
         }
 
-        public List<FinancialInstitutionExtendDto> GetFinancialInstitutionsByStatus(FinancialInstitutionDto financialInstitution)
+        public List<FinancialInstitutionExtendDto> GetFinancialInstitutionsByStatusBudget(FinancialInstitutionDto financialInstitution)
         {
             return (
                     from f in _context.FinancialInstitutions.AsNoTracking()
@@ -89,8 +89,8 @@
                         IdFinancialInstitution = f.IdFinancialInstitution,
                         Name = f.Name,
                         IdStatus = f.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                   )
                  .ToList();

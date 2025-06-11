@@ -147,7 +147,7 @@
             AuthenticationDto authentication = new()
             {
                 Username = "Test",
-                Password = "Test"
+                EncryptedPassword = "Test"
             };
 
             ///Act
@@ -166,7 +166,7 @@
             AuthenticationDto authentication = new()
             {
                 Username = "T",
-                Password = "T"
+                EncryptedPassword = "T"
             };
 
             ///Act

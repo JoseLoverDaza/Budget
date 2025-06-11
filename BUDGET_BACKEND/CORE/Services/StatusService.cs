@@ -20,7 +20,7 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class StatusService : BaseService, IStatusService
+    public class StatusService : BaseService, IStatusBudgetService
     {
 
         #region Atributos y Propiedades
@@ -42,7 +42,7 @@
 
         public StatusDto? GetStatusById(StatusDto status)
         {
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
             StatusDto? statusSearch = statusRepository.GetStatusById(status);
 
             _logApiService.TraceLog(typeof(Status).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
@@ -59,7 +59,7 @@
 
         public StatusDto? GetStatusByName(StatusDto status)
         {
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
             StatusDto? statusSearch = statusRepository.GetStatusByName(status);
 
             _logApiService.TraceLog(typeof(Status).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
@@ -76,7 +76,7 @@
 
         public List<StatusDto> GetStatus()
         {
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
             List<StatusDto> status = statusRepository.GetStatus();
 
             _logApiService.TraceLog(typeof(Status).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
@@ -93,7 +93,7 @@
 
         public StatusDto SaveStatus(StatusDto status)
         {
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
             if (status == null || string.IsNullOrWhiteSpace(status.Name.Trim()))
             {
@@ -127,7 +127,7 @@
 
         public StatusDto UpdateStatus(StatusDto status)
         {
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
             if (status == null || status.IdStatus <= 0 || string.IsNullOrWhiteSpace(status.Name.Trim()))
             {

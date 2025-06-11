@@ -54,7 +54,7 @@
             }
             finally
             {
-                if (context.RequestServices.GetService(typeof(IAuditService)) is IAuditService auditService)
+                if (context.RequestServices.GetService(typeof(IAuditApiService)) is IAuditApiService auditService)
                 {
                     var auditDto = new AuditDto
                     {

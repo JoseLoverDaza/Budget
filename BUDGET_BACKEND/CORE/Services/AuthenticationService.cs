@@ -45,18 +45,18 @@
 
         public AuthenticationDto? Authentication(AuthenticationDto authentication)
         {
-            IUserRepository userRepository = UnitOfWork.UserRepository();
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IUserBudgetRepository userRepository = UnitOfWork.UserRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
-            if (authentication == null || string.IsNullOrWhiteSpace(authentication.Username.Trim()) || string.IsNullOrWhiteSpace(authentication.Password.Trim()))
+            if (authentication == null || string.IsNullOrWhiteSpace(authentication.Username.Trim()) || string.IsNullOrWhiteSpace(authentication.EncryptedPassword.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            UserExtendDto? userSearch = (userRepository.GetUserByUsername(new UserDto { Username = authentication.Username }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL));
+            UserBudgetExtendDto? userSearch = (userRepository.GetUserByUsername(new UserDto { Username = authentication.Username }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL));
             StatusDto? statusSearch = statusRepository.GetStatusByName(new StatusDto { Name = Constants.Status.ACTIVO }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            if (!PasswordHash.VerifyPassword(authentication.Password, userSearch.Password))
+            if (!PasswordHash.VerifyPassword(authentication.EncryptedPassword, userSearch.Password))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -97,9 +97,9 @@
 
         public AuthenticationDto? ValidateAuthentication(AuthenticationDto authentication)
         {
-            IUserRepository userRepository = UnitOfWork.UserRepository();
+            IUserBudgetRepository userRepository = UnitOfWork.UserRepository();
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
             if (authentication == null || string.IsNullOrWhiteSpace(authentication.Token.Trim()))
             {
@@ -107,7 +107,7 @@
             }
 
             TokenApiExtendDto? tokenApiSearch = (tokenApiRepository.GetTokenApiByToken(new TokenApiDto { Token = authentication.Token.Trim() }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL));
-            UserExtendDto? userSearch = (userRepository.GetUserById(new UserDto { IdUser = tokenApiSearch.IdUser }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL));
+            UserBudgetExtendDto? userSearch = (userRepository.GetUserById(new UserDto { IdUser = tokenApiSearch.IdUser }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL));
             StatusDto? statusSearch = statusRepository.GetStatusByName(new StatusDto { Name = Constants.Status.ACTIVO }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (userSearch.IdStatus != statusSearch.IdStatus)
@@ -116,7 +116,7 @@
             }
                         
             authentication.Username = userSearch.Username;
-            authentication.Password = string.Empty;
+            authentication.EncryptedPassword = string.Empty;
             authentication.CreationDate = tokenApiSearch.CreationDate;
             authentication.ExpirationDate = tokenApiSearch.ExpirationDate;
             authentication.IsAuthenticated = tokenApiSearch.ExpirationDate >= DateTime.Now;

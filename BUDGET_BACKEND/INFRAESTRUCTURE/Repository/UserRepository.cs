@@ -20,7 +20,7 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    internal class UserRepository : BaseRepository<User>, IUserRepository
+    internal class UserRepository : BaseRepository<User>, IUserBudgetRepository
     {
 
         #region Atributos y Propiedades
@@ -40,7 +40,7 @@
 
         #region Métodos y Funciones
 
-        public UserExtendDto? GetUserById(UserDto user)
+        public UserBudgetExtendDto? GetUserById(UserDto user)
         {
             return (
                        from u in _context.Users.AsNoTracking()
@@ -49,7 +49,7 @@
                        join s in _context.Status.AsNoTracking()
                        on u.IdStatus equals s.IdStatus
                        where u.IdUser == user.IdUser
-                       select new UserExtendDto
+                       select new UserBudgetExtendDto
                        {
                            IdUser = u.IdUser,
                            Email = u.Email,
@@ -57,17 +57,17 @@
                            Username = u.Username,
                            Password = u.Password,
                            IdRole = u.IdRole,
-                           NameRole = r.Name,
-                           DescriptionRole = r.Description,
+                           NameRoleBudget = r.Name,
+                           DescriptionRoleBudget = r.Description,
                            IdStatus = u.IdStatus,
-                           NameStatus = s.Name,
-                           DescriptionStatus = s.Description
+                           NameStatusBudget = s.Name,
+                           DescriptionStatusBudget = s.Description
                        }
                    )
                    .FirstOrDefault();
         }
 
-        public UserExtendDto? GetUserByEmail(UserDto user)
+        public UserBudgetExtendDto? GetUserByEmail(UserDto user)
         {
             return (
                       from u in _context.Users.AsNoTracking()
@@ -76,7 +76,7 @@
                       join s in _context.Status.AsNoTracking()
                       on u.IdStatus equals s.IdStatus
                       where u.Email == user.Email
-                      select new UserExtendDto
+                      select new UserBudgetExtendDto
                       {
                           IdUser = u.IdUser,
                           Email = u.Email,
@@ -84,17 +84,17 @@
                           Username = u.Username,
                           Password = u.Password,
                           IdRole = u.IdRole,
-                          NameRole = r.Name,
-                          DescriptionRole = r.Description,
+                          NameRoleBudget = r.Name,
+                          DescriptionRoleBudget = r.Description,
                           IdStatus = u.IdStatus,
-                          NameStatus = s.Name,
-                          DescriptionStatus = s.Description
+                          NameStatusBudget = s.Name,
+                          DescriptionStatusBudget = s.Description
                       }
                   )
                   .FirstOrDefault();
         }
 
-        public UserExtendDto? GetUserByUsername(UserDto user)
+        public UserBudgetExtendDto? GetUserByUsername(UserDto user)
         {
             return (
                       from u in _context.Users.AsNoTracking()
@@ -103,7 +103,7 @@
                       join s in _context.Status.AsNoTracking()
                       on u.IdStatus equals s.IdStatus
                       where u.Username == user.Username
-                      select new UserExtendDto
+                      select new UserBudgetExtendDto
                       {
                           IdUser = u.IdUser,
                           Email = u.Email,
@@ -111,17 +111,17 @@
                           Username = u.Username,
                           Password = u.Password,
                           IdRole = u.IdRole,
-                          NameRole = r.Name,
-                          DescriptionRole = r.Description,
+                          NameRoleBudget = r.Name,
+                          DescriptionRoleBudget = r.Description,
                           IdStatus = u.IdStatus,
-                          NameStatus = s.Name,
-                          DescriptionStatus = s.Description
+                          NameStatusBudget = s.Name,
+                          DescriptionStatusBudget = s.Description
                       }
                   )
                   .FirstOrDefault();
         }
 
-        public List<UserExtendDto> GetUsersByRole(UserDto user)
+        public List<UserBudgetExtendDto> GetUsersByRole(UserDto user)
         {
             return (
                      from u in _context.Users.AsNoTracking()
@@ -130,7 +130,7 @@
                      join s in _context.Status.AsNoTracking()
                      on u.IdStatus equals s.IdStatus
                      where r.IdRole == user.IdRole
-                     select new UserExtendDto
+                     select new UserBudgetExtendDto
                      {
                          IdUser = u.IdUser,
                          Email = u.Email,
@@ -138,17 +138,17 @@
                          Username = u.Username,
                          Password = u.Password,
                          IdRole = u.IdRole,
-                         NameRole = r.Name,
-                         DescriptionRole = r.Description,
+                         NameRoleBudget = r.Name,
+                         DescriptionRoleBudget = r.Description,
                          IdStatus = u.IdStatus,
-                         NameStatus = s.Name,
-                         DescriptionStatus = s.Description
+                         NameStatusBudget = s.Name,
+                         DescriptionStatusBudget = s.Description
                      }
                   )
                  .ToList();
         }
 
-        public List<UserExtendDto> GetUsersByStatus(UserDto user)
+        public List<UserBudgetExtendDto> GetUsersByStatus(UserDto user)
         {
             return (
                      from u in _context.Users.AsNoTracking()
@@ -157,7 +157,7 @@
                      join s in _context.Status.AsNoTracking()
                      on u.IdStatus equals s.IdStatus
                      where r.IdStatus == user.IdStatus
-                     select new UserExtendDto
+                     select new UserBudgetExtendDto
                      {
                          IdUser = u.IdUser,
                          Email = u.Email,
@@ -165,17 +165,17 @@
                          Username = u.Username,
                          Password = u.Password,
                          IdRole = u.IdRole,
-                         NameRole = r.Name,
-                         DescriptionRole = r.Description,
+                         NameRoleBudget = r.Name,
+                         DescriptionRoleBudget = r.Description,
                          IdStatus = u.IdStatus,
-                         NameStatus = s.Name,
-                         DescriptionStatus = s.Description
+                         NameStatusBudget = s.Name,
+                         DescriptionStatusBudget = s.Description
                      }
                   )
                  .ToList();
         }
 
-        public List<UserExtendDto> GetUsersByRoleStatus(UserDto user)
+        public List<UserBudgetExtendDto> GetUsersByRoleStatus(UserDto user)
         {
             return (
                      from u in _context.Users.AsNoTracking()
@@ -184,7 +184,7 @@
                      join s in _context.Status.AsNoTracking()
                      on u.IdStatus equals s.IdStatus
                      where r.IdRole == user.IdRole && r.IdStatus == user.IdStatus
-                     select new UserExtendDto
+                     select new UserBudgetExtendDto
                      {
                          IdUser = u.IdUser,
                          Email = u.Email,
@@ -192,11 +192,11 @@
                          Username = u.Username,
                          Password = u.Password,
                          IdRole = u.IdRole,
-                         NameRole = r.Name,
-                         DescriptionRole = r.Description,
+                         NameRoleBudget = r.Name,
+                         DescriptionRoleBudget = r.Description,
                          IdStatus = u.IdStatus,
-                         NameStatus = s.Name,
-                         DescriptionStatus = s.Description
+                         NameStatusBudget = s.Name,
+                         DescriptionStatusBudget = s.Description
                      }
                   )
                  .ToList();

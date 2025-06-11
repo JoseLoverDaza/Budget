@@ -20,7 +20,7 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class AuditService : BaseService, IAuditService
+    public class AuditService : BaseService, IAuditApiService
     {
 
         #region Atributos y Propiedades
@@ -42,7 +42,7 @@
 
         public AuditDto? GetAuditById(AuditDto audit)
         {
-            IAuditRepository auditRepository = UnitOfWork.AuditRepository();
+            IAuditApiRepository auditRepository = UnitOfWork.AuditRepository();
             AuditDto? auditSearch = auditRepository.GetAuditById(audit);
 
             _logApiService.TraceLog(typeof(Audit).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
@@ -59,7 +59,7 @@
 
         public List<AuditDto> GetAuditsByCreationDate(AuditDto audit)
         {
-            IAuditRepository auditRepository = UnitOfWork.AuditRepository();
+            IAuditApiRepository auditRepository = UnitOfWork.AuditRepository();
             List<AuditDto> auditsSearch = auditRepository.GetAuditsByCreationDate(audit);
 
             _logApiService.TraceLog(typeof(Audit).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
@@ -76,7 +76,7 @@
 
         public List<AuditDto> GetAuditsByMethodCreationDate(AuditDto audit)
         {
-            IAuditRepository auditRepository = UnitOfWork.AuditRepository();
+            IAuditApiRepository auditRepository = UnitOfWork.AuditRepository();
             List<AuditDto> auditsSearch = auditRepository.GetAuditsByMethodCreationDate(audit);
 
             _logApiService.TraceLog(typeof(Audit).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
@@ -93,7 +93,7 @@
 
         public List<AuditDto> GetAuditsByEndpointCreationDate(AuditDto audit)
         {
-            IAuditRepository auditRepository = UnitOfWork.AuditRepository();
+            IAuditApiRepository auditRepository = UnitOfWork.AuditRepository();
             List<AuditDto> auditsSearch = auditRepository.GetAuditsByEndpointCreationDate(audit);
 
             _logApiService.TraceLog(typeof(Audit).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
@@ -110,7 +110,7 @@
 
         public List<AuditDto> GetAuditsByEndpointMethodCreationDate(AuditDto audit)
         {
-            IAuditRepository auditRepository = UnitOfWork.AuditRepository();
+            IAuditApiRepository auditRepository = UnitOfWork.AuditRepository();
             List<AuditDto> auditsSearch = auditRepository.GetAuditsByEndpointMethodCreationDate(audit);
 
             _logApiService.TraceLog(typeof(Audit).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
@@ -155,7 +155,7 @@
 
         public AuditDto UpdateAudit(AuditDto audit)
         {
-            IAuditRepository auditRepository = UnitOfWork.AuditRepository();
+            IAuditApiRepository auditRepository = UnitOfWork.AuditRepository();
 
             if (audit == null || audit.IdAudit <= 0)
             {

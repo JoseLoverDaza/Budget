@@ -18,11 +18,11 @@
 
         #region Atributos y Propiedades
 
-        public string EmailUser { get; set; } = null!;
-        public string UsernameUser { get; set; } = null!;
+        public string EmailUserBudget { get; set; } = null!;
+        public string UsernameUserBudget { get; set; } = null!;
 
-        public string NameStatus { get; set; } = null!;
-        public string? DescriptionStatus { get; set; }
+        public string NameStatusBudget { get; set; } = null!;
+        public string? DescriptionStatusBudget { get; set; }
 
         #endregion
 

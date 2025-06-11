@@ -19,25 +19,25 @@
 
         #region Métodos y Funciones
 
-        public AccountExtendDto? GetAccountById(AccountDto account);
+        public AccountExtendDto? GetAccountByIdAccount(AccountDto account);
 
         public List<AccountExtendDto> GetAccountsByFinancialInstitution(AccountDto account);
 
         public List<AccountExtendDto> GetAccountsByTypeAccount(AccountDto account);
 
-        public List<AccountExtendDto> GetAccountsByUser(AccountDto account);
+        public List<AccountExtendDto> GetAccountsByUserBudget(AccountDto account);
 
-        public List<AccountExtendDto> GetAccountsByStatus(AccountDto account);
+        public List<AccountExtendDto> GetAccountsByStatusBudget(AccountDto account);
 
-        public List<AccountExtendDto> GetAccountsByFinancialInstitutionStatus(AccountDto account);
+        public List<AccountExtendDto> GetAccountsByFinancialInstitutionStatusBudget(AccountDto account);
 
-        public List<AccountExtendDto> GetAccountsByTypeAccountStatus(AccountDto account);
+        public List<AccountExtendDto> GetAccountsByTypeAccountStatusBudget(AccountDto account);
 
-        public List<AccountExtendDto> GetAccountsByUserStatus(AccountDto account);
+        public List<AccountExtendDto> GetAccountsByUserBudgetStatusBudget(AccountDto account);
 
-        public List<AccountExtendDto> GetAccountsByNameFinancialInstitutionTypeAccountUser(AccountDto account);
+        public List<AccountExtendDto> GetAccountsByNameFinancialInstitutionTypeAccountUserBudget(AccountDto account);
 
-        public List<AccountExtendDto> GetAccountsByFinancialInstitutionTypeAccountUser(AccountDto account);
+        public List<AccountExtendDto> GetAccountsByFinancialInstitutionTypeAccountUserBudget(AccountDto account);
 
         public AccountDto SaveAccount(AccountDto account);
 

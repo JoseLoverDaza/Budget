@@ -19,21 +19,21 @@
 
         #region Métodos y Funciones
 
-        public BudgetExtendDto? GetBudgetById(BudgetDto budget);
+        public BudgetExtendDto? GetBudgetByIdBudget(BudgetDto budget);
 
         public List<BudgetExtendDto> GetBudgetsByYearMonth(BudgetDto budget);
 
-        public List<BudgetExtendDto> GetBudgetsByYearUser(BudgetDto budget);
+        public List<BudgetExtendDto> GetBudgetsByYearUserBudget(BudgetDto budget);
 
-        public List<BudgetExtendDto> GetBudgetsByMonthUser(BudgetDto budget);
+        public List<BudgetExtendDto> GetBudgetsByMonthUserBudget(BudgetDto budget);
 
-        public List<BudgetExtendDto> GetBudgetsByYearMonthUser(BudgetDto budget);
+        public List<BudgetExtendDto> GetBudgetsByYearMonthUserBudget(BudgetDto budget);
 
-        public List<BudgetExtendDto> GetBudgetsByUser(BudgetDto budget);
+        public List<BudgetExtendDto> GetBudgetsByUserBudget(BudgetDto budget);
 
-        public List<BudgetExtendDto> GetBudgetsByStatus(BudgetDto budget);
+        public List<BudgetExtendDto> GetBudgetsByStatusBudget(BudgetDto budget);
 
-        public List<BudgetExtendDto> GetBudgetsByUserStatus(BudgetDto budget);
+        public List<BudgetExtendDto> GetBudgetsByUserBudgetStatusBudget(BudgetDto budget);
 
         #endregion 
 

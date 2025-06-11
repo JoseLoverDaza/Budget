@@ -44,7 +44,7 @@
         public TokenApiExtendDto? GetTokenApiById(TokenApiDto tokenApi)
         {
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
-            TokenApiExtendDto? tokenApiSearch = tokenApiRepository.GetTokenApiById(tokenApi);
+            TokenApiExtendDto? tokenApiSearch = tokenApiRepository.GetTokenApiByIdTokenApi(tokenApi);
 
             _logApiService.TraceLog(typeof(TokenApi).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -95,7 +95,7 @@
         public List<TokenApiExtendDto> GetTokenApisByUser(TokenApiDto tokenApi)
         {
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
-            List<TokenApiExtendDto> tokenApisSearch = tokenApiRepository.GetTokenApisByUser(tokenApi);
+            List<TokenApiExtendDto> tokenApisSearch = tokenApiRepository.GetTokenApisByUserBudget(tokenApi);
 
             _logApiService.TraceLog(typeof(TokenApi).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -112,7 +112,7 @@
         public List<TokenApiExtendDto> GetTokenApisByStatus(TokenApiDto tokenApi)
         {
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
-            List<TokenApiExtendDto> tokenApisSearch = tokenApiRepository.GetTokenApisByStatus(tokenApi);
+            List<TokenApiExtendDto> tokenApisSearch = tokenApiRepository.GetTokenApisByStatusBudget(tokenApi);
 
             _logApiService.TraceLog(typeof(TokenApi).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -129,7 +129,7 @@
         public List<TokenApiExtendDto> GetTokenApisByCreationDateStatus(TokenApiDto tokenApi)
         {
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
-            List<TokenApiExtendDto> tokenApisSearch = tokenApiRepository.GetTokenApisByCreationDateStatus(tokenApi);
+            List<TokenApiExtendDto> tokenApisSearch = tokenApiRepository.GetTokenApisByCreationDateStatusBudget(tokenApi);
 
             _logApiService.TraceLog(typeof(TokenApi).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -146,7 +146,7 @@
         public List<TokenApiExtendDto> GetTokenApisByExpirationDateStatus(TokenApiDto tokenApi)
         {
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
-            List<TokenApiExtendDto> tokenApisSearch = tokenApiRepository.GetTokenApisByExpirationDateStatus(tokenApi);
+            List<TokenApiExtendDto> tokenApisSearch = tokenApiRepository.GetTokenApisByExpirationDateStatusBudget(tokenApi);
 
             _logApiService.TraceLog(typeof(TokenApi).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -163,7 +163,7 @@
         public List<TokenApiExtendDto> GetTokenApisByUserStatus(TokenApiDto tokenApi)
         {
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
-            List<TokenApiExtendDto> tokenApisSearch = tokenApiRepository.GetTokenApisByUserStatus(tokenApi);
+            List<TokenApiExtendDto> tokenApisSearch = tokenApiRepository.GetTokenApisByUserBudgetStatusBudget(tokenApi);
 
             _logApiService.TraceLog(typeof(TokenApi).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -180,7 +180,7 @@
         public List<TokenApiExtendDto> GetTokenApisByCreationDateUserStatus(TokenApiDto tokenApi)
         {
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
-            List<TokenApiExtendDto> tokenApisSearch = tokenApiRepository.GetTokenApisByCreationDateUserStatus(tokenApi);
+            List<TokenApiExtendDto> tokenApisSearch = tokenApiRepository.GetTokenApisByCreationDateUserBudgetStatusBudget(tokenApi);
 
             _logApiService.TraceLog(typeof(TokenApi).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -197,7 +197,7 @@
         public List<TokenApiExtendDto> GetTokenApisByExpirationDateUserStatus(TokenApiDto tokenApi)
         {
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
-            List<TokenApiExtendDto> tokenApisSearch = tokenApiRepository.GetTokenApisByExpirationDateUserStatus(tokenApi);
+            List<TokenApiExtendDto> tokenApisSearch = tokenApiRepository.GetTokenApisByExpirationDateUserBudgetStatusBudget(tokenApi);
 
             _logApiService.TraceLog(typeof(TokenApi).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -214,8 +214,8 @@
         public TokenApiDto SaveTokenApi(TokenApiDto tokenApi)
         {
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
-            IUserRepository userRepository = UnitOfWork.UserRepository();
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IUserBudgetRepository userRepository = UnitOfWork.UserRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
             if (tokenApi == null || string.IsNullOrWhiteSpace(tokenApi.Token.Trim()))
             {
@@ -263,7 +263,7 @@
             }
 
             TokenApiExtendDto? tokenApiDuplicado = tokenApiRepository.GetTokenApiByToken(tokenApi);
-            TokenApiExtendDto? tokenApiSearch = tokenApiRepository.GetTokenApiById(tokenApi) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            TokenApiExtendDto? tokenApiSearch = tokenApiRepository.GetTokenApiByIdTokenApi(tokenApi) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (tokenApiDuplicado != null && tokenApiDuplicado.IdTokenApi != tokenApiSearch.IdTokenApi)
             {
@@ -295,9 +295,9 @@
         public TokenApiDto DeleteTokenApi(TokenApiDto tokenApi)
         {
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
-            TokenApiExtendDto? tokenApiSearch = tokenApiRepository.GetTokenApiById(tokenApi) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            TokenApiExtendDto? tokenApiSearch = tokenApiRepository.GetTokenApiByIdTokenApi(tokenApi) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = tokenApi.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (tokenApiSearch.IdStatus == tokenApi.IdStatus)

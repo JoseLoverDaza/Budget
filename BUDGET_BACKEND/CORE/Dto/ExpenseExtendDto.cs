@@ -20,8 +20,9 @@
 
         public string NameTypeExpense { get; set; } = null!;
         public string? DescriptionTypeExpense { get; set; }
-        public string NameStatus { get; set; } = null!;
-        public string? DescriptionStatus { get; set; }
+
+        public string NameStatusBudget { get; set; } = null!;
+        public string? DescriptionStatusBudget { get; set; }
 
         #endregion
 

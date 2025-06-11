@@ -44,7 +44,7 @@
         public BillingDetailExtendDto? GetBillingDetailsById(BillingDetailsDto billingDetails)
         {
             IBillingDetailsRepository billingDetailRepository = UnitOfWork.BillingDetailsRepository();
-            BillingDetailExtendDto? billingDetailsSearch = billingDetailRepository.GetBillingDetailsById(billingDetails);
+            BillingDetailExtendDto? billingDetailsSearch = billingDetailRepository.GetBillingDetailsByIdBillingDetails(billingDetails);
 
             _logApiService.TraceLog(typeof(BillingDetails).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -95,7 +95,7 @@
         public List<BillingDetailExtendDto> GetBillingDetailsByStatus(BillingDetailsDto billingDetails)
         {
             IBillingDetailsRepository billingDetailRepository = UnitOfWork.BillingDetailsRepository();
-            List<BillingDetailExtendDto> billingDetailsSearch = billingDetailRepository.GetBillingDetailsByStatus(billingDetails);
+            List<BillingDetailExtendDto> billingDetailsSearch = billingDetailRepository.GetBillingDetailsByStatusBudget(billingDetails);
 
             _logApiService.TraceLog(typeof(BillingDetails).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -129,7 +129,7 @@
         public List<BillingDetailExtendDto> GetBillingDetailsByExpenseStatus(BillingDetailsDto billingDetails)
         {
             IBillingDetailsRepository billingDetailRepository = UnitOfWork.BillingDetailsRepository();
-            List<BillingDetailExtendDto> billingDetailsSearch = billingDetailRepository.GetBillingDetailsByExpenseStatus(billingDetails);
+            List<BillingDetailExtendDto> billingDetailsSearch = billingDetailRepository.GetBillingDetailsByExpenseStatusBudget(billingDetails);
 
             _logApiService.TraceLog(typeof(BillingDetails).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -146,7 +146,7 @@
         public List<BillingDetailExtendDto> GetBillingDetailsByBillingExpenseStatus(BillingDetailsDto billingDetails)
         {
             IBillingDetailsRepository billingDetailRepository = UnitOfWork.BillingDetailsRepository();
-            List<BillingDetailExtendDto> billingDetailsSearch = billingDetailRepository.GetBillingDetailsByBillingExpenseStatus(billingDetails);
+            List<BillingDetailExtendDto> billingDetailsSearch = billingDetailRepository.GetBillingDetailsByBillingExpenseStatusBudget(billingDetails);
 
             _logApiService.TraceLog(typeof(BillingDetails).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -165,7 +165,7 @@
             IBillingDetailsRepository billingDetailRepository = UnitOfWork.BillingDetailsRepository();
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
             if (billingDetails == null || billingDetails.Amount <= 0)
             {
@@ -179,8 +179,8 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            BillingExtendDto? billingSearch = billingRepository.GetBillingById(new BillingDto { IdBilling = billingDetails.IdBilling }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            ExpenseExtendDto? expenseSearch = expenseRepository.GetExpenseById(new ExpenseDto { IdExpense = billingDetails.IdExpense }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            BillingExtendDto? billingSearch = billingRepository.GetBillingByIdBilling(new BillingDto { IdBilling = billingDetails.IdBilling }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            ExpenseExtendDto? expenseSearch = expenseRepository.GetExpenseByIdExpense(new ExpenseDto { IdExpense = billingDetails.IdExpense }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = billingDetails.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             BillingDetails saveBillingDetails = new()
@@ -213,7 +213,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            BillingDetailExtendDto? billingDetailSearch = billingDetailRepository.GetBillingDetailsById(billingDetails) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            BillingDetailExtendDto? billingDetailSearch = billingDetailRepository.GetBillingDetailsByIdBillingDetails(billingDetails) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             BillingDetails updateBillingDetails = new()
             {
@@ -240,9 +240,9 @@
         public BillingDetailsDto DeleteBillingDetail(BillingDetailsDto billingDetails)
         {
             IBillingDetailsRepository billingDetailRepository = UnitOfWork.BillingDetailsRepository();
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
-            BillingDetailExtendDto? billingDetailSearch = billingDetailRepository.GetBillingDetailsById(billingDetails) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            BillingDetailExtendDto? billingDetailSearch = billingDetailRepository.GetBillingDetailsByIdBillingDetails(billingDetails) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = billingDetails.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (billingDetailSearch.IdStatus == billingDetails.IdStatus)

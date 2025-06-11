@@ -29,10 +29,10 @@
 
         #region Atributos y Propiedades
 
-        private readonly IStatusService _statusService;
+        private readonly IStatusBudgetService _statusService;
         private readonly ILogApiService _logApiService;
         private readonly EFContext? _context;
-        private readonly StatusController? _statusController;
+        private readonly StatusBudgetController? _statusController;
 
         #endregion 
 
@@ -48,7 +48,7 @@
             UnitOfWork unitOfWork = new(_context);
             _logApiService = new LogApiService(unitOfWork);
             _statusService = new StatusService(unitOfWork, _logApiService);            
-            _statusController = new StatusController(_statusService);
+            _statusController = new StatusBudgetController(_statusService);
 
             #region Data
 

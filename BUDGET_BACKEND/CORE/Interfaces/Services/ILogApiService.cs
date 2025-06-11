@@ -5,8 +5,7 @@
 
     using CORE.Dto;
     using Domain.Dto;
-    using Domain.Entities;
-
+    
     #endregion
 
     /// <summary>
@@ -20,17 +19,17 @@
 
         #region Métodos y Funciones
 
-        public LogApiExtendDto? GetLogApiById(LogApiDto logApi);
+        public LogApiExtendDto? GetLogApiByIdLogApi(LogApiDto logApi);
 
         public List<LogApiExtendDto> GetLogApisByCreationDate(LogApiDto logApi);
 
-        public List<LogApiExtendDto> GetLogApisByStatus(LogApiDto logApi);
+        public List<LogApiExtendDto> GetLogApisByStatusBudget(LogApiDto logApi);
 
         public List<LogApiExtendDto> GetLogApisByEntityCreationDate(LogApiDto logApi);
 
-        public List<LogApiExtendDto> GetLogApisByCreationDateStatus(LogApiDto logApi);
+        public List<LogApiExtendDto> GetLogApisByCreationDateStatusBudget(LogApiDto logApi);
 
-        public List<LogApiExtendDto> GetLogApisByEntityCreationDateStatus(LogApiDto logApi);
+        public List<LogApiExtendDto> GetLogApisByEntityCreationDateStatusBudget(LogApiDto logApi);
 
         public LogApiDto SaveLogApi(LogApiDto logApi);
 

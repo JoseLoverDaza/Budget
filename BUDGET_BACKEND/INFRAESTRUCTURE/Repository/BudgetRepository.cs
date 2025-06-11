@@ -39,7 +39,7 @@
 
         #region Métodos y Funciones
 
-        public BudgetExtendDto? GetBudgetById(BudgetDto budget)
+        public BudgetExtendDto? GetBudgetByIdBudget(BudgetDto budget)
         {
             return (
                      from b in _context.Budgets.AsNoTracking()
@@ -57,11 +57,11 @@
                          Description = b.Description,
                          Observation = b.Observation,
                          IdUser = b.IdUser,
-                         EmailUser = u.Email,
-                         UsernameUser = u.Username,
+                         EmailUserBudget = u.Email,
+                         UsernameUserBudget = u.Username,
                          IdStatus = b.IdStatus,
-                         NameStatus = s.Name,
-                         DescriptionStatus = s.Description
+                         NameStatusBudget = s.Name,
+                         DescriptionStatusBudget = s.Description
                      }
                 )
                 .FirstOrDefault();
@@ -85,17 +85,17 @@
                         Description = b.Description,
                         Observation = b.Observation,
                         IdUser = b.IdUser,
-                        EmailUser = u.Email,
-                        UsernameUser = u.Username,
+                        EmailUserBudget = u.Email,
+                        UsernameUserBudget = u.Username,
                         IdStatus = b.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                )
                .ToList();
         }
 
-        public List<BudgetExtendDto> GetBudgetsByYearUser(BudgetDto budget)
+        public List<BudgetExtendDto> GetBudgetsByYearUserBudget(BudgetDto budget)
         {
             return (
                     from b in _context.Budgets.AsNoTracking()
@@ -113,17 +113,17 @@
                         Description = b.Description,
                         Observation = b.Observation,
                         IdUser = b.IdUser,
-                        EmailUser = u.Email,
-                        UsernameUser = u.Username,
+                        EmailUserBudget = u.Email,
+                        UsernameUserBudget = u.Username,
                         IdStatus = b.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                )
                .ToList();
         }
 
-        public List<BudgetExtendDto> GetBudgetsByMonthUser(BudgetDto budget)
+        public List<BudgetExtendDto> GetBudgetsByMonthUserBudget(BudgetDto budget)
         {
             return (
                      from b in _context.Budgets.AsNoTracking()
@@ -141,17 +141,17 @@
                          Description = b.Description,
                          Observation = b.Observation,
                          IdUser = b.IdUser,
-                         EmailUser = u.Email,
-                         UsernameUser = u.Username,
+                         EmailUserBudget = u.Email,
+                         UsernameUserBudget = u.Username,
                          IdStatus = b.IdStatus,
-                         NameStatus = s.Name,
-                         DescriptionStatus = s.Description
+                         NameStatusBudget = s.Name,
+                         DescriptionStatusBudget = s.Description
                      }
                 )
                 .ToList();
         }
 
-        public List<BudgetExtendDto> GetBudgetsByYearMonthUser(BudgetDto budget)
+        public List<BudgetExtendDto> GetBudgetsByYearMonthUserBudget(BudgetDto budget)
         {
             return (
                      from b in _context.Budgets.AsNoTracking()
@@ -169,17 +169,17 @@
                          Description = b.Description,
                          Observation = b.Observation,
                          IdUser = b.IdUser,
-                         EmailUser = u.Email,
-                         UsernameUser = u.Username,
+                         EmailUserBudget = u.Email,
+                         UsernameUserBudget = u.Username,
                          IdStatus = b.IdStatus,
-                         NameStatus = s.Name,
-                         DescriptionStatus = s.Description
+                         NameStatusBudget = s.Name,
+                         DescriptionStatusBudget = s.Description
                      }
                 )
                 .ToList();
         }
 
-        public List<BudgetExtendDto> GetBudgetsByUser(BudgetDto budget)
+        public List<BudgetExtendDto> GetBudgetsByUserBudget(BudgetDto budget)
         {
             return (
                      from b in _context.Budgets.AsNoTracking()
@@ -197,17 +197,17 @@
                          Description = b.Description,
                          Observation = b.Observation,
                          IdUser = b.IdUser,
-                         EmailUser = u.Email,
-                         UsernameUser = u.Username,
+                         EmailUserBudget = u.Email,
+                         UsernameUserBudget = u.Username,
                          IdStatus = b.IdStatus,
-                         NameStatus = s.Name,
-                         DescriptionStatus = s.Description
+                         NameStatusBudget = s.Name,
+                         DescriptionStatusBudget = s.Description
                      }
                   )
                  .ToList();
         }
 
-        public List<BudgetExtendDto> GetBudgetsByStatus(BudgetDto budget)
+        public List<BudgetExtendDto> GetBudgetsByStatusBudget(BudgetDto budget)
         {
             return (
                     from b in _context.Budgets.AsNoTracking()
@@ -225,17 +225,17 @@
                         Description = b.Description,
                         Observation = b.Observation,
                         IdUser = b.IdUser,
-                        EmailUser = u.Email,
-                        UsernameUser = u.Username,
+                        EmailUserBudget = u.Email,
+                        UsernameUserBudget = u.Username,
                         IdStatus = b.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                  )
                 .ToList();
         }
 
-        public List<BudgetExtendDto> GetBudgetsByUserStatus(BudgetDto budget)
+        public List<BudgetExtendDto> GetBudgetsByUserBudgetStatusBudget(BudgetDto budget)
         {
             return (
                    from b in _context.Budgets.AsNoTracking()
@@ -253,11 +253,11 @@
                        Description = b.Description,
                        Observation = b.Observation,
                        IdUser = b.IdUser,
-                       EmailUser = u.Email,
-                       UsernameUser = u.Username,
+                       EmailUserBudget = u.Email,
+                       UsernameUserBudget = u.Username,
                        IdStatus = b.IdStatus,
-                       NameStatus = s.Name,
-                       DescriptionStatus = s.Description
+                       NameStatusBudget = s.Name,
+                       DescriptionStatusBudget = s.Description
                    }
                 )
                .ToList();

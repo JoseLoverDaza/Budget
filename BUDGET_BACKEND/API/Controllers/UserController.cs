@@ -25,13 +25,13 @@
 
         #region Atributos y Propiedades
 
-        private readonly IUserService _userService;
+        private readonly IUserBudgetService _userService;
 
         #endregion
 
         #region Constructor
 
-        public UserController(IUserService userService)
+        public UserController(IUserBudgetService userService)
         {
             _userService = userService;
         }

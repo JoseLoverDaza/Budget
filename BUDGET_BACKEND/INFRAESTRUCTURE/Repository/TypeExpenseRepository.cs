@@ -39,7 +39,7 @@
 
         #region Métodos y Funciones
 
-        public TypeExpenseExtendDto? GetTypeExpenseById(TypeExpenseDto typeExpense)
+        public TypeExpenseExtendDto? GetTypeExpenseByIdTypeExpense(TypeExpenseDto typeExpense)
         {
             return (
                        from t in _context.TypeExpenses.AsNoTracking()
@@ -51,14 +51,14 @@
                            IdTypeExpense = t.IdTypeExpense,
                            Name = t.Name,
                            IdStatus = t.IdStatus,
-                           NameStatus = s.Name,
-                           DescriptionStatus = s.Description
+                           NameStatusBudget = s.Name,
+                           DescriptionStatusBudget = s.Description
                        }
                    )
                    .FirstOrDefault();
         }
 
-        public TypeExpenseExtendDto? GetTypeExpenseByName(TypeExpenseDto typeExpense)
+        public TypeExpenseExtendDto? GetTypeExpenseByNameTypeExpense(TypeExpenseDto typeExpense)
         {
             return (
                        from t in _context.TypeExpenses.AsNoTracking()
@@ -70,8 +70,8 @@
                            IdTypeExpense = t.IdTypeExpense,
                            Name = t.Name,
                            IdStatus = t.IdStatus,
-                           NameStatus = s.Name,
-                           DescriptionStatus = s.Description
+                           NameStatusBudget = s.Name,
+                           DescriptionStatusBudget = s.Description
                        }
                    )
                    .FirstOrDefault();
@@ -89,8 +89,8 @@
                         IdTypeExpense = t.IdTypeExpense,
                         Name = t.Name,
                         IdStatus = t.IdStatus,
-                        NameStatus = s.Name,
-                        DescriptionStatus = s.Description
+                        NameStatusBudget = s.Name,
+                        DescriptionStatusBudget = s.Description
                     }
                  )
                 .ToList();

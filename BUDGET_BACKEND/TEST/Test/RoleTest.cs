@@ -30,7 +30,7 @@
 
         #region Atributos y Propiedades
 
-        private readonly IRoleService _roleService;
+        private readonly IRoleBudgetService _roleService;
         private readonly ILogApiService _logApiService;
         private readonly EFContext? _context;
         private readonly RoleController? _roleController;
@@ -214,7 +214,7 @@
         public void SaveRoleOK()
         {
             ///Arrange   
-            RoleExtendDto role = new()
+            RoleBudgetExtendDto role = new()
             {
                 Name = "Test1",
                 IdStatus = 1
@@ -233,7 +233,7 @@
         public void SaveRoleFail()
         {
             ///Arrange   
-            RoleExtendDto role = new()
+            RoleBudgetExtendDto role = new()
             {
                 Name = "Test",
                 IdStatus = 1
@@ -252,7 +252,7 @@
         public void UpdateRoleOK()
         {
             ///Arrange   
-            RoleExtendDto role = new()
+            RoleBudgetExtendDto role = new()
             {
                 IdRole = 1,
                 Name = "Test1",
@@ -272,7 +272,7 @@
         public void UpdateRoleFail()
         {
             ///Arrange   
-            RoleExtendDto role = new()
+            RoleBudgetExtendDto role = new()
             {
                 IdRole = -1,
                 Name = "Test1",
@@ -292,7 +292,7 @@
         public void DeleteRoleOK()
         {
             ///Arrange   
-            RoleExtendDto role = new()
+            RoleBudgetExtendDto role = new()
             {
                 IdRole = 1,
                 Name = "Test1",
@@ -312,7 +312,7 @@
         public void DeleteRoleFail()
         {
             ///Arrange   
-            RoleExtendDto role = new()
+            RoleBudgetExtendDto role = new()
             {
                 IdRole = -1,
                 Name = "Test1",

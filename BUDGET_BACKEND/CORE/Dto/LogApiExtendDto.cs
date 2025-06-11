@@ -18,8 +18,8 @@
 
         #region Atributos y Propiedades
 
-        public string NameStatus { get; set; } = null!;
-        public string? DescriptionStatus { get; set; }
+        public string NameStatusBudget { get; set; } = null!;
+        public string? DescriptionStatusBudget { get; set; }
 
         #endregion
 

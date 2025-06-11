@@ -64,22 +64,22 @@
             return _dbContext.SaveChangesAsync();
         }
 
-        public IStatusRepository StatusRepository()
+        public IStatusBudgetRepository StatusRepository()
         {
             return new StatusRepository(_dbContext);
         }
 
-        public IRoleRepository RoleRepository()
+        public IRoleBudgetRepository RoleRepository()
         {
             return new RoleRepository(_dbContext);
         }
 
-        public IUserRepository UserRepository()
+        public IUserBudgetRepository UserRepository()
         {
             return new UserRepository(_dbContext);
         }
 
-        public IAuditRepository AuditRepository()
+        public IAuditApiRepository AuditRepository()
         {
             return new AuditRepository(_dbContext);
         }

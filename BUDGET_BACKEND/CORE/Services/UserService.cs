@@ -21,7 +21,7 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class UserService : BaseService, IUserService
+    public class UserService : BaseService, IUserBudgetService
     {
 
         #region Atributos y Propiedades
@@ -41,10 +41,10 @@
 
         #region Métodos y Funciones
 
-        public UserExtendDto? GetUserById(UserDto user)
+        public UserBudgetExtendDto? GetUserById(UserDto user)
         {
-            IUserRepository userRepository = UnitOfWork.UserRepository();
-            UserExtendDto? userSearch = userRepository.GetUserById(user);
+            IUserBudgetRepository userRepository = UnitOfWork.UserRepository();
+            UserBudgetExtendDto? userSearch = userRepository.GetUserById(user);
 
             _logApiService.TraceLog(typeof(User).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -58,10 +58,10 @@
             }
         }
 
-        public UserExtendDto? GetUserByEmail(UserDto user)
+        public UserBudgetExtendDto? GetUserByEmail(UserDto user)
         {
-            IUserRepository userRepository = UnitOfWork.UserRepository();
-            UserExtendDto? userSearch = userRepository.GetUserByEmail(user);
+            IUserBudgetRepository userRepository = UnitOfWork.UserRepository();
+            UserBudgetExtendDto? userSearch = userRepository.GetUserByEmail(user);
 
             _logApiService.TraceLog(typeof(User).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -75,10 +75,10 @@
             }
         }
 
-        public UserExtendDto? GetUserByUsername(UserDto user)
+        public UserBudgetExtendDto? GetUserByUsername(UserDto user)
         {
-            IUserRepository userRepository = UnitOfWork.UserRepository();
-            UserExtendDto? userSearch = userRepository.GetUserByUsername(user);
+            IUserBudgetRepository userRepository = UnitOfWork.UserRepository();
+            UserBudgetExtendDto? userSearch = userRepository.GetUserByUsername(user);
 
             _logApiService.TraceLog(typeof(User).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -92,10 +92,10 @@
             }
         }
 
-        public List<UserExtendDto> GetUsersByRole(UserDto user)
+        public List<UserBudgetExtendDto> GetUsersByRole(UserDto user)
         {
-            IUserRepository userRepository = UnitOfWork.UserRepository();
-            List<UserExtendDto> usersSearch = userRepository.GetUsersByRole(user);
+            IUserBudgetRepository userRepository = UnitOfWork.UserRepository();
+            List<UserBudgetExtendDto> usersSearch = userRepository.GetUsersByRole(user);
 
             _logApiService.TraceLog(typeof(User).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -109,10 +109,10 @@
             }
         }
 
-        public List<UserExtendDto> GetUsersByStatus(UserDto user)
+        public List<UserBudgetExtendDto> GetUsersByStatus(UserDto user)
         {
-            IUserRepository userRepository = UnitOfWork.UserRepository();
-            List<UserExtendDto> usersSearch = userRepository.GetUsersByStatus(user);
+            IUserBudgetRepository userRepository = UnitOfWork.UserRepository();
+            List<UserBudgetExtendDto> usersSearch = userRepository.GetUsersByStatus(user);
 
             _logApiService.TraceLog(typeof(User).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -126,10 +126,10 @@
             }
         }
 
-        public List<UserExtendDto> GetUsersByRoleStatus(UserDto user)
+        public List<UserBudgetExtendDto> GetUsersByRoleStatus(UserDto user)
         {
-            IUserRepository userRepository = UnitOfWork.UserRepository();
-            List<UserExtendDto> usersSearch = userRepository.GetUsersByRoleStatus(user);
+            IUserBudgetRepository userRepository = UnitOfWork.UserRepository();
+            List<UserBudgetExtendDto> usersSearch = userRepository.GetUsersByRoleStatus(user);
 
             _logApiService.TraceLog(typeof(User).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -145,24 +145,24 @@
 
         public UserDto SaveUser(UserDto user)
         {
-            IUserRepository userRepository = UnitOfWork.UserRepository();
-            IRoleRepository roleRepository = UnitOfWork.RoleRepository();
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IUserBudgetRepository userRepository = UnitOfWork.UserRepository();
+            IRoleBudgetRepository roleRepository = UnitOfWork.RoleRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
             if (user == null || string.IsNullOrWhiteSpace(user.Email.Trim()) || string.IsNullOrWhiteSpace(user.Phone.Trim()) || string.IsNullOrWhiteSpace(user.Username.Trim()) || string.IsNullOrWhiteSpace(user.Password.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            UserExtendDto? userEmailSearch = userRepository.GetUserByEmail(user);
-            UserExtendDto? userLoginSearch = userRepository.GetUserByUsername(user);
+            UserBudgetExtendDto? userEmailSearch = userRepository.GetUserByEmail(user);
+            UserBudgetExtendDto? userLoginSearch = userRepository.GetUserByUsername(user);
 
             if (userEmailSearch != null || userLoginSearch != null)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            RoleExtendDto? rolSearch = roleRepository.GetRoleById(new RoleDto { IdRole = user.IdRole }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            RoleBudgetExtendDto? rolSearch = roleRepository.GetRoleById(new RoleDto { IdRole = user.IdRole }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = user.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             string sHashPassword = PasswordHash.HashPassword(user.Password);
@@ -191,16 +191,16 @@
 
         public UserDto UpdateUser(UserDto user)
         {
-            IUserRepository userRepository = UnitOfWork.UserRepository();
+            IUserBudgetRepository userRepository = UnitOfWork.UserRepository();
 
             if (user == null || user.IdUser <= 0 || string.IsNullOrWhiteSpace(user.Email.Trim()) || string.IsNullOrWhiteSpace(user.Phone.Trim()) || string.IsNullOrWhiteSpace(user.Username.Trim()) || string.IsNullOrWhiteSpace(user.Password.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            UserExtendDto? userEmailDuplicado = userRepository.GetUserByEmail(user);
-            UserExtendDto? userLoginDuplicado = userRepository.GetUserByUsername(user);
-            UserExtendDto? userSearch = userRepository.GetUserById(user) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            UserBudgetExtendDto? userEmailDuplicado = userRepository.GetUserByEmail(user);
+            UserBudgetExtendDto? userLoginDuplicado = userRepository.GetUserByUsername(user);
+            UserBudgetExtendDto? userSearch = userRepository.GetUserById(user) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (userEmailDuplicado != null && userSearch != null && userEmailDuplicado.IdUser != user.IdUser)
             {
@@ -239,10 +239,10 @@
 
         public UserDto DeleteUser(UserDto user)
         {
-            IUserRepository userRepository = UnitOfWork.UserRepository();
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IUserBudgetRepository userRepository = UnitOfWork.UserRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
-            UserExtendDto? userSearch = userRepository.GetUserById(user) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            UserBudgetExtendDto? userSearch = userRepository.GetUserById(user) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = user.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (userSearch.IdStatus == user.IdStatus)

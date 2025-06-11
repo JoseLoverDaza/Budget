@@ -41,7 +41,7 @@
         public LogApiExtendDto? GetLogApiById(LogApiDto logApi)
         {
             ILogApiRepository logApiRepository = UnitOfWork.LogApiRepository();
-            LogApiExtendDto? logApiSearch = logApiRepository.GetLogApiById(logApi);
+            LogApiExtendDto? logApiSearch = logApiRepository.GetLogApiByIdLogApi(logApi);
 
             if (logApiSearch != null)
             {
@@ -71,7 +71,7 @@
         public List<LogApiExtendDto> GetLogApisByStatus(LogApiDto logApi)
         {
             ILogApiRepository logApiRepository = UnitOfWork.LogApiRepository();
-            List<LogApiExtendDto> logApisSearch = logApiRepository.GetLogApisByStatus(logApi);
+            List<LogApiExtendDto> logApisSearch = logApiRepository.GetLogApisByStatusBudget(logApi);
 
             if (logApisSearch.Count != 0)
             {
@@ -101,7 +101,7 @@
         public List<LogApiExtendDto> GetLogApisByCreationDateStatus(LogApiDto logApi)
         {
             ILogApiRepository logApiRepository = UnitOfWork.LogApiRepository();
-            List<LogApiExtendDto> logApisSearch = logApiRepository.GetLogApisByCreationDateStatus(logApi);
+            List<LogApiExtendDto> logApisSearch = logApiRepository.GetLogApisByCreationDateStatusBudget(logApi);
 
             if (logApisSearch.Count != 0)
             {
@@ -130,7 +130,7 @@
 
         public LogApiDto SaveLogApi(LogApiDto logApi)
         {
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = logApi.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
@@ -162,7 +162,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            LogApiExtendDto? logApiSearch = logApiRepository.GetLogApiById(logApi) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            LogApiExtendDto? logApiSearch = logApiRepository.GetLogApiByIdLogApi(logApi) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             LogApi updateLogApi = new()
             {
@@ -187,9 +187,9 @@
         public LogApiDto DeleteLogApi(LogApiDto logApi)
         {
             ILogApiRepository logApiRepository = UnitOfWork.LogApiRepository();
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
-            LogApiExtendDto? logSearch = logApiRepository.GetLogApiById(logApi) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            LogApiExtendDto? logSearch = logApiRepository.GetLogApiByIdLogApi(logApi) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = logApi.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (logSearch.IdStatus == statusSearch.IdStatus)
@@ -219,7 +219,7 @@
 
         public void TraceLog(string entity, string entityAction, string previousValues, string newValues, DateTime creationDate, int? idStatus)
         {
-            IStatusRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
             StatusDto? statusSearch = idStatus != null ? new StatusDto { IdStatus = (int)idStatus }  : statusRepository.GetStatusByName(new StatusDto { Name = Constants.Status.ACTIVO }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 

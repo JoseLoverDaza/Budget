@@ -30,7 +30,7 @@
 
         #region  Atributos y Propiedades
 
-        private readonly IUserService _userService;
+        private readonly IUserBudgetService _userService;
         private readonly ILogApiService _logApiService;
         private readonly EFContext? _context;
         private readonly UserController? _userController;

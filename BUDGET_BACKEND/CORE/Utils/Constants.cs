@@ -43,6 +43,11 @@
             public const string VERIFY = "VERIFY";
         }
 
+        public static class UserBudget
+        {
+            public const string USERNAME_ADMIN = "Admin";            
+        }
+
         #endregion
 
     }

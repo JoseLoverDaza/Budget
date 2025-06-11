@@ -19,15 +19,15 @@
 
         #region Métodos y Funciones
 
-        public ExpenseExtendDto? GetExpenseById(ExpenseDto expense);
+        public ExpenseExtendDto? GetExpenseByIdExpense(ExpenseDto expense);
 
         public List<ExpenseExtendDto> GetExpensesByTypeExpense(ExpenseDto expense);
 
-        public List<ExpenseExtendDto> GetExpensesByStatus(ExpenseDto expense);
+        public List<ExpenseExtendDto> GetExpensesByStatusBudget(ExpenseDto expense);
 
         public List<ExpenseExtendDto> GetExpensesByNameTypeExpense(ExpenseDto expense);
 
-        public List<ExpenseExtendDto> GetExpensesByTypeExpenseStatus(ExpenseDto expense);
+        public List<ExpenseExtendDto> GetExpensesByTypeExpenseStatusBudget(ExpenseDto expense);
 
         #endregion
 

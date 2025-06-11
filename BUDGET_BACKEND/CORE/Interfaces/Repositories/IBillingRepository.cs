@@ -19,21 +19,21 @@
 
         #region Métodos y Funciones
 
-        public BillingExtendDto? GetBillingById(BillingDto billing);
+        public BillingExtendDto? GetBillingByIdBilling(BillingDto billing);
 
         public List<BillingExtendDto> GetBillingsByYearMonth(BillingDto billing);
 
-        public List<BillingExtendDto> GetBillingsByYearUser(BillingDto billing);
+        public List<BillingExtendDto> GetBillingsByYearUserBudget(BillingDto billing);
 
-        public List<BillingExtendDto> GetBillingsByMonthUser(BillingDto billing);
+        public List<BillingExtendDto> GetBillingsByMonthUserBudget(BillingDto billing);
 
-        public List<BillingExtendDto> GetBillingsByYearMonthUser(BillingDto billing);
+        public List<BillingExtendDto> GetBillingsByYearMonthUserBudget(BillingDto billing);
 
-        public List<BillingExtendDto> GetBillingsByUser(BillingDto billing);
+        public List<BillingExtendDto> GetBillingsByUserBudget(BillingDto billing);
 
-        public List<BillingExtendDto> GetBillingsByStatus(BillingDto billing);
+        public List<BillingExtendDto> GetBillingsByStatusBudget(BillingDto billing);
 
-        public List<BillingExtendDto> GetBillingsByUserStatus(BillingDto billing);
+        public List<BillingExtendDto> GetBillingsByUserBudgetStatusBudget(BillingDto billing);
 
         #endregion 
 
