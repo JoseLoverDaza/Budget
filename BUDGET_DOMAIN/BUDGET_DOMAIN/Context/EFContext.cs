@@ -39,13 +39,13 @@
 
         #region Métodos y Funciones
 
-        public virtual DbSet<Status> Status { get; set; }
+        public virtual DbSet<StatusBudget> StatusBudget { get; set; }
 
-        public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<RoleBudget> RolesBudget { get; set; }
+        public virtual DbSet<UserBudget> UsersBudget { get; set; }
 
-        public virtual DbSet<TokenApi> TokenApis { get; set; }
-        public virtual DbSet<Audit> Audits { get; set; }
+        public virtual DbSet<AuditApi> AuditApis { get; set; }
+        public virtual DbSet<TokenApi> TokenApis { get; set; }        
         public virtual DbSet<LogApi> LogApis { get; set; }
         
         public virtual DbSet<TypeAccount> TypeAccounts { get; set; }
@@ -55,37 +55,35 @@
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Deposit> Deposits { get; set; }
         public virtual DbSet<Expense> Expenses { get; set; }
-        public virtual DbSet<Budget> Budgets { get; set; }
-        public virtual DbSet<BudgetDetails> BudgetDetails { get; set; }
         public virtual DbSet<Billing> Billings { get; set; }
         public virtual DbSet<BillingDetails> BillingDetails { get; set; }
+        public virtual DbSet<Budget> Budgets { get; set; }
+        public virtual DbSet<BudgetDetails> BudgetDetails { get; set; }        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new Configurations.StatusConfiguration());
 
-            modelBuilder.ApplyConfiguration(new Configurations.RoleConfiguration());
-            modelBuilder.ApplyConfiguration(new Configurations.UserConfiguration());
+            modelBuilder.ApplyConfiguration(new Configurations.StatusBudgetConfiguration());
 
-            modelBuilder.ApplyConfiguration(new Configurations.TokenApiConfiguration());
-            modelBuilder.ApplyConfiguration(new Configurations.AuditConfiguration());            
+            modelBuilder.ApplyConfiguration(new Configurations.RoleBudgetConfiguration());
+            modelBuilder.ApplyConfiguration(new Configurations.UserBudgetConfiguration());
+
+            modelBuilder.ApplyConfiguration(new Configurations.AuditApiConfiguration());
+            modelBuilder.ApplyConfiguration(new Configurations.TokenApiConfiguration());                    
             modelBuilder.ApplyConfiguration(new Configurations.LogApiConfiguration());
 
             modelBuilder.ApplyConfiguration(new Configurations.TypeAccountConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.TypeExpenseConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.FinancialInstitutionConfiguration());
             
-            modelBuilder.ApplyConfiguration(new Configurations.TokenApiConfiguration());
-            modelBuilder.ApplyConfiguration(new Configurations.AuditConfiguration());
-            modelBuilder.ApplyConfiguration(new Configurations.LogApiConfiguration());
-
             modelBuilder.ApplyConfiguration(new Configurations.AccountConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.DepositConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.ExpenseConfiguration());
+            modelBuilder.ApplyConfiguration(new Configurations.BillingConfiguration());
+            modelBuilder.ApplyConfiguration(new Configurations.BillingDetailsConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.BudgetConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.BudgetDetailsConfiguration());
-            modelBuilder.ApplyConfiguration(new Configurations.BillingConfiguration());
-            modelBuilder.ApplyConfiguration(new Configurations.BillingDetailsConfiguration());            
+                 
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

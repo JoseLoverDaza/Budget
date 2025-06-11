@@ -3,21 +3,21 @@
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
-    /// Nombre: TypeExpenseDto   
+    /// Nombre: RoleBudgetDto   
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class TypeExpenseDto
+    public class RoleBudgetDto
     {
 
         #region Atributos y Propiedades
 
-        public int IdTypeExpense { get; set; }
-        public string NameTypeExpense { get; set; } = null!;
-        public string? DescriptionTypeExpense { get; set; }
+        public int IdRoleBudget { get; set; }
+        public string NameRole { get; set; } = null!;
+        public string? DescriptionRole { get; set; }
 
         public int IdStatusBudget { get; set; }
-
+        
         #endregion
 
     }

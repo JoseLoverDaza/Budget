@@ -11,32 +11,33 @@
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
-    /// Nombre: TypeAccountConfiguration   
+    /// Nombre: RoleBudgetConfiguration   
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public partial class TypeAccountConfiguration : IEntityTypeConfiguration<TypeAccount>
+    public partial class RoleBudgetConfiguration : IEntityTypeConfiguration<RoleBudget>
     {
 
         #region Métodos y Funciones
 
-        public void Configure(EntityTypeBuilder<TypeAccount> entity)
+        public void Configure(EntityTypeBuilder<RoleBudget> entity)
         {
-            /// Tabla [TypeAccount].[Budget]
+            /// Tabla [RoleBudget].[SecurityBudget]
 
-            entity.ToTable("TypeAccount", "Budget");
+            entity.ToTable("RoleBudget", "SecurityBudget");
 
-            entity.HasKey(e => e.IdTypeAccount);
+            entity.HasKey(e => e.IdRoleBudget);
 
-            entity.Property(e => e.NameTypeAccount)
+            entity.Property(e => e.NameRole)
                   .IsRequired()
                   .HasMaxLength(100);
 
-            entity.Property(e => e.DescriptionTypeAccount)
+            entity.Property(e => e.DescriptionRole)
                   .HasMaxLength(255);
 
             entity.Property(e => e.IdStatusBudget)
                   .IsRequired();
+
         }
 
         #endregion

@@ -3,18 +3,18 @@
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
-    /// Nombre: FinancialInstitution   
+    /// Nombre: RoleBudget   
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class FinancialInstitution
+    public class RoleBudget
     {
 
         #region Atributos y Propiedades
 
-        public int IdFinancialInstitution { get; set; }
-        public string NameFinancialInstitution { get; set; } = null!;
-        public string? DescriptionFinancialInstitution { get; set; }
+        public int IdRoleBudget { get; set; }
+        public string NameRole { get; set; } = null!;
+        public string? DescriptionRole { get; set; }
 
         public int IdStatusBudget { get; set; }
         

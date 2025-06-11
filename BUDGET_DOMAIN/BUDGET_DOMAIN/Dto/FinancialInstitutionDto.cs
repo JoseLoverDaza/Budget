@@ -13,10 +13,10 @@
         #region Atributos y Propiedades
 
         public int IdFinancialInstitution { get; set; }
-        public string Name { get; set; } = null!;
-        public string? Description { get; set; }
+        public string NameFinancialInstitution { get; set; } = null!;
+        public string? DescriptionFinancialInstitution { get; set; }
 
-        public int IdStatus { get; set; }
+        public int IdStatusBudget { get; set; }
        
         #endregion
 

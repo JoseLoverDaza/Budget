@@ -11,22 +11,22 @@
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
-    /// Nombre: UserConfiguration   
+    /// Nombre: UserBudgetConfiguration   
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public partial class UserConfiguration : IEntityTypeConfiguration<User>
+    public partial class UserBudgetConfiguration : IEntityTypeConfiguration<UserBudget>
     {
 
         #region Métodos y Funciones
 
-        public void Configure(EntityTypeBuilder<User> entity)
+        public void Configure(EntityTypeBuilder<UserBudget> entity)
         {
-            /// Tabla [User].[Security]
+            /// Tabla [UserBudget].[SecurityBudget]
 
-            entity.ToTable("User", "Security");
+            entity.ToTable("UserBudget", "SecurityBudget");
 
-            entity.HasKey(e => e.IdUser);
+            entity.HasKey(e => e.IdUserBudget);
 
             entity.Property(e => e.Email)
                   .IsRequired()
@@ -40,12 +40,14 @@
                   .IsRequired()
                   .HasMaxLength(100);
 
-            entity.Property(e => e.Password)
+            entity.Property(e => e.EncryptedPassword)
                   .IsRequired()
                   .HasMaxLength(255);
 
-            entity.Property(e => e.IdRole).IsRequired();
-            entity.Property(e => e.IdStatus).IsRequired();
+            entity.Property(e => e.IdRoleBudget).IsRequired();
+
+            entity.Property(e => e.IdStatusBudget).IsRequired();
+
         }
         
         #endregion

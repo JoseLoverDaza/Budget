@@ -28,14 +28,14 @@
 
             entity.HasKey(e => e.IdTypeExpense);
 
-            entity.Property(e => e.Name)
+            entity.Property(e => e.NameTypeExpense)
                   .IsRequired()
                   .HasMaxLength(100);
 
-            entity.Property(e => e.Description)
+            entity.Property(e => e.DescriptionTypeExpense)
                   .HasMaxLength(255);
 
-            entity.Property(e => e.IdStatus)
+            entity.Property(e => e.IdStatusBudget)
                   .IsRequired();
         }
 

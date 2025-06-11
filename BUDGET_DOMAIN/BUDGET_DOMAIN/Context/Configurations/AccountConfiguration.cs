@@ -28,17 +28,17 @@
 
             entity.HasKey(e => e.IdAccount);
 
-            entity.Property(e => e.Name)
+            entity.Property(e => e.NameAccount)
                   .IsRequired()
                   .HasMaxLength(100);
 
-            entity.Property(e => e.Description)
+            entity.Property(e => e.DescriptionAccount)
                   .HasMaxLength(255);
 
             entity.Property(e => e.IdFinancialInstitution).IsRequired();
             entity.Property(e => e.IdTypeAccount).IsRequired();
-            entity.Property(e => e.IdUser).IsRequired();
-            entity.Property(e => e.IdStatus).IsRequired();
+            entity.Property(e => e.IdUserBudget).IsRequired();
+            entity.Property(e => e.IdStatusBudget).IsRequired();
         }
 
         #endregion

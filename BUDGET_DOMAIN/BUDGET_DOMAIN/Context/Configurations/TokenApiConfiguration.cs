@@ -22,9 +22,9 @@
 
         public void Configure(EntityTypeBuilder<TokenApi> entity)
         {
-            /// Tabla [TokenApi].[Security]
+            /// Tabla [TokenApi].[SecurityBudget]
 
-            entity.ToTable("TokenApi", "Security");
+            entity.ToTable("TokenApi", "SecurityBudget");
 
             entity.HasKey(e => e.IdTokenApi);
 
@@ -33,16 +33,19 @@
                   .HasColumnType("nvarchar(max)");
 
             entity.Property(e => e.CreationDate)
-                  .IsRequired();
+                  .IsRequired()
+                  .HasColumnType("datetime");
 
             entity.Property(e => e.ExpirationDate)
+                  .IsRequired()
+                  .HasColumnType("datetime");
+
+            entity.Property(e => e.IdUserBudget)
                   .IsRequired();
 
-            entity.Property(e => e.IdUser)
+            entity.Property(e => e.IdStatusBudget)
                   .IsRequired();
 
-            entity.Property(e => e.IdStatus)
-                  .IsRequired();
         }
 
         #endregion

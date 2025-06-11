@@ -11,32 +11,30 @@
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
-    /// Nombre: RoleConfiguration   
+    /// Nombre: StatusBudgetConfiguration   
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public partial class RoleConfiguration : IEntityTypeConfiguration<Role>
+    public partial class StatusBudgetConfiguration : IEntityTypeConfiguration<StatusBudget>
     {
 
         #region Métodos y Funciones
 
-        public void Configure(EntityTypeBuilder<Role> entity)
+        public void Configure(EntityTypeBuilder<StatusBudget> entity) 
         {
-            /// Tabla [Role].[Security]
+            /// Tabla [StatusBudget].[ParameterizationBudget]
 
-            entity.ToTable("Role", "Security");
+            entity.ToTable("StatusBudget", "ParameterizationBudget");
 
-            entity.HasKey(e => e.IdRole);
+            entity.HasKey(e => e.IdStatusBudget);
 
-            entity.Property(e => e.Name)
+            entity.Property(e => e.NameStatus)
                   .IsRequired()
                   .HasMaxLength(100);
 
-            entity.Property(e => e.Description)
+            entity.Property(e => e.DescriptionStatus)
                   .HasMaxLength(255);
 
-            entity.Property(e => e.IdStatus)
-                  .IsRequired();
         }
 
         #endregion

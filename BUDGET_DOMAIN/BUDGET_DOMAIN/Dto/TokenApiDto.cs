@@ -17,9 +17,9 @@
         public DateTime CreationDate { get; set; } = DateTime.Now;
         public DateTime ExpirationDate { get; set; } = DateTime.Now;
 
-        public int IdUser { get; set; }
+        public int IdUserBudget { get; set; }
 
-        public int IdStatus { get; set; }
+        public int IdStatusBudget { get; set; }
 
         #endregion
 

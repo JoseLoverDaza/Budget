@@ -22,9 +22,9 @@
 
         public void Configure(EntityTypeBuilder<LogApi> entity)
         {
-            /// Tabla [LogApi].[Security]
+            /// Tabla [LogApi].[SecurityBudget]
 
-            entity.ToTable("LogApi", "Security");
+            entity.ToTable("LogApi", "SecurityBudget");
 
             entity.HasKey(e => e.IdLogApi);
 
@@ -32,21 +32,22 @@
                   .IsRequired()
                   .HasMaxLength(100);
 
+            entity.Property(e => e.EntityAction)
+                 .HasMaxLength(20);
+
             entity.Property(e => e.PreviousValues)
                   .HasColumnType("nvarchar(max)");
 
             entity.Property(e => e.NewValues)
                   .HasColumnType("nvarchar(max)");
 
-            entity.Property(e => e.EntityAction)
-                  .HasMaxLength(20);
-
             entity.Property(e => e.CreationDate)
                   .IsRequired()
-                  .HasColumnType("date");
+                  .HasColumnType("datetime");
 
-            entity.Property(e => e.IdStatus)
+            entity.Property(e => e.IdStatusBudget)
                   .IsRequired();
+
         }
 
         #endregion

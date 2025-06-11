@@ -3,20 +3,18 @@
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
-    /// Nombre: TypeExpenseDto   
+    /// Nombre: StatusBudgetDto   
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public class TypeExpenseDto
+    public class StatusBudgetDto
     {
 
         #region Atributos y Propiedades
 
-        public int IdTypeExpense { get; set; }
-        public string NameTypeExpense { get; set; } = null!;
-        public string? DescriptionTypeExpense { get; set; }
-
         public int IdStatusBudget { get; set; }
+        public string NameStatus { get; set; } = null!;
+        public string? DescriptionStatus { get; set; }
 
         #endregion
 

@@ -13,16 +13,16 @@
         #region Atributos y Propiedades
 
         public int IdAccount { get; set; }
-        public string Name { get; set; } = null!;
-        public string? Description { get; set; }
+        public string NameAccount { get; set; } = null!;
+        public string? DescriptionAccount { get; set; }
 
         public int IdFinancialInstitution { get; set; }      
 
         public int IdTypeAccount { get; set; }
 
-        public int IdUser { get; set; }       
+        public int IdUserBudget { get; set; }       
 
-        public int IdStatus { get; set; }
+        public int IdStatusBudget { get; set; }
         
         #endregion
 

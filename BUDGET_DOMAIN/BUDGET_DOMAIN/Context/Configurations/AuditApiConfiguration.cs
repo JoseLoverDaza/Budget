@@ -11,27 +11,27 @@
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
-    /// Nombre: AuditConfiguration   
+    /// Nombre: AuditApiConfiguration   
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    public partial class AuditConfiguration : IEntityTypeConfiguration<Audit>
+    public partial class AuditApiConfiguration : IEntityTypeConfiguration<AuditApi>
     {
 
         #region Métodos y Funciones
 
-        public void Configure(EntityTypeBuilder<Audit> entity)
+        public void Configure(EntityTypeBuilder<AuditApi> entity)
         {
-            /// Tabla [Audit].[Security]
+            /// Tabla [AuditApi].[SecurityBudget]
 
-            entity.ToTable("Audit", "Security");
+            entity.ToTable("AuditApi", "SecurityBudget");
 
-            entity.HasKey(e => e.IdAudit);
+            entity.HasKey(e => e.IdAuditApi);
 
             entity.Property(e => e.Host)
                      .HasMaxLength(255);
 
-            entity.Property(e => e.Endpoint)
+            entity.Property(e => e.EndpointUrl)
                      .HasMaxLength(255);
 
             entity.Property(e => e.Agent)
@@ -41,7 +41,8 @@
                     .HasMaxLength(255);
 
             entity.Property(e => e.CreationDate)
-                  .IsRequired();
+                 .IsRequired()
+                 .HasColumnType("datetime");
 
         }
 

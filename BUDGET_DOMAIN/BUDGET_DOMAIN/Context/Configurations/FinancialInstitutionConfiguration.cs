@@ -28,15 +28,16 @@
 
             entity.HasKey(e => e.IdFinancialInstitution);
 
-            entity.Property(e => e.Name)
+            entity.Property(e => e.NameFinancialInstitution)
                   .IsRequired()
                   .HasMaxLength(100);
 
-            entity.Property(e => e.Description)
+            entity.Property(e => e.DescriptionFinancialInstitution)
                   .HasMaxLength(255);
 
-            entity.Property(e => e.IdStatus)
+            entity.Property(e => e.IdStatusBudget)
                   .IsRequired();
+
         }
 
         #endregion
