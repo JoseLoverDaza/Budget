@@ -47,7 +47,7 @@
             _context = new EFContext(options);
             UnitOfWork unitOfWork = new(_context);
             _logApiService = new LogApiService(unitOfWork);
-            _roleBudgetService = new RoleService(unitOfWork, _logApiService);            
+            _roleBudgetService = new RoleBudgetService(unitOfWork, _logApiService);            
             _roleBudgetController = new RoleBudgetController(_roleBudgetService);
 
             #region Data

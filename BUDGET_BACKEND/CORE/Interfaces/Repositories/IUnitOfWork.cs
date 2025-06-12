@@ -24,13 +24,13 @@
 
         public IBaseRepository<T> BaseRepository<T>() where T : class;
 
-        public IStatusBudgetRepository StatusRepository();
+        public IStatusBudgetRepository StatusBudgetRepository();
 
-        public IRoleBudgetRepository RoleRepository();
+        public IRoleBudgetRepository RoleBudgetRepository();
 
-        public IUserBudgetRepository UserRepository();
+        public IUserBudgetRepository UserBudgetRepository();
 
-        public IAuditApiRepository AuditRepository();
+        public IAuditApiRepository AuditApiRepository();
 
         public ITokenApiRepository TokenApiRepository();
 

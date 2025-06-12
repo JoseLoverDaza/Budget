@@ -95,7 +95,7 @@
         public FinancialInstitutionDto SaveFinancialInstitution(FinancialInstitutionDto financialInstitution)
         {
             IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
 
             if (financialInstitution == null || string.IsNullOrWhiteSpace(financialInstitution.Name.Trim()))
             {
@@ -170,7 +170,7 @@
         public FinancialInstitutionDto DeleteFinancialInstitution(FinancialInstitutionDto financialInstitution)
         {
             IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
 
             FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionByIdFinancialInstitution(financialInstitution) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = financialInstitution.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);

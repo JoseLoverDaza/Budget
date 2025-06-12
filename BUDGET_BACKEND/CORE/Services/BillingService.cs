@@ -180,8 +180,8 @@
         public BillingDto SaveBilling(BillingDto billing)
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
-            IUserBudgetRepository userRepository = UnitOfWork.UserRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
+            IUserBudgetRepository userRepository = UnitOfWork.UserBudgetRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
 
             if (billing == null || billing.Year <= 0 || billing.Month <= 0)
             {
@@ -259,7 +259,7 @@
         public BillingDto DeleteBilling(BillingDto billing)
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
 
             BillingExtendDto? billingSearch = billingRepository.GetBillingByIdBilling(billing) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = billing.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);

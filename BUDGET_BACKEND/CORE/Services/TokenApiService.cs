@@ -41,7 +41,7 @@
 
         #region Métodos y Funciones
 
-        public TokenApiExtendDto? GetTokenApiById(TokenApiDto tokenApi)
+        public TokenApiExtendDto? GetTokenApiByIdTokenApi(TokenApiDto tokenApi)
         {
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
             TokenApiExtendDto? tokenApiSearch = tokenApiRepository.GetTokenApiByIdTokenApi(tokenApi);
@@ -92,7 +92,7 @@
             }
         }
 
-        public List<TokenApiExtendDto> GetTokenApisByUser(TokenApiDto tokenApi)
+        public List<TokenApiExtendDto> GetTokenApisByUserBudget(TokenApiDto tokenApi)
         {
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
             List<TokenApiExtendDto> tokenApisSearch = tokenApiRepository.GetTokenApisByUserBudget(tokenApi);
@@ -109,7 +109,7 @@
             }
         }
 
-        public List<TokenApiExtendDto> GetTokenApisByStatus(TokenApiDto tokenApi)
+        public List<TokenApiExtendDto> GetTokenApisByStatusBudget(TokenApiDto tokenApi)
         {
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
             List<TokenApiExtendDto> tokenApisSearch = tokenApiRepository.GetTokenApisByStatusBudget(tokenApi);
@@ -126,7 +126,7 @@
             }
         }
 
-        public List<TokenApiExtendDto> GetTokenApisByCreationDateStatus(TokenApiDto tokenApi)
+        public List<TokenApiExtendDto> GetTokenApisByCreationDateStatusBudget(TokenApiDto tokenApi)
         {
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
             List<TokenApiExtendDto> tokenApisSearch = tokenApiRepository.GetTokenApisByCreationDateStatusBudget(tokenApi);
@@ -143,7 +143,7 @@
             }
         }
 
-        public List<TokenApiExtendDto> GetTokenApisByExpirationDateStatus(TokenApiDto tokenApi)
+        public List<TokenApiExtendDto> GetTokenApisByExpirationDateStatusBudget(TokenApiDto tokenApi)
         {
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
             List<TokenApiExtendDto> tokenApisSearch = tokenApiRepository.GetTokenApisByExpirationDateStatusBudget(tokenApi);
@@ -160,7 +160,7 @@
             }
         }
 
-        public List<TokenApiExtendDto> GetTokenApisByUserStatus(TokenApiDto tokenApi)
+        public List<TokenApiExtendDto> GetTokenApisByUserBudgetStatusBudget(TokenApiDto tokenApi)
         {
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
             List<TokenApiExtendDto> tokenApisSearch = tokenApiRepository.GetTokenApisByUserBudgetStatusBudget(tokenApi);
@@ -177,7 +177,7 @@
             }
         }
 
-        public List<TokenApiExtendDto> GetTokenApisByCreationDateUserStatus(TokenApiDto tokenApi)
+        public List<TokenApiExtendDto> GetTokenApisByCreationDateUserBudgetStatusBudget(TokenApiDto tokenApi)
         {
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
             List<TokenApiExtendDto> tokenApisSearch = tokenApiRepository.GetTokenApisByCreationDateUserBudgetStatusBudget(tokenApi);
@@ -194,7 +194,7 @@
             }
         }
 
-        public List<TokenApiExtendDto> GetTokenApisByExpirationDateUserStatus(TokenApiDto tokenApi)
+        public List<TokenApiExtendDto> GetTokenApisByExpirationDateUserBudgetStatusBudget(TokenApiDto tokenApi)
         {
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
             List<TokenApiExtendDto> tokenApisSearch = tokenApiRepository.GetTokenApisByExpirationDateUserBudgetStatusBudget(tokenApi);
@@ -214,8 +214,8 @@
         public TokenApiDto SaveTokenApi(TokenApiDto tokenApi)
         {
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
-            IUserBudgetRepository userRepository = UnitOfWork.UserRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
+            IUserBudgetRepository userBudgetRepository = UnitOfWork.UserBudgetRepository();
+            IStatusBudgetRepository statusBudgetRepository = UnitOfWork.StatusBudgetRepository();
 
             if (tokenApi == null || string.IsNullOrWhiteSpace(tokenApi.Token.Trim()))
             {
@@ -229,16 +229,20 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            UserDto? userSearch = userRepository.GetUserById(new UserDto { IdUser = tokenApi.IdUser }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = tokenApi.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            UserBudgetDto? userBudgetSearch = userBudgetRepository.GetUserBudgetByIdUserBudget(new UserBudgetDto { IdUserBudget = tokenApi.IdUserBudget }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusBudgetDto? statusBudgetSearch = statusBudgetRepository.GetStatusBudgetByIdStatusBudget(new StatusBudgetDto { IdStatusBudget = tokenApi.IdStatusBudget }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            UserBudgetExtendDto? userBudgetAdminSearch = userBudgetRepository.GetUserBudgetByUsername(new UserBudgetDto { Username = Constants.UserBudget.USERNAME_ADMIN }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             TokenApi saveTokenApi = new()
             {
-                Token = tokenApi.Token,
-                CreationDate = tokenApi.CreationDate,
+                Token = tokenApi.Token,               
                 ExpirationDate = tokenApi.ExpirationDate,
-                IdUser = userSearch.IdUser,
-                IdStatus = statusSearch.IdStatus
+                IdUserBudget = userBudgetSearch.IdUserBudget,
+                IdStatusBudget = statusBudgetSearch.IdStatusBudget,
+                CreationUser = userBudgetAdminSearch.IdUserBudget,
+                CreationDate = tokenApi.CreationDate,
+                ModificationUser = userBudgetAdminSearch.IdUserBudget,
+                ModificationDate = tokenApi.ModificationDate
             };
 
             UnitOfWork.BaseRepository<TokenApi>().Add(saveTokenApi);
@@ -273,11 +277,14 @@
             TokenApi updateTokenApi = new()
             {
                 IdTokenApi = tokenApiSearch.IdTokenApi,
-                Token = tokenApi.Token,
-                CreationDate = tokenApi.CreationDate,
+                Token = tokenApi.Token,                
                 ExpirationDate = tokenApi.ExpirationDate,
-                IdUser = tokenApiSearch.IdUser,
-                IdStatus = tokenApiSearch.IdStatus
+                IdUserBudget = tokenApiSearch.IdUserBudget,
+                IdStatusBudget = tokenApiSearch.IdStatusBudget,
+                CreationUser = tokenApiSearch.CreationUser,
+                CreationDate = tokenApiSearch.CreationDate,
+                ModificationUser = tokenApiSearch.ModificationUser,
+                ModificationDate = tokenApi.ModificationDate
             };
 
             UnitOfWork.BaseRepository<TokenApi>().Update(updateTokenApi);
@@ -295,12 +302,12 @@
         public TokenApiDto DeleteTokenApi(TokenApiDto tokenApi)
         {
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusBudgetRepository = UnitOfWork.StatusBudgetRepository();
 
             TokenApiExtendDto? tokenApiSearch = tokenApiRepository.GetTokenApiByIdTokenApi(tokenApi) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = tokenApi.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusBudgetDto? statusBudgetSearch = statusBudgetRepository.GetStatusBudgetByIdStatusBudget(new StatusBudgetDto { IdStatusBudget = tokenApi.IdStatusBudget }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            if (tokenApiSearch.IdStatus == tokenApi.IdStatus)
+            if (tokenApiSearch.IdStatusBudget == tokenApi.IdStatusBudget)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -308,11 +315,10 @@
             TokenApi deleteTokenApi = new()
             {
                 IdTokenApi = tokenApiSearch.IdTokenApi,
-                Token = tokenApiSearch.Token,
-                CreationDate = tokenApiSearch.CreationDate,
+                Token = tokenApiSearch.Token,                
                 ExpirationDate = tokenApiSearch.ExpirationDate,
-                IdUser = tokenApiSearch.IdUser,
-                IdStatus = statusSearch.IdStatus
+                IdUserBudget = tokenApiSearch.IdUserBudget,
+                IdStatusBudget = statusBudgetSearch.IdStatusBudget
             };
 
             UnitOfWork.BaseRepository<TokenApi>().Update(deleteTokenApi);

@@ -95,7 +95,7 @@
         public TypeExpenseDto SaveTypeExpense(TypeExpenseDto typeExpense)
         {
             ITypeExpenseRepository typeExpenseRepository = UnitOfWork.TypeExpenseRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
 
             if (typeExpense == null || string.IsNullOrWhiteSpace(typeExpense.Name.Trim()))
             {
@@ -175,7 +175,7 @@
         public TypeExpenseDto DeleteTypeExpense(TypeExpenseDto typeExpense)
         {
             ITypeExpenseRepository typeExpenseRepository = UnitOfWork.TypeExpenseRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
 
             TypeExpenseExtendDto? typeExpenseSearch = typeExpenseRepository.GetTypeExpenseByIdTypeExpense(typeExpense) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = typeExpense.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);

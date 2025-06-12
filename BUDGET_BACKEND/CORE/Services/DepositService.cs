@@ -265,9 +265,9 @@
         public DepositDto SaveDeposit(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
-            IUserBudgetRepository userRepository = UnitOfWork.UserRepository();
+            IUserBudgetRepository userRepository = UnitOfWork.UserBudgetRepository();
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
 
             if (deposit == null || string.IsNullOrWhiteSpace(deposit.Amount.ToString().Trim()) || deposit.Year <= 0 || deposit.Month <= 0)
             {
@@ -344,7 +344,7 @@
         public DepositDto DeleteDeposit(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
 
             DepositExtendDto? depositSearch = depositRepository.GetDepositByIdDeposit(deposit) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = deposit.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);

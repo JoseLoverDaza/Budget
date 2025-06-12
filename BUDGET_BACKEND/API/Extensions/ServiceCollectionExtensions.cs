@@ -44,10 +44,10 @@
         public static IServiceCollection AddBusinessServices(this IServiceCollection services)
         {
             services.AddTransient<IAuthenticationService, AuthenticationService>();
-            services.AddTransient<IStatusBudgetService, StatusService>();
-            services.AddTransient<IRoleBudgetService, RoleService>();
-            services.AddTransient<IUserBudgetService, UserService>();
-            services.AddTransient<IAuditApiService, AuditService>();
+            services.AddTransient<IStatusBudgetService, StatusBudgetService>();
+            services.AddTransient<IRoleBudgetService, RoleBudgetService>();
+            services.AddTransient<IUserBudgetService, UserBudgetService>();
+            services.AddTransient<IAuditApiService, AuditApiService>();
             services.AddTransient<ITokenApiService, TokenApiService>();
             services.AddTransient<ILogApiService, LogApiService>();
             services.AddTransient<ITypeAccountService, TypeAccountService>();

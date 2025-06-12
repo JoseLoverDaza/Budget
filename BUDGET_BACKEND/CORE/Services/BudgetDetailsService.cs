@@ -165,7 +165,7 @@
             IBudgetDetailsRepository budgetDetailsRepository = UnitOfWork.BudgetDetailsRepository();
             IBudgetRepository budgetRepository = UnitOfWork.BudgetRepository();
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
 
             if (budgetDetails == null || budgetDetails.Amount <= 0)
             {
@@ -240,7 +240,7 @@
         public BudgetDetailsDto DeleteBudgetDetail(BudgetDetailsDto budgetDetails)
         {
             IBudgetDetailsRepository budgetDetailsRepository = UnitOfWork.BudgetDetailsRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
 
             BudgetDetailExtendDto? budgetDetailSearch = budgetDetailsRepository.GetBudgetDetailsByIdBudgetDetails(budgetDetails) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = budgetDetails.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);

@@ -48,7 +48,7 @@
             _context = new EFContext(options);
             UnitOfWork unitOfWork = new(_context);
             _logApiService = new LogApiService(unitOfWork);
-            _auditApiService = new AuditService(unitOfWork, _logApiService);           
+            _auditApiService = new AuditApiService(unitOfWork, _logApiService);           
             _auditApiController = new AuditApiController(_auditApiService);
 
             #region Data
@@ -83,6 +83,31 @@
 
             _context.SaveChanges();
 
+            /// RolesBudget IdRoleBudget 1
+            _context.RolesBudget.Add(new RoleBudget()
+            {
+                IdRoleBudget = 1,
+                NameRole = Constants.UserBudget.USERNAME_ADMIN,
+                DescriptionRole = Constants.UserBudget.USERNAME_ADMIN,
+                IdStatusBudget = 2
+            });
+
+            _context.SaveChanges();
+
+            /// UsersBudget IdUserBudget 1
+            _context.UsersBudget.Add(new UserBudget()
+            {
+                IdUserBudget = 1,
+                Email = "Test",
+                Phone = "1234567890",
+                Username = Constants.UserBudget.USERNAME_ADMIN,
+                EncryptedPassword = "A7Ws/sQDVsXXi/xheT1IufcXPN5rJUKXmPWvnJTGzjRgOzD+vAt1GAMXoD0/mlrD",
+                IdRoleBudget = 1,
+                IdStatusBudget = 2
+            });
+
+            _context.SaveChanges();
+
             /// AuditApis IdAuditApi 1
             _context.AuditApis.Add(new AuditApi()
             {
@@ -91,12 +116,16 @@
                 EndpointUrl = "Test",
                 Agent = "Test",
                 Method = "Test",
-                CreationDate = new DateTime(2026, 1, 1)
+                CreationUser = 1,
+                CreationDate = new DateTime(2026, 1, 1),               
+                ModificationUser = 1,
+                ModificationDate = new DateTime(2026, 1, 1)
             });
 
             _context.SaveChanges();
 
             #endregion Data
+
         }
 
         #endregion

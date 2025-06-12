@@ -165,7 +165,7 @@
             IBillingDetailsRepository billingDetailRepository = UnitOfWork.BillingDetailsRepository();
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
 
             if (billingDetails == null || billingDetails.Amount <= 0)
             {
@@ -240,7 +240,7 @@
         public BillingDetailsDto DeleteBillingDetail(BillingDetailsDto billingDetails)
         {
             IBillingDetailsRepository billingDetailRepository = UnitOfWork.BillingDetailsRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
 
             BillingDetailExtendDto? billingDetailSearch = billingDetailRepository.GetBillingDetailsByIdBillingDetails(billingDetails) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = billingDetails.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);

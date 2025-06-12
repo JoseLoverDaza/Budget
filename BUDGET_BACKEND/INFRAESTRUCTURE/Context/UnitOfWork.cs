@@ -64,22 +64,22 @@
             return _dbContext.SaveChangesAsync();
         }
 
-        public IStatusBudgetRepository StatusRepository()
+        public IStatusBudgetRepository StatusBudgetRepository()
         {
             return new StatusBudgetRepository(_dbContext);
         }
 
-        public IRoleBudgetRepository RoleRepository()
+        public IRoleBudgetRepository RoleBudgetRepository()
         {
             return new RoleBudgetRepository(_dbContext);
         }
 
-        public IUserBudgetRepository UserRepository()
+        public IUserBudgetRepository UserBudgetRepository()
         {
             return new UserBudgetRepository(_dbContext);
         }
 
-        public IAuditApiRepository AuditRepository()
+        public IAuditApiRepository AuditApiRepository()
         {
             return new AuditApiRepository(_dbContext);
         }
@@ -145,7 +145,6 @@
         }
 
         #endregion Methods
-
 
     }
 }

@@ -130,7 +130,7 @@
         {
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
             ITypeExpenseRepository typeExpenseRepository = UnitOfWork.TypeExpenseRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
 
             if (expense == null || string.IsNullOrWhiteSpace(expense.Name.Trim()))
             {
@@ -212,7 +212,7 @@
         public ExpenseDto DeleteExpense(ExpenseDto expense)
         {
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
 
             ExpenseExtendDto? expenseSearch = expenseRepository.GetExpenseByIdExpense(expense) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = expense.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);

@@ -38,7 +38,7 @@
 
         #region Métodos y Funciones
 
-        public LogApiExtendDto? GetLogApiById(LogApiDto logApi)
+        public LogApiExtendDto? GetLogApiByIdLogApi(LogApiDto logApi)
         {
             ILogApiRepository logApiRepository = UnitOfWork.LogApiRepository();
             LogApiExtendDto? logApiSearch = logApiRepository.GetLogApiByIdLogApi(logApi);
@@ -68,7 +68,7 @@
             }
         }
 
-        public List<LogApiExtendDto> GetLogApisByStatus(LogApiDto logApi)
+        public List<LogApiExtendDto> GetLogApisByStatusBudget(LogApiDto logApi)
         {
             ILogApiRepository logApiRepository = UnitOfWork.LogApiRepository();
             List<LogApiExtendDto> logApisSearch = logApiRepository.GetLogApisByStatusBudget(logApi);
@@ -98,7 +98,7 @@
             }
         }
 
-        public List<LogApiExtendDto> GetLogApisByCreationDateStatus(LogApiDto logApi)
+        public List<LogApiExtendDto> GetLogApisByCreationDateStatusBudget(LogApiDto logApi)
         {
             ILogApiRepository logApiRepository = UnitOfWork.LogApiRepository();
             List<LogApiExtendDto> logApisSearch = logApiRepository.GetLogApisByCreationDateStatusBudget(logApi);
@@ -113,10 +113,10 @@
             }
         }
 
-        public List<LogApiExtendDto> GetLogApisByEntityCreationDateStatus(LogApiDto logApi)
+        public List<LogApiExtendDto> GetLogApisByEntityCreationDateStatusBudget(LogApiDto logApi)
         {
             ILogApiRepository logApiRepository = UnitOfWork.LogApiRepository();
-            List<LogApiExtendDto> logApisSearch = logApiRepository.GetLogApisByEntityCreationDateStatus(logApi);
+            List<LogApiExtendDto> logApisSearch = logApiRepository.GetLogApisByEntityCreationDateStatusBudget(logApi);
 
             if (logApisSearch.Count != 0)
             {
@@ -130,9 +130,11 @@
 
         public LogApiDto SaveLogApi(LogApiDto logApi)
         {
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
+            IUserBudgetRepository userBudgetRepository = UnitOfWork.UserBudgetRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
 
-            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = logApi.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusBudgetDto? statusBudgetSearch = statusRepository.GetStatusBudgetByIdStatusBudget(new StatusBudgetDto { IdStatusBudget = logApi.IdStatusBudget }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            UserBudgetExtendDto? userBudgetAdminSearch = userBudgetRepository.GetUserBudgetByUsername(new UserBudgetDto { Username = Constants.UserBudget.USERNAME_ADMIN }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             LogApi saveApiLog = new()
             {
@@ -140,8 +142,11 @@
                 PreviousValues = logApi.PreviousValues?.Trim() ?? string.Empty,
                 NewValues = logApi.NewValues?.Trim() ?? string.Empty,
                 EntityAction = logApi.EntityAction?.Trim() ?? string.Empty,
+                IdStatusBudget = statusBudgetSearch.IdStatusBudget,
+                CreationUser = userBudgetAdminSearch.IdUserBudget,
                 CreationDate = logApi.CreationDate,
-                IdStatus = statusSearch.IdStatus
+                ModificationUser = userBudgetAdminSearch.IdUserBudget, 
+                ModificationDate = logApi.ModificationDate                
             };
 
             UnitOfWork.BaseRepository<LogApi>().Add(saveApiLog);
@@ -170,9 +175,12 @@
                 Entity = logApi.Entity?.Trim() ?? string.Empty,
                 PreviousValues = logApi.PreviousValues?.Trim() ?? string.Empty,
                 NewValues = logApi.NewValues?.Trim() ?? string.Empty,
-                EntityAction = logApi.EntityAction?.Trim() ?? string.Empty,
+                EntityAction = logApi.EntityAction?.Trim() ?? string.Empty,                
+                IdStatusBudget = logApiSearch.IdStatusBudget,
+                CreationUser = logApiSearch.CreationUser,
                 CreationDate = logApiSearch.CreationDate,
-                IdStatus = logApiSearch.IdStatus
+                ModificationUser = logApiSearch.ModificationUser,
+                ModificationDate = logApi.ModificationDate
             };
 
             UnitOfWork.BaseRepository<LogApi>().Update(updateLogApi);
@@ -187,25 +195,28 @@
         public LogApiDto DeleteLogApi(LogApiDto logApi)
         {
             ILogApiRepository logApiRepository = UnitOfWork.LogApiRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
 
-            LogApiExtendDto? logSearch = logApiRepository.GetLogApiByIdLogApi(logApi) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = logApi.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            LogApiExtendDto? logApiSearch = logApiRepository.GetLogApiByIdLogApi(logApi) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusBudgetDto? statusBudgetSearch = statusRepository.GetStatusBudgetByIdStatusBudget(new StatusBudgetDto { IdStatusBudget = logApi.IdStatusBudget }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            if (logSearch.IdStatus == statusSearch.IdStatus)
+            if (logApiSearch.IdStatusBudget == statusBudgetSearch.IdStatusBudget)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
             LogApi deleteLogApi = new()
             {
-                IdLogApi = logSearch.IdLogApi,
-                Entity = logSearch.Entity,
-                PreviousValues = logSearch.PreviousValues,
-                NewValues = logSearch.NewValues,
-                EntityAction = logSearch.EntityAction,
-                CreationDate = logSearch.CreationDate,
-                IdStatus = statusSearch.IdStatus
+                IdLogApi = logApiSearch.IdLogApi,
+                Entity = logApiSearch.Entity,
+                PreviousValues = logApiSearch.PreviousValues,
+                NewValues = logApiSearch.NewValues,
+                EntityAction = logApiSearch.EntityAction,                
+                IdStatusBudget = statusBudgetSearch.IdStatusBudget,
+                CreationUser = logApiSearch.CreationUser,
+                CreationDate = logApiSearch.CreationDate,
+                ModificationUser = logApiSearch.ModificationUser,
+                ModificationDate = logApiSearch.ModificationDate
             };
 
             UnitOfWork.BaseRepository<LogApi>().Update(deleteLogApi);
@@ -219,9 +230,11 @@
 
         public void TraceLog(string entity, string entityAction, string previousValues, string newValues, DateTime creationDate, int? idStatus)
         {
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
+            IUserBudgetRepository userBudgetRepository = UnitOfWork.UserBudgetRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
 
-            StatusDto? statusSearch = idStatus != null ? new StatusDto { IdStatus = (int)idStatus }  : statusRepository.GetStatusByName(new StatusDto { Name = Constants.Status.ACTIVO }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusBudgetDto? statusSearch = idStatus != null ? new StatusBudgetDto { IdStatusBudget = (int)idStatus }  : statusRepository.GetStatusBudgetByNameStatus(new StatusBudgetDto { NameStatus = Constants.Status.ACTIVO }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            UserBudgetExtendDto? userBudgetAdminSearch = userBudgetRepository.GetUserBudgetByUsername(new UserBudgetDto { Username = Constants.UserBudget.USERNAME_ADMIN }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             LogApi saveLogApi = new()
             {
@@ -230,7 +243,10 @@
                 PreviousValues = previousValues,
                 NewValues = newValues,
                 CreationDate = creationDate,
-                IdStatus = statusSearch.IdStatus
+                IdStatusBudget = statusSearch.IdStatusBudget,
+                CreationUser = userBudgetAdminSearch.IdUserBudget,
+                ModificationUser = userBudgetAdminSearch.IdUserBudget,
+                ModificationDate = creationDate                
             };
 
             UnitOfWork.BaseRepository<LogApi>().Add(saveLogApi);
@@ -242,15 +258,22 @@
         }
 
         public void TraceLog(string entity, string entityAction, TokenApi? tokenApiPrevious, TokenApi? tokenApiNew, DateTime creationDate, int idStatus)
-        {           
+        {
+            IUserBudgetRepository userBudgetRepository = UnitOfWork.UserBudgetRepository();
+
+            UserBudgetExtendDto? userBudgetAdminSearch = userBudgetRepository.GetUserBudgetByUsername(new UserBudgetDto { Username = Constants.UserBudget.USERNAME_ADMIN }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+
             LogApi saveLogApi = new()
             {
                 Entity = entity,
                 EntityAction = entityAction,
                 PreviousValues = tokenApiPrevious != null ? JsonSerializer.Serialize(tokenApiPrevious) : JsonSerializer.Serialize(Constants.General.JSON_EMPTY),
                 NewValues = tokenApiNew != null ? JsonSerializer.Serialize(tokenApiNew) : JsonSerializer.Serialize(Constants.General.JSON_EMPTY),
+                IdStatusBudget = idStatus,
+                CreationUser = userBudgetAdminSearch.IdUserBudget,
                 CreationDate = creationDate,
-                IdStatus = idStatus
+                ModificationUser = userBudgetAdminSearch.IdUserBudget,
+                ModificationDate = creationDate                
             };
 
             UnitOfWork.BaseRepository<LogApi>().Add(saveLogApi);

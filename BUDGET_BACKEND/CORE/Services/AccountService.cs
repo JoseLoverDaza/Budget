@@ -216,8 +216,8 @@
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
             IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
             ITypeAccountRepository typeAccountRepository = UnitOfWork.TypeAccountRepository();
-            IUserBudgetRepository userRepository = UnitOfWork.UserRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
+            IUserBudgetRepository userRepository = UnitOfWork.UserBudgetRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
 
             if (account == null || string.IsNullOrWhiteSpace(account.Name.Trim()))
             {
@@ -301,7 +301,7 @@
         public AccountDto DeleteAccount(AccountDto account)
         {
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
 
             AccountExtendDto? accountSearch = accountRepository.GetAccountByIdAccount(account) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = account.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);

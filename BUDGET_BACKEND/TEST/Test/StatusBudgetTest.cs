@@ -47,7 +47,7 @@
             _context = new EFContext(options);
             UnitOfWork unitOfWork = new(_context);
             _logApiService = new LogApiService(unitOfWork);
-            _statusBudgetService = new StatusService(unitOfWork, _logApiService);            
+            _statusBudgetService = new StatusBudgetService(unitOfWork, _logApiService);            
             _statusBudgetController = new StatusBudgetController(_statusBudgetService);
 
             #region Data

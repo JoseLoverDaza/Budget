@@ -95,7 +95,7 @@
         public TypeAccountDto SaveTypeAccount(TypeAccountDto typeAccount)
         {
             ITypeAccountRepository typeAccountRepository = UnitOfWork.TypeAccountRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
 
             if (typeAccount == null || string.IsNullOrWhiteSpace(typeAccount.Name.Trim()))
             {
@@ -170,7 +170,7 @@
         public TypeAccountDto DeleteTypeAccount(TypeAccountDto typeAccount)
         {
             ITypeAccountRepository typeAccountRepository = UnitOfWork.TypeAccountRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
 
             TypeAccountExtendDto? typeAccountSearch = typeAccountRepository.GetTypeAccountByIdTypeAccount(typeAccount) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = typeAccount.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);

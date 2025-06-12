@@ -180,8 +180,8 @@
         public BudgetDto SaveBudget(BudgetDto budget)
         {
             IBudgetRepository budgetRepository = UnitOfWork.BudgetRepository();
-            IUserBudgetRepository userRepository = UnitOfWork.UserRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
+            IUserBudgetRepository userRepository = UnitOfWork.UserBudgetRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
 
             if (budget == null || budget.Year <= 0 || budget.Month <= 0)
             {
@@ -259,7 +259,7 @@
         public BudgetDto DeleteBudget(BudgetDto budget)
         {
             IBudgetRepository budgetRepository = UnitOfWork.BudgetRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
 
             BudgetExtendDto? budgetSearch = budgetRepository.GetBudgetByIdBudget(budget) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = budget.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);

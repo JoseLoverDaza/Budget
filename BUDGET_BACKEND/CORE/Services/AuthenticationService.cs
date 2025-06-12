@@ -45,8 +45,8 @@
 
         public AuthenticationDto? Authentication(AuthenticationDto authentication)
         {
-            IUserBudgetRepository userRepository = UnitOfWork.UserRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
+            IUserBudgetRepository userRepository = UnitOfWork.UserBudgetRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
 
             if (authentication == null || string.IsNullOrWhiteSpace(authentication.Username.Trim()) || string.IsNullOrWhiteSpace(authentication.EncryptedPassword.Trim()))
             {
@@ -97,9 +97,9 @@
 
         public AuthenticationDto? ValidateAuthentication(AuthenticationDto authentication)
         {
-            IUserBudgetRepository userRepository = UnitOfWork.UserRepository();
+            IUserBudgetRepository userRepository = UnitOfWork.UserBudgetRepository();
             ITokenApiRepository tokenApiRepository = UnitOfWork.TokenApiRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
 
             if (authentication == null || string.IsNullOrWhiteSpace(authentication.Token.Trim()))
             {

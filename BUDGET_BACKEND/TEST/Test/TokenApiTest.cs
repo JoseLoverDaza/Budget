@@ -86,9 +86,9 @@
             _context.RolesBudget.Add(new RoleBudget()
             {
                 IdRoleBudget = 1,
-                NameRole = "Test",
-                DescriptionRole = "Test",
-                IdStatusBudget = 1
+                NameRole = Constants.UserBudget.USERNAME_ADMIN,
+                DescriptionRole = Constants.UserBudget.USERNAME_ADMIN,
+                IdStatusBudget = 2
             });
 
             _context.SaveChanges();
@@ -99,10 +99,10 @@
                 IdUserBudget = 1,
                 Email = "Test",
                 Phone = "1234567890",
-                Username = "Test",
+                Username = Constants.UserBudget.USERNAME_ADMIN,
                 EncryptedPassword = "A7Ws/sQDVsXXi/xheT1IufcXPN5rJUKXmPWvnJTGzjRgOzD+vAt1GAMXoD0/mlrD",
                 IdRoleBudget = 1,
-                IdStatusBudget = 1
+                IdStatusBudget = 2
             });
 
             _context.SaveChanges();
@@ -115,7 +115,7 @@
                 CreationDate = new DateTime(2026, 1, 1),
                 ExpirationDate = new DateTime(2026, 1, 1),
                 IdUserBudget = 1,
-                IdStatusBudget = 1
+                IdStatusBudget = 2
             });
 
             _context.SaveChanges();
