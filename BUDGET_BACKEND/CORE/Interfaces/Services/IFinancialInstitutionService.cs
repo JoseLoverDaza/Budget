@@ -23,6 +23,8 @@
 
         public FinancialInstitutionExtendDto? GetFinancialInstitutionByNameFinancialInstitution(FinancialInstitutionDto financialInstitution);
 
+        public List<FinancialInstitutionExtendDto> GetFinancialInstitutionsByStatusBudget(FinancialInstitutionDto financialInstitution);
+
         public FinancialInstitutionDto SaveFinancialInstitution(FinancialInstitutionDto financialInstitution);
 
         public FinancialInstitutionDto UpdateFinancialInstitution(FinancialInstitutionDto financialInstitution);

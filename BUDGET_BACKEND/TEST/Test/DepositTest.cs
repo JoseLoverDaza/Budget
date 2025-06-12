@@ -53,112 +53,113 @@
 
             #region Data
 
-            /// Status Id 1
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 1
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 1,
-                Name = Constants.Status.INACTIVO,
-                Description = Constants.Status.INACTIVO
+                IdStatusBudget = 1,
+                NameStatus = Constants.Status.INACTIVO,
+                DescriptionStatus = Constants.Status.INACTIVO
             });
 
             _context.SaveChanges();
 
-            /// Status Id 2
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 2
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 2,
-                Name = Constants.Status.ACTIVO,
-                Description = Constants.Status.ACTIVO
+                IdStatusBudget = 2,
+                NameStatus = Constants.Status.ACTIVO,
+                DescriptionStatus = Constants.Status.ACTIVO
             });
 
             _context.SaveChanges();
 
-            /// Status Id 3
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 3
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 3,
-                Name = Constants.Status.CANCELADO,
-                Description = Constants.Status.CANCELADO
+                IdStatusBudget = 3,
+                NameStatus = Constants.Status.CANCELADO,
+                DescriptionStatus = Constants.Status.CANCELADO
             });
 
             _context.SaveChanges();
 
-            /// Role Id 1
-            _context.Roles.Add(new Role()
+            /// RolesBudget IdRoleBudget 1
+            _context.RolesBudget.Add(new RoleBudget()
             {
-                IdRole = 1,
-                Name = "Test",
-                Description = "Test",
-                IdStatus = 1
+                IdRoleBudget = 1,
+                NameRole = "Test",
+                DescriptionRole = "Test",
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
 
-            /// User Id 1
-            _context.Users.Add(new User()
+            /// UsersBudget IdUserBudget 1
+            _context.UsersBudget.Add(new UserBudget()
             {
-                IdUser = 1,
+                IdUserBudget = 1,
                 Email = "Test",
-                Phone = "Test",
+                Phone = "1234567890",
                 Username = "Test",
-                Password = "Test",
-                IdRole = 1,
-                IdStatus = 1
+                EncryptedPassword = "A7Ws/sQDVsXXi/xheT1IufcXPN5rJUKXmPWvnJTGzjRgOzD+vAt1GAMXoD0/mlrD",
+                IdRoleBudget = 1,
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
 
-            /// FinancialInstitution Id 1
+            /// FinancialInstitution IdFinancialInstitution 1
             _context.FinancialInstitutions.Add(new FinancialInstitution()
             {
                 IdFinancialInstitution = 1,
-                Name = "Test",
-                Description = "Test",
-                IdStatus = 1
+                NameFinancialInstitution = "Test",
+                DescriptionFinancialInstitution = "Test",
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
 
-            /// TypeAccount Id 1
+            /// TypeAccount IdTypeAccount 1
             _context.TypeAccounts.Add(new TypeAccount()
             {
                 IdTypeAccount = 1,
-                Name = "Test",
-                Description = "Test",
-                IdStatus = 1
+                NameTypeAccount = "Test",
+                DescriptionTypeAccount = "Test",
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
 
-            /// Account Id 1
+            /// Account IdAccount 1
             _context.Accounts.Add(new Account()
             {
                 IdAccount = 1,
-                Name = "Test",
-                Description = "Test",
+                NameAccount = "Test",
+                DescriptionAccount = "Test",
                 IdFinancialInstitution = 1,
                 IdTypeAccount = 1,
-                IdUser = 1,
-                IdStatus = 1
+                IdUserBudget = 1,
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
 
-            /// Deposit Id 1
+            /// Deposit IdDeposit 1
             _context.Deposits.Add(new Deposit()
             {
                 IdDeposit = 1,
-                Year = 2026,
-                Month = 1,
+                YearDeposit = 2026,
+                MonthDeposit = 1,
                 Amount = 1000,
-                IdUser = 1,
+                IdUserBudget = 1,
                 IdAccount = 1,
-                IdStatus = 1
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
 
             #endregion Data
+
         }
 
         #endregion
@@ -166,7 +167,7 @@
         #region Métodos y Funciones
 
         [TestMethod]
-        public void GetDepositByIdOK()
+        public void GetDepositByIdDepositOK()
         {
             ///Arrange   
             DepositDto deposit = new()
@@ -175,7 +176,7 @@
             };
 
             ///Act
-            var result = _depositController!.GetDepositById(deposit);
+            var result = _depositController!.GetDepositByIdDeposit(deposit);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -184,7 +185,7 @@
         }
 
         [TestMethod]
-        public void GetDepositByIdFail()
+        public void GetDepositByIdDepositFail()
         {
             ///Arrange   
             DepositDto deposit = new()
@@ -193,7 +194,7 @@
             };
 
             ///Act
-            var result = _depositController!.GetDepositById(deposit);
+            var result = _depositController!.GetDepositByIdDeposit(deposit);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -207,8 +208,8 @@
             ///Arrange   
             DepositDto deposit = new()
             {
-                Year = 2026,
-                Month = 1
+                YearDeposit = 2026,
+                MonthDeposit = 1
             };
 
             ///Act
@@ -226,8 +227,8 @@
             ///Arrange   
             DepositDto deposit = new()
             {
-                Year = 2025,
-                Month = 1
+                YearDeposit = 2025,
+                MonthDeposit = 1
             };
 
             ///Act
@@ -240,17 +241,17 @@
         }
 
         [TestMethod]
-        public void GetDepositsByYearUserOK()
+        public void GetDepositsByYearUserBudgetOK()
         {
             ///Arrange   
             DepositDto deposit = new()
             {
-                Year = 2026,
-                IdUser = 1
+                YearDeposit = 2026,
+                IdUserBudget = 1
             };
 
             ///Act
-            var result = _depositController!.GetDepositsByYearUser(deposit);
+            var result = _depositController!.GetDepositsByYearUserBudget(deposit);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -259,17 +260,17 @@
         }
 
         [TestMethod]
-        public void GetDepositsByYearUserFail()
+        public void GetDepositsByYearUserBudgetFail()
         {
             ///Arrange   
             DepositDto deposit = new()
             {
-                Year = 2025,
-                IdUser = -1
+                YearDeposit = 2025,
+                IdUserBudget = -1
             };
 
             ///Act
-            var result = _depositController!.GetDepositsByYearUser(deposit);
+            var result = _depositController!.GetDepositsByYearUserBudget(deposit);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -278,17 +279,17 @@
         }
 
         [TestMethod]
-        public void GetDepositsByMonthUserOK()
+        public void GetDepositsByMonthUserBudgetOK()
         {
             ///Arrange   
             DepositDto deposit = new()
             {
-                Month = 1,
-                IdUser = 1
+                MonthDeposit = 1,
+                IdUserBudget = 1
             };
 
             ///Act
-            var result = _depositController!.GetDepositsByMonthUser(deposit);
+            var result = _depositController!.GetDepositsByMonthUserBudget(deposit);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -297,17 +298,17 @@
         }
 
         [TestMethod]
-        public void GetDepositsByMonthUserFail()
+        public void GetDepositsByMonthUserBudgetFail()
         {
             ///Arrange   
             DepositDto deposit = new()
             {
-                Month = 2,
-                IdUser = -1
+                MonthDeposit = 2,
+                IdUserBudget = -1
             };
 
             ///Act
-            var result = _depositController!.GetDepositsByMonthUser(deposit);
+            var result = _depositController!.GetDepositsByMonthUserBudget(deposit);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -316,18 +317,18 @@
         }
 
         [TestMethod]
-        public void GetDepositsByYearMonthUserOK()
+        public void GetDepositsByYearMonthUserBudgetOK()
         {
             ///Arrange   
             DepositDto deposit = new()
             {
-                Year = 2026,
-                Month = 1,
-                IdUser = 1
+                YearDeposit = 2026,
+                MonthDeposit = 1,
+                IdUserBudget = 1
             };
 
             ///Act
-            var result = _depositController!.GetDepositsByYearMonthUser(deposit);
+            var result = _depositController!.GetDepositsByYearMonthUserBudget(deposit);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -336,18 +337,18 @@
         }
 
         [TestMethod]
-        public void GetDepositsByYearMonthUserFail()
+        public void GetDepositsByYearMonthUserBudgetFail()
         {
             ///Arrange   
             DepositDto deposit = new()
             {
-                Year = 2026,
-                Month = 1,
-                IdUser = -1
+                YearDeposit = 2026,
+                MonthDeposit = 1,
+                IdUserBudget = -1
             };
 
             ///Act
-            var result = _depositController!.GetDepositsByYearMonthUser(deposit);
+            var result = _depositController!.GetDepositsByYearMonthUserBudget(deposit);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -361,8 +362,8 @@
             ///Arrange   
             DepositDto deposit = new()
             {
-                Year = 2026,
-                Month = 1,
+                YearDeposit = 2026,
+                MonthDeposit = 1,
                 IdAccount = 1
             };
 
@@ -381,8 +382,8 @@
             ///Arrange   
             DepositDto deposit = new()
             {
-                Year = 2026,
-                Month = 1,
+                YearDeposit = 2026,
+                MonthDeposit = 1,
                 IdAccount = -1
             };
 
@@ -396,18 +397,18 @@
         }
 
         [TestMethod]
-        public void GetDepositsByYearMonthStatusOK()
+        public void GetDepositsByYearMonthStatusBudgetOK()
         {
             ///Arrange   
             DepositDto deposit = new()
             {
-                Year = 2026,
-                Month = 1,
-                IdStatus = 1
+                YearDeposit = 2026,
+                MonthDeposit = 1,
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _depositController!.GetDepositsByYearMonthStatus(deposit);
+            var result = _depositController!.GetDepositsByYearMonthStatusBudget(deposit);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -416,18 +417,18 @@
         }
 
         [TestMethod]
-        public void GetDepositsByYearMonthStatusFail()
+        public void GetDepositsByYearMonthStatusBudgetFail()
         {
             ///Arrange   
             DepositDto deposit = new()
             {
-                Year = 2026,
-                Month = 1,
-                IdStatus = -1
+                YearDeposit = 2026,
+                MonthDeposit = 1,
+                IdStatusBudget = -1
             };
 
             ///Act
-            var result = _depositController!.GetDepositsByYearMonthStatus(deposit);
+            var result = _depositController!.GetDepositsByYearMonthStatusBudget(deposit);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -436,19 +437,19 @@
         }
 
         [TestMethod]
-        public void GetDepositsByYearMonthUserAccountOK()
+        public void GetDepositsByYearMonthUserBudgetAccountOK()
         {
             ///Arrange   
             DepositDto deposit = new()
             {
-                Year = 2026,
-                Month = 1,
-                IdUser = 1,
+                YearDeposit = 2026,
+                MonthDeposit = 1,
+                IdUserBudget = 1,
                 IdAccount = 1
             };
 
             ///Act
-            var result = _depositController!.GetDepositsByYearMonthUserAccount(deposit);
+            var result = _depositController!.GetDepositsByYearMonthUserBudgetAccount(deposit);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -457,19 +458,19 @@
         }
 
         [TestMethod]
-        public void GetDepositsByYearMonthUserAccountFail()
+        public void GetDepositsByYearMonthUserBudgetAccountFail()
         {
             ///Arrange   
             DepositDto deposit = new()
             {
-                Year = 2026,
-                Month = 1,
-                IdUser = -1,
+                YearDeposit = 2026,
+                MonthDeposit = 1,
+                IdUserBudget = -1,
                 IdAccount = -1
             };
 
             ///Act
-            var result = _depositController!.GetDepositsByYearMonthUserAccount(deposit);
+            var result = _depositController!.GetDepositsByYearMonthUserBudgetAccount(deposit);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -478,16 +479,16 @@
         }
 
         [TestMethod]
-        public void GetDepositsByUserOK()
+        public void GetDepositsByUserBudgetOK()
         {
             ///Arrange   
             DepositDto deposit = new()
             {
-                IdUser = 1
+                IdUserBudget = 1
             };
 
             ///Act
-            var result = _depositController!.GetDepositsByUser(deposit);
+            var result = _depositController!.GetDepositsByUserBudget(deposit);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -496,16 +497,16 @@
         }
 
         [TestMethod]
-        public void GetDepositsByUserFail()
+        public void GetDepositsByUserBudgetFail()
         {
             ///Arrange   
             DepositDto deposit = new()
             {
-                IdUser = -1
+                IdUserBudget = -1
             };
 
             ///Act
-            var result = _depositController!.GetDepositsByUser(deposit);
+            var result = _depositController!.GetDepositsByUserBudget(deposit);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -550,16 +551,16 @@
         }
 
         [TestMethod]
-        public void GetDepositsByStatusOK()
+        public void GetDepositsByStatusBudgetOK()
         {
             ///Arrange   
             DepositDto deposit = new()
             {
-                IdStatus = 1
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _depositController!.GetDepositsByStatus(deposit);
+            var result = _depositController!.GetDepositsByStatusBudget(deposit);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -568,16 +569,16 @@
         }
 
         [TestMethod]
-        public void GetDepositsByStatusFail()
+        public void GetDepositsByStatusBudgetFail()
         {
             ///Arrange   
             DepositDto deposit = new()
             {
-                IdStatus = -1
+                IdStatusBudget = -1
             };
 
             ///Act
-            var result = _depositController!.GetDepositsByStatus(deposit);
+            var result = _depositController!.GetDepositsByStatusBudget(deposit);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -586,17 +587,17 @@
         }
 
         [TestMethod]
-        public void GetDepositsByUserStatusOK()
+        public void GetDepositsByUserBudgetStatusBudgetOK()
         {
             ///Arrange   
             DepositDto deposit = new()
             {
-                IdUser = 1,
-                IdStatus = 1
+                IdUserBudget = 1,
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _depositController!.GetDepositsByUserStatus(deposit);
+            var result = _depositController!.GetDepositsByUserBudgetStatusBudget(deposit);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -605,17 +606,17 @@
         }
 
         [TestMethod]
-        public void GetDepositsByUserStatusFail()
+        public void GetDepositsByUserBudgetStatusBudgetFail()
         {
             ///Arrange   
             DepositDto deposit = new()
             {
-                IdUser = -1,
-                IdStatus = -1
+                IdUserBudget = -1,
+                IdStatusBudget = -1
             };
 
             ///Act
-            var result = _depositController!.GetDepositsByUserStatus(deposit);
+            var result = _depositController!.GetDepositsByUserBudgetStatusBudget(deposit);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -624,17 +625,17 @@
         }
 
         [TestMethod]
-        public void GetDepositsByAccountStatusOK()
+        public void GetDepositsByAccountStatusBudgetOK()
         {
             ///Arrange   
             DepositDto deposit = new()
             {
                 IdAccount = 1,
-                IdStatus = 1
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _depositController!.GetDepositsByAccountStatus(deposit);
+            var result = _depositController!.GetDepositsByAccountStatusBudget(deposit);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -643,17 +644,17 @@
         }
 
         [TestMethod]
-        public void GetDepositsByAccountStatusFail()
+        public void GetDepositsByAccountStatusBudgetFail()
         {
             ///Arrange   
             DepositDto deposit = new()
             {
                 IdAccount = -1,
-                IdStatus = -1
+                IdStatusBudget = -1
             };
 
             ///Act
-            var result = _depositController!.GetDepositsByAccountStatus(deposit);
+            var result = _depositController!.GetDepositsByAccountStatusBudget(deposit);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -667,12 +668,12 @@
             ///Arrange   
             DepositDto deposit = new()
             {
-                Year = 1,
-                Month = 1,
+                YearDeposit = 1,
+                MonthDeposit = 1,
                 Amount = 1,
-                IdUser = 1,
+                IdUserBudget = 1,
                 IdAccount = 1,
-                IdStatus = 1
+                IdStatusBudget = 1
             };
 
             ///Act
@@ -691,12 +692,12 @@
             DepositDto deposit = new()
             {
                 IdDeposit = 1,
-                Year = 2026,
-                Month = 1,
+                YearDeposit = 2026,
+                MonthDeposit = 1,
                 Amount = 1000,
-                IdUser = 1,
+                IdUserBudget = 1,
                 IdAccount = 1,
-                IdStatus = 1
+                IdStatusBudget = 1
             };
 
             ///Act
@@ -715,12 +716,12 @@
             DepositDto deposit = new()
             {
                 IdDeposit = 1,
-                Year = 1,
-                Month = 1,
+                YearDeposit = 1,
+                MonthDeposit = 1,
                 Amount = 1,
-                IdUser = 1,
+                IdUserBudget = 1,
                 IdAccount = 1,
-                IdStatus = 1
+                IdStatusBudget = 1
             };
 
             ///Act
@@ -739,12 +740,12 @@
             DepositDto deposit = new()
             {
                 IdDeposit = -1,
-                Year = 1,
-                Month = 1,
+                YearDeposit = 1,
+                MonthDeposit = 1,
                 Amount = 1,
-                IdUser = 1,
+                IdUserBudget = 1,
                 IdAccount = 1,
-                IdStatus = 1
+                IdStatusBudget = 1
             };
 
             ///Act
@@ -763,12 +764,12 @@
             DepositDto deposit = new()
             {
                 IdDeposit = 1,
-                Year = 1,
-                Month = 1,
+                YearDeposit = 1,
+                MonthDeposit = 1,
                 Amount = 1,
-                IdUser = 1,
+                IdUserBudget = 1,
                 IdAccount = 1,
-                IdStatus = 3
+                IdStatusBudget = 3
             };
 
             ///Act
@@ -787,12 +788,12 @@
             DepositDto deposit = new()
             {
                 IdDeposit = -1,
-                Year = 1,
-                Month = 1,
+                YearDeposit = 1,
+                MonthDeposit = 1,
                 Amount = 1,
-                IdUser = 1,
+                IdUserBudget = 1,
                 IdAccount = 1,
-                IdStatus = 1
+                IdStatusBudget = 1
             };
 
             ///Act

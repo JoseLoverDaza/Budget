@@ -44,7 +44,7 @@
         public BudgetDetailExtendDto? GetBudgetDetailsById(BudgetDetailsDto budgetDetails)
         {
             IBudgetDetailsRepository budgetDetailRepository = UnitOfWork.BudgetDetailsRepository();
-            BudgetDetailExtendDto? budgetDetailsSearch = budgetDetailRepository.GetBudgetDetailsById(budgetDetails);
+            BudgetDetailExtendDto? budgetDetailsSearch = budgetDetailRepository.GetBudgetDetailsByIdBudgetDetails(budgetDetails);
 
             _logApiService.TraceLog(typeof(BillingDetails).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -95,7 +95,7 @@
         public List<BudgetDetailExtendDto> GetBudgetDetailsByStatus(BudgetDetailsDto budgetDetails)
         {
             IBudgetDetailsRepository budgetDetailRepository = UnitOfWork.BudgetDetailsRepository();
-            List<BudgetDetailExtendDto> budgetDetailsSearch = budgetDetailRepository.GetBudgetDetailsByStatus(budgetDetails);
+            List<BudgetDetailExtendDto> budgetDetailsSearch = budgetDetailRepository.GetBudgetDetailsByStatusBudget(budgetDetails);
 
             _logApiService.TraceLog(typeof(BillingDetails).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -129,7 +129,7 @@
         public List<BudgetDetailExtendDto> GetBudgetDetailsByExpenseStatus(BudgetDetailsDto budgetDetails)
         {
             IBudgetDetailsRepository budgetDetailRepository = UnitOfWork.BudgetDetailsRepository();
-            List<BudgetDetailExtendDto> budgetDetailsSearch = budgetDetailRepository.GetBudgetDetailsByExpenseStatus(budgetDetails);
+            List<BudgetDetailExtendDto> budgetDetailsSearch = budgetDetailRepository.GetBudgetDetailsByExpenseStatusBudget(budgetDetails);
 
             _logApiService.TraceLog(typeof(BillingDetails).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -146,7 +146,7 @@
         public List<BudgetDetailExtendDto> GetBudgetDetailsByBudgetExpenseStatus(BudgetDetailsDto budgetDetails)
         {
             IBudgetDetailsRepository budgetDetailRepository = UnitOfWork.BudgetDetailsRepository();
-            List<BudgetDetailExtendDto> budgetDetailsSearch = budgetDetailRepository.GetBudgetDetailsByBudgetExpenseStatus(budgetDetails);
+            List<BudgetDetailExtendDto> budgetDetailsSearch = budgetDetailRepository.GetBudgetDetailsByBudgetExpenseStatusBudget(budgetDetails);
 
             _logApiService.TraceLog(typeof(BillingDetails).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -213,7 +213,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            BudgetDetailExtendDto? budgetDetailSearch = budgetDetailsRepository.GetBudgetDetailsById(budgetDetails) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            BudgetDetailExtendDto? budgetDetailSearch = budgetDetailsRepository.GetBudgetDetailsByIdBudgetDetails(budgetDetails) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             BudgetDetails updateBudgetDetails = new()
             {
@@ -242,7 +242,7 @@
             IBudgetDetailsRepository budgetDetailsRepository = UnitOfWork.BudgetDetailsRepository();
             IStatusBudgetRepository statusRepository = UnitOfWork.StatusRepository();
 
-            BudgetDetailExtendDto? budgetDetailSearch = budgetDetailsRepository.GetBudgetDetailsById(budgetDetails) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            BudgetDetailExtendDto? budgetDetailSearch = budgetDetailsRepository.GetBudgetDetailsByIdBudgetDetails(budgetDetails) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = budgetDetails.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             if (budgetDetailSearch.IdStatus == budgetDetails.IdStatus)

@@ -39,7 +39,7 @@
 
         #region Métodos y Funciones
 
-        public BudgetDetailExtendDto? GetBudgetDetailsById(BudgetDetailsDto budgetDetails)
+        public BudgetDetailExtendDto? GetBudgetDetailsByIdBudgetDetails(BudgetDetailsDto budgetDetails)
         {
             return (
                      from bd in _context.BudgetDetails.AsNoTracking()
@@ -138,7 +138,7 @@
                   .ToList();
         }
 
-        public List<BudgetDetailExtendDto> GetBudgetDetailsByStatus(BudgetDetailsDto budgetDetails)
+        public List<BudgetDetailExtendDto> GetBudgetDetailsByStatusBudget(BudgetDetailsDto budgetDetails)
         {
             return (
                      from bd in _context.BudgetDetails.AsNoTracking()
@@ -204,7 +204,7 @@
                    .ToList();
         }
 
-        public List<BudgetDetailExtendDto> GetBudgetDetailsByExpenseStatus(BudgetDetailsDto budgetDetails)
+        public List<BudgetDetailExtendDto> GetBudgetDetailsByExpenseStatusBudget(BudgetDetailsDto budgetDetails)
         {
             return (
                      from bd in _context.BudgetDetails.AsNoTracking()
@@ -237,7 +237,7 @@
                   .ToList();
         }
 
-        public List<BudgetDetailExtendDto> GetBudgetDetailsByBudgetExpenseStatus(BudgetDetailsDto budgetDetails)
+        public List<BudgetDetailExtendDto> GetBudgetDetailsByBudgetExpenseStatusBudget(BudgetDetailsDto budgetDetails)
         {
             return (
                     from bd in _context.BudgetDetails.AsNoTracking()

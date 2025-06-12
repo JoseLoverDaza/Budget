@@ -53,43 +53,43 @@
 
             #region Data
 
-            /// Status Id 1
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 1
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 1,
-                Name = Constants.Status.INACTIVO,
-                Description = Constants.Status.INACTIVO
+                IdStatusBudget = 1,
+                NameStatus = Constants.Status.INACTIVO,
+                DescriptionStatus = Constants.Status.INACTIVO
             });
 
             _context.SaveChanges();
 
-            /// Status Id 2
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 2
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 2,
-                Name = Constants.Status.ACTIVO,
-                Description = Constants.Status.ACTIVO
+                IdStatusBudget = 2,
+                NameStatus = Constants.Status.ACTIVO,
+                DescriptionStatus = Constants.Status.ACTIVO
             });
 
             _context.SaveChanges();
 
-            /// Status Id 3
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 3
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 3,
-                Name = Constants.Status.CANCELADO,
-                Description = Constants.Status.CANCELADO
+                IdStatusBudget = 3,
+                NameStatus = Constants.Status.CANCELADO,
+                DescriptionStatus = Constants.Status.CANCELADO
             });
 
             _context.SaveChanges();
 
-            /// TypeAccount Id 1
+            /// TypeAccount IdTypeAccount 1
             _context.TypeAccounts.Add(new TypeAccount()
             {
                 IdTypeAccount = 1,
-                Name = "Test",
-                Description = "Test",
-                IdStatus = 1
+                NameTypeAccount = "Test",
+                DescriptionTypeAccount = "Test",
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
@@ -103,7 +103,7 @@
         #region Métodos y Funciones
 
         [TestMethod]
-        public void GetTypeAccountByIdOK()
+        public void GetTypeAccountByIdTypeAccountOK()
         {
             ///Arrange           
             TypeAccountDto typeAccount = new()
@@ -112,7 +112,7 @@
             };
 
             ///Act
-            var result = _typeAccountController!.GetTypeAccountById(typeAccount);
+            var result = _typeAccountController!.GetTypeAccountByIdTypeAccount(typeAccount);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -121,7 +121,7 @@
         }
 
         [TestMethod]
-        public void GetTypeAccountByIdFail()
+        public void GetTypeAccountByIdTypeAccountFail()
         {
             ///Arrange   
             TypeAccountDto typeAccount = new()
@@ -130,7 +130,7 @@
             };
 
             ///Act
-            var result = _typeAccountController!.GetTypeAccountById(typeAccount);
+            var result = _typeAccountController!.GetTypeAccountByIdTypeAccount(typeAccount);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -139,16 +139,16 @@
         }
 
         [TestMethod]
-        public void GetTypeAccountByNameOK()
+        public void GetTypeAccountByNameTypeAccountOK()
         {
             ///Arrange   
             TypeAccountDto typeAccount = new()
             {
-                Name = "Test"
+                NameTypeAccount = "Test"
             };
 
             ///Act
-            var result = _typeAccountController!.GetTypeAccountByName(typeAccount);
+            var result = _typeAccountController!.GetTypeAccountByNameTypeAccount(typeAccount);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -157,16 +157,16 @@
         }
 
         [TestMethod]
-        public void GetTypeAccountByNameFail()
+        public void GetTypeAccountByNameTypeAccountFail()
         {
             ///Arrange   
             TypeAccountDto typeAccount = new()
             {
-                Name = "T"
+                NameTypeAccount = "T"
             };
 
             ///Act
-            var result = _typeAccountController!.GetTypeAccountByName(typeAccount);
+            var result = _typeAccountController!.GetTypeAccountByNameTypeAccount(typeAccount);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -175,16 +175,16 @@
         }
 
         [TestMethod]
-        public void GetTypeAccountsByStatusOK()
+        public void GetTypeAccountsByStatusBudgetOK()
         {
             ///Arrange   
             TypeAccountDto typeAccount = new()
             {
-                IdStatus = 1
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _typeAccountController!.GetTypeAccountsByStatus(typeAccount);
+            var result = _typeAccountController!.GetTypeAccountsByStatusBudget(typeAccount);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -193,16 +193,16 @@
         }
 
         [TestMethod]
-        public void GetTypeAccountsByStatusFail()
+        public void GetTypeAccountsByStatusBudgetFail()
         {
             ///Arrange   
             TypeAccountDto typeAccount = new()
             {
-                IdStatus = -1
+                IdStatusBudget = -1
             };
 
             ///Act
-            var result = _typeAccountController!.GetTypeAccountsByStatus(typeAccount);
+            var result = _typeAccountController!.GetTypeAccountsByStatusBudget(typeAccount);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -216,8 +216,8 @@
             ///Arrange   
             TypeAccountExtendDto typeAccount = new()
             {
-                Name = "Test1",
-                IdStatus = 1
+                NameTypeAccount = "Test1",
+                IdStatusBudget = 1
             };
 
             ///Act
@@ -235,8 +235,8 @@
             ///Arrange   
             TypeAccountExtendDto typeAccount = new()
             {
-                Name = "Test",
-                IdStatus = 1
+                NameTypeAccount = "Test",
+                IdStatusBudget = 1
             };
 
             ///Act
@@ -255,8 +255,8 @@
             TypeAccountExtendDto typeAccount = new()
             {
                 IdTypeAccount = 1,
-                Name = "Test1",
-                IdStatus = 1
+                NameTypeAccount = "Test1",
+                IdStatusBudget = 1
             };
 
             ///Act
@@ -275,8 +275,8 @@
             TypeAccountExtendDto typeAccount = new()
             {
                 IdTypeAccount = -1,
-                Name = "Test1",
-                IdStatus = 1
+                NameTypeAccount = "Test1",
+                IdStatusBudget = 1
             };
 
             ///Act
@@ -295,8 +295,8 @@
             TypeAccountExtendDto typeAccount = new()
             {
                 IdTypeAccount = 1,
-                Name = "Test1",
-                IdStatus = 3
+                NameTypeAccount = "Test1",
+                IdStatusBudget = 3
             };
 
             ///Act
@@ -315,8 +315,8 @@
             TypeAccountExtendDto typeAccount = new()
             {
                 IdTypeAccount = -1,
-                Name = "Test1",
-                IdStatus = 1
+                NameTypeAccount = "Test1",
+                IdStatusBudget = 1
             };
 
             ///Act

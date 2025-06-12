@@ -52,43 +52,44 @@
             _typeExpenseController = new TypeExpenseController(_typeExpenseService);
 
             #region Data
-            /// Status Id 1
-            _context.Status.Add(new Status()
+
+            /// StatusBudget IdStatusBudget 1
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 1,
-                Name = Constants.Status.INACTIVO,
-                Description = Constants.Status.INACTIVO
+                IdStatusBudget = 1,
+                NameStatus = Constants.Status.INACTIVO,
+                DescriptionStatus = Constants.Status.INACTIVO
             });
 
             _context.SaveChanges();
 
-            /// Status Id 2
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 2
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 2,
-                Name = Constants.Status.ACTIVO,
-                Description = Constants.Status.ACTIVO
+                IdStatusBudget = 2,
+                NameStatus = Constants.Status.ACTIVO,
+                DescriptionStatus = Constants.Status.ACTIVO
             });
 
             _context.SaveChanges();
 
-            /// Status Id 3
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 3
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 3,
-                Name = Constants.Status.CANCELADO,
-                Description = Constants.Status.CANCELADO
+                IdStatusBudget = 3,
+                NameStatus = Constants.Status.CANCELADO,
+                DescriptionStatus = Constants.Status.CANCELADO
             });
 
             _context.SaveChanges();
 
-            /// TypeExpense Id 1
+            /// TypeExpense IdTypeExpense 1
             _context.TypeExpenses.Add(new TypeExpense()
             {
                 IdTypeExpense = 1,
-                Name = "Test",
-                Description = "Test",
-                IdStatus = 1
+                NameTypeExpense = "Test",
+                DescriptionTypeExpense = "Test",
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
@@ -102,7 +103,7 @@
         #region Métodos y Funciones
 
         [TestMethod]
-        public void GetTypeExpenseByIdOK()
+        public void GetTypeExpenseByIdTypeExpenseOK()
         {
             ///Arrange  
             TypeExpenseDto typeExpense = new()
@@ -111,7 +112,7 @@
             };
 
             ///Act
-            var result = _typeExpenseController!.GetTypeExpenseById(typeExpense);
+            var result = _typeExpenseController!.GetTypeExpenseByIdTypeExpense(typeExpense);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -120,7 +121,7 @@
         }
 
         [TestMethod]
-        public void GetTypeExpenseByIdFail()
+        public void GetTypeExpenseByIdTypeExpenseFail()
         {
             ///Arrange   
             TypeExpenseDto typeExpense = new()
@@ -129,7 +130,7 @@
             };
 
             ///Act
-            var result = _typeExpenseController!.GetTypeExpenseById(typeExpense);
+            var result = _typeExpenseController!.GetTypeExpenseByIdTypeExpense(typeExpense);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -138,16 +139,16 @@
         }
 
         [TestMethod]
-        public void GetTypeExpenseByNameOK()
+        public void GetTypeExpenseByNameTypeExpenseOK()
         {
             ///Arrange   
             TypeExpenseDto typeExpense = new()
             {
-                Name = "Test"
+                NameTypeExpense = "Test"
             };
 
             ///Act
-            var result = _typeExpenseController!.GetTypeExpenseByName(typeExpense);
+            var result = _typeExpenseController!.GetTypeExpenseByNameTypeExpense(typeExpense);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -156,16 +157,16 @@
         }
 
         [TestMethod]
-        public void GetTypeExpenseByNameFail()
+        public void GetTypeExpenseByNameTypeExpenseFail()
         {
             ///Arrange   
             TypeExpenseDto typeExpense = new()
             {
-                Name = "T"
+                NameTypeExpense = "T"
             };
 
             ///Act
-            var result = _typeExpenseController!.GetTypeExpenseByName(typeExpense);
+            var result = _typeExpenseController!.GetTypeExpenseByNameTypeExpense(typeExpense);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -174,16 +175,16 @@
         }
 
         [TestMethod]
-        public void GetTypeExpensesByStatusOK()
+        public void GetTypeExpensesByStatusBudgetOK()
         {
             ///Arrange   
             TypeExpenseDto typeExpense = new()
             {
-                IdStatus = 1
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _typeExpenseController!.GetTypeExpensesByStatus(typeExpense);
+            var result = _typeExpenseController!.GetTypeExpensesByStatusBudget(typeExpense);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -192,16 +193,16 @@
         }
 
         [TestMethod]
-        public void GetTypeExpensesByStatusFail()
+        public void GetTypeExpensesByStatusBudgetFail()
         {
             ///Arrange   
             TypeExpenseDto typeExpense = new()
             {
-                IdStatus = -1
+                IdStatusBudget = -1
             };
 
             ///Act
-            var result = _typeExpenseController!.GetTypeExpensesByStatus(typeExpense);
+            var result = _typeExpenseController!.GetTypeExpensesByStatusBudget(typeExpense);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -215,8 +216,8 @@
             ///Arrange   
             TypeExpenseExtendDto typeExpense = new()
             {
-                Name = "Test1",
-                IdStatus = 1
+                NameTypeExpense = "Test1",
+                IdStatusBudget = 1
             };
 
             ///Act
@@ -234,8 +235,8 @@
             ///Arrange   
             TypeExpenseExtendDto typeExpense = new()
             {
-                Name = "Test",
-                IdStatus = 1
+                NameTypeExpense = "Test",
+                IdStatusBudget = 1
             };
 
             ///Act
@@ -254,8 +255,8 @@
             TypeExpenseExtendDto typeExpense = new()
             {
                 IdTypeExpense = 1,
-                Name = "Test1",
-                IdStatus = 1
+                NameTypeExpense = "Test1",
+                IdStatusBudget = 1
             };
 
             ///Act
@@ -274,8 +275,8 @@
             TypeExpenseExtendDto typeExpense = new()
             {
                 IdTypeExpense = -1,
-                Name = "Test1",
-                IdStatus = 1
+                NameTypeExpense = "Test1",
+                IdStatusBudget = 1
             };
 
             ///Act
@@ -294,8 +295,8 @@
             TypeExpenseExtendDto typeExpense = new()
             {
                 IdTypeExpense = 1,
-                Name = "Test1",
-                IdStatus = 3
+                NameTypeExpense = "Test1",
+                IdStatusBudget = 3
             };
 
             ///Act
@@ -314,8 +315,8 @@
             TypeExpenseExtendDto typeExpense = new()
             {
                 IdTypeExpense = -1,
-                Name = "Test1",
-                IdStatus = 1
+                NameTypeExpense = "Test1",
+                IdStatusBudget = 1
             };
 
             ///Act

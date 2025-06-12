@@ -52,43 +52,44 @@
             _financialInstitutionController = new FinancialInstitutionController(_financialInstitutionService);
 
             #region Data
-            /// Status Id 1
-            _context.Status.Add(new Status()
+
+            /// StatusBudget IdStatusBudget 1
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 1,
-                Name = Constants.Status.INACTIVO,
-                Description = Constants.Status.INACTIVO
+                IdStatusBudget = 1,
+                NameStatus = Constants.Status.INACTIVO,
+                DescriptionStatus = Constants.Status.INACTIVO
             });
 
             _context.SaveChanges();
 
-            /// Status Id 2
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 2
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 2,
-                Name = Constants.Status.ACTIVO,
-                Description = Constants.Status.ACTIVO
+                IdStatusBudget = 2,
+                NameStatus = Constants.Status.ACTIVO,
+                DescriptionStatus = Constants.Status.ACTIVO
             });
 
             _context.SaveChanges();
 
-            /// Status Id 3
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 3
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 3,
-                Name = Constants.Status.CANCELADO,
-                Description = Constants.Status.CANCELADO
+                IdStatusBudget = 3,
+                NameStatus = Constants.Status.CANCELADO,
+                DescriptionStatus = Constants.Status.CANCELADO
             });
 
             _context.SaveChanges();
 
-            /// FinancialInstitution Id 1
+            /// FinancialInstitution IdFinancialInstitution 1
             _context.FinancialInstitutions.Add(new FinancialInstitution()
             {
                 IdFinancialInstitution = 1,
-                Name = "Test",
-                Description = "Test",
-                IdStatus = 1
+                NameFinancialInstitution = "Test",
+                DescriptionFinancialInstitution = "Test",
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
@@ -102,7 +103,7 @@
         #region Métodos y Funciones
 
         [TestMethod]
-        public void GetFinancialInstitutionByIdOK()
+        public void GetFinancialInstitutionByIdFinancialInstitutionOK()
         {
             ///Arrange   
             FinancialInstitutionDto financialInstitution = new()
@@ -111,7 +112,7 @@
             };
 
             ///Act
-            var result = _financialInstitutionController!.GetFinancialInstitutionById(financialInstitution);
+            var result = _financialInstitutionController!.GetFinancialInstitutionByIdFinancialInstitution(financialInstitution);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -120,7 +121,7 @@
         }
 
         [TestMethod]
-        public void GetFinancialInstitutionByIdFail()
+        public void GetFinancialInstitutionByIdFinancialInstitutionFail()
         {
             ///Arrange   
             FinancialInstitutionDto financialInstitution = new()
@@ -129,7 +130,7 @@
             };
 
             ///Act
-            var result = _financialInstitutionController!.GetFinancialInstitutionById(financialInstitution);
+            var result = _financialInstitutionController!.GetFinancialInstitutionByIdFinancialInstitution(financialInstitution);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -138,16 +139,16 @@
         }
 
         [TestMethod]
-        public void GetFinancialInstitutionByNameOK()
+        public void GetFinancialInstitutionByNameFinancialInstitutionOK()
         {
             ///Arrange   
             FinancialInstitutionDto financialInstitution = new()
             {
-                Name = "Test"
+                NameFinancialInstitution = "Test"
             };
 
             ///Act
-            var result = _financialInstitutionController!.GetFinancialInstitutionByName(financialInstitution);
+            var result = _financialInstitutionController!.GetFinancialInstitutionByNameFinancialInstitution(financialInstitution);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -156,16 +157,16 @@
         }
 
         [TestMethod]
-        public void GetFinancialInstitutionByNameFail()
+        public void GetFinancialInstitutionByNameFinancialInstitutionFail()
         {
             ///Arrange   
             FinancialInstitutionDto financialInstitution = new()
             {
-                Name = "T"
+                NameFinancialInstitution = "T"
             };
 
             ///Act
-            var result = _financialInstitutionController!.GetFinancialInstitutionByName(financialInstitution);
+            var result = _financialInstitutionController!.GetFinancialInstitutionByNameFinancialInstitution(financialInstitution);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -174,16 +175,16 @@
         }
 
         [TestMethod]
-        public void GetFinancialInstitutionsByStatusOK()
+        public void GetFinancialInstitutionsByStatusBudgetOK()
         {
             ///Arrange   
             FinancialInstitutionDto financialInstitution = new()
             {
-                IdStatus = 1
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _financialInstitutionController!.GetFinancialInstitutionsByStatus(financialInstitution);
+            var result = _financialInstitutionController!.GetFinancialInstitutionsByStatusBudget(financialInstitution);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -192,16 +193,16 @@
         }
 
         [TestMethod]
-        public void GetFinancialInstitutionsByStatusFail()
+        public void GetFinancialInstitutionsByStatusBudgetFail()
         {
             ///Arrange   
             FinancialInstitutionDto financialInstitution = new()
             {
-                IdStatus = -1
+                IdStatusBudget = -1
             };
 
             ///Act
-            var result = _financialInstitutionController!.GetFinancialInstitutionsByStatus(financialInstitution);
+            var result = _financialInstitutionController!.GetFinancialInstitutionsByStatusBudget(financialInstitution);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -215,8 +216,8 @@
             ///Arrange   
             FinancialInstitutionExtendDto financialInstitution = new()
             {
-                Name = "Test1",
-                IdStatus = 1
+                NameFinancialInstitution = "Test1",
+                IdStatusBudget = 1
             };
 
             ///Act
@@ -234,8 +235,8 @@
             ///Arrange   
             FinancialInstitutionExtendDto financialInstitution = new()
             {
-                Name = "Test",
-                IdStatus = 1
+                NameFinancialInstitution = "Test",
+                IdStatusBudget = 1
             };
 
             ///Act
@@ -254,8 +255,8 @@
             FinancialInstitutionExtendDto financialInstitution = new()
             {
                 IdFinancialInstitution = 1,
-                Name = "Test1",
-                IdStatus = 1
+                NameFinancialInstitution = "Test1",
+                IdStatusBudget = 1
             };
 
             ///Act
@@ -274,8 +275,8 @@
             FinancialInstitutionExtendDto financialInstitution = new()
             {
                 IdFinancialInstitution = -1,
-                Name = "Test1",
-                IdStatus = 1
+                NameFinancialInstitution = "Test1",
+                IdStatusBudget = 1
             };
 
             ///Act
@@ -294,8 +295,8 @@
             FinancialInstitutionExtendDto financialInstitution = new()
             {
                 IdFinancialInstitution = 1,
-                Name = "Test1",
-                IdStatus = 3
+                NameFinancialInstitution = "Test1",
+                IdStatusBudget = 3
             };
 
             ///Act
@@ -314,8 +315,8 @@
             FinancialInstitutionExtendDto financialInstitution = new()
             {
                 IdFinancialInstitution = -1,
-                Name = "Test1",
-                IdStatus = 1
+                NameFinancialInstitution = "Test1",
+                IdStatusBudget = 1
             };
 
             ///Act

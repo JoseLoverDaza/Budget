@@ -41,13 +41,13 @@
         #region Métodos y Funciones
 
         [HttpPost]
-        [Route("GetExpenseById")]
-        [SwaggerOperation(Summary = "Get Expense By Id")]
-        public ResponseDto GetExpenseById(ExpenseDto expense)
+        [Route("GetExpenseByIdExpense")]
+        [SwaggerOperation(Summary = "Get Expense By IdExpense")]
+        public ResponseDto GetExpenseByIdExpense(ExpenseDto expense)
         {
             try
             {
-                response.Data = _expenseService.GetExpenseById(expense);
+                response.Data = _expenseService.GetExpenseByIdExpense(expense);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -75,13 +75,13 @@
         }
 
         [HttpPost]
-        [Route("GetExpensesByStatus")]
-        [SwaggerOperation(Summary = "Get Expenses By Status")]
-        public ResponseDto GetExpensesByStatus(ExpenseDto expense)
+        [Route("GetExpensesByStatusBudget")]
+        [SwaggerOperation(Summary = "Get Expenses By StatusBudget")]
+        public ResponseDto GetExpensesByStatusBudget(ExpenseDto expense)
         {
             try
             {
-                response.Data = _expenseService.GetExpensesByStatus(expense);
+                response.Data = _expenseService.GetExpensesByStatusBudget(expense);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -109,13 +109,13 @@
         }
 
         [HttpPost]
-        [Route("GetExpensesByTypeExpenseStatus")]
-        [SwaggerOperation(Summary = "Get Expenses By Type Expense Status")]
-        public ResponseDto GetExpensesByTypeExpenseStatus(ExpenseDto expense)
+        [Route("GetExpensesByTypeExpenseStatusBudget")]
+        [SwaggerOperation(Summary = "Get Expenses By TypeExpense StatusBudget")]
+        public ResponseDto GetExpensesByTypeExpenseStatusBudget(ExpenseDto expense)
         {
             try
             {
-                response.Data = _expenseService.GetExpensesByTypeExpenseStatus(expense);
+                response.Data = _expenseService.GetExpensesByTypeExpenseStatusBudget(expense);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)

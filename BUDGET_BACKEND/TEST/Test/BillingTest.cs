@@ -53,70 +53,71 @@
 
             #region Data
 
-            /// Status Id 1
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 1
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 1,
-                Name = Constants.Status.INACTIVO,
-                Description = Constants.Status.INACTIVO
+                IdStatusBudget = 1,
+                NameStatus = Constants.Status.INACTIVO,
+                DescriptionStatus = Constants.Status.INACTIVO
             });
 
             _context.SaveChanges();
 
-            /// Status Id 2
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 2
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 2,
-                Name = Constants.Status.ACTIVO,
-                Description = Constants.Status.ACTIVO
+                IdStatusBudget = 2,
+                NameStatus = Constants.Status.ACTIVO,
+                DescriptionStatus = Constants.Status.ACTIVO
             });
 
             _context.SaveChanges();
 
-            /// Status Id 3
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 3
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 3,
-                Name = Constants.Status.CANCELADO,
-                Description = Constants.Status.CANCELADO
+                IdStatusBudget = 3,
+                NameStatus = Constants.Status.CANCELADO,
+                DescriptionStatus = Constants.Status.CANCELADO
             });
 
             _context.SaveChanges();
 
-            /// Role Id 1
-            _context.Roles.Add(new Role()
+            /// RolesBudget IdRoleBudget 1
+            _context.RolesBudget.Add(new RoleBudget()
             {
-                IdRole = 1,
-                Name = "Test",
-                Description = "Test"
+                IdRoleBudget = 1,
+                NameRole = "Test",
+                DescriptionRole = "Test",
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
 
-            /// User Id 1
-            _context.Users.Add(new User()
+            /// UsersBudget IdUserBudget 1
+            _context.UsersBudget.Add(new UserBudget()
             {
-                IdUser = 1,
+                IdUserBudget = 1,
                 Email = "Test",
-                Phone = "Test",
+                Phone = "1234567890",
                 Username = "Test",
-                Password = "Test",
-                IdRole = 1,
-                IdStatus = 1
+                EncryptedPassword = "A7Ws/sQDVsXXi/xheT1IufcXPN5rJUKXmPWvnJTGzjRgOzD+vAt1GAMXoD0/mlrD",
+                IdRoleBudget = 1,
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
 
-            /// Billing Id 1
+            /// Billing IdBilling 1
             _context.Billings.Add(new Billing()
             {
                 IdBilling = 1,
-                Year = 2026,
-                Month = 1,
+                YearBilling = 2026,
+                MonthBilling = 1,
                 CreationDate = new DateTime(2026, 1, 1),
-                Description = "Test",
-                IdUser = 1,
-                IdStatus = 1
+                DescriptionBilling = "Test",
+                IdUserBudget = 1,
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
@@ -130,7 +131,7 @@
         #region Métodos y Funciones
 
         [TestMethod]
-        public void GetBillingByIdOK()
+        public void GetBillingByIdBillingOK()
         {
             ///Arrange   
             BillingDto billing = new()
@@ -139,7 +140,7 @@
             };
 
             ///Act
-            var result = _billingController!.GetBillingById(billing);
+            var result = _billingController!.GetBillingByIdBilling(billing);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -148,7 +149,7 @@
         }
 
         [TestMethod]
-        public void GetBillingByIdFail()
+        public void GetBillingByIdBillingFail()
         {
             ///Arrange   
             BillingDto billing = new()
@@ -157,7 +158,7 @@
             };
 
             ///Act
-            var result = _billingController!.GetBillingById(billing);
+            var result = _billingController!.GetBillingByIdBilling(billing);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -171,8 +172,8 @@
             ///Arrange   
             BillingDto billing = new()
             {
-                Year = 2026,
-                Month = 1
+                YearBilling = 2026,
+                MonthBilling = 1
             };
 
             ///Act
@@ -190,8 +191,8 @@
             ///Arrange   
             BillingDto billing = new()
             {
-                Year = 2025,
-                Month = 1
+                YearBilling = 2025,
+                MonthBilling = 1
             };
 
             ///Act
@@ -204,17 +205,17 @@
         }
 
         [TestMethod]
-        public void GetBillingsByYearUserOK()
+        public void GetBillingsByYearUserBudgetOK()
         {
             ///Arrange   
             BillingDto billing = new()
             {
-                Year = 2026,
-                IdUser = 1
+                YearBilling = 2026,
+                IdUserBudget = 1
             };
 
             ///Act
-            var result = _billingController!.GetBillingsByYearUser(billing);
+            var result = _billingController!.GetBillingsByYearUserBudget(billing);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -223,17 +224,17 @@
         }
 
         [TestMethod]
-        public void GetBillingsByYearUserFail()
+        public void GetBillingsByYearUserBudgetFail()
         {
             ///Arrange   
             BillingDto billing = new()
             {
-                Year = 2025,
-                IdUser = -1
+                YearBilling = 2025,
+                IdUserBudget = -1
             };
 
             ///Act
-            var result = _billingController!.GetBillingsByYearUser(billing);
+            var result = _billingController!.GetBillingsByYearUserBudget(billing);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -242,17 +243,17 @@
         }
 
         [TestMethod]
-        public void GetBillingsByMonthUserOK()
+        public void GetBillingsByMonthUserBudgetOK()
         {
             ///Arrange   
             BillingDto billing = new()
             {
-                Month = 1,
-                IdUser = 1
+                MonthBilling = 1,
+                IdUserBudget = 1
             };
 
             ///Act
-            var result = _billingController!.GetBillingsByMonthUser(billing);
+            var result = _billingController!.GetBillingsByMonthUserBudget(billing);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -261,17 +262,17 @@
         }
 
         [TestMethod]
-        public void GetBillingsByMonthUserFail()
+        public void GetBillingsByMonthUserBudgetFail()
         {
             ///Arrange   
             BillingDto billing = new()
             {
-                Month = 1,
-                IdUser = -1
+                MonthBilling = 1,
+                IdUserBudget = -1
             };
 
             ///Act
-            var result = _billingController!.GetBillingsByMonthUser(billing);
+            var result = _billingController!.GetBillingsByMonthUserBudget(billing);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -280,18 +281,18 @@
         }
 
         [TestMethod]
-        public void GetBillingsByYearMonthUserOK()
+        public void GetBillingsByYearMonthUserBudgetOK()
         {
             ///Arrange   
             BillingDto billing = new()
             {
-                Year = 2026,
-                Month = 1,
-                IdUser = 1
+                YearBilling = 2026,
+                MonthBilling = 1,
+                IdUserBudget = 1
             };
 
             ///Act
-            var result = _billingController!.GetBillingsByYearMonthUser(billing);
+            var result = _billingController!.GetBillingsByYearMonthUserBudget(billing);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -300,18 +301,18 @@
         }
 
         [TestMethod]
-        public void GetBillingsByYearMonthUserFail()
+        public void GetBillingsByYearMonthUserBudgetFail()
         {
             ///Arrange   
             BillingDto billing = new()
             {
-                Year = 2025,
-                Month = 1,
-                IdUser = -1
+                YearBilling = 2025,
+                MonthBilling = 1,
+                IdUserBudget = -1
             };
 
             ///Act
-            var result = _billingController!.GetBillingsByYearMonthUser(billing);
+            var result = _billingController!.GetBillingsByYearMonthUserBudget(billing);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -320,16 +321,16 @@
         }
 
         [TestMethod]
-        public void GetBillingsByUserOK()
+        public void GetBillingsByUserBudgetOK()
         {
             ///Arrange   
             BillingDto billing = new()
             {
-                IdUser = 1
+                IdUserBudget = 1
             };
 
             ///Act
-            var result = _billingController!.GetBillingsByUser(billing);
+            var result = _billingController!.GetBillingsByUserBudget(billing);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -338,16 +339,16 @@
         }
 
         [TestMethod]
-        public void GetBillingsByUserFail()
+        public void GetBillingsByUserBudgetFail()
         {
             ///Arrange   
             BillingDto billing = new()
             {
-                IdUser = -1
+                IdUserBudget = -1
             };
 
             ///Act
-            var result = _billingController!.GetBillingsByUser(billing);
+            var result = _billingController!.GetBillingsByUserBudget(billing);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -356,16 +357,16 @@
         }
 
         [TestMethod]
-        public void GetBillingsByStatusOK()
+        public void GetBillingsByStatusBudgetOK()
         {
             ///Arrange   
             BillingDto billing = new()
             {
-                IdStatus = 1
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _billingController!.GetBillingsByStatus(billing);
+            var result = _billingController!.GetBillingsByStatusBudget(billing);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -374,16 +375,16 @@
         }
 
         [TestMethod]
-        public void GetBillingsByStatusFail()
+        public void GetBillingsByStatusBudgetFail()
         {
             ///Arrange   
             BillingDto billing = new()
             {
-                IdStatus = -1
+                IdStatusBudget = -1
             };
 
             ///Act
-            var result = _billingController!.GetBillingsByStatus(billing);
+            var result = _billingController!.GetBillingsByStatusBudget(billing);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -392,17 +393,17 @@
         }
 
         [TestMethod]
-        public void GetBillingsByUserStatusOK()
+        public void GetBillingsByUserBudgetStatusBudgetOK()
         {
             ///Arrange   
             BillingDto billing = new()
             {
-                IdUser = 1,
-                IdStatus = 1
+                IdUserBudget = 1,
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _billingController!.GetBillingsByUserStatus(billing);
+            var result = _billingController!.GetBillingsByUserBudgetStatusBudget(billing);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -411,17 +412,17 @@
         }
 
         [TestMethod]
-        public void GetBillingsByUserStatusFail()
+        public void GetBillingsByUserBudgetStatusBudgetFail()
         {
             ///Arrange   
             BillingDto billing = new()
             {
-                IdUser = -1,
-                IdStatus = -1
+                IdUserBudget = -1,
+                IdStatusBudget = -1
             };
 
             ///Act
-            var result = _billingController!.GetBillingsByUserStatus(billing);
+            var result = _billingController!.GetBillingsByUserBudgetStatusBudget(billing);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -435,11 +436,11 @@
             ///Arrange   
             BillingDto billing = new()
             {
-                Year = 2026,
-                Month = 2,
+                YearBilling = 2026,
+                MonthBilling = 2,
                 CreationDate = DateTime.Now,
-                IdUser = 1,
-                IdStatus = 1
+                IdUserBudget = 1,
+                IdStatusBudget = 1
             };
 
             ///Act
@@ -457,11 +458,11 @@
             ///Arrange   
             BillingDto billing = new()
             {
-                Year = 2026,
-                Month = 2,
+                YearBilling = 2026,
+                MonthBilling = 2,
                 CreationDate = DateTime.Now,
-                IdUser = -1,
-                IdStatus = -1
+                IdUserBudget = -1,
+                IdStatusBudget = -1
             };
 
             ///Act
@@ -480,11 +481,11 @@
             BillingDto billing = new()
             {
                 IdBilling = 1,
-                Year = 2026,
-                Month = 1,
+                YearBilling = 2026,
+                MonthBilling = 1,
                 CreationDate = DateTime.Now,
-                IdUser = 1,
-                IdStatus = 1
+                IdUserBudget = 1,
+                IdStatusBudget = 1
             };
 
             ///Act
@@ -503,11 +504,11 @@
             BillingDto billing = new()
             {
                 IdBilling = -1,
-                Year = 2026,
-                Month = 1,
+                YearBilling = 2026,
+                MonthBilling = 1,
                 CreationDate = DateTime.Now,
-                IdUser = -1,
-                IdStatus = -1
+                IdUserBudget = -1,
+                IdStatusBudget = -1
             };
 
             ///Act
@@ -526,11 +527,11 @@
             BillingDto billing = new()
             {
                 IdBilling = 1,
-                Year = 2026,
-                Month = 1,
+                YearBilling = 2026,
+                MonthBilling = 1,
                 CreationDate = DateTime.Now,
-                IdUser = 1,
-                IdStatus = 3
+                IdUserBudget = 1,
+                IdStatusBudget = 3
             };
 
             ///Act
@@ -549,11 +550,11 @@
             BillingDto billing = new()
             {
                 IdBilling = -1,
-                Year = 2026,
-                Month = 1,
+                YearBilling = 2026,
+                MonthBilling = 1,
                 CreationDate = DateTime.Now,
-                IdUser = 1,
-                IdStatus = 3
+                IdUserBudget = 1,
+                IdStatusBudget = 3
             };
 
             ///Act

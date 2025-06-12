@@ -41,13 +41,13 @@
         #region Métodos y Funciones
 
         [HttpPost]
-        [Route("GetFinancialInstitutionById")]
-        [SwaggerOperation(Summary = "Get Financial Institution By Id")]
-        public ResponseDto GetFinancialInstitutionById(FinancialInstitutionDto financialInstitution)
+        [Route("GetFinancialInstitutionByIdFinancialInstitution")]
+        [SwaggerOperation(Summary = "Get FinancialInstitution By IdFinancialInstitution")]
+        public ResponseDto GetFinancialInstitutionByIdFinancialInstitution(FinancialInstitutionDto financialInstitution)
         {
             try
             {
-                response.Data = _financialInstitutionService.GetFinancialInstitutionById(financialInstitution);
+                response.Data = _financialInstitutionService.GetFinancialInstitutionByIdFinancialInstitution(financialInstitution);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -58,13 +58,13 @@
         }
 
         [HttpPost]
-        [Route("GetFinancialInstitutionByName")]
-        [SwaggerOperation(Summary = "Get Financial Institution By Name")]
-        public ResponseDto GetFinancialInstitutionByName(FinancialInstitutionDto financialInstitution)
+        [Route("GetFinancialInstitutionByNameFinancialInstitution")]
+        [SwaggerOperation(Summary = "Get FinancialInstitution By NameFinancialInstitution")]
+        public ResponseDto GetFinancialInstitutionByNameFinancialInstitution(FinancialInstitutionDto financialInstitution)
         {
             try
             {
-                response.Data = _financialInstitutionService.GetFinancialInstitutionByName(financialInstitution);
+                response.Data = _financialInstitutionService.GetFinancialInstitutionByNameFinancialInstitution(financialInstitution);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -75,13 +75,13 @@
         }
 
         [HttpPost]
-        [Route("GetFinancialInstitutionsByStatus")]
-        [SwaggerOperation(Summary = "Get Financial Institutions By Status")]
-        public ResponseDto GetFinancialInstitutionsByStatus(FinancialInstitutionDto financialInstitution)
+        [Route("GetFinancialInstitutionsByStatusBudget")]
+        [SwaggerOperation(Summary = "Get FinancialInstitutions By StatusBudget")]
+        public ResponseDto GetFinancialInstitutionsByStatusBudget(FinancialInstitutionDto financialInstitution)
         {
             try
             {
-                response.Data = _financialInstitutionService.GetFinancialInstitutionsByStatus(financialInstitution);
+                response.Data = _financialInstitutionService.GetFinancialInstitutionsByStatusBudget(financialInstitution);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)

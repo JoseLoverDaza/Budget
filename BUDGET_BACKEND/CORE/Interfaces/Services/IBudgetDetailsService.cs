@@ -19,19 +19,19 @@
 
         #region Métodos y Funciones
 
-        public BudgetDetailExtendDto? GetBudgetDetailsById(BudgetDetailsDto budgetDetails);
+        public BudgetDetailExtendDto? GetBudgetDetailsByIdBudgetDetails(BudgetDetailsDto budgetDetails);
 
         public List<BudgetDetailExtendDto> GetBudgetDetailsByBudget(BudgetDetailsDto budgetDetails);
 
         public List<BudgetDetailExtendDto> GetBudgetDetailsByExpense(BudgetDetailsDto budgetDetails);
 
-        public List<BudgetDetailExtendDto> GetBudgetDetailsByStatus(BudgetDetailsDto budgetDetails);
+        public List<BudgetDetailExtendDto> GetBudgetDetailsByStatusBudget(BudgetDetailsDto budgetDetails);
 
         public List<BudgetDetailExtendDto> GetBudgetDetailsByBudgetExpense(BudgetDetailsDto budgetDetails);
 
-        public List<BudgetDetailExtendDto> GetBudgetDetailsByExpenseStatus(BudgetDetailsDto budgetDetails);
+        public List<BudgetDetailExtendDto> GetBudgetDetailsByExpenseStatusBudget(BudgetDetailsDto budgetDetails);
 
-        public List<BudgetDetailExtendDto> GetBudgetDetailsByBudgetExpenseStatus(BudgetDetailsDto budgetDetails);
+        public List<BudgetDetailExtendDto> GetBudgetDetailsByBudgetExpenseStatusBudget(BudgetDetailsDto budgetDetails);
 
         public BudgetDetailsDto SaveBudgetDetail(BudgetDetailsDto budgetDetails);
 

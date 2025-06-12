@@ -41,13 +41,13 @@
         #region Métodos y Funciones
 
         [HttpPost]
-        [Route("GetBudgetById")]
-        [SwaggerOperation(Summary = "Get Budget By Id")]
-        public ResponseDto GetBudgetById(BudgetDto budget)
+        [Route("GetBudgetByIdBudget")]
+        [SwaggerOperation(Summary = "Get Budget By IdBudget")]
+        public ResponseDto GetBudgetByIdBudget(BudgetDto budget)
         {
             try
             {
-                response.Data = _budgetService.GetBudgetById(budget);
+                response.Data = _budgetService.GetBudgetByIdBudget(budget);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -75,13 +75,13 @@
         }
 
         [HttpPost]
-        [Route("GetBudgetsByYearUser")]
-        [SwaggerOperation(Summary = "GetBudgetsByYearUser")]
-        public ResponseDto GetBudgetsByYearUser(BudgetDto budget)
+        [Route("GetBudgetsByYearUserBudget")]
+        [SwaggerOperation(Summary = "Get Budgets By Year UserBudget")]
+        public ResponseDto GetBudgetsByYearUserBudget(BudgetDto budget)
         {
             try
             {
-                response.Data = _budgetService.GetBudgetsByYearUser(budget);
+                response.Data = _budgetService.GetBudgetsByYearUserBudget(budget);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -92,13 +92,13 @@
         }
 
         [HttpPost]
-        [Route("GetBudgetsByMonthUser")]
-        [SwaggerOperation(Summary = "Get Budgets By Month User")]
-        public ResponseDto GetBudgetsByMonthUser(BudgetDto budget)
+        [Route("GetBudgetsByMonthUserBudget")]
+        [SwaggerOperation(Summary = "Get Budgets By Month UserBudget")]
+        public ResponseDto GetBudgetsByMonthUserBudget(BudgetDto budget)
         {
             try
             {
-                response.Data = _budgetService.GetBudgetsByMonthUser(budget);
+                response.Data = _budgetService.GetBudgetsByMonthUserBudget(budget);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -109,13 +109,13 @@
         }
 
         [HttpPost]
-        [Route("GetBudgetsByYearMonthUser")]
-        [SwaggerOperation(Summary = "Get Budgets By Year Month User")]
-        public ResponseDto GetBudgetsByYearMonthUser(BudgetDto budget)
+        [Route("GetBudgetsByYearMonthUserBudget")]
+        [SwaggerOperation(Summary = "Get Budgets By Year Month UserBudget")]
+        public ResponseDto GetBudgetsByYearMonthUserBudget(BudgetDto budget)
         {
             try
             {
-                response.Data = _budgetService.GetBudgetsByYearMonthUser(budget);
+                response.Data = _budgetService.GetBudgetsByYearMonthUserBudget(budget);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -126,13 +126,13 @@
         }
 
         [HttpPost]
-        [Route("GetBudgetsByUser")]
-        [SwaggerOperation(Summary = "Get Budgets By User")]
-        public ResponseDto GetBudgetsByUser(BudgetDto budget)
+        [Route("GetBudgetsByUserBudget")]
+        [SwaggerOperation(Summary = "Get Budgets By UserBudget")]
+        public ResponseDto GetBudgetsByUserBudget(BudgetDto budget)
         {
             try
             {
-                response.Data = _budgetService.GetBudgetsByUser(budget);
+                response.Data = _budgetService.GetBudgetsByUserBudget(budget);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -143,13 +143,13 @@
         }
 
         [HttpPost]
-        [Route("GetBudgetsByStatus")]
-        [SwaggerOperation(Summary = "Get Budgets By Status")]
-        public ResponseDto GetBudgetsByStatus(BudgetDto budget)
+        [Route("GetBudgetsByStatusBudget")]
+        [SwaggerOperation(Summary = "Get Budgets By StatusBudget")]
+        public ResponseDto GetBudgetsByStatusBudget(BudgetDto budget)
         {
             try
             {
-                response.Data = _budgetService.GetBudgetsByStatus(budget);
+                response.Data = _budgetService.GetBudgetsByStatusBudget(budget);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -160,13 +160,13 @@
         }
 
         [HttpPost]
-        [Route("GetBudgetsByUserStatus")]
-        [SwaggerOperation(Summary = "Get Budgets By User Status")]
-        public ResponseDto GetBudgetsByUserStatus(BudgetDto budget)
+        [Route("GetBudgetsByUserBudgetStatusBudget")]
+        [SwaggerOperation(Summary = "Get Budgets By User Budget StatusBudget")]
+        public ResponseDto GetBudgetsByUserBudgetStatusBudget(BudgetDto budget)
         {
             try
             {
-                response.Data = _budgetService.GetBudgetsByUserStatus(budget);
+                response.Data = _budgetService.GetBudgetsByUserBudgetStatusBudget(budget);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)

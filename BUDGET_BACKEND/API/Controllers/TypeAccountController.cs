@@ -41,13 +41,13 @@
         #region Métodos y Funciones
 
         [HttpGet]
-        [Route("GetTypeAccountById")]
-        [SwaggerOperation(Summary = "Get Type Account By Id")]
-        public ResponseDto GetTypeAccountById(TypeAccountDto typeAccount)
+        [Route("GetTypeAccountByIdTypeAccount")]
+        [SwaggerOperation(Summary = "Get TypeAccount By IdTypeAccount")]
+        public ResponseDto GetTypeAccountByIdTypeAccount(TypeAccountDto typeAccount)
         {
             try
             {
-                response.Data = _typeAccountService.GetTypeAccountById(typeAccount);
+                response.Data = _typeAccountService.GetTypeAccountByIdTypeAccount(typeAccount);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -58,13 +58,13 @@
         }
 
         [HttpGet]
-        [Route("GetTypeAccountByName")]
-        [SwaggerOperation(Summary = "Get Type Account By Name")]
-        public ResponseDto GetTypeAccountByName(TypeAccountDto typeAccount)
+        [Route("GetTypeAccountByNameTypeAccount")]
+        [SwaggerOperation(Summary = "Get TypeAccount By NameTypeAccount")]
+        public ResponseDto GetTypeAccountByNameTypeAccount(TypeAccountDto typeAccount)
         {
             try
             {
-                response.Data = _typeAccountService.GetTypeAccountByName(typeAccount);
+                response.Data = _typeAccountService.GetTypeAccountByNameTypeAccount(typeAccount);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -75,13 +75,13 @@
         }
 
         [HttpGet]
-        [Route("GetTypeAccountsByStatus")]
-        [SwaggerOperation(Summary = "Get Type Accounts By Status")]
-        public ResponseDto GetTypeAccountsByStatus(TypeAccountDto typeAccount)
+        [Route("GetTypeAccountsByStatusBudget")]
+        [SwaggerOperation(Summary = "Get TypeAccounts By StatusBudget")]
+        public ResponseDto GetTypeAccountsByStatusBudget(TypeAccountDto typeAccount)
         {
             try
             {
-                response.Data = _typeAccountService.GetTypeAccountsByStatus(typeAccount);
+                response.Data = _typeAccountService.GetTypeAccountsByStatusBudget(typeAccount);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)

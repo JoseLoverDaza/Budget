@@ -41,13 +41,13 @@
         #region Métodos y Funciones
 
         [HttpPost]
-        [Route("GetDepositById")]
-        [SwaggerOperation(Summary = "Get Deposit By Id")]
-        public ResponseDto GetDepositById(DepositDto deposit)
+        [Route("GetDepositByIdDeposit")]
+        [SwaggerOperation(Summary = "Get Deposit By IdDeposit")]
+        public ResponseDto GetDepositByIdDeposit(DepositDto deposit)
         {
             try
             {
-                response.Data = _depositService.GetDepositById(deposit);
+                response.Data = _depositService.GetDepositByIdDeposit(deposit);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -75,13 +75,13 @@
         }
 
         [HttpPost]
-        [Route("GetDepositsByYearUser")]
-        [SwaggerOperation(Summary = "Get Deposits By Year User")]
-        public ResponseDto GetDepositsByYearUser(DepositDto deposit)
+        [Route("GetDepositsByYearUserBudget")]
+        [SwaggerOperation(Summary = "Get Deposits By Year UserBudget")]
+        public ResponseDto GetDepositsByYearUserBudget(DepositDto deposit)
         {
             try
             {
-                response.Data = _depositService.GetDepositsByYearUser(deposit);
+                response.Data = _depositService.GetDepositsByYearUserBudget(deposit);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -92,13 +92,13 @@
         }
 
         [HttpPost]
-        [Route("GetDepositsByMonthUser")]
-        [SwaggerOperation(Summary = "Get Deposits By Month User")]
-        public ResponseDto GetDepositsByMonthUser(DepositDto deposit)
+        [Route("GetDepositsByMonthUserBudget")]
+        [SwaggerOperation(Summary = "Get Deposits By Month UserBudget")]
+        public ResponseDto GetDepositsByMonthUserBudget(DepositDto deposit)
         {
             try
             {
-                response.Data = _depositService.GetDepositsByMonthUser(deposit);
+                response.Data = _depositService.GetDepositsByMonthUserBudget(deposit);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -111,11 +111,11 @@
         [HttpPost]
         [Route("GetDepositsByYearMonthUser")]
         [SwaggerOperation(Summary = "Get Deposits By Year Month User")]
-        public ResponseDto GetDepositsByYearMonthUser(DepositDto deposit)
+        public ResponseDto GetDepositsByYearMonthUserBudget(DepositDto deposit)
         {
             try
             {
-                response.Data = _depositService.GetDepositsByYearMonthUser(deposit);
+                response.Data = _depositService.GetDepositsByYearMonthUserBudget(deposit);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -143,13 +143,13 @@
         }
 
         [HttpPost]
-        [Route("GetDepositsByYearMonthStatus")]
-        [SwaggerOperation(Summary = "Get Deposits By Year Month Status")]
-        public ResponseDto GetDepositsByYearMonthStatus(DepositDto deposit)
+        [Route("GetDepositsByYearMonthStatusBudget")]
+        [SwaggerOperation(Summary = "Get Deposits By Year Month StatusBudget")]
+        public ResponseDto GetDepositsByYearMonthStatusBudget(DepositDto deposit)
         {
             try
             {
-                response.Data = _depositService.GetDepositsByYearMonthStatus(deposit);
+                response.Data = _depositService.GetDepositsByYearMonthStatusBudget(deposit);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -160,13 +160,13 @@
         }
 
         [HttpPost]
-        [Route("GetDepositsByYearMonthUserAccount")]
-        [SwaggerOperation(Summary = "GetDepositsByYearMonthUserAccount")]
-        public ResponseDto GetDepositsByYearMonthUserAccount(DepositDto deposit)
+        [Route("GetDepositsByYearMonthUserBudgetAccount")]
+        [SwaggerOperation(Summary = "Get Deposits By Year Month UserBudget Account")]
+        public ResponseDto GetDepositsByYearMonthUserBudgetAccount(DepositDto deposit)
         {
             try
             {
-                response.Data = _depositService.GetDepositsByYearMonthUserAccount(deposit);
+                response.Data = _depositService.GetDepositsByYearMonthUserBudgetAccount(deposit);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -177,13 +177,13 @@
         }
 
         [HttpPost]
-        [Route("GetDepositsByUser")]
-        [SwaggerOperation(Summary = "Get Deposits By User")]
-        public ResponseDto GetDepositsByUser(DepositDto deposit)
+        [Route("GetDepositsByUserBudget")]
+        [SwaggerOperation(Summary = "Get Deposits By UserBudget")]
+        public ResponseDto GetDepositsByUserBudget(DepositDto deposit)
         {
             try
             {
-                response.Data = _depositService.GetDepositsByUser(deposit);
+                response.Data = _depositService.GetDepositsByUserBudget(deposit);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -211,13 +211,13 @@
         }
 
         [HttpPost]
-        [Route("GetDepositsByStatus")]
-        [SwaggerOperation(Summary = "Get Deposits By Status")]
-        public ResponseDto GetDepositsByStatus(DepositDto deposit)
+        [Route("GetDepositsByStatusBudget")]
+        [SwaggerOperation(Summary = "Get Deposits By StatusBudget")]
+        public ResponseDto GetDepositsByStatusBudget(DepositDto deposit)
         {
             try
             {
-                response.Data = _depositService.GetDepositsByStatus(deposit);
+                response.Data = _depositService.GetDepositsByStatusBudget(deposit);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -228,13 +228,13 @@
         }
 
         [HttpPost]
-        [Route("GetDepositsByUserStatus")]
-        [SwaggerOperation(Summary = "Get Deposits By User Status")]
-        public ResponseDto GetDepositsByUserStatus(DepositDto deposit)
+        [Route("GetDepositsByUserBudgetStatusBudget")]
+        [SwaggerOperation(Summary = "Get Deposits By UserBudget StatusBudget")]
+        public ResponseDto GetDepositsByUserBudgetStatusBudget(DepositDto deposit)
         {
             try
             {
-                response.Data = _depositService.GetDepositsByUserStatus(deposit);
+                response.Data = _depositService.GetDepositsByUserBudgetStatusBudget(deposit);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -245,13 +245,13 @@
         }
 
         [HttpPost]
-        [Route("GetDepositsByAccountStatus")]
-        [SwaggerOperation(Summary = "Get Deposits By Account Status")]
-        public ResponseDto GetDepositsByAccountStatus(DepositDto deposit)
+        [Route("GetDepositsByAccountStatusBudget")]
+        [SwaggerOperation(Summary = "Get Deposits By Account StatusBudget")]
+        public ResponseDto GetDepositsByAccountStatusBudget(DepositDto deposit)
         {
             try
             {
-                response.Data = _depositService.GetDepositsByAccountStatus(deposit);
+                response.Data = _depositService.GetDepositsByAccountStatusBudget(deposit);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)

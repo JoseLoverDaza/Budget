@@ -53,56 +53,57 @@
 
             #region Data
 
-            /// Status Id 1
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 1
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 1,
-                Name = Constants.Status.INACTIVO,
-                Description = Constants.Status.INACTIVO
+                IdStatusBudget = 1,
+                NameStatus = Constants.Status.INACTIVO,
+                DescriptionStatus = Constants.Status.INACTIVO
             });
 
             _context.SaveChanges();
 
-            /// Status Id 2
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 2
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 2,
-                Name = Constants.Status.ACTIVO,
-                Description = Constants.Status.ACTIVO
+                IdStatusBudget = 2,
+                NameStatus = Constants.Status.ACTIVO,
+                DescriptionStatus = Constants.Status.ACTIVO
             });
 
             _context.SaveChanges();
 
-            /// Status Id 3
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 3
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 3,
-                Name = Constants.Status.CANCELADO,
-                Description = Constants.Status.CANCELADO
+                IdStatusBudget = 3,
+                NameStatus = Constants.Status.CANCELADO,
+                DescriptionStatus = Constants.Status.CANCELADO
             });
 
             _context.SaveChanges();
 
-            /// Role Id 1
-            _context.Roles.Add(new Role()
+            /// RolesBudget IdRoleBudget 1
+            _context.RolesBudget.Add(new RoleBudget()
             {
-                IdRole = 1,
-                Name = "Test",
-                Description = "Test"
+                IdRoleBudget = 1,
+                NameRole = "Test",
+                DescriptionRole = "Test",
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
 
-            /// User Id 1
-            _context.Users.Add(new User()
+            /// UsersBudget IdUserBudget 1
+            _context.UsersBudget.Add(new UserBudget()
             {
-                IdUser = 1,
+                IdUserBudget = 1,
                 Email = "Test",
-                Phone = "Test",
+                Phone = "1234567890",
                 Username = "Test",
-                Password = "Test",
-                IdRole = 1,
-                IdStatus = 1
+                EncryptedPassword = "A7Ws/sQDVsXXi/xheT1IufcXPN5rJUKXmPWvnJTGzjRgOzD+vAt1GAMXoD0/mlrD",
+                IdRoleBudget = 1,
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
@@ -110,17 +111,18 @@
             /// Budget Id 1
             _context.Budgets.Add(new Budget()
             {
-                Year = 2026,
-                Month = 1,
+                YearBudget = 2026,
+                MonthBudget = 1,
                 CreationDate = new DateTime(2026, 1, 1),
-                Description = "Test",
-                IdUser = 1,
-                IdStatus = 1
+                DescriptionBudget = "Test",
+                IdUserBudget = 1,
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
 
             #endregion
+
         }
 
         #endregion
@@ -128,7 +130,7 @@
         #region Métodos y Funciones
 
         [TestMethod]
-        public void GetBudgetByIdOK()
+        public void GetBudgetByIdBudgetOK()
         {
             ///Arrange   
             BudgetDto budget = new()
@@ -137,7 +139,7 @@
             };
 
             ///Act
-            var result = _budgetController!.GetBudgetById(budget);
+            var result = _budgetController!.GetBudgetByIdBudget(budget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -146,7 +148,7 @@
         }
 
         [TestMethod]
-        public void GetBudgetByIdFail()
+        public void GetBudgetByIdBudgetFail()
         {
             ///Arrange   
             BudgetDto budget = new()
@@ -155,7 +157,7 @@
             };
 
             ///Act
-            var result = _budgetController!.GetBudgetById(budget);
+            var result = _budgetController!.GetBudgetByIdBudget(budget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -169,8 +171,8 @@
             ///Arrange   
             BudgetDto budget = new()
             {
-                Year = 2026,
-                Month = 1
+                YearBudget = 2026,
+                MonthBudget = 1
             };
 
             ///Act
@@ -188,8 +190,8 @@
             ///Arrange   
             BudgetDto budget = new()
             {
-                Year = 2025,
-                Month = 1
+                YearBudget = 2025,
+                MonthBudget = 1
             };
 
             ///Act
@@ -202,17 +204,17 @@
         }
 
         [TestMethod]
-        public void GetBudgetsByYearUserOK()
+        public void GetBudgetsByYearUserBudgetOK()
         {
             ///Arrange   
             BudgetDto budget = new()
             {
-                Year = 2026,
-                IdUser = 1
+                YearBudget = 2026,
+                IdUserBudget = 1
             };
 
             ///Act
-            var result = _budgetController!.GetBudgetsByYearUser(budget);
+            var result = _budgetController!.GetBudgetsByYearUserBudget(budget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -221,17 +223,17 @@
         }
 
         [TestMethod]
-        public void GetBudgetsByYearUserFail()
+        public void GetBudgetsByYearUserBudgetFail()
         {
             ///Arrange   
             BudgetDto budget = new()
             {
-                Year = 2025,
-                IdUser = 1
+                YearBudget = 2025,
+                IdUserBudget = 1
             };
 
             ///Act
-            var result = _budgetController!.GetBudgetsByYearUser(budget);
+            var result = _budgetController!.GetBudgetsByYearUserBudget(budget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -240,17 +242,17 @@
         }
 
         [TestMethod]
-        public void GetBudgetsByMonthUserOK()
+        public void GetBudgetsByMonthUserBudgetOK()
         {
             ///Arrange   
             BudgetDto budget = new()
             {
-                Month = 1,
-                IdUser = 1
+                MonthBudget = 1,
+                IdUserBudget = 1
             };
 
             ///Act
-            var result = _budgetController!.GetBudgetsByMonthUser(budget);
+            var result = _budgetController!.GetBudgetsByMonthUserBudget(budget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -259,17 +261,17 @@
         }
 
         [TestMethod]
-        public void GetBudgetsByMonthUserFail()
+        public void GetBudgetsByMonthUserBudgetFail()
         {
             ///Arrange   
             BudgetDto budget = new()
             {
-                Month = 1,
-                IdUser = 2
+                MonthBudget = 1,
+                IdUserBudget = 2
             };
 
             ///Act
-            var result = _budgetController!.GetBudgetsByMonthUser(budget);
+            var result = _budgetController!.GetBudgetsByMonthUserBudget(budget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -278,18 +280,18 @@
         }
 
         [TestMethod]
-        public void GetBudgetsByYearMonthUserOK()
+        public void GetBudgetsByYearMonthUserBudgetOK()
         {
             ///Arrange   
             BudgetDto budget = new()
             {
-                Year = 2026,
-                Month = 1,
-                IdUser = 1
+                YearBudget = 2026,
+                MonthBudget = 1,
+                IdUserBudget = 1
             };
 
             ///Act
-            var result = _budgetController!.GetBudgetsByYearMonthUser(budget);
+            var result = _budgetController!.GetBudgetsByYearMonthUserBudget(budget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -298,18 +300,18 @@
         }
 
         [TestMethod]
-        public void GetBudgetsByYearMonthUserFail()
+        public void GetBudgetsByYearMonthUserBudgetFail()
         {
             ///Arrange   
             BudgetDto budget = new()
             {
-                Year = 2025,
-                Month = 1,
-                IdUser = 2
+                YearBudget = 2025,
+                MonthBudget = 1,
+                IdUserBudget = 2
             };
 
             ///Act
-            var result = _budgetController!.GetBudgetsByYearMonthUser(budget);
+            var result = _budgetController!.GetBudgetsByYearMonthUserBudget(budget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -318,16 +320,16 @@
         }
 
         [TestMethod]
-        public void GetBudgetsByUserOK()
+        public void GetBudgetsByUserBudgetOK()
         {
             ///Arrange   
             BudgetDto budget = new()
             {
-                IdUser = 1
+                IdUserBudget = 1
             };
 
             ///Act
-            var result = _budgetController!.GetBudgetsByUser(budget);
+            var result = _budgetController!.GetBudgetsByUserBudget(budget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -336,16 +338,16 @@
         }
 
         [TestMethod]
-        public void GetBudgetsByUserFail()
+        public void GetBudgetsByUserBudgetFail()
         {
             ///Arrange   
             BudgetDto budget = new()
             {
-                IdUser = -1
+                IdUserBudget = -1
             };
 
             ///Act
-            var result = _budgetController!.GetBudgetsByUser(budget);
+            var result = _budgetController!.GetBudgetsByUserBudget(budget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -354,16 +356,16 @@
         }
 
         [TestMethod]
-        public void GetBudgetsByStatusOK()
+        public void GetBudgetsByStatusBudgetOK()
         {
             ///Arrange   
             BudgetDto budget = new()
             {
-                IdStatus = 1
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _budgetController!.GetBudgetsByStatus(budget);
+            var result = _budgetController!.GetBudgetsByStatusBudget(budget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -372,16 +374,16 @@
         }
 
         [TestMethod]
-        public void GetBudgetsByStatusFail()
+        public void GetBudgetsByStatusBudgetFail()
         {
             ///Arrange   
             BudgetDto budget = new()
             {
-                IdStatus = -1
+                IdStatusBudget = -1
             };
 
             ///Act
-            var result = _budgetController!.GetBudgetsByStatus(budget);
+            var result = _budgetController!.GetBudgetsByStatusBudget(budget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -390,17 +392,17 @@
         }
 
         [TestMethod]
-        public void GetBudgetsByUserStatusOK()
+        public void GetBudgetsByUserBudgetStatusBudgetOK()
         {
             ///Arrange   
             BudgetDto budget = new()
             {
-                IdUser = 1,
-                IdStatus = 1
+                IdUserBudget = 1,
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _budgetController!.GetBudgetsByUserStatus(budget);
+            var result = _budgetController!.GetBudgetsByUserBudgetStatusBudget(budget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -409,17 +411,17 @@
         }
 
         [TestMethod]
-        public void GetBudgetsByUserStatusFail()
+        public void GetBudgetsByUserBudgetStatusBudgetFail()
         {
             ///Arrange   
             BudgetDto budget = new()
             {
-                IdUser = -1,
-                IdStatus = -1
+                IdUserBudget = -1,
+                IdStatusBudget = -1
             };
 
             ///Act
-            var result = _budgetController!.GetBudgetsByUserStatus(budget);
+            var result = _budgetController!.GetBudgetsByUserBudgetStatusBudget(budget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -433,11 +435,11 @@
             ///Arrange   
             BudgetDto budget = new()
             {
-                Year = 2026,
-                Month = 2,
+                YearBudget = 2026,
+                MonthBudget = 2,
                 CreationDate = DateTime.Now,
-                IdUser = 1,
-                IdStatus = 1
+                IdUserBudget = 1,
+                IdStatusBudget = 1
             };
 
             ///Act
@@ -455,11 +457,11 @@
             ///Arrange   
             BudgetDto budget = new()
             {
-                Year = 2026,
-                Month = 2,
+                YearBudget = 2026,
+                MonthBudget = 2,
                 CreationDate = DateTime.Now,
-                IdUser = -1,
-                IdStatus = -1
+                IdUserBudget = -1,
+                IdStatusBudget = -1
             };
 
             ///Act
@@ -478,11 +480,11 @@
             BudgetDto budget = new()
             {
                 IdBudget = 1,
-                Year = 2026,
-                Month = 1,
+                YearBudget = 2026,
+                MonthBudget = 1,
                 CreationDate = DateTime.Now,
-                IdUser = 1,
-                IdStatus = 1
+                IdUserBudget = 1,
+                IdStatusBudget = 1
             };
 
             ///Act
@@ -501,11 +503,11 @@
             BudgetDto budget = new()
             {
                 IdBudget = -1,
-                Year = 2026,
-                Month = 1,
+                YearBudget = 2026,
+                MonthBudget = 1,
                 CreationDate = DateTime.Now,
-                IdUser = -1,
-                IdStatus = -1
+                IdUserBudget = -1,
+                IdStatusBudget = -1
             };
 
             ///Act
@@ -524,11 +526,11 @@
             BudgetDto budget = new()
             {
                 IdBudget = 1,
-                Year = 2026,
-                Month = 1,
+                YearBudget = 2026,
+                MonthBudget = 1,
                 CreationDate = DateTime.Now,
-                IdUser = 1,
-                IdStatus = 3
+                IdUserBudget = 1,
+                IdStatusBudget = 3
             };
 
             ///Act
@@ -547,11 +549,11 @@
             BudgetDto budget = new()
             {
                 IdBudget = -1,
-                Year = 2026,
-                Month = 1,
+                YearBudget = 2026,
+                MonthBudget = 1,
                 CreationDate = DateTime.Now,
-                IdUser = 1,
-                IdStatus = 1
+                IdUserBudget = 1,
+                IdStatusBudget = 1
             };
 
             ///Act

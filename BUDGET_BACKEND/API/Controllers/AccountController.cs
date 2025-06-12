@@ -41,13 +41,13 @@
         #region Métodos y Funciones
 
         [HttpPost]
-        [Route("GetAccountById")]
-        [SwaggerOperation(Summary = "Get Account By Id")]
-        public ResponseDto GetAccountById(AccountDto account)
+        [Route("GetAccountByIdAccount")]
+        [SwaggerOperation(Summary = "Get Account By IdAccount")]
+        public ResponseDto GetAccountByIdAccount(AccountDto account)
         {
             try
             {
-                response.Data = _accountService.GetAccountById(account);
+                response.Data = _accountService.GetAccountByIdAccount(account);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -92,13 +92,13 @@
         }
 
         [HttpPost]
-        [Route("GetAccountsByUser")]
-        [SwaggerOperation(Summary = "Get Accounts By User")]
-        public ResponseDto GetAccountsByUser(AccountDto account)
+        [Route("GetAccountsByUserBudget")]
+        [SwaggerOperation(Summary = "Get Accounts By UserBudget")]
+        public ResponseDto GetAccountsByUserBudget(AccountDto account)
         {
             try
             {
-                response.Data = _accountService.GetAccountsByUser(account);
+                response.Data = _accountService.GetAccountsByUserBudget(account);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -109,13 +109,13 @@
         }
 
         [HttpPost]
-        [Route("GetAccountsByStatus")]
-        [SwaggerOperation(Summary = "Get Accounts By Status")]
-        public ResponseDto GetAccountsByStatus(AccountDto account)
+        [Route("GetAccountsByStatusBudget")]
+        [SwaggerOperation(Summary = "Get Accounts By StatusBudget")]
+        public ResponseDto GetAccountsByStatusBudget(AccountDto account)
         {
             try
             {
-                response.Data = _accountService.GetAccountsByStatus(account);
+                response.Data = _accountService.GetAccountsByStatusBudget(account);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -126,13 +126,13 @@
         }
 
         [HttpPost]
-        [Route("GetAccountsByFinancialInstitutionStatus")]
-        [SwaggerOperation(Summary = "Get Accounts By Financial InstitutionStatus")]
-        public ResponseDto GetAccountsByFinancialInstitutionStatus(AccountDto account)
+        [Route("GetAccountsByFinancialInstitutionStatusBudget")]
+        [SwaggerOperation(Summary = "Get Accounts By FinancialInstitution StatusBudget")]
+        public ResponseDto GetAccountsByFinancialInstitutionStatusBudget(AccountDto account)
         {
             try
             {
-                response.Data = _accountService.GetAccountsByFinancialInstitutionStatus(account);
+                response.Data = _accountService.GetAccountsByFinancialInstitutionStatusBudget(account);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -143,13 +143,13 @@
         }
 
         [HttpPost]
-        [Route("GetAccountsByTypeAccountStatus")]
-        [SwaggerOperation(Summary = "Get Accounts By Type Account Status")]
-        public ResponseDto GetAccountsByTypeAccountStatus(AccountDto account)
+        [Route("GetAccountsByTypeAccountStatusBudget")]
+        [SwaggerOperation(Summary = "Get Accounts By TypeAccount StatusBudget")]
+        public ResponseDto GetAccountsByTypeAccountStatusBudget(AccountDto account)
         {
             try
             {
-                response.Data = _accountService.GetAccountsByTypeAccountStatus(account);
+                response.Data = _accountService.GetAccountsByTypeAccountStatusBudget(account);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -160,13 +160,13 @@
         }
 
         [HttpPost]
-        [Route("GetAccountsByUserStatus")]
-        [SwaggerOperation(Summary = "Get Accounts By User Status")]
-        public ResponseDto GetAccountsByUserStatus(AccountDto account)
+        [Route("GetAccountsByUserBudgetStatusBudget")]
+        [SwaggerOperation(Summary = "Get Accounts By UserBudget StatusBudget")]
+        public ResponseDto GetAccountsByUserBudgetStatusBudget(AccountDto account)
         {
             try
             {
-                response.Data = _accountService.GetAccountsByUserStatus(account);
+                response.Data = _accountService.GetAccountsByUserBudgetStatusBudget(account);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -177,13 +177,13 @@
         }
 
         [HttpPost]
-        [Route("GetAccountsByNameFinancialInstitutionTypeAccountUser")]
-        [SwaggerOperation(Summary = "Get Accounts By Name Financial Institution Type Account User")]
-        public ResponseDto GetAccountsByNameFinancialInstitutionTypeAccountUser(AccountDto account)
+        [Route("GetAccountsByNameFinancialInstitutionTypeAccountUserBudget")]
+        [SwaggerOperation(Summary = "Get Accounts By NameFinancialInstitution TypeAccount UserBudget")]
+        public ResponseDto GetAccountsByNameFinancialInstitutionTypeAccountUserBudget(AccountDto account)
         {
             try
             {
-                response.Data = _accountService.GetAccountsByNameFinancialInstitutionTypeAccountUser(account);
+                response.Data = _accountService.GetAccountsByNameFinancialInstitutionTypeAccountUserBudget(account);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -194,13 +194,13 @@
         }
 
         [HttpPost]
-        [Route("GetAccountsByFinancialInstitutionTypeAccountUser")]
-        [SwaggerOperation(Summary = "Get Accounts By Financial Institution Type Account User")]
-        public ResponseDto GetAccountsByFinancialInstitutionTypeAccountUser(AccountDto account)
+        [Route("GetAccountsByFinancialInstitutionTypeAccountUserBudget")]
+        [SwaggerOperation(Summary = "Get Accounts By FinancialInstitution TypeAccount UserBudget")]
+        public ResponseDto GetAccountsByFinancialInstitutionTypeAccountUserBudget(AccountDto account)
         {
             try
             {
-                response.Data = _accountService.GetAccountsByFinancialInstitutionTypeAccountUser(account);
+                response.Data = _accountService.GetAccountsByFinancialInstitutionTypeAccountUserBudget(account);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)

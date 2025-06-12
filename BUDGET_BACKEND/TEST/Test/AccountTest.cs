@@ -53,92 +53,93 @@
 
             #region Data
 
-            /// Status Id 1
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 1
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 1,
-                Name = Constants.Status.INACTIVO,
-                Description = Constants.Status.INACTIVO
+                IdStatusBudget = 1,
+                NameStatus = Constants.Status.INACTIVO,
+                DescriptionStatus = Constants.Status.INACTIVO
             });
 
             _context.SaveChanges();
 
-            /// Status Id 2
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 2
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 2,
-                Name = Constants.Status.ACTIVO,
-                Description = Constants.Status.ACTIVO
+                IdStatusBudget = 2,
+                NameStatus = Constants.Status.ACTIVO,
+                DescriptionStatus = Constants.Status.ACTIVO
             });
 
             _context.SaveChanges();
 
-            /// Status Id 3
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 3
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 3,
-                Name = Constants.Status.CANCELADO,
-                Description = Constants.Status.CANCELADO
+                IdStatusBudget = 3,
+                NameStatus = Constants.Status.CANCELADO,
+                DescriptionStatus = Constants.Status.CANCELADO
             });
 
             _context.SaveChanges();
 
-            /// Role Id 1
-            _context.Roles.Add(new Role()
+            /// RolesBudget IdRoleBudget 1
+            _context.RolesBudget.Add(new RoleBudget()
             {
-                IdRole = 1,
-                Name = "Test",
-                Description = "Test"
+                IdRoleBudget = 1,
+                NameRole = "Test",
+                DescriptionRole = "Test",
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
 
-            /// User Id 1
-            _context.Users.Add(new User()
+            /// UsersBudget IdUserBudget 1
+            _context.UsersBudget.Add(new UserBudget()
             {
-                IdUser = 1,
+                IdUserBudget = 1,
                 Email = "Test",
-                Phone = "Test",
+                Phone = "1234567890",
                 Username = "Test",
-                Password = "Test",
-                IdRole = 1,
-                IdStatus = 1
+                EncryptedPassword = "A7Ws/sQDVsXXi/xheT1IufcXPN5rJUKXmPWvnJTGzjRgOzD+vAt1GAMXoD0/mlrD",
+                IdRoleBudget = 1,
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
 
-            /// FinancialInstitution Id 1
+            /// FinancialInstitution IdFinancialInstitution 1
             _context.FinancialInstitutions.Add(new FinancialInstitution()
             {
                 IdFinancialInstitution = 1,
-                Name = "Test",
-                Description = "Test",
-                IdStatus = 1
+                NameFinancialInstitution = "Test",
+                DescriptionFinancialInstitution = "Test",
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
 
-            /// TypeAccount Id 1
+            /// TypeAccount IdTypeAccount 1
             _context.TypeAccounts.Add(new TypeAccount()
             {
                 IdTypeAccount = 1,
-                Name = "Test",
-                Description = "Test",
-                IdStatus = 1
+                NameTypeAccount = "Test",
+                DescriptionTypeAccount = "Test",
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
 
-            /// Account Id 1
+            /// Account IdAccount 1
             _context.Accounts.Add(new Account()
             {
                 IdAccount = 1,
-                Name = "Test",
-                Description = "Test",
+                NameAccount = "Test",
+                DescriptionAccount = "Test",
                 IdFinancialInstitution = 1,
                 IdTypeAccount = 1,
-                IdUser = 1,
-                IdStatus = 1
+                IdUserBudget = 1,
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
@@ -152,7 +153,7 @@
         #region Métodos y Funciones
 
         [TestMethod]
-        public void GetAccountByIdOK()
+        public void GetAccountByIdAccountOK()
         {
             ///Arrange   
             AccountDto account = new()
@@ -161,7 +162,7 @@
             };
 
             ///Act
-            var result = _accountController!.GetAccountById(account);
+            var result = _accountController!.GetAccountByIdAccount(account);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -170,7 +171,7 @@
         }
 
         [TestMethod]
-        public void GetAccountByIdFail()
+        public void GetAccountByIdAccountFail()
         {
             ///Arrange   
             AccountDto account = new()
@@ -179,7 +180,7 @@
             };
 
             ///Act
-            var result = _accountController!.GetAccountById(account);
+            var result = _accountController!.GetAccountByIdAccount(account);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -260,16 +261,16 @@
         }
 
         [TestMethod]
-        public void GetAccountsByUserOK()
+        public void GetAccountsByUserBudgetOK()
         {
             ///Arrange   
             AccountDto account = new()
             {
-                IdUser = 1
+                IdUserBudget = 1
             };
 
             ///Act
-            var result = _accountController!.GetAccountsByUser(account);
+            var result = _accountController!.GetAccountsByUserBudget(account);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -278,16 +279,16 @@
         }
 
         [TestMethod]
-        public void GetAccountsByUserFail()
+        public void GetAccountsByUserBudgetFail()
         {
             ///Arrange   
             AccountDto account = new()
             {
-                IdUser = -1
+                IdUserBudget = -1
             };
 
             ///Act
-            var result = _accountController!.GetAccountsByUser(account);
+            var result = _accountController!.GetAccountsByUserBudget(account);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -296,16 +297,16 @@
         }
 
         [TestMethod]
-        public void GetAccountsByStatusOK()
+        public void GetAccountsByStatusBudgetOK()
         {
             ///Arrange   
             AccountDto account = new()
             {
-                IdStatus = 1
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _accountController!.GetAccountsByStatus(account);
+            var result = _accountController!.GetAccountsByStatusBudget(account);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -314,16 +315,16 @@
         }
 
         [TestMethod]
-        public void GetAccountsByStatusFail()
+        public void GetAccountsByStatusBudgetFail()
         {
             ///Arrange   
             AccountDto account = new()
             {
-                IdStatus = -1
+                IdStatusBudget = -1
             };
 
             ///Act
-            var result = _accountController!.GetAccountsByStatus(account);
+            var result = _accountController!.GetAccountsByStatusBudget(account);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -332,17 +333,17 @@
         }
 
         [TestMethod]
-        public void GetAccountsByFinancialInstitutionStatusOK()
+        public void GetAccountsByFinancialInstitutionStatusBudgetOK()
         {
             ///Arrange   
             AccountDto account = new()
             {
                 IdFinancialInstitution = 1,
-                IdStatus = 1
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _accountController!.GetAccountsByFinancialInstitutionStatus(account);
+            var result = _accountController!.GetAccountsByFinancialInstitutionStatusBudget(account);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -351,17 +352,17 @@
         }
 
         [TestMethod]
-        public void GetAccountsByFinancialInstitutionStatusFail()
+        public void GetAccountsByFinancialInstitutionStatusBudgetFail()
         {
             ///Arrange   
             AccountDto account = new()
             {
                 IdFinancialInstitution = -1,
-                IdStatus = -1
+                IdStatusBudget = -1
             };
 
             ///Act
-            var result = _accountController!.GetAccountsByFinancialInstitutionStatus(account);
+            var result = _accountController!.GetAccountsByFinancialInstitutionStatusBudget(account);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -370,17 +371,17 @@
         }
 
         [TestMethod]
-        public void GetAccountsByTypeAccountStatusOK()
+        public void GetAccountsByTypeAccountStatusBudgetOK()
         {
             ///Arrange   
             AccountDto account = new()
             {
                 IdTypeAccount = 1,
-                IdStatus = 1
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _accountController!.GetAccountsByTypeAccountStatus(account);
+            var result = _accountController!.GetAccountsByTypeAccountStatusBudget(account);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -389,17 +390,17 @@
         }
 
         [TestMethod]
-        public void GetAccountsByTypeAccountStatusFail()
+        public void GetAccountsByTypeAccountStatusBudgetFail()
         {
             ///Arrange   
             AccountDto account = new()
             {
                 IdTypeAccount = -1,
-                IdStatus = -1
+                IdStatusBudget = -1
             };
 
             ///Act
-            var result = _accountController!.GetAccountsByTypeAccountStatus(account);
+            var result = _accountController!.GetAccountsByTypeAccountStatusBudget(account);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -408,17 +409,17 @@
         }
 
         [TestMethod]
-        public void GetAccountsByUserStatusOK()
+        public void GetAccountsByUserBudgetStatusBudgetOK()
         {
             ///Arrange   
             AccountDto account = new()
             {
-                IdUser = 1,
-                IdStatus = 1
+                IdUserBudget = 1,
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _accountController!.GetAccountsByUserStatus(account);
+            var result = _accountController!.GetAccountsByUserBudgetStatusBudget(account);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -427,17 +428,17 @@
         }
 
         [TestMethod]
-        public void GetAccountsByUserStatusFail()
+        public void GetAccountsByUserBudgetStatusBudgetFail()
         {
             ///Arrange   
             AccountDto account = new()
             {
-                IdUser = -1,
-                IdStatus = -1
+                IdUserBudget = -1,
+                IdStatusBudget = -1
             };
 
             ///Act
-            var result = _accountController!.GetAccountsByUserStatus(account);
+            var result = _accountController!.GetAccountsByUserBudgetStatusBudget(account);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -446,19 +447,19 @@
         }
 
         [TestMethod]
-        public void GetAccountsByNameFinancialInstitutionTypeAccountUserOK()
+        public void GetAccountsByNameFinancialInstitutionTypeAccountUserBudgetOK()
         {
             ///Arrange   
             AccountDto account = new()
             {
-                Name = "Test",
+                NameAccount = "Test",
                 IdFinancialInstitution = 1,
                 IdTypeAccount = 1,
-                IdUser = 1
+                IdUserBudget = 1
             };
 
             ///Act
-            var result = _accountController!.GetAccountsByNameFinancialInstitutionTypeAccountUser(account);
+            var result = _accountController!.GetAccountsByNameFinancialInstitutionTypeAccountUserBudget(account);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -467,19 +468,19 @@
         }
 
         [TestMethod]
-        public void GetAccountsByNameFinancialInstitutionTypeAccountUserFail()
+        public void GetAccountsByNameFinancialInstitutionTypeAccountUserBudgetFail()
         {
             ///Arrange   
             AccountDto account = new()
             {
-                Name = "T",
+                NameAccount = "T",
                 IdFinancialInstitution = -1,
                 IdTypeAccount = -1,
-                IdUser = -1
+                IdUserBudget = -1
             };
 
             ///Act
-            var result = _accountController!.GetAccountsByNameFinancialInstitutionTypeAccountUser(account);
+            var result = _accountController!.GetAccountsByNameFinancialInstitutionTypeAccountUserBudget(account);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -488,18 +489,18 @@
         }
 
         [TestMethod]
-        public void GetAccountsByFinancialInstitutionTypeAccountUserOK()
+        public void GetAccountsByFinancialInstitutionTypeAccountUserBudgetOK()
         {
             ///Arrange   
             AccountDto account = new()
             {
                 IdFinancialInstitution = 1,
                 IdTypeAccount = 1,
-                IdUser = 1
+                IdUserBudget = 1
             };
 
             ///Act
-            var result = _accountController!.GetAccountsByFinancialInstitutionTypeAccountUser(account);
+            var result = _accountController!.GetAccountsByFinancialInstitutionTypeAccountUserBudget(account);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -508,18 +509,18 @@
         }
 
         [TestMethod]
-        public void GetAccountsByFinancialInstitutionTypeAccountUserFail()
+        public void GetAccountsByFinancialInstitutionTypeAccountUserBudgetFail()
         {
             ///Arrange   
             AccountDto account = new()
             {
                 IdFinancialInstitution = -1,
                 IdTypeAccount = -1,
-                IdUser = -1
+                IdUserBudget = -1
             };
 
             ///Act
-            var result = _accountController!.GetAccountsByFinancialInstitutionTypeAccountUser(account);
+            var result = _accountController!.GetAccountsByFinancialInstitutionTypeAccountUserBudget(account);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -533,11 +534,11 @@
             ///Arrange   
             AccountDto account = new()
             {
-                Name = "Test2",
+                NameAccount = "Test2",
                 IdFinancialInstitution = 1,
                 IdTypeAccount = 1,
-                IdUser = 1,
-                IdStatus = 1
+                IdUserBudget = 1,
+                IdStatusBudget = 1
             };
 
             ///Act
@@ -555,11 +556,11 @@
             ///Arrange   
             AccountDto account = new()
             {
-                Name = "Test",
+                NameAccount = "Test",
                 IdFinancialInstitution = 1,
                 IdTypeAccount = 1,
-                IdUser = 1,
-                IdStatus = 1
+                IdUserBudget = 1,
+                IdStatusBudget = 1
             };
 
             ///Act
@@ -578,11 +579,11 @@
             AccountDto account = new()
             {
                 IdAccount = 1,
-                Name = "Test",
+                NameAccount = "Test",
                 IdFinancialInstitution = 1,
                 IdTypeAccount = 1,
-                IdUser = 1,
-                IdStatus = 1
+                IdUserBudget = 1,
+                IdStatusBudget = 1
             };
 
             ///Act
@@ -601,11 +602,11 @@
             AccountDto account = new()
             {
                 IdAccount = -1,
-                Name = "Test",
+                NameAccount = "Test",
                 IdFinancialInstitution = 1,
                 IdTypeAccount = 1,
-                IdUser = 1,
-                IdStatus = 1
+                IdUserBudget = 1,
+                IdStatusBudget = 1
             };
 
             ///Act
@@ -624,11 +625,11 @@
             AccountDto account = new()
             {
                 IdAccount = 1,
-                Name = "Test",
+                NameAccount = "Test",
                 IdFinancialInstitution = 1,
                 IdTypeAccount = 1,
-                IdUser = 1,
-                IdStatus = 3
+                IdUserBudget = 1,
+                IdStatusBudget = 3
             };
 
             ///Act
@@ -647,11 +648,11 @@
             AccountDto account = new()
             {
                 IdAccount = -1,
-                Name = "Test",
+                NameAccount = "Test",
                 IdFinancialInstitution = 1,
                 IdTypeAccount = 1,
-                IdUser = 1,
-                IdStatus = 1
+                IdUserBudget = 1,
+                IdStatusBudget = 1
             };
 
             ///Act

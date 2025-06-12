@@ -53,108 +53,109 @@
 
             #region Data
 
-            /// Status Id 1
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 1
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 1,
-                Name = Constants.Status.INACTIVO,
-                Description = Constants.Status.INACTIVO
+                IdStatusBudget = 1,
+                NameStatus = Constants.Status.INACTIVO,
+                DescriptionStatus = Constants.Status.INACTIVO
             });
 
             _context.SaveChanges();
 
-            /// Status Id 2
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 2
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 2,
-                Name = Constants.Status.ACTIVO,
-                Description = Constants.Status.ACTIVO
+                IdStatusBudget = 2,
+                NameStatus = Constants.Status.ACTIVO,
+                DescriptionStatus = Constants.Status.ACTIVO
             });
 
             _context.SaveChanges();
 
-            /// Status Id 3
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 3
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 3,
-                Name = Constants.Status.CANCELADO,
-                Description = Constants.Status.CANCELADO
+                IdStatusBudget = 3,
+                NameStatus = Constants.Status.CANCELADO,
+                DescriptionStatus = Constants.Status.CANCELADO
             });
 
             _context.SaveChanges();
 
-            /// Role Id 1
-            _context.Roles.Add(new Role()
+            /// RolesBudget IdRoleBudget 1
+            _context.RolesBudget.Add(new RoleBudget()
             {
-                IdRole = 1,
-                Name = "Test",
-                Description = "Test"
+                IdRoleBudget = 1,
+                NameRole = "Test",
+                DescriptionRole = "Test",
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
 
-            /// User Id 1
-            _context.Users.Add(new User()
+            /// UsersBudget IdUserBudget 1
+            _context.UsersBudget.Add(new UserBudget()
             {
-                IdUser = 1,
+                IdUserBudget = 1,
                 Email = "Test",
-                Phone = "Test",
+                Phone = "1234567890",
                 Username = "Test",
-                Password = "Test",
-                IdRole = 1,
-                IdStatus = 1
+                EncryptedPassword = "A7Ws/sQDVsXXi/xheT1IufcXPN5rJUKXmPWvnJTGzjRgOzD+vAt1GAMXoD0/mlrD",
+                IdRoleBudget = 1,
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
 
-            /// TypeExpense Id 1
+            /// TypeExpense IdTypeExpense 1
             _context.TypeExpenses.Add(new TypeExpense()
             {
                 IdTypeExpense = 1,
-                Name = "Test",
-                Description = "Test",
-                IdStatus = 1
+                NameTypeExpense = "Test",
+                DescriptionTypeExpense = "Test",
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
 
-            /// Expense Id 1
+            /// Expense IdExpense 1
             _context.Expenses.Add(new Expense()
             {
                 IdExpense = 1,
-                Name = "Test",
-                Description = "Test",
+                NameExpense = "Test",
+                DescriptionExpense = "Test",
                 IdTypeExpense = 1,
-                IdStatus = 1
+                IdStatusBudget = 1
             });
 
-            /// Expense Id 2
+            /// Expense IdExpense 2
             _context.Expenses.Add(new Expense()
             {
                 IdExpense = 2,
-                Name = "Test1",
-                Description = "Test",
+                NameExpense = "Test1",
+                DescriptionExpense = "Test",
                 IdTypeExpense = 1,
-                IdStatus = 1
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
 
-            /// Billing Id 1
+            /// Billing IdBilling 1
             _context.Billings.Add(new Billing()
             {
                 IdBilling = 1,
-                Year = 2026,
-                Month = 1,
+                YearBilling = 2026,
+                MonthBilling = 1,
                 CreationDate = new DateTime(2026, 1, 1),
-                Description = "Test",
-                IdUser = 1,
-                IdStatus = 1
+                DescriptionBilling = "Test",
+                IdUserBudget = 1,
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
 
-            /// BillingDetails Id 1
+            /// BillingDetails IdBillingDetails 1
             _context.BillingDetails.Add(new BillingDetails()
             {
                 IdBillingDetails = 1,
@@ -162,7 +163,7 @@
                 CreationDate = new DateTime(2026, 1, 1),
                 Amount = 1000,
                 IdExpense = 1,
-                IdStatus = 1
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
@@ -176,7 +177,7 @@
         #region Métodos y Funciones
 
         [TestMethod]
-        public void GetBillingDetailsByIdOK()
+        public void GetBillingDetailsByIdBillingDetailsOK()
         {
             ///Arrange   
             BillingDetailsDto billingDetails = new()
@@ -185,7 +186,7 @@
             };
 
             ///Act
-            var result = _billingDetailsController!.GetBillingDetailsById(billingDetails);
+            var result = _billingDetailsController!.GetBillingDetailsByIdBillingDetails(billingDetails);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -194,7 +195,7 @@
         }
 
         [TestMethod]
-        public void GetBillingDetailsByIdFail()
+        public void GetBillingDetailsByIdBillingDetailsFail()
         {
             ///Arrange   
             BillingDetailsDto billingDetails = new()
@@ -203,7 +204,7 @@
             };
 
             ///Act
-            var result = _billingDetailsController!.GetBillingDetailsById(billingDetails);
+            var result = _billingDetailsController!.GetBillingDetailsByIdBillingDetails(billingDetails);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -284,16 +285,16 @@
         }
 
         [TestMethod]
-        public void GetBillingDetailsByStatusOK()
+        public void GetBillingDetailsByStatusBudgetOK()
         {
             ///Arrange   
             BillingDetailsDto billingDetails = new()
             {
-                IdStatus = 1
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _billingDetailsController!.GetBillingDetailsByStatus(billingDetails);
+            var result = _billingDetailsController!.GetBillingDetailsByStatusBudget(billingDetails);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -302,16 +303,16 @@
         }
 
         [TestMethod]
-        public void GetBillingDetailsByStatusFail()
+        public void GetBillingDetailsByStatusBudgetFail()
         {
             ///Arrange   
             BillingDetailsDto billingDetails = new()
             {
-                IdStatus = -1
+                IdStatusBudget = -1
             };
 
             ///Act
-            var result = _billingDetailsController!.GetBillingDetailsByStatus(billingDetails);
+            var result = _billingDetailsController!.GetBillingDetailsByStatusBudget(billingDetails);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -358,17 +359,17 @@
         }
 
         [TestMethod]
-        public void GetBillingDetailsByExpenseStatusOK()
+        public void GetBillingDetailsByExpenseStatusBudgetOK()
         {
             ///Arrange   
             BillingDetailsDto billingDetails = new()
             {
                 IdExpense = 1,
-                IdStatus = 1
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _billingDetailsController!.GetBillingDetailsByExpenseStatus(billingDetails);
+            var result = _billingDetailsController!.GetBillingDetailsByExpenseStatusBudget(billingDetails);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -377,17 +378,17 @@
         }
 
         [TestMethod]
-        public void GetBillingDetailsByExpenseStatusFail()
+        public void GetBillingDetailsByExpenseStatusBudgetFail()
         {
             ///Arrange   
             BillingDetailsDto billingDetails = new()
             {
                 IdExpense = -1,
-                IdStatus = -1
+                IdStatusBudget = -1
             };
 
             ///Act
-            var result = _billingDetailsController!.GetBillingDetailsByExpenseStatus(billingDetails);
+            var result = _billingDetailsController!.GetBillingDetailsByExpenseStatusBudget(billingDetails);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -396,18 +397,18 @@
         }
 
         [TestMethod]
-        public void GetBillingDetailsByBillingExpenseStatusOK()
+        public void GetBillingDetailsByBillingExpenseStatusBudgetOK()
         {
             ///Arrange   
             BillingDetailsDto billingDetails = new()
             {
                 IdBilling = 1,
                 IdExpense = 1,
-                IdStatus = 1
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _billingDetailsController!.GetBillingDetailsByBillingExpenseStatus(billingDetails);
+            var result = _billingDetailsController!.GetBillingDetailsByBillingExpenseStatusBudget(billingDetails);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -416,18 +417,18 @@
         }
 
         [TestMethod]
-        public void GetBillingDetailsByBillingExpenseStatusFail()
+        public void GetBillingDetailsByBillingExpenseStatusBudgetFail()
         {
             ///Arrange   
             BillingDetailsDto billingDetails = new()
             {
                 IdBilling = -1,
                 IdExpense = -1,
-                IdStatus = -1
+                IdStatusBudget = -1
             };
 
             ///Act
-            var result = _billingDetailsController!.GetBillingDetailsByBillingExpenseStatus(billingDetails);
+            var result = _billingDetailsController!.GetBillingDetailsByBillingExpenseStatusBudget(billingDetails);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -445,7 +446,7 @@
                 CreationDate = DateTime.Now,
                 Amount = 1000,
                 IdExpense = 2,
-                IdStatus = 1
+                IdStatusBudget = 1
             };
 
             ///Act
@@ -467,7 +468,7 @@
                 CreationDate = DateTime.Now,
                 Amount = 1000,
                 IdExpense = -1,
-                IdStatus = -1
+                IdStatusBudget = -1
             };
 
             ///Act
@@ -490,7 +491,7 @@
                 CreationDate = DateTime.Now,
                 Amount = 1000,
                 IdExpense = -1,
-                IdStatus = -1
+                IdStatusBudget = -1
             };
 
             ///Act
@@ -513,7 +514,7 @@
                 CreationDate = DateTime.Now,
                 Amount = 1000,
                 IdExpense = 1,
-                IdStatus = 3
+                IdStatusBudget = 3
             };
 
             ///Act
@@ -536,7 +537,7 @@
                 CreationDate = DateTime.Now,
                 Amount = 1000,
                 IdExpense = -1,
-                IdStatus = -1
+                IdStatusBudget = -1
             };
 
             ///Act

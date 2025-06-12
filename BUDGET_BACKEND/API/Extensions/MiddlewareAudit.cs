@@ -1,5 +1,6 @@
 ﻿namespace API.Extensions
 {
+    using CORE.Dto;
 
     #region Librerias
 
@@ -39,7 +40,7 @@
             TimeZoneInfo zonaHoraria = TimeZoneInfo.FindSystemTimeZoneById("SA Pacific Standard Time");
             DateTime fechaLocal = TimeZoneInfo.ConvertTimeFromUtc(fechaUtc, zonaHoraria);
 
-            var endpoint = context.Request.Path;
+            var endpointurl = context.Request.Path;
             var metodo = context.Request.Method;
             var agente = context.Request.Headers.UserAgent.ToString();
             var fecha = fechaLocal;
@@ -53,19 +54,29 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
             finally
-            {
+            {                
                 if (context.RequestServices.GetService(typeof(IAuditApiService)) is IAuditApiService auditService)
                 {
-                    var auditDto = new AuditDto
+                    var userBudget = context.RequestServices.GetService(typeof(IUserBudgetService));
+                    if (userBudget is IUserBudgetService userBudgetService)
                     {
-                        Host = ip,
-                        Endpoint = endpoint,
-                        Method = metodo,
-                        Agent = agente,
-                        CreationDate = fecha
-                    };
-
-                    auditService.SaveAudit(auditDto);
+                        UserBudgetExtendDto? userBudgetSearch = userBudgetService.GetUserBudgetByUsername(new UserBudgetDto { Username = Constants.UserBudget.USERNAME_ADMIN });
+                        if (userBudgetSearch != null)
+                        {
+                            var auditApiDto = new AuditApiDto
+                            {
+                                Host = ip,
+                                EndpointUrl = endpointurl,
+                                Method = metodo,
+                                Agent = agente,
+                                CreationDate = fecha,
+                                CreationUser = userBudgetSearch.IdUserBudget,
+                                ModificationDate = fecha,
+                                ModificationUser = userBudgetSearch.IdUserBudget
+                            };
+                            auditService.SaveAuditApi(auditApiDto);
+                        }
+                    }                    
                 }
             }
         }
