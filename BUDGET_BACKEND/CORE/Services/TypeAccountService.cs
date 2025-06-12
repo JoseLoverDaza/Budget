@@ -41,7 +41,7 @@
 
         #region Métodos y Funciones
 
-        public TypeAccountExtendDto? GetTypeAccountById(TypeAccountDto typeAccount)
+        public TypeAccountExtendDto? GetTypeAccountByIdTypeAccount(TypeAccountDto typeAccount)
         {
             ITypeAccountRepository typeAccountRepository = UnitOfWork.TypeAccountRepository();
             TypeAccountExtendDto? typeAccountSearch = typeAccountRepository.GetTypeAccountByIdTypeAccount(typeAccount);
@@ -58,7 +58,7 @@
             }
         }
 
-        public TypeAccountExtendDto? GetTypeAccountByName(TypeAccountDto typeAccount)
+        public TypeAccountExtendDto? GetTypeAccountByNameTypeAccount(TypeAccountDto typeAccount)
         {
             ITypeAccountRepository typeAccountRepository = UnitOfWork.TypeAccountRepository();
             TypeAccountExtendDto? typeAccountSearch = typeAccountRepository.GetTypeAccountByNameTypeAccount(typeAccount);
@@ -75,7 +75,7 @@
             }
         }
 
-        public List<TypeAccountExtendDto> GetTypeAccountsByStatus(TypeAccountDto typeAccount)
+        public List<TypeAccountExtendDto> GetTypeAccountsByStatusBudget(TypeAccountDto typeAccount)
         {
             ITypeAccountRepository typeAccountRepository = UnitOfWork.TypeAccountRepository();
             List<TypeAccountExtendDto> typeAccountsSearch = typeAccountRepository.GetTypeAccountsByStatusBudget(typeAccount);
@@ -94,28 +94,34 @@
 
         public TypeAccountDto SaveTypeAccount(TypeAccountDto typeAccount)
         {
+            IUserBudgetRepository userBudgetRepository = UnitOfWork.UserBudgetRepository();
             ITypeAccountRepository typeAccountRepository = UnitOfWork.TypeAccountRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
+            IStatusBudgetRepository statusBudgetRepository = UnitOfWork.StatusBudgetRepository();
 
-            if (typeAccount == null || string.IsNullOrWhiteSpace(typeAccount.Name.Trim()))
+            if (typeAccount == null || string.IsNullOrWhiteSpace(typeAccount.NameTypeAccount.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
             TypeAccountExtendDto? typeAccountSearch = typeAccountRepository.GetTypeAccountByNameTypeAccount(typeAccount);
-
+            
             if (typeAccountSearch != null)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = typeAccount.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-
+            UserBudgetExtendDto? userBudgetAdminSearch = userBudgetRepository.GetUserBudgetByUsername(new UserBudgetDto { Username = Constants.UserBudget.USERNAME_ADMIN }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusBudgetDto? statusBudgetSearch = statusBudgetRepository.GetStatusBudgetByIdStatusBudget(new StatusBudgetDto { IdStatusBudget = typeAccount.IdStatusBudget }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            
             TypeAccount saveTypeAccount = new()
             {
-                Name = typeAccount.Name.Trim(),
-                Description = typeAccount.Description?.Trim() ?? string.Empty,
-                IdStatus = statusSearch.IdStatus
+                NameTypeAccount = typeAccount.NameTypeAccount.Trim(),
+                DescriptionTypeAccount = typeAccount.DescriptionTypeAccount?.Trim() ?? string.Empty,
+                IdStatusBudget = statusBudgetSearch.IdStatusBudget,
+                CreationUser = userBudgetAdminSearch.IdUserBudget,
+                CreationDate = typeAccount.CreationDate,
+                ModificationUser = userBudgetAdminSearch.IdUserBudget,
+                ModificationDate = typeAccount.ModificationDate
             };
 
             UnitOfWork.BaseRepository<TypeAccount>().Add(saveTypeAccount);
@@ -134,7 +140,7 @@
         {
             ITypeAccountRepository typeAccountRepository = UnitOfWork.TypeAccountRepository();
 
-            if (typeAccount == null || typeAccount.IdTypeAccount <= 0 || string.IsNullOrWhiteSpace(typeAccount.Name.Trim()))
+            if (typeAccount == null || typeAccount.IdTypeAccount <= 0 || string.IsNullOrWhiteSpace(typeAccount.NameTypeAccount.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -150,9 +156,13 @@
             TypeAccount updateTypeAccount = new()
             {
                 IdTypeAccount = typeAccountSearch.IdTypeAccount,
-                Name = typeAccount.Name.Trim(),
-                Description = typeAccount.Description?.Trim() ?? string.Empty,
-                IdStatus = typeAccountSearch.IdStatus
+                NameTypeAccount = typeAccount.NameTypeAccount.Trim(),
+                DescriptionTypeAccount = typeAccount.DescriptionTypeAccount?.Trim() ?? string.Empty,
+                IdStatusBudget = typeAccountSearch.IdStatusBudget,
+                CreationUser = typeAccountSearch.CreationUser,
+                CreationDate = typeAccountSearch.CreationDate,
+                ModificationUser = typeAccountSearch.ModificationUser,
+                ModificationDate = typeAccount.ModificationDate
             };
 
             UnitOfWork.BaseRepository<TypeAccount>().Update(updateTypeAccount);
@@ -170,12 +180,12 @@
         public TypeAccountDto DeleteTypeAccount(TypeAccountDto typeAccount)
         {
             ITypeAccountRepository typeAccountRepository = UnitOfWork.TypeAccountRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
+            IStatusBudgetRepository statusBudgetRepository = UnitOfWork.StatusBudgetRepository();
 
             TypeAccountExtendDto? typeAccountSearch = typeAccountRepository.GetTypeAccountByIdTypeAccount(typeAccount) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = typeAccount.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusBudgetDto? statusBudgetSearch = statusBudgetRepository.GetStatusBudgetByIdStatusBudget(new StatusBudgetDto { IdStatusBudget = typeAccount.IdStatusBudget }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            if (typeAccountSearch.IdStatus == typeAccount.IdStatus)
+            if (typeAccountSearch.IdStatusBudget == typeAccount.IdStatusBudget)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -183,9 +193,13 @@
             TypeAccount deleteTypeAccount = new()
             {
                 IdTypeAccount = typeAccountSearch.IdTypeAccount,
-                Name = typeAccountSearch.Name.Trim(),
-                Description = typeAccountSearch.Description?.Trim() ?? string.Empty,
-                IdStatus = statusSearch.IdStatus
+                NameTypeAccount = typeAccountSearch.NameTypeAccount.Trim(),
+                DescriptionTypeAccount = typeAccountSearch.DescriptionTypeAccount?.Trim() ?? string.Empty,
+                IdStatusBudget = statusBudgetSearch.IdStatusBudget,
+                CreationUser = typeAccountSearch.CreationUser,
+                CreationDate = typeAccountSearch.CreationDate,
+                ModificationUser = typeAccountSearch.ModificationUser,
+                ModificationDate = typeAccount.ModificationDate
             };
 
             UnitOfWork.BaseRepository<TypeAccount>().Update(deleteTypeAccount);

@@ -41,7 +41,7 @@
 
         #region Métodos y Funciones
 
-        public DepositExtendDto? GetDepositById(DepositDto deposit)
+        public DepositExtendDto? GetDepositByIdDeposit(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
             DepositExtendDto? depositSearch = depositRepository.GetDepositByIdDeposit(deposit);
@@ -75,7 +75,7 @@
             }
         }
 
-        public List<DepositExtendDto> GetDepositsByYearUser(DepositDto deposit)
+        public List<DepositExtendDto> GetDepositsByYearUserBudget(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
             List<DepositExtendDto> depositsSearch = depositRepository.GetDepositsByYearUserBudget(deposit);
@@ -92,7 +92,7 @@
             }
         }
 
-        public List<DepositExtendDto> GetDepositsByMonthUser(DepositDto deposit)
+        public List<DepositExtendDto> GetDepositsByMonthUserBudget(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
             List<DepositExtendDto> depositsSearch = depositRepository.GetDepositsByMonthUserBudget(deposit);
@@ -109,7 +109,7 @@
             }
         }
 
-        public List<DepositExtendDto> GetDepositsByYearMonthUser(DepositDto deposit)
+        public List<DepositExtendDto> GetDepositsByYearMonthUserBudget(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
             List<DepositExtendDto> depositsSearch = depositRepository.GetDepositsByYearMonthUserBudget(deposit);
@@ -143,7 +143,7 @@
             }
         }
 
-        public List<DepositExtendDto> GetDepositsByYearMonthStatus(DepositDto deposit)
+        public List<DepositExtendDto> GetDepositsByYearMonthStatusBudget(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
             List<DepositExtendDto> depositsSearch = depositRepository.GetDepositsByYearMonthStatusBudget(deposit);
@@ -160,7 +160,7 @@
             }
         }
 
-        public List<DepositExtendDto> GetDepositsByYearMonthUserAccount(DepositDto deposit)
+        public List<DepositExtendDto> GetDepositsByYearMonthUserBudgetAccount(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
             List<DepositExtendDto> deposits = depositRepository.GetDepositsByYearMonthUserBudgetAccount(deposit);
@@ -177,7 +177,7 @@
             }
         }
 
-        public List<DepositExtendDto> GetDepositsByUser(DepositDto deposit)
+        public List<DepositExtendDto> GetDepositsByUserBudget(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
             List<DepositExtendDto> deposits = depositRepository.GetDepositsByUserBudget(deposit);
@@ -211,7 +211,7 @@
             }
         }
 
-        public List<DepositExtendDto> GetDepositsByStatus(DepositDto deposit)
+        public List<DepositExtendDto> GetDepositsByStatusBudget(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
             List<DepositExtendDto> deposits = depositRepository.GetDepositsByStatusBudget(deposit);
@@ -228,7 +228,7 @@
             }
         }
 
-        public List<DepositExtendDto> GetDepositsByUserStatus(DepositDto deposit)
+        public List<DepositExtendDto> GetDepositsByUserBudgetStatusBudget(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
             List<DepositExtendDto> deposits = depositRepository.GetDepositsByUserBudgetStatusBudget(deposit);
@@ -245,7 +245,7 @@
             }
         }
 
-        public List<DepositExtendDto> GetDepositsByAccountStatus(DepositDto deposit)
+        public List<DepositExtendDto> GetDepositsByAccountStatusBudget(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
             List<DepositExtendDto> deposits = depositRepository.GetDepositsByAccountStatusBudget(deposit);
@@ -265,18 +265,19 @@
         public DepositDto SaveDeposit(DepositDto deposit)
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
-            IUserBudgetRepository userRepository = UnitOfWork.UserBudgetRepository();
+            IUserBudgetRepository userBudgetRepository = UnitOfWork.UserBudgetRepository();
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
+            IStatusBudgetRepository statusBudgetRepository = UnitOfWork.StatusBudgetRepository();
 
-            if (deposit == null || string.IsNullOrWhiteSpace(deposit.Amount.ToString().Trim()) || deposit.Year <= 0 || deposit.Month <= 0)
+            if (deposit == null || string.IsNullOrWhiteSpace(deposit.Amount.ToString().Trim()) || deposit.YearDeposit <= 0 || deposit.MonthDeposit <= 0)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
+            UserBudgetExtendDto? userBudgetAdminSearch = userBudgetRepository.GetUserBudgetByUsername(new UserBudgetDto { Username = Constants.UserBudget.USERNAME_ADMIN }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             AccountExtendDto? accountSearch = accountRepository.GetAccountByIdAccount(new AccountDto { IdAccount = deposit.IdAccount }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            UserBudgetExtendDto? userSearch = userRepository.GetUserById(new UserDto { IdUser = deposit.IdUser }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = deposit.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            UserBudgetExtendDto? userSearch = userBudgetRepository.GetUserBudgetByIdUserBudget(new UserBudgetDto { IdUserBudget = deposit.IdUserBudget }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusBudgetDto? statusBudgetSearch = statusBudgetRepository.GetStatusBudgetByIdStatusBudget(new StatusBudgetDto { IdStatusBudget = deposit.IdStatusBudget }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             List<DepositExtendDto>? depositSearch = depositRepository.GetDepositsByYearMonthUserBudgetAccount(deposit);
 
@@ -287,12 +288,16 @@
 
             Deposit saveDeposit = new()
             {
-                Year = deposit.Year,
-                Month = deposit.Month,
+                YearDeposit = deposit.YearDeposit,
+                MonthDeposit = deposit.MonthDeposit,
                 Amount = deposit.Amount,
-                IdUser = userSearch.IdUser,
+                IdUserBudget = userSearch.IdUserBudget,
                 IdAccount = accountSearch.IdAccount,
-                IdStatus = statusSearch.IdStatus
+                IdStatusBudget = statusBudgetSearch.IdStatusBudget,
+                CreationUser = userBudgetAdminSearch.IdUserBudget,
+                CreationDate = deposit.CreationDate,
+                ModificationUser = userBudgetAdminSearch.IdUserBudget,
+                ModificationDate = deposit.ModificationDate
             };
 
             UnitOfWork.BaseRepository<Deposit>().Add(saveDeposit);
@@ -311,7 +316,7 @@
         {
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
 
-            if (deposit == null || string.IsNullOrWhiteSpace(deposit.Amount.ToString().Trim()) || deposit.Year <= 0 || deposit.Month <= 0)
+            if (deposit == null || string.IsNullOrWhiteSpace(deposit.Amount.ToString().Trim()) || deposit.YearDeposit <= 0 || deposit.MonthDeposit <= 0)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -321,12 +326,16 @@
             Deposit updateDeposit = new()
             {
                 IdDeposit = depositSearch.IdDeposit,
-                Year = depositSearch.Year,
-                Month = depositSearch.Month,
+                YearDeposit = depositSearch.YearDeposit,
+                MonthDeposit = depositSearch.MonthDeposit,
                 Amount = deposit.Amount,
-                IdUser = depositSearch.IdUser,
+                IdUserBudget = depositSearch.IdUserBudget,
                 IdAccount = depositSearch.IdAccount,
-                IdStatus = depositSearch.IdStatus
+                IdStatusBudget = depositSearch.IdStatusBudget,
+                CreationUser = depositSearch.CreationUser,
+                CreationDate = depositSearch.CreationDate,
+                ModificationUser = depositSearch.ModificationUser,
+                ModificationDate = deposit.ModificationDate
             };
 
             UnitOfWork.BaseRepository<Deposit>().Update(updateDeposit);
@@ -347,9 +356,9 @@
             IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
 
             DepositExtendDto? depositSearch = depositRepository.GetDepositByIdDeposit(deposit) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = deposit.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusBudgetDto? statusBudgetSearch = statusRepository.GetStatusBudgetByIdStatusBudget(new StatusBudgetDto { IdStatusBudget = deposit.IdStatusBudget }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            if (depositSearch.IdStatus == deposit.IdStatus)
+            if (depositSearch.IdStatusBudget == deposit.IdStatusBudget)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -357,12 +366,16 @@
             Deposit deleteDeposit = new()
             {
                 IdDeposit = depositSearch.IdDeposit,
-                Year = depositSearch.Year,
-                Month = depositSearch.Month,
+                YearDeposit = depositSearch.YearDeposit,
+                MonthDeposit = depositSearch.MonthDeposit,
                 Amount = depositSearch.Amount,
-                IdUser = depositSearch.IdUser,
+                IdUserBudget = depositSearch.IdUserBudget,
                 IdAccount = depositSearch.IdAccount,
-                IdStatus = statusSearch.IdStatus
+                IdStatusBudget = statusBudgetSearch.IdStatusBudget,
+                CreationUser = depositSearch.CreationUser,
+                CreationDate = depositSearch.CreationDate,
+                ModificationUser = depositSearch.ModificationUser,
+                ModificationDate = deposit.ModificationDate
             };
 
             UnitOfWork.BaseRepository<Deposit>().Update(deleteDeposit);

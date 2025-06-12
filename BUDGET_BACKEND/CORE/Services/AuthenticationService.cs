@@ -53,10 +53,10 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            UserBudgetExtendDto? userSearch = (userRepository.GetUserByUsername(new UserDto { Username = authentication.Username }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL));
-            StatusDto? statusSearch = statusRepository.GetStatusByName(new StatusDto { Name = Constants.Status.ACTIVO }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            UserBudgetExtendDto? userSearch = (userRepository.GetUserBudgetByUsername(new UserBudgetDto { Username = authentication.Username }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL));
+            StatusBudgetDto? statusBudgetSearch = statusRepository.GetStatusBudgetByNameStatus(new StatusBudgetDto { NameStatus = Constants.Status.ACTIVO }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            if (!PasswordHash.VerifyPassword(authentication.EncryptedPassword, userSearch.Password))
+            if (!PasswordHash.VerifyPassword(authentication.EncryptedPassword, userSearch.EncryptedPassword))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -74,8 +74,8 @@
                 Token = sToken,
                 CreationDate = DateTime.Now,
                 ExpirationDate = DateTime.Now.AddDays(1),
-                IdUser = userSearch.IdUser,
-                IdStatus = statusSearch.IdStatus
+                IdUserBudget = userSearch.IdUserBudget,
+                IdStatusBudget = statusBudgetSearch.IdStatusBudget
             };
 
             UnitOfWork.BaseRepository<TokenApi>().Add(saveTokenApi);
@@ -90,7 +90,7 @@
             authentication.ExpirationDate = DateTime.Now.AddDays(1);
             authentication.IsAuthenticated = true;
 
-            _logApiService.TraceLog(typeof(Account).Name, Constants.Method.TOKEN, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(authentication), DateTime.Now, statusSearch.IdStatus);
+            _logApiService.TraceLog(typeof(Account).Name, Constants.Method.TOKEN, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(authentication), DateTime.Now, statusBudgetSearch.IdStatusBudget);
 
             return authentication;
         }
@@ -107,10 +107,10 @@
             }
 
             TokenApiExtendDto? tokenApiSearch = (tokenApiRepository.GetTokenApiByToken(new TokenApiDto { Token = authentication.Token.Trim() }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL));
-            UserBudgetExtendDto? userSearch = (userRepository.GetUserById(new UserDto { IdUser = tokenApiSearch.IdUser }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL));
-            StatusDto? statusSearch = statusRepository.GetStatusByName(new StatusDto { Name = Constants.Status.ACTIVO }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            UserBudgetExtendDto? userSearch = (userRepository.GetUserBudgetByIdUserBudget(new UserBudgetDto { IdUserBudget = tokenApiSearch.IdUserBudget }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL));
+            StatusBudgetDto? statusBudgetSearch = statusRepository.GetStatusBudgetByNameStatus(new StatusBudgetDto { NameStatus = Constants.Status.ACTIVO }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            if (userSearch.IdStatus != statusSearch.IdStatus)
+            if (userSearch.IdStatusBudget != statusBudgetSearch.IdStatusBudget)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -121,7 +121,7 @@
             authentication.ExpirationDate = tokenApiSearch.ExpirationDate;
             authentication.IsAuthenticated = tokenApiSearch.ExpirationDate >= DateTime.Now;
 
-            _logApiService.TraceLog(typeof(Account).Name, Constants.Method.VERIFY, JsonSerializer.Serialize(tokenApiSearch), JsonSerializer.Serialize(authentication), DateTime.Now, statusSearch.IdStatus);
+            _logApiService.TraceLog(typeof(Account).Name, Constants.Method.VERIFY, JsonSerializer.Serialize(tokenApiSearch), JsonSerializer.Serialize(authentication), DateTime.Now, statusBudgetSearch.IdStatusBudget);
 
             return authentication;
         }

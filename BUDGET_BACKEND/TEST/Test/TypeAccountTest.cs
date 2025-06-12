@@ -83,11 +83,47 @@
 
             _context.SaveChanges();
 
+            /// RolesBudget IdRoleBudget 1
+            _context.RolesBudget.Add(new RoleBudget()
+            {
+                IdRoleBudget = 1,
+                NameRole = "Test",
+                DescriptionRole = "Test",
+                IdStatusBudget = 1
+            });
+
+            _context.SaveChanges();
+
+            /// UsersBudget IdUserBudget 1
+            _context.UsersBudget.Add(new UserBudget()
+            {
+                IdUserBudget = 1,
+                Email = "Test",
+                Phone = "1234567890",
+                Username = Constants.UserBudget.USERNAME_ADMIN,
+                EncryptedPassword = "A7Ws/sQDVsXXi/xheT1IufcXPN5rJUKXmPWvnJTGzjRgOzD+vAt1GAMXoD0/mlrD",
+                IdRoleBudget = 1,
+                IdStatusBudget = 2
+            });
+
+            _context.SaveChanges();
+
             /// TypeAccount IdTypeAccount 1
             _context.TypeAccounts.Add(new TypeAccount()
             {
                 IdTypeAccount = 1,
                 NameTypeAccount = "Test",
+                DescriptionTypeAccount = "Test",
+                IdStatusBudget = 2
+            });
+
+            _context.SaveChanges();
+
+            /// TypeAccount IdTypeAccount 1
+            _context.TypeAccounts.Add(new TypeAccount()
+            {
+                IdTypeAccount = 2,
+                NameTypeAccount = "Test1",
                 DescriptionTypeAccount = "Test",
                 IdStatusBudget = 1
             });
@@ -180,7 +216,7 @@
             ///Arrange   
             TypeAccountDto typeAccount = new()
             {
-                IdStatusBudget = 1
+                IdStatusBudget = 2
             };
 
             ///Act
@@ -216,8 +252,8 @@
             ///Arrange   
             TypeAccountExtendDto typeAccount = new()
             {
-                NameTypeAccount = "Test1",
-                IdStatusBudget = 1
+                NameTypeAccount = "Test2",
+                IdStatusBudget = 2
             };
 
             ///Act
@@ -236,7 +272,7 @@
             TypeAccountExtendDto typeAccount = new()
             {
                 NameTypeAccount = "Test",
-                IdStatusBudget = 1
+                IdStatusBudget = 2
             };
 
             ///Act
@@ -255,7 +291,7 @@
             TypeAccountExtendDto typeAccount = new()
             {
                 IdTypeAccount = 1,
-                NameTypeAccount = "Test1",
+                NameTypeAccount = "Test",
                 IdStatusBudget = 1
             };
 
@@ -276,7 +312,7 @@
             {
                 IdTypeAccount = -1,
                 NameTypeAccount = "Test1",
-                IdStatusBudget = 1
+                IdStatusBudget = 2
             };
 
             ///Act
@@ -316,7 +352,7 @@
             {
                 IdTypeAccount = -1,
                 NameTypeAccount = "Test1",
-                IdStatusBudget = 1
+                IdStatusBudget = 2
             };
 
             ///Act

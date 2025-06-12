@@ -83,11 +83,47 @@
 
             _context.SaveChanges();
 
+            /// RolesBudget IdRoleBudget 1
+            _context.RolesBudget.Add(new RoleBudget()
+            {
+                IdRoleBudget = 1,
+                NameRole = "Test",
+                DescriptionRole = "Test",
+                IdStatusBudget = 1
+            });
+
+            _context.SaveChanges();
+
+            /// UsersBudget IdUserBudget 1
+            _context.UsersBudget.Add(new UserBudget()
+            {
+                IdUserBudget = 1,
+                Email = "Test",
+                Phone = "1234567890",
+                Username = Constants.UserBudget.USERNAME_ADMIN,
+                EncryptedPassword = "A7Ws/sQDVsXXi/xheT1IufcXPN5rJUKXmPWvnJTGzjRgOzD+vAt1GAMXoD0/mlrD",
+                IdRoleBudget = 1,
+                IdStatusBudget = 2
+            });
+
+            _context.SaveChanges();
+
             /// TypeExpense IdTypeExpense 1
             _context.TypeExpenses.Add(new TypeExpense()
             {
                 IdTypeExpense = 1,
                 NameTypeExpense = "Test",
+                DescriptionTypeExpense = "Test",
+                IdStatusBudget = 2
+            });
+
+            _context.SaveChanges();
+
+            /// TypeExpense IdTypeExpense 1
+            _context.TypeExpenses.Add(new TypeExpense()
+            {
+                IdTypeExpense = 2,
+                NameTypeExpense = "Test1",
                 DescriptionTypeExpense = "Test",
                 IdStatusBudget = 1
             });
@@ -216,8 +252,8 @@
             ///Arrange   
             TypeExpenseExtendDto typeExpense = new()
             {
-                NameTypeExpense = "Test1",
-                IdStatusBudget = 1
+                NameTypeExpense = "Test2",
+                IdStatusBudget = 2
             };
 
             ///Act
@@ -236,7 +272,7 @@
             TypeExpenseExtendDto typeExpense = new()
             {
                 NameTypeExpense = "Test",
-                IdStatusBudget = 1
+                IdStatusBudget = 2
             };
 
             ///Act
@@ -254,7 +290,7 @@
             ///Arrange   
             TypeExpenseExtendDto typeExpense = new()
             {
-                IdTypeExpense = 1,
+                IdTypeExpense = 2,
                 NameTypeExpense = "Test1",
                 IdStatusBudget = 1
             };

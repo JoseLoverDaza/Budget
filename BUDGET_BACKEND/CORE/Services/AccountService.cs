@@ -41,7 +41,7 @@
 
         #region Métodos y Funciones
 
-        public AccountExtendDto? GetAccountById(AccountDto account)
+        public AccountExtendDto? GetAccountByIdAccount(AccountDto account)
         {
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();            
             AccountExtendDto? accountSearch = accountRepository.GetAccountByIdAccount(account);
@@ -92,7 +92,7 @@
             }
         }
 
-        public List<AccountExtendDto> GetAccountsByUser(AccountDto account)
+        public List<AccountExtendDto> GetAccountsByUserBudget(AccountDto account)
         {
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
             List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByUserBudget(account);
@@ -109,7 +109,7 @@
             }
         }
 
-        public List<AccountExtendDto> GetAccountsByStatus(AccountDto account)
+        public List<AccountExtendDto> GetAccountsByStatusBudget(AccountDto account)
         {
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
             List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByStatusBudget(account);
@@ -126,7 +126,7 @@
             }
         }
 
-        public List<AccountExtendDto> GetAccountsByFinancialInstitutionStatus(AccountDto account)
+        public List<AccountExtendDto> GetAccountsByFinancialInstitutionStatusBudget(AccountDto account)
         {
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
             List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByFinancialInstitutionStatusBudget(account);
@@ -143,7 +143,7 @@
             }
         }
 
-        public List<AccountExtendDto> GetAccountsByTypeAccountStatus(AccountDto account)
+        public List<AccountExtendDto> GetAccountsByTypeAccountStatusBudget(AccountDto account)
         {
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
             List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByTypeAccountStatusBudget(account);
@@ -160,7 +160,7 @@
             }
         }
 
-        public List<AccountExtendDto> GetAccountsByUserStatus(AccountDto account)
+        public List<AccountExtendDto> GetAccountsByUserBudgetStatusBudget(AccountDto account)
         {
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
             List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByUserBudgetStatusBudget(account);
@@ -177,7 +177,7 @@
             }
         }
 
-        public List<AccountExtendDto> GetAccountsByNameFinancialInstitutionTypeAccountUser(AccountDto account)
+        public List<AccountExtendDto> GetAccountsByNameFinancialInstitutionTypeAccountUserBudget(AccountDto account)
         {
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
             List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByNameFinancialInstitutionTypeAccountUserBudget(account);
@@ -194,7 +194,7 @@
             }
         }
 
-        public List<AccountExtendDto> GetAccountsByFinancialInstitutionTypeAccountUser(AccountDto account)
+        public List<AccountExtendDto> GetAccountsByFinancialInstitutionTypeAccountUserBudget(AccountDto account)
         {
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
             List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByFinancialInstitutionTypeAccountUserBudget(account);
@@ -216,10 +216,10 @@
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
             IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
             ITypeAccountRepository typeAccountRepository = UnitOfWork.TypeAccountRepository();
-            IUserBudgetRepository userRepository = UnitOfWork.UserBudgetRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
+            IUserBudgetRepository userBudgetRepository = UnitOfWork.UserBudgetRepository();
+            IStatusBudgetRepository statusBudgetRepository = UnitOfWork.StatusBudgetRepository();
 
-            if (account == null || string.IsNullOrWhiteSpace(account.Name.Trim()))
+            if (account == null || string.IsNullOrWhiteSpace(account.NameAccount.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -233,17 +233,22 @@
 
             FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionByIdFinancialInstitution(new FinancialInstitutionDto { IdFinancialInstitution = account.IdFinancialInstitution }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             TypeAccountExtendDto? typeAccountSearch = typeAccountRepository.GetTypeAccountByIdTypeAccount(new TypeAccountDto { IdTypeAccount = account.IdTypeAccount }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            UserBudgetExtendDto? userSearch = userRepository.GetUserById(new UserDto { IdUser = account.IdUser }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = account.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            UserBudgetExtendDto? userBudgetSearch = userBudgetRepository.GetUserBudgetByIdUserBudget(new UserBudgetDto { IdUserBudget = account.IdUserBudget }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusBudgetDto? statusBudgetSearch = statusBudgetRepository.GetStatusBudgetByIdStatusBudget(new StatusBudgetDto { IdStatusBudget = account.IdStatusBudget }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            UserBudgetExtendDto? userBudgetAdminSearch = userBudgetRepository.GetUserBudgetByUsername(new UserBudgetDto { Username = Constants.UserBudget.USERNAME_ADMIN }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             Account saveAccount = new()
             {
-                Name = account.Name.Trim(),
-                Description = account.Description?.Trim() ?? string.Empty,
+                NameAccount = account.NameAccount.Trim(),
+                DescriptionAccount = account.DescriptionAccount?.Trim() ?? string.Empty,
                 IdFinancialInstitution = financialInstitutionSearch.IdFinancialInstitution,
                 IdTypeAccount = typeAccountSearch.IdTypeAccount,
-                IdUser = userSearch.IdUser,
-                IdStatus = statusSearch.IdStatus
+                IdUserBudget = userBudgetSearch.IdUserBudget,
+                IdStatusBudget = statusBudgetSearch.IdStatusBudget,
+                CreationUser = userBudgetAdminSearch.IdUserBudget,
+                CreationDate = account.CreationDate,
+                ModificationUser = userBudgetAdminSearch.IdUserBudget,
+                ModificationDate = account.ModificationDate
             };
 
             UnitOfWork.BaseRepository<Account>().Add(saveAccount);
@@ -262,7 +267,7 @@
         {
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
 
-            if (account == null || account.IdAccount <= 0 || string.IsNullOrWhiteSpace(account.Name.Trim()))
+            if (account == null || account.IdAccount <= 0 || string.IsNullOrWhiteSpace(account.NameAccount.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -278,12 +283,16 @@
             Account updateAccount = new()
             {
                 IdAccount = accountSearch.IdAccount,
-                Name = account.Name.Trim(),
-                Description = account.Description?.Trim() ?? string.Empty,
+                NameAccount = account.NameAccount.Trim(),
+                DescriptionAccount = account.DescriptionAccount?.Trim() ?? string.Empty,
                 IdFinancialInstitution = accountSearch.IdFinancialInstitution,
                 IdTypeAccount = accountSearch.IdTypeAccount,
-                IdUser = accountSearch.IdUser,
-                IdStatus = accountSearch.IdStatus
+                IdUserBudget = accountSearch.IdUserBudget,
+                IdStatusBudget = accountSearch.IdStatusBudget,
+                CreationUser = accountSearch.CreationUser,
+                CreationDate = accountSearch.CreationDate,
+                ModificationUser = accountSearch.ModificationUser,
+                ModificationDate = account.ModificationDate
             };
 
             UnitOfWork.BaseRepository<Account>().Update(updateAccount);
@@ -301,12 +310,12 @@
         public AccountDto DeleteAccount(AccountDto account)
         {
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
+            IStatusBudgetRepository statusBudgetRepository = UnitOfWork.StatusBudgetRepository();
 
             AccountExtendDto? accountSearch = accountRepository.GetAccountByIdAccount(account) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = account.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusBudgetDto? statusSearch = statusBudgetRepository.GetStatusBudgetByIdStatusBudget(new StatusBudgetDto { IdStatusBudget = account.IdStatusBudget }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            if (accountSearch.IdStatus == account.IdStatus)
+            if (accountSearch.IdStatusBudget == account.IdStatusBudget)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -314,12 +323,16 @@
             Account deleteAccount = new()
             {
                 IdAccount = accountSearch.IdAccount,
-                Name = accountSearch.Name.Trim(),
-                Description = accountSearch.Description?.Trim() ?? string.Empty,
+                NameAccount = accountSearch.NameAccount.Trim(),
+                DescriptionAccount = accountSearch.DescriptionAccount?.Trim() ?? string.Empty,
                 IdFinancialInstitution = accountSearch.IdFinancialInstitution,
                 IdTypeAccount = accountSearch.IdTypeAccount,
-                IdUser = accountSearch.IdUser,
-                IdStatus = statusSearch.IdStatus
+                IdUserBudget = accountSearch.IdUserBudget,
+                IdStatusBudget = statusSearch.IdStatusBudget,
+                CreationUser = accountSearch.CreationUser,
+                CreationDate = accountSearch.CreationDate,
+                ModificationUser = accountSearch.ModificationUser,
+                ModificationDate = account.ModificationDate
             };
 
             UnitOfWork.BaseRepository<Account>().Update(deleteAccount);

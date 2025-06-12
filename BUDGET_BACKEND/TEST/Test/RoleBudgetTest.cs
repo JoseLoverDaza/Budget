@@ -93,6 +93,20 @@
 
             _context.SaveChanges();
 
+            /// UsersBudget IdUserBudget 1
+            _context.UsersBudget.Add(new UserBudget()
+            {
+                IdUserBudget = 1,
+                Email = "Test",
+                Phone = "1234567890",
+                Username = Constants.UserBudget.USERNAME_ADMIN,
+                EncryptedPassword = "A7Ws/sQDVsXXi/xheT1IufcXPN5rJUKXmPWvnJTGzjRgOzD+vAt1GAMXoD0/mlrD",
+                IdRoleBudget = 1,
+                IdStatusBudget = 2
+            });
+
+            _context.SaveChanges();
+
             #endregion Data
 
         }

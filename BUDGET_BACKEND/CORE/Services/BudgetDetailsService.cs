@@ -41,7 +41,7 @@
 
         #region Métodos y Funciones
 
-        public BudgetDetailExtendDto? GetBudgetDetailsById(BudgetDetailsDto budgetDetails)
+        public BudgetDetailExtendDto? GetBudgetDetailsByIdBudgetDetails(BudgetDetailsDto budgetDetails)
         {
             IBudgetDetailsRepository budgetDetailRepository = UnitOfWork.BudgetDetailsRepository();
             BudgetDetailExtendDto? budgetDetailsSearch = budgetDetailRepository.GetBudgetDetailsByIdBudgetDetails(budgetDetails);
@@ -92,7 +92,7 @@
             }
         }
 
-        public List<BudgetDetailExtendDto> GetBudgetDetailsByStatus(BudgetDetailsDto budgetDetails)
+        public List<BudgetDetailExtendDto> GetBudgetDetailsByStatusBudget(BudgetDetailsDto budgetDetails)
         {
             IBudgetDetailsRepository budgetDetailRepository = UnitOfWork.BudgetDetailsRepository();
             List<BudgetDetailExtendDto> budgetDetailsSearch = budgetDetailRepository.GetBudgetDetailsByStatusBudget(budgetDetails);
@@ -126,7 +126,7 @@
             }
         }
 
-        public List<BudgetDetailExtendDto> GetBudgetDetailsByExpenseStatus(BudgetDetailsDto budgetDetails)
+        public List<BudgetDetailExtendDto> GetBudgetDetailsByExpenseStatusBudget(BudgetDetailsDto budgetDetails)
         {
             IBudgetDetailsRepository budgetDetailRepository = UnitOfWork.BudgetDetailsRepository();
             List<BudgetDetailExtendDto> budgetDetailsSearch = budgetDetailRepository.GetBudgetDetailsByExpenseStatusBudget(budgetDetails);
@@ -143,7 +143,7 @@
             }
         }
 
-        public List<BudgetDetailExtendDto> GetBudgetDetailsByBudgetExpenseStatus(BudgetDetailsDto budgetDetails)
+        public List<BudgetDetailExtendDto> GetBudgetDetailsByBudgetExpenseStatusBudget(BudgetDetailsDto budgetDetails)
         {
             IBudgetDetailsRepository budgetDetailRepository = UnitOfWork.BudgetDetailsRepository();
             List<BudgetDetailExtendDto> budgetDetailsSearch = budgetDetailRepository.GetBudgetDetailsByBudgetExpenseStatusBudget(budgetDetails);
@@ -162,10 +162,11 @@
 
         public BudgetDetailsDto SaveBudgetDetail(BudgetDetailsDto budgetDetails)
         {
+            IUserBudgetRepository userBudgetRepository = UnitOfWork.UserBudgetRepository();
             IBudgetDetailsRepository budgetDetailsRepository = UnitOfWork.BudgetDetailsRepository();
             IBudgetRepository budgetRepository = UnitOfWork.BudgetRepository();
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
+            IStatusBudgetRepository statusBudgetRepository = UnitOfWork.StatusBudgetRepository();
 
             if (budgetDetails == null || budgetDetails.Amount <= 0)
             {
@@ -179,17 +180,21 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
+            UserBudgetExtendDto? userBudgetAdminSearch = userBudgetRepository.GetUserBudgetByUsername(new UserBudgetDto { Username = Constants.UserBudget.USERNAME_ADMIN }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             BudgetExtendDto? budgetSearch = budgetRepository.GetBudgetByIdBudget(new BudgetDto { IdBudget = budgetDetails.IdBudget }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             ExpenseExtendDto? expenseSearch = expenseRepository.GetExpenseByIdExpense(new ExpenseDto { IdExpense = budgetDetails.IdExpense }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = budgetDetails.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusBudgetDto? statusBudgetSearch = statusBudgetRepository.GetStatusBudgetByIdStatusBudget(new StatusBudgetDto { IdStatusBudget = budgetDetails.IdStatusBudget }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             BudgetDetails saveBudgetDetails = new()
             {
-                IdBudget = budgetSearch.IdBudget,
-                CreationDate = budgetDetails.CreationDate,
+                IdBudget = budgetSearch.IdBudget,               
                 Amount = budgetDetails.Amount,
                 IdExpense = expenseSearch.IdExpense,
-                IdStatus = statusSearch.IdStatus
+                IdStatusBudget = statusBudgetSearch.IdStatusBudget,
+                CreationUser = userBudgetAdminSearch.IdUserBudget,
+                CreationDate = budgetDetails.CreationDate,
+                ModificationUser = userBudgetAdminSearch.IdUserBudget,
+                ModificationDate = budgetDetails.ModificationDate
             };
 
             UnitOfWork.BaseRepository<BudgetDetails>().Add(saveBudgetDetails);
@@ -218,11 +223,14 @@
             BudgetDetails updateBudgetDetails = new()
             {
                 IdBudgetDetails = budgetDetailSearch.IdBudgetDetails,
-                IdBudget = budgetDetailSearch.IdBudget,
-                CreationDate = budgetDetailSearch.CreationDate,
+                IdBudget = budgetDetailSearch.IdBudget,               
                 Amount = budgetDetails.Amount,
                 IdExpense = budgetDetailSearch.IdExpense,
-                IdStatus = budgetDetailSearch.IdStatus
+                IdStatusBudget = budgetDetailSearch.IdStatusBudget,
+                CreationUser = budgetDetailSearch.CreationUser,
+                CreationDate = budgetDetailSearch.CreationDate,
+                ModificationUser = budgetDetailSearch.ModificationUser,
+                ModificationDate = budgetDetails.ModificationDate
             };
 
             UnitOfWork.BaseRepository<BudgetDetails>().Update(updateBudgetDetails);
@@ -243,9 +251,9 @@
             IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
 
             BudgetDetailExtendDto? budgetDetailSearch = budgetDetailsRepository.GetBudgetDetailsByIdBudgetDetails(budgetDetails) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = budgetDetails.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusBudgetDto? statusBudgetSearch = statusRepository.GetStatusBudgetByIdStatusBudget(new StatusBudgetDto { IdStatusBudget = budgetDetails.IdStatusBudget }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            if (budgetDetailSearch.IdStatus == budgetDetails.IdStatus)
+            if (budgetDetailSearch.IdStatusBudget == budgetDetails.IdStatusBudget)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -253,11 +261,14 @@
             BudgetDetails deleteBudgetDetails = new()
             {
                 IdBudgetDetails = budgetDetailSearch.IdBudgetDetails,
-                IdBudget = budgetDetailSearch.IdBudget,
-                CreationDate = budgetDetailSearch.CreationDate,
+                IdBudget = budgetDetailSearch.IdBudget,               
                 Amount = budgetDetailSearch.Amount,
                 IdExpense = budgetDetailSearch.IdExpense,
-                IdStatus = statusSearch.IdStatus
+                IdStatusBudget = statusBudgetSearch.IdStatusBudget,
+                CreationUser = budgetDetailSearch.CreationUser,
+                CreationDate = budgetDetailSearch.CreationDate,
+                ModificationUser = budgetDetailSearch.ModificationUser,
+                ModificationDate = budgetDetails.ModificationDate
             };
 
             UnitOfWork.BaseRepository<BudgetDetails>().Update(deleteBudgetDetails);

@@ -52,6 +52,7 @@
             _tokenApiController = new TokenApiController(_tokenApiService);
 
             #region Data
+
             /// StatusBudget IdStatusBudget 1
             _context.StatusBudget.Add(new StatusBudget()
             {
@@ -86,9 +87,9 @@
             _context.RolesBudget.Add(new RoleBudget()
             {
                 IdRoleBudget = 1,
-                NameRole = Constants.UserBudget.USERNAME_ADMIN,
-                DescriptionRole = Constants.UserBudget.USERNAME_ADMIN,
-                IdStatusBudget = 2
+                NameRole = "Test",
+                DescriptionRole = "Test",
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
@@ -115,7 +116,7 @@
                 CreationDate = new DateTime(2026, 1, 1),
                 ExpirationDate = new DateTime(2026, 1, 1),
                 IdUserBudget = 1,
-                IdStatusBudget = 2
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();

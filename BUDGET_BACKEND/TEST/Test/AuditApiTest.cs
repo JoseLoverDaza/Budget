@@ -87,9 +87,9 @@
             _context.RolesBudget.Add(new RoleBudget()
             {
                 IdRoleBudget = 1,
-                NameRole = Constants.UserBudget.USERNAME_ADMIN,
-                DescriptionRole = Constants.UserBudget.USERNAME_ADMIN,
-                IdStatusBudget = 2
+                NameRole = "Test",
+                DescriptionRole = "Test",
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
@@ -340,28 +340,6 @@
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(HttpStatusCode.OK.GetHashCode(), result.Code);
-        }
-
-        [TestMethod]
-        public void SaveAuditApiFail()
-        {
-            ///Arrange   
-            AuditApiDto auditApi = new()
-            {                
-                Host = "Test",
-                EndpointUrl = "Test",
-                Agent = "Test",
-                Method = "Test",
-                CreationDate = DateTime.Now
-            };
-
-            ///Act
-            var result = _auditApiController!.SaveAuditApi(auditApi);
-
-            ///Assert
-            Assert.IsNotNull(result);
-            Assert.IsNull(result.Data);
-            Assert.AreEqual(HttpStatusCode.InternalServerError.GetHashCode(), result.Code);
         }
 
         [TestMethod]

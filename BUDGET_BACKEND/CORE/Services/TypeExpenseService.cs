@@ -41,7 +41,7 @@
 
         #region Métodos y Funciones
 
-        public TypeExpenseExtendDto? GetTypeExpenseById(TypeExpenseDto typeExpense)
+        public TypeExpenseExtendDto? GetTypeExpenseByIdTypeExpense(TypeExpenseDto typeExpense)
         {
             ITypeExpenseRepository typeExpenseRepository = UnitOfWork.TypeExpenseRepository();
             TypeExpenseExtendDto? typeExpenseSearch = typeExpenseRepository.GetTypeExpenseByIdTypeExpense(typeExpense);
@@ -58,7 +58,7 @@
             }
         }
 
-        public TypeExpenseExtendDto? GetTypeExpenseByName(TypeExpenseDto typeExpense)
+        public TypeExpenseExtendDto? GetTypeExpenseByNameTypeExpense(TypeExpenseDto typeExpense)
         {
             ITypeExpenseRepository typeExpenseRepository = UnitOfWork.TypeExpenseRepository();
             TypeExpenseExtendDto? typeExpenseSearch = typeExpenseRepository.GetTypeExpenseByNameTypeExpense(typeExpense);
@@ -75,10 +75,10 @@
             }
         }
 
-        public List<TypeExpenseExtendDto> GetTypeExpensesByStatus(TypeExpenseDto typeExpense)
+        public List<TypeExpenseExtendDto> GetTypeExpensesByStatusBudget(TypeExpenseDto typeExpense)
         {
             ITypeExpenseRepository typeExpenseRepository = UnitOfWork.TypeExpenseRepository();
-            List<TypeExpenseExtendDto> typeExpensesSearch = typeExpenseRepository.GetTypeExpensesByStatus(typeExpense);
+            List<TypeExpenseExtendDto> typeExpensesSearch = typeExpenseRepository.GetTypeExpensesByStatusBudget(typeExpense);
 
             _logApiService.TraceLog(typeof(TypeExpense).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -94,10 +94,11 @@
 
         public TypeExpenseDto SaveTypeExpense(TypeExpenseDto typeExpense)
         {
+            IUserBudgetRepository userBudgetRepository = UnitOfWork.UserBudgetRepository();
             ITypeExpenseRepository typeExpenseRepository = UnitOfWork.TypeExpenseRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
+            IStatusBudgetRepository statusBudgetRepository = UnitOfWork.StatusBudgetRepository();
 
-            if (typeExpense == null || string.IsNullOrWhiteSpace(typeExpense.Name.Trim()))
+            if (typeExpense == null || string.IsNullOrWhiteSpace(typeExpense.NameTypeExpense.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -109,13 +110,18 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = typeExpense.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            UserBudgetExtendDto? userBudgetAdminSearch = userBudgetRepository.GetUserBudgetByUsername(new UserBudgetDto { Username = Constants.UserBudget.USERNAME_ADMIN }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusBudgetDto? statusBudgetSearch = statusBudgetRepository.GetStatusBudgetByIdStatusBudget(new StatusBudgetDto { IdStatusBudget = typeExpense.IdStatusBudget }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             TypeExpense saveTypeExpense = new()
             {
-                Name = typeExpense.Name.Trim(),
-                Description = typeExpense.Description?.Trim() ?? string.Empty,
-                IdStatus = statusSearch.IdStatus
+                NameTypeExpense = typeExpense.NameTypeExpense.Trim(),
+                DescriptionTypeExpense = typeExpense.DescriptionTypeExpense?.Trim() ?? string.Empty,
+                IdStatusBudget = statusBudgetSearch.IdStatusBudget,
+                CreationUser = userBudgetAdminSearch.IdUserBudget,
+                CreationDate = typeExpense.CreationDate,
+                ModificationUser = userBudgetAdminSearch.IdUserBudget,
+                ModificationDate = typeExpense.ModificationDate
             };
 
             UnitOfWork.BaseRepository<TypeExpense>().Add(saveTypeExpense);
@@ -134,12 +140,12 @@
         {
             ITypeExpenseRepository typeExpenseRepository = UnitOfWork.TypeExpenseRepository();
 
-            if (typeExpense == null || typeExpense.IdTypeExpense <= 0 || string.IsNullOrWhiteSpace(typeExpense.Name.Trim()))
+            if (typeExpense == null || typeExpense.IdTypeExpense <= 0 || string.IsNullOrWhiteSpace(typeExpense.NameTypeExpense.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            if (string.IsNullOrWhiteSpace(typeExpense.Name.Trim()))
+            if (string.IsNullOrWhiteSpace(typeExpense.NameTypeExpense.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -155,9 +161,13 @@
             TypeExpense updateTypeExpense = new()
             {
                 IdTypeExpense = typeExpenseSearch.IdTypeExpense,
-                Name = typeExpense.Name.Trim(),
-                Description = typeExpense.Description?.Trim() ?? string.Empty,
-                IdStatus = typeExpenseSearch.IdStatus
+                NameTypeExpense = typeExpense.NameTypeExpense.Trim(),
+                DescriptionTypeExpense = typeExpense.DescriptionTypeExpense?.Trim() ?? string.Empty,
+                IdStatusBudget = typeExpenseSearch.IdStatusBudget,
+                CreationUser = typeExpenseSearch.CreationUser,
+                CreationDate = typeExpenseSearch.CreationDate,
+                ModificationUser = typeExpenseSearch.ModificationUser,
+                ModificationDate = typeExpense.ModificationDate
             };
 
             UnitOfWork.BaseRepository<TypeExpense>().Update(updateTypeExpense);
@@ -175,12 +185,12 @@
         public TypeExpenseDto DeleteTypeExpense(TypeExpenseDto typeExpense)
         {
             ITypeExpenseRepository typeExpenseRepository = UnitOfWork.TypeExpenseRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
+            IStatusBudgetRepository statusBudgetRepository = UnitOfWork.StatusBudgetRepository();
 
             TypeExpenseExtendDto? typeExpenseSearch = typeExpenseRepository.GetTypeExpenseByIdTypeExpense(typeExpense) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = typeExpense.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusBudgetDto? statusBudgetSearch = statusBudgetRepository.GetStatusBudgetByIdStatusBudget(new StatusBudgetDto { IdStatusBudget = typeExpense.IdStatusBudget }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            if (typeExpenseSearch.IdStatus == typeExpense.IdStatus)
+            if (typeExpenseSearch.IdStatusBudget == typeExpense.IdStatusBudget)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -188,9 +198,13 @@
             TypeExpense deleteTypeExpense = new()
             {
                 IdTypeExpense = typeExpenseSearch.IdTypeExpense,
-                Name = typeExpenseSearch.Name.Trim(),
-                Description = typeExpenseSearch.Description?.Trim() ?? string.Empty,
-                IdStatus = statusSearch.IdStatus
+                NameTypeExpense = typeExpenseSearch.NameTypeExpense.Trim(),
+                DescriptionTypeExpense = typeExpenseSearch.DescriptionTypeExpense?.Trim() ?? string.Empty,
+                IdStatusBudget = statusBudgetSearch.IdStatusBudget,
+                CreationUser = typeExpenseSearch.CreationUser,
+                CreationDate = typeExpenseSearch.CreationDate,
+                ModificationUser = typeExpenseSearch.ModificationUser,
+                ModificationDate = typeExpenseSearch.ModificationDate
             };
 
             UnitOfWork.BaseRepository<TypeExpense>().Update(deleteTypeExpense);

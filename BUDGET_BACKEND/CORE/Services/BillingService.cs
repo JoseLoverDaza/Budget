@@ -41,7 +41,7 @@
 
         #region Métodos y Funciones
 
-        public BillingExtendDto? GetBillingById(BillingDto billing)
+        public BillingExtendDto? GetBillingByIdBilling(BillingDto billing)
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
             BillingExtendDto? billingSearch = billingRepository.GetBillingByIdBilling(billing);
@@ -75,7 +75,7 @@
             }
         }
 
-        public List<BillingExtendDto> GetBillingsByYearUser(BillingDto billing)
+        public List<BillingExtendDto> GetBillingsByYearUserBudget(BillingDto billing)
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
             List<BillingExtendDto> billings = billingRepository.GetBillingsByYearUserBudget(billing);
@@ -92,7 +92,7 @@
             }
         }
 
-        public List<BillingExtendDto> GetBillingsByMonthUser(BillingDto billing)
+        public List<BillingExtendDto> GetBillingsByMonthUserBudget(BillingDto billing)
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
             List<BillingExtendDto> billings = billingRepository.GetBillingsByMonthUserBudget(billing);
@@ -109,7 +109,7 @@
             }
         }
 
-        public List<BillingExtendDto> GetBillingsByYearMonthUser(BillingDto billing)
+        public List<BillingExtendDto> GetBillingsByYearMonthUserBudget(BillingDto billing)
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
             List<BillingExtendDto> billings = billingRepository.GetBillingsByYearMonthUserBudget(billing);
@@ -126,7 +126,7 @@
             }
         }
 
-        public List<BillingExtendDto> GetBillingsByUser(BillingDto billing)
+        public List<BillingExtendDto> GetBillingsByUserBudget(BillingDto billing)
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
             List<BillingExtendDto> billings = billingRepository.GetBillingsByUserBudget(billing);
@@ -143,7 +143,7 @@
             }
         }
 
-        public List<BillingExtendDto> GetBillingsByStatus(BillingDto billing)
+        public List<BillingExtendDto> GetBillingsByStatusBudget(BillingDto billing)
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
             List<BillingExtendDto> billings = billingRepository.GetBillingsByStatusBudget(billing);
@@ -160,7 +160,7 @@
             }
         }
 
-        public List<BillingExtendDto> GetBillingsByUserStatus(BillingDto billing)
+        public List<BillingExtendDto> GetBillingsByUserBudgetStatusBudget(BillingDto billing)
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
             List<BillingExtendDto> billings = billingRepository.GetBillingsByUserBudgetStatusBudget(billing);
@@ -179,17 +179,18 @@
 
         public BillingDto SaveBilling(BillingDto billing)
         {
-            IBillingRepository billingRepository = UnitOfWork.BillingRepository();
-            IUserBudgetRepository userRepository = UnitOfWork.UserBudgetRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
+            IUserBudgetRepository userBudgetRepository = UnitOfWork.UserBudgetRepository();
+            IBillingRepository billingRepository = UnitOfWork.BillingRepository();         
+            IStatusBudgetRepository statusBudgetRepository = UnitOfWork.StatusBudgetRepository();
 
-            if (billing == null || billing.Year <= 0 || billing.Month <= 0)
+            if (billing == null || billing.YearBilling <= 0 || billing.MonthBilling <= 0)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            UserBudgetExtendDto? userSearch = userRepository.GetUserById(new UserDto { IdUser = billing.IdUser }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = billing.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            UserBudgetExtendDto? userBudgetAdminSearch = userBudgetRepository.GetUserBudgetByUsername(new UserBudgetDto { Username = Constants.UserBudget.USERNAME_ADMIN }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            UserBudgetExtendDto? userBudgetSearch = userBudgetRepository.GetUserBudgetByIdUserBudget(new UserBudgetDto { IdUserBudget = billing.IdUserBudget }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusBudgetDto? statusBudgetSearch = statusBudgetRepository.GetStatusBudgetByIdStatusBudget(new StatusBudgetDto { IdStatusBudget = billing.IdStatusBudget }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             List<BillingExtendDto> billingsSearch = billingRepository.GetBillingsByYearMonthUserBudget(billing);
 
@@ -200,13 +201,16 @@
 
             Billing saveBilling = new()
             {
-                Year = billing.Year,
-                Month = billing.Month,
+                YearBilling = billing.YearBilling,
+                MonthBilling = billing.MonthBilling,              
+                DescriptionBilling = billing.DescriptionBilling?.Trim() ?? string.Empty,
+                ObservationBilling = billing.ObservationBilling?.Trim() ?? string.Empty,
+                IdUserBudget = userBudgetSearch.IdUserBudget,
+                IdStatusBudget = statusBudgetSearch.IdStatusBudget,
+                CreationUser = userBudgetAdminSearch.IdUserBudget,
                 CreationDate = billing.CreationDate,
-                Description = billing.Description?.Trim() ?? string.Empty,
-                Observation = billing.Observation?.Trim() ?? string.Empty,
-                IdUser = userSearch.IdUser,
-                IdStatus = statusSearch.IdStatus
+                ModificationUser = userBudgetAdminSearch.IdUserBudget,
+                ModificationDate = billing.ModificationDate
             };
 
             UnitOfWork.BaseRepository<Billing>().Add(saveBilling);
@@ -225,7 +229,7 @@
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
 
-            if (billing == null || billing.Year <= 0 || billing.Month <= 0)
+            if (billing == null || billing.YearBilling <= 0 || billing.MonthBilling <= 0)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -235,13 +239,16 @@
             Billing updateBilling = new()
             {
                 IdBilling = billingSearch.IdBilling,
-                Year = billingSearch.Year,
-                Month = billingSearch.Month,
-                CreationDate = billing.CreationDate,
-                Description = billing.Description?.Trim() ?? string.Empty,
-                Observation = billing.Observation?.Trim() ?? string.Empty,
-                IdUser = billingSearch.IdUser,
-                IdStatus = billingSearch.IdStatus
+                YearBilling = billingSearch.YearBilling,
+                MonthBilling = billingSearch.MonthBilling,               
+                DescriptionBilling = billing.DescriptionBilling?.Trim() ?? string.Empty,
+                ObservationBilling = billing.ObservationBilling?.Trim() ?? string.Empty,
+                IdUserBudget = billingSearch.IdUserBudget,
+                IdStatusBudget = billingSearch.IdStatusBudget,
+                CreationUser = billingSearch.CreationUser,
+                CreationDate = billingSearch.CreationDate,
+                ModificationUser = billingSearch.ModificationUser,
+                ModificationDate = billing.ModificationDate
             };
 
             UnitOfWork.BaseRepository<Billing>().Update(updateBilling);
@@ -259,12 +266,12 @@
         public BillingDto DeleteBilling(BillingDto billing)
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
+            IStatusBudgetRepository statusBudgetRepository = UnitOfWork.StatusBudgetRepository();
 
             BillingExtendDto? billingSearch = billingRepository.GetBillingByIdBilling(billing) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = billing.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusBudgetDto? statusBudgetSearch = statusBudgetRepository.GetStatusBudgetByIdStatusBudget(new StatusBudgetDto { IdStatusBudget = billing.IdStatusBudget }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            if (billingSearch.IdStatus == billing.IdStatus)
+            if (billingSearch.IdStatusBudget == billing.IdStatusBudget)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -272,13 +279,16 @@
             Billing deleteBilling = new()
             {
                 IdBilling = billingSearch.IdBilling,
-                Year = billingSearch.Year,
-                Month = billingSearch.Month,
+                YearBilling = billingSearch.YearBilling,
+                MonthBilling = billingSearch.MonthBilling,                
+                DescriptionBilling = billingSearch.DescriptionBilling?.Trim() ?? string.Empty,
+                ObservationBilling = billingSearch.ObservationBilling?.Trim() ?? string.Empty,
+                IdUserBudget = billingSearch.IdUserBudget,
+                IdStatusBudget = statusBudgetSearch.IdStatusBudget,
+                CreationUser = billingSearch.CreationUser,
                 CreationDate = billingSearch.CreationDate,
-                Description = billingSearch.Description?.Trim() ?? string.Empty,
-                Observation = billingSearch.Observation?.Trim() ?? string.Empty,
-                IdUser = billingSearch.IdUser,
-                IdStatus = statusSearch.IdStatus
+                ModificationUser = billingSearch.ModificationUser,
+                ModificationDate = billing.ModificationDate
             };
 
             UnitOfWork.BaseRepository<Billing>().Update(deleteBilling);

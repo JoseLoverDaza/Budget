@@ -41,7 +41,7 @@
 
         #region Métodos y Funciones
 
-        public FinancialInstitutionExtendDto? GetFinancialInstitutionById(FinancialInstitutionDto financialInstitution)
+        public FinancialInstitutionExtendDto? GetFinancialInstitutionByIdFinancialInstitution(FinancialInstitutionDto financialInstitution)
         {
             IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
             FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionByIdFinancialInstitution(financialInstitution);
@@ -58,7 +58,7 @@
             }
         }
 
-        public FinancialInstitutionExtendDto? GetFinancialInstitutionByName(FinancialInstitutionDto financialInstitution)
+        public FinancialInstitutionExtendDto? GetFinancialInstitutionByNameFinancialInstitution(FinancialInstitutionDto financialInstitution)
         {
             IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
             FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionByNameFinancialInstitution(financialInstitution);
@@ -75,7 +75,7 @@
             }
         }
 
-        public List<FinancialInstitutionExtendDto> GetFinancialInstitutionsByStatus(FinancialInstitutionDto financialInstitution)
+        public List<FinancialInstitutionExtendDto> GetFinancialInstitutionsByStatusBudget(FinancialInstitutionDto financialInstitution)
         {
             IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
             List<FinancialInstitutionExtendDto> financialInstitutionsSearch = financialInstitutionRepository.GetFinancialInstitutionsByStatusBudget(financialInstitution);
@@ -94,10 +94,11 @@
 
         public FinancialInstitutionDto SaveFinancialInstitution(FinancialInstitutionDto financialInstitution)
         {
+            IUserBudgetRepository userBudgetRepository = UnitOfWork.UserBudgetRepository();
             IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
+            IStatusBudgetRepository statusBudgetRepository = UnitOfWork.StatusBudgetRepository();
 
-            if (financialInstitution == null || string.IsNullOrWhiteSpace(financialInstitution.Name.Trim()))
+            if (financialInstitution == null || string.IsNullOrWhiteSpace(financialInstitution.NameFinancialInstitution.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -109,13 +110,18 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = financialInstitution.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            UserBudgetExtendDto? userBudgetAdminSearch = userBudgetRepository.GetUserBudgetByUsername(new UserBudgetDto { Username = Constants.UserBudget.USERNAME_ADMIN }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusBudgetDto? statusSearch = statusBudgetRepository.GetStatusBudgetByIdStatusBudget(new StatusBudgetDto { IdStatusBudget = financialInstitution.IdStatusBudget }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             FinancialInstitution saveFinancialInstitution = new()
             {
-                Name = financialInstitution.Name.Trim(),
-                Description = financialInstitution.Description?.Trim() ?? string.Empty,
-                IdStatus = statusSearch.IdStatus
+                NameFinancialInstitution = financialInstitution.NameFinancialInstitution.Trim(),
+                DescriptionFinancialInstitution = financialInstitution.DescriptionFinancialInstitution?.Trim() ?? string.Empty,
+                IdStatusBudget = statusSearch.IdStatusBudget,
+                CreationUser = userBudgetAdminSearch.IdUserBudget,
+                CreationDate = financialInstitution.CreationDate,
+                ModificationUser = userBudgetAdminSearch.IdUserBudget,
+                ModificationDate = financialInstitution.ModificationDate
             };
 
             UnitOfWork.BaseRepository<FinancialInstitution>().Add(saveFinancialInstitution);
@@ -134,7 +140,7 @@
         {
             IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
 
-            if (financialInstitution == null || financialInstitution.IdFinancialInstitution <= 0 || string.IsNullOrWhiteSpace(financialInstitution.Name.Trim()))
+            if (financialInstitution == null || financialInstitution.IdFinancialInstitution <= 0 || string.IsNullOrWhiteSpace(financialInstitution.NameFinancialInstitution.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -150,9 +156,13 @@
             FinancialInstitution updateFinancialInstitution = new()
             {
                 IdFinancialInstitution = financialInstitutionSearch.IdFinancialInstitution,
-                Name = financialInstitution.Name.Trim(),
-                Description = financialInstitution.Description?.Trim() ?? string.Empty,
-                IdStatus = financialInstitutionSearch.IdStatus
+                NameFinancialInstitution = financialInstitution.NameFinancialInstitution.Trim(),
+                DescriptionFinancialInstitution = financialInstitution.DescriptionFinancialInstitution?.Trim() ?? string.Empty,
+                IdStatusBudget = financialInstitutionSearch.IdStatusBudget,
+                CreationUser = financialInstitutionSearch.CreationUser,
+                CreationDate = financialInstitutionSearch.CreationDate,
+                ModificationUser = financialInstitutionSearch.ModificationUser,
+                ModificationDate = financialInstitution.ModificationDate
             };
 
             UnitOfWork.BaseRepository<FinancialInstitution>().Update(updateFinancialInstitution);
@@ -170,12 +180,12 @@
         public FinancialInstitutionDto DeleteFinancialInstitution(FinancialInstitutionDto financialInstitution)
         {
             IFinancialInstitutionRepository financialInstitutionRepository = UnitOfWork.FinancialInstitutionRepository();
-            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
+            IStatusBudgetRepository statusBudgetRepository = UnitOfWork.StatusBudgetRepository();
 
             FinancialInstitutionExtendDto? financialInstitutionSearch = financialInstitutionRepository.GetFinancialInstitutionByIdFinancialInstitution(financialInstitution) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = financialInstitution.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusBudgetDto? statusBudgetSearch = statusBudgetRepository.GetStatusBudgetByIdStatusBudget(new StatusBudgetDto { IdStatusBudget = financialInstitution.IdStatusBudget }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            if (financialInstitutionSearch.IdStatus == statusSearch.IdStatus)
+            if (financialInstitutionSearch.IdStatusBudget == statusBudgetSearch.IdStatusBudget)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -183,9 +193,13 @@
             FinancialInstitution deleteFinancialInstitution = new()
             {
                 IdFinancialInstitution = financialInstitutionSearch.IdFinancialInstitution,
-                Name = financialInstitutionSearch.Name.Trim(),
-                Description = financialInstitutionSearch.Description?.Trim() ?? string.Empty,
-                IdStatus = statusSearch.IdStatus
+                NameFinancialInstitution = financialInstitutionSearch.NameFinancialInstitution.Trim(),
+                DescriptionFinancialInstitution = financialInstitutionSearch.DescriptionFinancialInstitution?.Trim() ?? string.Empty,
+                IdStatusBudget = statusBudgetSearch.IdStatusBudget,
+                CreationUser = financialInstitutionSearch.CreationUser,
+                CreationDate = financialInstitutionSearch.CreationDate,
+                ModificationUser = financialInstitutionSearch.ModificationUser,
+                ModificationDate = financialInstitution.ModificationDate
             };
 
             UnitOfWork.BaseRepository<FinancialInstitution>().Update(deleteFinancialInstitution);

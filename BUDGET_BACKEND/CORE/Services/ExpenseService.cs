@@ -41,7 +41,7 @@
 
         #region Métodos y Funciones
 
-        public ExpenseExtendDto? GetExpenseById(ExpenseDto expense)
+        public ExpenseExtendDto? GetExpenseByIdExpense(ExpenseDto expense)
         {
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
             ExpenseExtendDto? expenseSearch = expenseRepository.GetExpenseByIdExpense(expense);
@@ -75,10 +75,10 @@
             }
         }
 
-        public List<ExpenseExtendDto> GetExpensesByStatus(ExpenseDto expense)
+        public List<ExpenseExtendDto> GetExpensesByStatusBudget(ExpenseDto expense)
         {
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
-            List<ExpenseExtendDto> expensesSearch = expenseRepository.GetExpensesByStatus(expense);
+            List<ExpenseExtendDto> expensesSearch = expenseRepository.GetExpensesByStatusBudget(expense);
 
             _logApiService.TraceLog(typeof(Expense).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
@@ -109,7 +109,7 @@
             }
         }
 
-        public List<ExpenseExtendDto> GetExpensesByTypeExpenseStatus(ExpenseDto expense)
+        public List<ExpenseExtendDto> GetExpensesByTypeExpenseStatusBudget(ExpenseDto expense)
         {
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
             List<ExpenseExtendDto> expensesSearch = expenseRepository.GetExpensesByTypeExpenseStatusBudget(expense);
@@ -128,16 +128,17 @@
 
         public ExpenseDto SaveExpense(ExpenseDto expense)
         {
+            IUserBudgetRepository userBudgetRepository = UnitOfWork.UserBudgetRepository();
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
             ITypeExpenseRepository typeExpenseRepository = UnitOfWork.TypeExpenseRepository();
             IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
 
-            if (expense == null || string.IsNullOrWhiteSpace(expense.Name.Trim()))
+            if (expense == null || string.IsNullOrWhiteSpace(expense.NameExpense.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            if (string.IsNullOrWhiteSpace(expense.Name.Trim()))
+            if (string.IsNullOrWhiteSpace(expense.NameExpense.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -149,15 +150,20 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
+            UserBudgetExtendDto? userBudgetAdminSearch = userBudgetRepository.GetUserBudgetByUsername(new UserBudgetDto { Username = Constants.UserBudget.USERNAME_ADMIN }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             TypeExpenseExtendDto? typeExpenseSearch = typeExpenseRepository.GetTypeExpenseByIdTypeExpense(new TypeExpenseDto { IdTypeExpense = expense.IdTypeExpense }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = expense.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusBudgetDto? statusBudgetSearch = statusRepository.GetStatusBudgetByIdStatusBudget(new StatusBudgetDto { IdStatusBudget = expense.IdStatusBudget }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
             Expense saveExpense = new()
             {
-                Name = expense.Name.Trim(),
-                Description = expense.Description?.Trim() ?? string.Empty,
+                NameExpense = expense.NameExpense.Trim(),
+                DescriptionExpense = expense.DescriptionExpense?.Trim() ?? string.Empty,
                 IdTypeExpense = typeExpenseSearch.IdTypeExpense,
-                IdStatus = statusSearch.IdStatus
+                IdStatusBudget = statusBudgetSearch.IdStatusBudget,
+                CreationUser = userBudgetAdminSearch.IdUserBudget,
+                CreationDate = expense.CreationDate,
+                ModificationUser = userBudgetAdminSearch.IdUserBudget,
+                ModificationDate = expense.ModificationDate
             };
 
             UnitOfWork.BaseRepository<Expense>().Add(saveExpense);
@@ -176,7 +182,7 @@
         {
             IExpenseRepository expenseRepository = UnitOfWork.ExpenseRepository();
 
-            if (expense == null || expense.IdExpense <= 0 || string.IsNullOrWhiteSpace(expense.Name.Trim()))
+            if (expense == null || expense.IdExpense <= 0 || string.IsNullOrWhiteSpace(expense.NameExpense.Trim()))
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -192,9 +198,13 @@
             Expense updateExpense = new()
             {
                 IdExpense = expenseSearch.IdExpense,
-                Name = expense.Name.Trim(),
-                Description = expense.Description?.Trim() ?? string.Empty,
-                IdStatus = expenseSearch.IdStatus
+                NameExpense = expense.NameExpense.Trim(),
+                DescriptionExpense = expense.DescriptionExpense?.Trim() ?? string.Empty,
+                IdStatusBudget = expenseSearch.IdStatusBudget,
+                CreationUser = expenseSearch.CreationUser,
+                CreationDate = expenseSearch.CreationDate,
+                ModificationUser = expenseSearch.ModificationUser,
+                ModificationDate = expense.ModificationDate
             };
 
             UnitOfWork.BaseRepository<Expense>().Update(updateExpense);
@@ -215,9 +225,9 @@
             IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
 
             ExpenseExtendDto? expenseSearch = expenseRepository.GetExpenseByIdExpense(expense) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            StatusDto? statusSearch = statusRepository.GetStatusById(new StatusDto { IdStatus = expense.IdStatus }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            StatusBudgetDto? statusBudgetSearch = statusRepository.GetStatusBudgetByIdStatusBudget(new StatusBudgetDto { IdStatusBudget = expense.IdStatusBudget }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
 
-            if (expenseSearch.IdStatus == expense.IdStatus)
+            if (expenseSearch.IdStatusBudget == expense.IdStatusBudget)
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
@@ -225,10 +235,14 @@
             Expense deleteExpense = new()
             {
                 IdExpense = expenseSearch.IdExpense,
-                Name = expenseSearch.Name.Trim(),
-                Description = expenseSearch.Description?.Trim() ?? string.Empty,
+                NameExpense = expenseSearch.NameExpense.Trim(),
+                DescriptionExpense = expenseSearch.DescriptionExpense?.Trim() ?? string.Empty,
                 IdTypeExpense = expenseSearch.IdTypeExpense,
-                IdStatus = statusSearch.IdStatus
+                IdStatusBudget = statusBudgetSearch.IdStatusBudget,
+                CreationUser = expenseSearch.CreationUser,
+                CreationDate = expenseSearch.CreationDate,
+                ModificationUser = expenseSearch.ModificationUser,
+                ModificationDate = expense.ModificationDate
             };
 
             UnitOfWork.BaseRepository<Expense>().Update(deleteExpense);
