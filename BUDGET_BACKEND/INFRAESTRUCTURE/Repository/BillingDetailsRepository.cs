@@ -47,26 +47,29 @@
                      on bd.IdBilling equals b.IdBilling
                      join e in _context.Expenses.AsNoTracking()
                      on bd.IdExpense equals e.IdExpense
-                     join s in _context.Status.AsNoTracking()
-                     on b.IdStatus equals s.IdStatus
+                     join s in _context.StatusBudget.AsNoTracking()
+                     on b.IdStatusBudget equals s.IdStatusBudget
                      where bd.IdBillingDetails == billingDetails.IdBillingDetails
                      select new BillingDetailExtendDto
                      {
                          IdBillingDetails = bd.IdBillingDetails,
                          IdBilling = bd.IdBilling,
-                         YearBilling = b.Year,
-                         MonthBilling = b.Month,
-                         CreationDate = bd.CreationDate,
+                         YearBilling = b.YearBilling,
+                         MonthBilling = b.MonthBilling,                       
                          Amount = bd.Amount,
                          IdExpense = bd.IdExpense,
-                         NameExpense = e.Name,
-                         DescriptionExpense = e.Description,
-                         IdStatus = bd.IdStatus,
-                         NameStatusBudget = s.Name,
-                         DescriptionStatusBudget = s.Description
+                         NameExpense = e.NameExpense,
+                         DescriptionExpense = e.DescriptionExpense,
+                         IdStatusBudget = bd.IdStatusBudget,
+                         NameStatusBudget = s.NameStatus,
+                         DescriptionStatusBudget = s.DescriptionStatus,
+                         CreationUser = b.CreationUser,
+                         CreationDate = b.CreationDate,
+                         ModificationUser = b.ModificationUser,
+                         ModificationDate = b.ModificationDate                         
                      }
-                )
-                .FirstOrDefault();
+                  )
+                  .FirstOrDefault();
         }
 
         public List<BillingDetailExtendDto> GetBillingDetailsByBilling(BillingDetailsDto billingDetails)
@@ -77,26 +80,29 @@
                      on bd.IdBilling equals b.IdBilling
                      join e in _context.Expenses.AsNoTracking()
                      on bd.IdExpense equals e.IdExpense
-                     join s in _context.Status.AsNoTracking()
-                     on b.IdStatus equals s.IdStatus
+                     join s in _context.StatusBudget.AsNoTracking()
+                     on b.IdStatusBudget equals s.IdStatusBudget
                      where bd.IdBilling == billingDetails.IdBilling
                      select new BillingDetailExtendDto
                      {
                          IdBillingDetails = bd.IdBillingDetails,
                          IdBilling = bd.IdBilling,
-                         YearBilling = b.Year,
-                         MonthBilling = b.Month,
-                         CreationDate = bd.CreationDate,
+                         YearBilling = b.YearBilling,
+                         MonthBilling = b.MonthBilling,
                          Amount = bd.Amount,
                          IdExpense = bd.IdExpense,
-                         NameExpense = e.Name,
-                         DescriptionExpense = e.Description,
-                         IdStatus = bd.IdStatus,
-                         NameStatusBudget = s.Name,
-                         DescriptionStatusBudget = s.Description
+                         NameExpense = e.NameExpense,
+                         DescriptionExpense = e.DescriptionExpense,
+                         IdStatusBudget = bd.IdStatusBudget,
+                         NameStatusBudget = s.NameStatus,
+                         DescriptionStatusBudget = s.DescriptionStatus,
+                         CreationUser = b.CreationUser,
+                         CreationDate = b.CreationDate,
+                         ModificationUser = b.ModificationUser,
+                         ModificationDate = b.ModificationDate
                      }
-                )
-                .ToList();
+                  )
+                  .ToList();
         }
 
         public List<BillingDetailExtendDto> GetBillingDetailsByExpense(BillingDetailsDto billingDetails)
@@ -107,26 +113,29 @@
                      on bd.IdBilling equals b.IdBilling
                      join e in _context.Expenses.AsNoTracking()
                      on bd.IdExpense equals e.IdExpense
-                     join s in _context.Status.AsNoTracking()
-                     on b.IdStatus equals s.IdStatus
+                     join s in _context.StatusBudget.AsNoTracking()
+                     on b.IdStatusBudget equals s.IdStatusBudget
                      where bd.IdExpense == billingDetails.IdExpense
                      select new BillingDetailExtendDto
                      {
                          IdBillingDetails = bd.IdBillingDetails,
                          IdBilling = bd.IdBilling,
-                         YearBilling = b.Year,
-                         MonthBilling = b.Month,
-                         CreationDate = bd.CreationDate,
+                         YearBilling = b.YearBilling,
+                         MonthBilling = b.MonthBilling,
                          Amount = bd.Amount,
                          IdExpense = bd.IdExpense,
-                         NameExpense = e.Name,
-                         DescriptionExpense = e.Description,
-                         IdStatus = bd.IdStatus,
-                         NameStatusBudget = s.Name,
-                         DescriptionStatusBudget = s.Description
+                         NameExpense = e.NameExpense,
+                         DescriptionExpense = e.DescriptionExpense,
+                         IdStatusBudget = bd.IdStatusBudget,
+                         NameStatusBudget = s.NameStatus,
+                         DescriptionStatusBudget = s.DescriptionStatus,
+                         CreationUser = b.CreationUser,
+                         CreationDate = b.CreationDate,
+                         ModificationUser = b.ModificationUser,
+                         ModificationDate = b.ModificationDate
                      }
-                )
-                .ToList();
+                 )
+                 .ToList();
         }
 
         public List<BillingDetailExtendDto> GetBillingDetailsByStatusBudget(BillingDetailsDto billingDetails)
@@ -137,26 +146,29 @@
                      on bd.IdBilling equals b.IdBilling
                      join e in _context.Expenses.AsNoTracking()
                      on bd.IdExpense equals e.IdExpense
-                     join s in _context.Status.AsNoTracking()
-                     on b.IdStatus equals s.IdStatus
-                     where bd.IdStatus == billingDetails.IdStatus
+                     join s in _context.StatusBudget.AsNoTracking()
+                     on b.IdStatusBudget equals s.IdStatusBudget
+                     where bd.IdStatusBudget == billingDetails.IdStatusBudget
                      select new BillingDetailExtendDto
                      {
                          IdBillingDetails = bd.IdBillingDetails,
                          IdBilling = bd.IdBilling,
-                         YearBilling = b.Year,
-                         MonthBilling = b.Month,
-                         CreationDate = bd.CreationDate,
+                         YearBilling = b.YearBilling,
+                         MonthBilling = b.MonthBilling,
                          Amount = bd.Amount,
                          IdExpense = bd.IdExpense,
-                         NameExpense = e.Name,
-                         DescriptionExpense = e.Description,
-                         IdStatus = bd.IdStatus,
-                         NameStatusBudget = s.Name,
-                         DescriptionStatusBudget = s.Description
+                         NameExpense = e.NameExpense,
+                         DescriptionExpense = e.DescriptionExpense,
+                         IdStatusBudget = bd.IdStatusBudget,
+                         NameStatusBudget = s.NameStatus,
+                         DescriptionStatusBudget = s.DescriptionStatus,
+                         CreationUser = b.CreationUser,
+                         CreationDate = b.CreationDate,
+                         ModificationUser = b.ModificationUser,
+                         ModificationDate = b.ModificationDate
                      }
-                )
-                .ToList();
+                  )
+                  .ToList();
         }
 
         public List<BillingDetailExtendDto> GetBillingDetailsByBillingExpense(BillingDetailsDto billingDetails)
@@ -167,26 +179,29 @@
                      on bd.IdBilling equals b.IdBilling
                      join e in _context.Expenses.AsNoTracking()
                      on bd.IdExpense equals e.IdExpense
-                     join s in _context.Status.AsNoTracking()
-                     on b.IdStatus equals s.IdStatus
+                     join s in _context.StatusBudget.AsNoTracking()
+                     on b.IdStatusBudget equals s.IdStatusBudget
                      where bd.IdBilling == billingDetails.IdBilling && bd.IdExpense == billingDetails.IdExpense
                      select new BillingDetailExtendDto
                      {
                          IdBillingDetails = bd.IdBillingDetails,
                          IdBilling = bd.IdBilling,
-                         YearBilling = b.Year,
-                         MonthBilling = b.Month,
-                         CreationDate = bd.CreationDate,
+                         YearBilling = b.YearBilling,
+                         MonthBilling = b.MonthBilling,
                          Amount = bd.Amount,
                          IdExpense = bd.IdExpense,
-                         NameExpense = e.Name,
-                         DescriptionExpense = e.Description,
-                         IdStatus = bd.IdStatus,
-                         NameStatusBudget = s.Name,
-                         DescriptionStatusBudget = s.Description
+                         NameExpense = e.NameExpense,
+                         DescriptionExpense = e.DescriptionExpense,
+                         IdStatusBudget = bd.IdStatusBudget,
+                         NameStatusBudget = s.NameStatus,
+                         DescriptionStatusBudget = s.DescriptionStatus,
+                         CreationUser = b.CreationUser,
+                         CreationDate = b.CreationDate,
+                         ModificationUser = b.ModificationUser,
+                         ModificationDate = b.ModificationDate
                      }
-                )
-                .ToList();
+                  )
+                  .ToList();
         }
 
         public List<BillingDetailExtendDto> GetBillingDetailsByExpenseStatusBudget(BillingDetailsDto billingDetails)
@@ -197,26 +212,29 @@
                      on bd.IdBilling equals b.IdBilling
                      join e in _context.Expenses.AsNoTracking()
                      on bd.IdExpense equals e.IdExpense
-                     join s in _context.Status.AsNoTracking()
-                     on b.IdStatus equals s.IdStatus
-                     where bd.IdExpense == billingDetails.IdExpense && bd.IdStatus == billingDetails.IdStatus
+                     join s in _context.StatusBudget.AsNoTracking()
+                     on b.IdStatusBudget equals s.IdStatusBudget
+                     where bd.IdExpense == billingDetails.IdExpense && bd.IdStatusBudget == billingDetails.IdStatusBudget
                      select new BillingDetailExtendDto
                      {
                          IdBillingDetails = bd.IdBillingDetails,
                          IdBilling = bd.IdBilling,
-                         YearBilling = b.Year,
-                         MonthBilling = b.Month,
-                         CreationDate = bd.CreationDate,
+                         YearBilling = b.YearBilling,
+                         MonthBilling = b.MonthBilling,
                          Amount = bd.Amount,
                          IdExpense = bd.IdExpense,
-                         NameExpense = e.Name,
-                         DescriptionExpense = e.Description,
-                         IdStatus = bd.IdStatus,
-                         NameStatusBudget = s.Name,
-                         DescriptionStatusBudget = s.Description
+                         NameExpense = e.NameExpense,
+                         DescriptionExpense = e.DescriptionExpense,
+                         IdStatusBudget = bd.IdStatusBudget,
+                         NameStatusBudget = s.NameStatus,
+                         DescriptionStatusBudget = s.DescriptionStatus,
+                         CreationUser = b.CreationUser,
+                         CreationDate = b.CreationDate,
+                         ModificationUser = b.ModificationUser,
+                         ModificationDate = b.ModificationDate
                      }
-                )
-                .ToList();
+                  )
+                  .ToList();
         }
 
         public List<BillingDetailExtendDto> GetBillingDetailsByBillingExpenseStatusBudget(BillingDetailsDto billingDetails)
@@ -227,26 +245,29 @@
                      on bd.IdBilling equals b.IdBilling
                      join e in _context.Expenses.AsNoTracking()
                      on bd.IdExpense equals e.IdExpense
-                     join s in _context.Status.AsNoTracking()
-                     on b.IdStatus equals s.IdStatus
-                     where bd.IdBilling == billingDetails.IdBilling && bd.IdExpense == billingDetails.IdExpense && bd.IdStatus == billingDetails.IdStatus
+                     join s in _context.StatusBudget.AsNoTracking()
+                     on b.IdStatusBudget equals s.IdStatusBudget
+                     where bd.IdBilling == billingDetails.IdBilling && bd.IdExpense == billingDetails.IdExpense && bd.IdStatusBudget == billingDetails.IdStatusBudget
                      select new BillingDetailExtendDto
                      {
                          IdBillingDetails = bd.IdBillingDetails,
                          IdBilling = bd.IdBilling,
-                         YearBilling = b.Year,
-                         MonthBilling = b.Month,
-                         CreationDate = bd.CreationDate,
+                         YearBilling = b.YearBilling,
+                         MonthBilling = b.MonthBilling,
                          Amount = bd.Amount,
                          IdExpense = bd.IdExpense,
-                         NameExpense = e.Name,
-                         DescriptionExpense = e.Description,
-                         IdStatus = bd.IdStatus,
-                         NameStatusBudget = s.Name,
-                         DescriptionStatusBudget = s.Description
+                         NameExpense = e.NameExpense,
+                         DescriptionExpense = e.DescriptionExpense,
+                         IdStatusBudget = bd.IdStatusBudget,
+                         NameStatusBudget = s.NameStatus,
+                         DescriptionStatusBudget = s.DescriptionStatus,
+                         CreationUser = b.CreationUser,
+                         CreationDate = b.CreationDate,
+                         ModificationUser = b.ModificationUser,
+                         ModificationDate = b.ModificationDate
                      }
-                )
-                .ToList();
+                  )
+                  .ToList();
         }
 
         #endregion

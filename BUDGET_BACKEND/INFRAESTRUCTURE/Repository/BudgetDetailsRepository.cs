@@ -47,26 +47,29 @@
                      on bd.IdBudget equals b.IdBudget
                      join e in _context.Expenses.AsNoTracking()
                      on bd.IdExpense equals e.IdExpense
-                     join s in _context.Status.AsNoTracking()
-                     on b.IdStatus equals s.IdStatus
+                     join s in _context.StatusBudget.AsNoTracking()
+                     on b.IdStatusBudget equals s.IdStatusBudget
                      where bd.IdBudgetDetails == budgetDetails.IdBudgetDetails
                      select new BudgetDetailExtendDto
                      {
                          IdBudgetDetails = bd.IdBudgetDetails,
                          IdBudget = bd.IdBudget,
-                         YearBudget = b.Year,
-                         MonthBudget = b.Month,
-                         CreationDate = bd.CreationDate,
+                         YearBudget = b.YearBudget,
+                         MonthBudget = b.MonthBudget,                        
                          Amount = bd.Amount,
                          IdExpense = bd.IdExpense,
-                         NameExpense = e.Name,
-                         DescriptionExpense = e.Description,
-                         IdStatus = bd.IdStatus,
-                         NameStatusBudget = s.Name,
-                         DescriptionStatusBudget = s.Description
+                         NameExpense = e.NameExpense,
+                         DescriptionExpense = e.DescriptionExpense,
+                         IdStatusBudget = bd.IdStatusBudget,
+                         NameStatusBudget = s.NameStatus,
+                         DescriptionStatusBudget = s.DescriptionStatus,
+                         CreationUser = b.CreationUser,
+                         CreationDate = b.CreationDate,
+                         ModificationUser = b.ModificationUser,
+                         ModificationDate = b.ModificationDate                         
                      }
-                )
-                .FirstOrDefault();
+                  )
+                  .FirstOrDefault();
         }
 
         public List<BudgetDetailExtendDto> GetBudgetDetailsByBudget(BudgetDetailsDto budgetDetails)
@@ -77,26 +80,29 @@
                      on bd.IdBudget equals b.IdBudget
                      join e in _context.Expenses.AsNoTracking()
                      on bd.IdExpense equals e.IdExpense
-                     join s in _context.Status.AsNoTracking()
-                     on b.IdStatus equals s.IdStatus
+                     join s in _context.StatusBudget.AsNoTracking()
+                     on b.IdStatusBudget equals s.IdStatusBudget
                      where bd.IdBudget == budgetDetails.IdBudget
                      select new BudgetDetailExtendDto
                      {
                          IdBudgetDetails = bd.IdBudgetDetails,
                          IdBudget = bd.IdBudget,
-                         YearBudget = b.Year,
-                         MonthBudget = b.Month,
-                         CreationDate = bd.CreationDate,
+                         YearBudget = b.YearBudget,
+                         MonthBudget = b.MonthBudget,
                          Amount = bd.Amount,
                          IdExpense = bd.IdExpense,
-                         NameExpense = e.Name,
-                         DescriptionExpense = e.Description,
-                         IdStatus = bd.IdStatus,
-                         NameStatusBudget = s.Name,
-                         DescriptionStatusBudget = s.Description
+                         NameExpense = e.NameExpense,
+                         DescriptionExpense = e.DescriptionExpense,
+                         IdStatusBudget = bd.IdStatusBudget,
+                         NameStatusBudget = s.NameStatus,
+                         DescriptionStatusBudget = s.DescriptionStatus,
+                         CreationUser = b.CreationUser,
+                         CreationDate = b.CreationDate,
+                         ModificationUser = b.ModificationUser,
+                         ModificationDate = b.ModificationDate
                      }
-                )
-                .ToList();
+                  )
+                  .ToList();
         }
 
         public List<BudgetDetailExtendDto> GetBudgetDetailsByExpense(BudgetDetailsDto budgetDetails)
@@ -107,26 +113,29 @@
                      on bd.IdBudget equals b.IdBudget
                      join e in _context.Expenses.AsNoTracking()
                      on bd.IdExpense equals e.IdExpense
-                     join s in _context.Status.AsNoTracking()
-                     on b.IdStatus equals s.IdStatus
+                     join s in _context.StatusBudget.AsNoTracking()
+                     on b.IdStatusBudget equals s.IdStatusBudget
                      where bd.IdExpense == budgetDetails.IdExpense
                      select new BudgetDetailExtendDto
                      {
                          IdBudgetDetails = bd.IdBudgetDetails,
                          IdBudget = bd.IdBudget,
-                         YearBudget = b.Year,
-                         MonthBudget = b.Month,
-                         CreationDate = bd.CreationDate,
+                         YearBudget = b.YearBudget,
+                         MonthBudget = b.MonthBudget,
                          Amount = bd.Amount,
                          IdExpense = bd.IdExpense,
-                         NameExpense = e.Name,
-                         DescriptionExpense = e.Description,
-                         IdStatus = bd.IdStatus,
-                         NameStatusBudget = s.Name,
-                         DescriptionStatusBudget = s.Description
+                         NameExpense = e.NameExpense,
+                         DescriptionExpense = e.DescriptionExpense,
+                         IdStatusBudget = bd.IdStatusBudget,
+                         NameStatusBudget = s.NameStatus,
+                         DescriptionStatusBudget = s.DescriptionStatus,
+                         CreationUser = b.CreationUser,
+                         CreationDate = b.CreationDate,
+                         ModificationUser = b.ModificationUser,
+                         ModificationDate = b.ModificationDate
                      }
-                )
-                .ToList();
+                  )
+                  .ToList();
         }
 
         public List<BudgetDetailExtendDto> GetBudgetDetailsByStatus(BudgetDetailsDto budgetDetails)
@@ -137,23 +146,26 @@
                      on bd.IdBudget equals b.IdBudget
                      join e in _context.Expenses.AsNoTracking()
                      on bd.IdExpense equals e.IdExpense
-                     join s in _context.Status.AsNoTracking()
-                     on b.IdStatus equals s.IdStatus
-                     where bd.IdStatus == budgetDetails.IdStatus
+                     join s in _context.StatusBudget.AsNoTracking()
+                     on b.IdStatusBudget equals s.IdStatusBudget
+                     where bd.IdStatusBudget == budgetDetails.IdStatusBudget
                      select new BudgetDetailExtendDto
                      {
                          IdBudgetDetails = bd.IdBudgetDetails,
                          IdBudget = bd.IdBudget,
-                         YearBudget = b.Year,
-                         MonthBudget = b.Month,
-                         CreationDate = bd.CreationDate,
+                         YearBudget = b.YearBudget,
+                         MonthBudget = b.MonthBudget,
                          Amount = bd.Amount,
                          IdExpense = bd.IdExpense,
-                         NameExpense = e.Name,
-                         DescriptionExpense = e.Description,
-                         IdStatus = bd.IdStatus,
-                         NameStatusBudget = s.Name,
-                         DescriptionStatusBudget = s.Description
+                         NameExpense = e.NameExpense,
+                         DescriptionExpense = e.DescriptionExpense,
+                         IdStatusBudget = bd.IdStatusBudget,
+                         NameStatusBudget = s.NameStatus,
+                         DescriptionStatusBudget = s.DescriptionStatus,
+                         CreationUser = b.CreationUser,
+                         CreationDate = b.CreationDate,
+                         ModificationUser = b.ModificationUser,
+                         ModificationDate = b.ModificationDate
                      }
                 )
                 .ToList();
@@ -167,26 +179,29 @@
                      on bd.IdBudget equals b.IdBudget
                      join e in _context.Expenses.AsNoTracking()
                      on bd.IdExpense equals e.IdExpense
-                     join s in _context.Status.AsNoTracking()
-                     on b.IdStatus equals s.IdStatus
+                     join s in _context.StatusBudget.AsNoTracking()
+                     on b.IdStatusBudget equals s.IdStatusBudget
                      where bd.IdBudget == budgetDetails.IdBudget && bd.IdExpense == budgetDetails.IdExpense
                      select new BudgetDetailExtendDto
                      {
                          IdBudgetDetails = bd.IdBudgetDetails,
                          IdBudget = bd.IdBudget,
-                         YearBudget = b.Year,
-                         MonthBudget = b.Month,
-                         CreationDate = bd.CreationDate,
+                         YearBudget = b.YearBudget,
+                         MonthBudget = b.MonthBudget,
                          Amount = bd.Amount,
                          IdExpense = bd.IdExpense,
-                         NameExpense = e.Name,
-                         DescriptionExpense = e.Description,
-                         IdStatus = bd.IdStatus,
-                         NameStatusBudget = s.Name,
-                         DescriptionStatusBudget = s.Description
+                         NameExpense = e.NameExpense,
+                         DescriptionExpense = e.DescriptionExpense,
+                         IdStatusBudget = bd.IdStatusBudget,
+                         NameStatusBudget = s.NameStatus,
+                         DescriptionStatusBudget = s.DescriptionStatus,
+                         CreationUser = b.CreationUser,
+                         CreationDate = b.CreationDate,
+                         ModificationUser = b.ModificationUser,
+                         ModificationDate = b.ModificationDate
                      }
-                )
-                .ToList();
+                   )
+                   .ToList();
         }
 
         public List<BudgetDetailExtendDto> GetBudgetDetailsByExpenseStatus(BudgetDetailsDto budgetDetails)
@@ -197,26 +212,29 @@
                      on bd.IdBudget equals b.IdBudget
                      join e in _context.Expenses.AsNoTracking()
                      on bd.IdExpense equals e.IdExpense
-                     join s in _context.Status.AsNoTracking()
-                     on b.IdStatus equals s.IdStatus
-                     where bd.IdExpense == budgetDetails.IdExpense && bd.IdStatus == budgetDetails.IdStatus
+                     join s in _context.StatusBudget.AsNoTracking()
+                     on b.IdStatusBudget equals s.IdStatusBudget
+                     where bd.IdExpense == budgetDetails.IdExpense && bd.IdStatusBudget == budgetDetails.IdStatusBudget
                      select new BudgetDetailExtendDto
                      {
                          IdBudgetDetails = bd.IdBudgetDetails,
                          IdBudget = bd.IdBudget,
-                         YearBudget = b.Year,
-                         MonthBudget = b.Month,
-                         CreationDate = bd.CreationDate,
+                         YearBudget = b.YearBudget,
+                         MonthBudget = b.MonthBudget,
                          Amount = bd.Amount,
                          IdExpense = bd.IdExpense,
-                         NameExpense = e.Name,
-                         DescriptionExpense = e.Description,
-                         IdStatus = bd.IdStatus,
-                         NameStatusBudget = s.Name,
-                         DescriptionStatusBudget = s.Description
+                         NameExpense = e.NameExpense,
+                         DescriptionExpense = e.DescriptionExpense,
+                         IdStatusBudget = bd.IdStatusBudget,
+                         NameStatusBudget = s.NameStatus,
+                         DescriptionStatusBudget = s.DescriptionStatus,
+                         CreationUser = b.CreationUser,
+                         CreationDate = b.CreationDate,
+                         ModificationUser = b.ModificationUser,
+                         ModificationDate = b.ModificationDate
                      }
-                )
-                .ToList();
+                  )
+                  .ToList();
         }
 
         public List<BudgetDetailExtendDto> GetBudgetDetailsByBudgetExpenseStatus(BudgetDetailsDto budgetDetails)
@@ -227,26 +245,29 @@
                     on bd.IdBudget equals b.IdBudget
                     join e in _context.Expenses.AsNoTracking()
                     on bd.IdExpense equals e.IdExpense
-                    join s in _context.Status.AsNoTracking()
-                    on b.IdStatus equals s.IdStatus
-                    where bd.IdBudget == budgetDetails.IdBudget && bd.IdExpense == budgetDetails.IdExpense && bd.IdStatus == budgetDetails.IdStatus
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on b.IdStatusBudget equals s.IdStatusBudget
+                    where bd.IdBudget == budgetDetails.IdBudget && bd.IdExpense == budgetDetails.IdExpense && bd.IdStatusBudget == budgetDetails.IdStatusBudget
                     select new BudgetDetailExtendDto
                     {
                         IdBudgetDetails = bd.IdBudgetDetails,
                         IdBudget = bd.IdBudget,
-                        YearBudget = b.Year,
-                        MonthBudget = b.Month,
-                        CreationDate = bd.CreationDate,
+                        YearBudget = b.YearBudget,
+                        MonthBudget = b.MonthBudget,
                         Amount = bd.Amount,
                         IdExpense = bd.IdExpense,
-                        NameExpense = e.Name,
-                        DescriptionExpense = e.Description,
-                        IdStatus = bd.IdStatus,
-                        NameStatusBudget = s.Name,
-                        DescriptionStatusBudget = s.Description
+                        NameExpense = e.NameExpense,
+                        DescriptionExpense = e.DescriptionExpense,
+                        IdStatusBudget = bd.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = b.CreationUser,
+                        CreationDate = b.CreationDate,
+                        ModificationUser = b.ModificationUser,
+                        ModificationDate = b.ModificationDate
                     }
-               )
-               .ToList();
+                  )
+                  .ToList();
         }
 
         #endregion

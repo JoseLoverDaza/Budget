@@ -14,13 +14,13 @@
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
-    /// Nombre: UserController   
+    /// Nombre: UserBudgetController   
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : BaseController
+    public class UserBudgetController : BaseController
     {
 
         #region Atributos y Propiedades
@@ -31,7 +31,7 @@
 
         #region Constructor
 
-        public UserController(IUserBudgetService userService)
+        public UserBudgetController(IUserBudgetService userService)
         {
             _userService = userService;
         }
@@ -41,13 +41,13 @@
         #region Métodos y Funciones
 
         [HttpPost]
-        [Route("GetUserById")]
-        [SwaggerOperation(Summary = "Get User By Id")]
-        public ResponseDto GetUserById(UserDto user)
+        [Route("GetUserBudgetByIdUserBudget")]
+        [SwaggerOperation(Summary = "Get UserBudget By IdUserBudget")]
+        public ResponseDto GetUserBudgetByIdUserBudget(UserBudgetDto userBudget)
         {
             try
             {
-                response.Data = _userService.GetUserById(user);
+                response.Data = _userService.GetUserBudgetByIdUserBudget(userBudget);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -58,13 +58,13 @@
         }
 
         [HttpPost]
-        [Route("GetUserByEmail")]
-        [SwaggerOperation(Summary = "Get User By Email")]
-        public ResponseDto GetUserByEmail(UserDto user)
+        [Route("GetUserBudgetByEmail")]
+        [SwaggerOperation(Summary = "Get UserBudget By Email")]
+        public ResponseDto GetUserBudgetByEmail(UserBudgetDto userBudget)
         {
             try
             {
-                response.Data = _userService.GetUserByEmail(user);
+                response.Data = _userService.GetUserBudgetByEmail(userBudget);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -75,13 +75,13 @@
         }
 
         [HttpPost]
-        [Route("GetUserByUsername")]
-        [SwaggerOperation(Summary = "Get User By Username")]
-        public ResponseDto GetUserByUsername(UserDto user)
+        [Route("GetUserBudgetByUsername")]
+        [SwaggerOperation(Summary = "Get UserBudget By Username")]
+        public ResponseDto GetUserBudgetByUsername(UserBudgetDto userBudget)
         {
             try
             {
-                response.Data = _userService.GetUserByUsername(user);
+                response.Data = _userService.GetUserBudgetByUsername(userBudget);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -92,13 +92,13 @@
         }
 
         [HttpPost]
-        [Route("GetUsersByRole")]
-        [SwaggerOperation(Summary = "Get Users By Role")]
-        public ResponseDto GetUsersByRole(UserDto user)
+        [Route("GetUsersBudgetByRoleBudget")]
+        [SwaggerOperation(Summary = "Get UsersBudget By RoleBudget")]
+        public ResponseDto GetUsersBudgetByRoleBudget(UserBudgetDto userBudget)
         {
             try
             {
-                response.Data = _userService.GetUsersByRole(user);
+                response.Data = _userService.GetUsersBudgetByRoleBudget(userBudget);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -109,13 +109,13 @@
         }
 
         [HttpPost]
-        [Route("GetUsersByStatus")]
-        [SwaggerOperation(Summary = "Get Users By Status")]
-        public ResponseDto GetUsersByStatus(UserDto user)
+        [Route("GetUsersBudgetByStatusBudget")]
+        [SwaggerOperation(Summary = "Get UsersBudget By StatusBudget")]
+        public ResponseDto GetUsersBudgetByStatusBudget(UserBudgetDto userBudget)
         {
             try
             {
-                response.Data = _userService.GetUsersByStatus(user);
+                response.Data = _userService.GetUsersBudgetByStatusBudget(userBudget);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -126,13 +126,13 @@
         }
 
         [HttpPost]
-        [Route("GetUsersByRoleStatus")]
-        [SwaggerOperation(Summary = "Get Users By Role Status")]
-        public ResponseDto GetUsersByRoleStatus(UserDto user)
+        [Route("GetUsersBudgetByRoleBudgetStatusBudget")]
+        [SwaggerOperation(Summary = "Get UsersBudget By RoleBudget StatusBudget")]
+        public ResponseDto GetUsersBudgetByRoleBudgetStatusBudget(UserBudgetDto userBudget)
         {
             try
             {
-                response.Data = _userService.GetUsersByRoleStatus(user);
+                response.Data = _userService.GetUsersBudgetByRoleBudgetStatusBudget(userBudget);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -143,13 +143,13 @@
         }
 
         [HttpPost]
-        [Route("SaveUser")]
-        [SwaggerOperation(Summary = "Save User")]
-        public ResponseDto SaveUser(UserDto user)
+        [Route("SaveUserBudget")]
+        [SwaggerOperation(Summary = "Save UserBudget")]
+        public ResponseDto SaveUserBudget(UserBudgetDto userBudget)
         {
             try
             {
-                response.Data = _userService.SaveUser(user);
+                response.Data = _userService.SaveUserBudget(userBudget);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -160,13 +160,13 @@
         }
 
         [HttpPost]
-        [Route("UpdateUser")]
-        [SwaggerOperation(Summary = "Update User")]
-        public ResponseDto UpdateUser(UserDto user)
+        [Route("UpdateUserBudget")]
+        [SwaggerOperation(Summary = "Update UserBudget")]
+        public ResponseDto UpdateUserBudget(UserBudgetDto userBudget)
         {
             try
             {
-                response.Data = _userService.UpdateUser(user);
+                response.Data = _userService.UpdateUserBudget(userBudget);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -177,13 +177,13 @@
         }
 
         [HttpPost]
-        [Route("DeleteUser")]
-        [SwaggerOperation(Summary = "Delete User")]
-        public ResponseDto DeleteUser(UserDto user)
+        [Route("DeleteUserBudget")]
+        [SwaggerOperation(Summary = "Delete UserBudget")]
+        public ResponseDto DeleteUserBudget(UserBudgetDto userBudget)
         {
             try
             {
-                response.Data = _userService.DeleteUser(user);
+                response.Data = _userService.DeleteUserBudget(userBudget);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)

@@ -43,25 +43,28 @@
         {
             return (
                      from b in _context.Billings.AsNoTracking()
-                     join u in _context.Users.AsNoTracking()
-                     on b.IdUser equals u.IdUser
-                     join s in _context.Status.AsNoTracking()
-                     on b.IdStatus equals s.IdStatus
+                     join u in _context.UsersBudget.AsNoTracking()
+                     on b.IdUserBudget equals u.IdUserBudget
+                     join s in _context.StatusBudget.AsNoTracking()
+                     on b.IdStatusBudget equals s.IdStatusBudget
                      where b.IdBilling == billing.IdBilling
                      select new BillingExtendDto
                      {
                          IdBilling = b.IdBilling,
-                         Year = b.Year,
-                         Month = b.Month,
-                         CreationDate = b.CreationDate,
-                         Description = b.Description,
-                         Observation = b.Observation,
-                         IdUser = b.IdUser,
+                         YearBilling = b.YearBilling,
+                         MonthBilling = b.MonthBilling,                         
+                         DescriptionBilling = b.DescriptionBilling,
+                         ObservationBilling = b.ObservationBilling,
+                         IdUserBudget = b.IdUserBudget,
                          EmailUserBudget = u.Email,
                          UsernameUserBudget = u.Username,
-                         IdStatus = b.IdStatus,
-                         NameStatusBudget = s.Name,
-                         DescriptionStatusBudget = s.Description
+                         IdStatusBudget = b.IdStatusBudget,
+                         NameStatusBudget = s.NameStatus,
+                         DescriptionStatusBudget = s.DescriptionStatus,
+                         CreationUser = b.CreationUser,
+                         CreationDate = b.CreationDate,
+                         ModificationUser = b.ModificationUser,
+                         ModificationDate = b.ModificationDate                        
                      }
                 )
                 .FirstOrDefault();
@@ -71,25 +74,28 @@
         {
             return (
                      from b in _context.Billings.AsNoTracking()
-                     join u in _context.Users.AsNoTracking()
-                     on b.IdUser equals u.IdUser
-                     join s in _context.Status.AsNoTracking()
-                     on b.IdStatus equals s.IdStatus
-                     where b.Year == billing.Year && b.Month == billing.Month
+                     join u in _context.UsersBudget.AsNoTracking()
+                     on b.IdUserBudget equals u.IdUserBudget
+                     join s in _context.StatusBudget.AsNoTracking()
+                     on b.IdStatusBudget equals s.IdStatusBudget
+                     where b.YearBilling == billing.YearBilling && b.MonthBilling == billing.MonthBilling
                      select new BillingExtendDto
                      {
                          IdBilling = b.IdBilling,
-                         Year = b.Year,
-                         Month = b.Month,
-                         CreationDate = b.CreationDate,
-                         Description = b.Description,
-                         Observation = b.Observation,
-                         IdUser = b.IdUser,
+                         YearBilling = b.YearBilling,
+                         MonthBilling = b.MonthBilling,
+                         DescriptionBilling = b.DescriptionBilling,
+                         ObservationBilling = b.ObservationBilling,
+                         IdUserBudget = b.IdUserBudget,
                          EmailUserBudget = u.Email,
                          UsernameUserBudget = u.Username,
-                         IdStatus = b.IdStatus,
-                         NameStatusBudget = s.Name,
-                         DescriptionStatusBudget = s.Description
+                         IdStatusBudget = b.IdStatusBudget,
+                         NameStatusBudget = s.NameStatus,
+                         DescriptionStatusBudget = s.DescriptionStatus,
+                         CreationUser = b.CreationUser,
+                         CreationDate = b.CreationDate,
+                         ModificationUser = b.ModificationUser,
+                         ModificationDate = b.ModificationDate
                      }
                    )
                    .ToList();
@@ -99,25 +105,28 @@
         {
             return (
                      from b in _context.Billings.AsNoTracking()
-                     join u in _context.Users.AsNoTracking()
-                     on b.IdUser equals u.IdUser
-                     join s in _context.Status.AsNoTracking()
-                     on b.IdStatus equals s.IdStatus
-                     where b.Year == billing.Year && b.IdUser == billing.IdUser
+                     join u in _context.UsersBudget.AsNoTracking()
+                     on b.IdUserBudget equals u.IdUserBudget
+                     join s in _context.StatusBudget.AsNoTracking()
+                     on b.IdStatusBudget equals s.IdStatusBudget
+                     where b.YearBilling == billing.YearBilling && b.IdUserBudget == billing.IdUserBudget
                      select new BillingExtendDto
                      {
                          IdBilling = b.IdBilling,
-                         Year = b.Year,
-                         Month = b.Month,
-                         CreationDate = b.CreationDate,
-                         Description = b.Description,
-                         Observation = b.Observation,
-                         IdUser = b.IdUser,
+                         YearBilling = b.YearBilling,
+                         MonthBilling = b.MonthBilling,
+                         DescriptionBilling = b.DescriptionBilling,
+                         ObservationBilling = b.ObservationBilling,
+                         IdUserBudget = b.IdUserBudget,
                          EmailUserBudget = u.Email,
                          UsernameUserBudget = u.Username,
-                         IdStatus = b.IdStatus,
-                         NameStatusBudget = s.Name,
-                         DescriptionStatusBudget = s.Description
+                         IdStatusBudget = b.IdStatusBudget,
+                         NameStatusBudget = s.NameStatus,
+                         DescriptionStatusBudget = s.DescriptionStatus,
+                         CreationUser = b.CreationUser,
+                         CreationDate = b.CreationDate,
+                         ModificationUser = b.ModificationUser,
+                         ModificationDate = b.ModificationDate
                      }
                    )
                    .ToList();
@@ -126,82 +135,91 @@
         public List<BillingExtendDto> GetBillingsByMonthUserBudget(BillingDto billing)
         {
             return (
-                     from b in _context.Billings.AsNoTracking()
-                     join u in _context.Users.AsNoTracking()
-                     on b.IdUser equals u.IdUser
-                     join s in _context.Status.AsNoTracking()
-                     on b.IdStatus equals s.IdStatus
-                     where b.Month == billing.Month && b.IdUser == billing.IdUser
-                     select new BillingExtendDto
-                     {
-                         IdBilling = b.IdBilling,
-                         Year = b.Year,
-                         Month = b.Month,
-                         CreationDate = b.CreationDate,
-                         Description = b.Description,
-                         Observation = b.Observation,
-                         IdUser = b.IdUser,
-                         EmailUserBudget = u.Email,
-                         UsernameUserBudget = u.Username,
-                         IdStatus = b.IdStatus,
-                         NameStatusBudget = s.Name,
-                         DescriptionStatusBudget = s.Description
-                     }
-                   )
-                   .ToList();
+                    from b in _context.Billings.AsNoTracking()
+                    join u in _context.UsersBudget.AsNoTracking()
+                    on b.IdUserBudget equals u.IdUserBudget
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on b.IdStatusBudget equals s.IdStatusBudget
+                    where b.MonthBilling == billing.MonthBilling && b.IdUserBudget == billing.IdUserBudget
+                    select new BillingExtendDto
+                    {
+                        IdBilling = b.IdBilling,
+                        YearBilling = b.YearBilling,
+                        MonthBilling = b.MonthBilling,
+                        DescriptionBilling = b.DescriptionBilling,
+                        ObservationBilling = b.ObservationBilling,
+                        IdUserBudget = b.IdUserBudget,
+                        EmailUserBudget = u.Email,
+                        UsernameUserBudget = u.Username,
+                        IdStatusBudget = b.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = b.CreationUser,
+                        CreationDate = b.CreationDate,
+                        ModificationUser = b.ModificationUser,
+                        ModificationDate = b.ModificationDate
+                    }
+                  )
+                  .ToList();
         }
 
         public List<BillingExtendDto> GetBillingsByYearMonthUserBudget(BillingDto billing)
         {
             return (
-                     from b in _context.Billings.AsNoTracking()
-                     join u in _context.Users.AsNoTracking()
-                     on b.IdUser equals u.IdUser
-                     join s in _context.Status.AsNoTracking()
-                     on b.IdStatus equals s.IdStatus
-                     where b.Year == billing.Year && b.Month == billing.Month && b.IdUser == billing.IdUser
-                     select new BillingExtendDto
-                     {
-                         IdBilling = b.IdBilling,
-                         Year = b.Year,
-                         Month = b.Month,
-                         CreationDate = b.CreationDate,
-                         Description = b.Description,
-                         Observation = b.Observation,
-                         IdUser = b.IdUser,
-                         EmailUserBudget = u.Email,
-                         UsernameUserBudget = u.Username,
-                         IdStatus = b.IdStatus,
-                         NameStatusBudget = s.Name,
-                         DescriptionStatusBudget = s.Description
-                     }
-                )
-                .ToList();
+                    from b in _context.Billings.AsNoTracking()
+                    join u in _context.UsersBudget.AsNoTracking()
+                    on b.IdUserBudget equals u.IdUserBudget
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on b.IdStatusBudget equals s.IdStatusBudget
+                    where b.YearBilling == billing.YearBilling && b.MonthBilling == billing.MonthBilling && b.IdUserBudget == billing.IdUserBudget
+                    select new BillingExtendDto
+                    {
+                        IdBilling = b.IdBilling,
+                        YearBilling = b.YearBilling,
+                        MonthBilling = b.MonthBilling,
+                        DescriptionBilling = b.DescriptionBilling,
+                        ObservationBilling = b.ObservationBilling,
+                        IdUserBudget = b.IdUserBudget,
+                        EmailUserBudget = u.Email,
+                        UsernameUserBudget = u.Username,
+                        IdStatusBudget = b.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = b.CreationUser,
+                        CreationDate = b.CreationDate,
+                        ModificationUser = b.ModificationUser,
+                        ModificationDate = b.ModificationDate
+                    }
+                   )
+                   .ToList();
         }
 
         public List<BillingExtendDto> GetBillingsByUserBudget(BillingDto billing)
         {
             return (
                      from b in _context.Billings.AsNoTracking()
-                     join u in _context.Users.AsNoTracking()
-                     on b.IdUser equals u.IdUser
-                     join s in _context.Status.AsNoTracking()
-                     on b.IdStatus equals s.IdStatus
-                     where b.IdUser == billing.IdUser
+                     join u in _context.UsersBudget.AsNoTracking()
+                     on b.IdUserBudget equals u.IdUserBudget
+                     join s in _context.StatusBudget.AsNoTracking()
+                     on b.IdStatusBudget equals s.IdStatusBudget
+                     where b.IdUserBudget == billing.IdUserBudget
                      select new BillingExtendDto
                      {
                          IdBilling = b.IdBilling,
-                         Year = b.Year,
-                         Month = b.Month,
-                         CreationDate = b.CreationDate,
-                         Description = b.Description,
-                         Observation = b.Observation,
-                         IdUser = b.IdUser,
+                         YearBilling = b.YearBilling,
+                         MonthBilling = b.MonthBilling,
+                         DescriptionBilling = b.DescriptionBilling,
+                         ObservationBilling = b.ObservationBilling,
+                         IdUserBudget = b.IdUserBudget,
                          EmailUserBudget = u.Email,
                          UsernameUserBudget = u.Username,
-                         IdStatus = b.IdStatus,
-                         NameStatusBudget = s.Name,
-                         DescriptionStatusBudget = s.Description
+                         IdStatusBudget = b.IdStatusBudget,
+                         NameStatusBudget = s.NameStatus,
+                         DescriptionStatusBudget = s.DescriptionStatus,
+                         CreationUser = b.CreationUser,
+                         CreationDate = b.CreationDate,
+                         ModificationUser = b.ModificationUser,
+                         ModificationDate = b.ModificationDate
                      }
                    )
                    .ToList();
@@ -211,25 +229,28 @@
         {
             return (
                      from b in _context.Billings.AsNoTracking()
-                     join u in _context.Users.AsNoTracking()
-                     on b.IdUser equals u.IdUser
-                     join s in _context.Status.AsNoTracking()
-                     on b.IdStatus equals s.IdStatus
-                     where b.IdStatus == billing.IdStatus
+                     join u in _context.UsersBudget.AsNoTracking()
+                     on b.IdUserBudget equals u.IdUserBudget
+                     join s in _context.StatusBudget.AsNoTracking()
+                     on b.IdStatusBudget equals s.IdStatusBudget
+                     where b.IdStatusBudget == billing.IdStatusBudget
                      select new BillingExtendDto
                      {
                          IdBilling = b.IdBilling,
-                         Year = b.Year,
-                         Month = b.Month,
-                         CreationDate = b.CreationDate,
-                         Description = b.Description,
-                         Observation = b.Observation,
-                         IdUser = b.IdUser,
+                         YearBilling = b.YearBilling,
+                         MonthBilling = b.MonthBilling,
+                         DescriptionBilling = b.DescriptionBilling,
+                         ObservationBilling = b.ObservationBilling,
+                         IdUserBudget = b.IdUserBudget,
                          EmailUserBudget = u.Email,
                          UsernameUserBudget = u.Username,
-                         IdStatus = b.IdStatus,
-                         NameStatusBudget = s.Name,
-                         DescriptionStatusBudget = s.Description
+                         IdStatusBudget = b.IdStatusBudget,
+                         NameStatusBudget = s.NameStatus,
+                         DescriptionStatusBudget = s.DescriptionStatus,
+                         CreationUser = b.CreationUser,
+                         CreationDate = b.CreationDate,
+                         ModificationUser = b.ModificationUser,
+                         ModificationDate = b.ModificationDate
                      }
                    )
                    .ToList();
@@ -238,29 +259,32 @@
         public List<BillingExtendDto> GetBillingsByUserBudgetStatusBudget(BillingDto billing)
         {
             return (
-                    from b in _context.Billings.AsNoTracking()
-                    join u in _context.Users.AsNoTracking()
-                    on b.IdUser equals u.IdUser
-                    join s in _context.Status.AsNoTracking()
-                    on b.IdStatus equals s.IdStatus
-                    where b.IdUser == billing.IdUser && b.IdStatus == billing.IdStatus
-                    select new BillingExtendDto
-                    {
+                     from b in _context.Billings.AsNoTracking()
+                     join u in _context.UsersBudget.AsNoTracking()
+                     on b.IdUserBudget equals u.IdUserBudget
+                     join s in _context.StatusBudget.AsNoTracking()
+                     on b.IdStatusBudget equals s.IdStatusBudget
+                     where b.IdUserBudget == billing.IdUserBudget && b.IdStatusBudget == billing.IdStatusBudget
+                     select new BillingExtendDto
+                     {
                         IdBilling = b.IdBilling,
-                        Year = b.Year,
-                        Month = b.Month,
-                        CreationDate = b.CreationDate,
-                        Description = b.Description,
-                        Observation = b.Observation,
-                        IdUser = b.IdUser,
+                        YearBilling = b.YearBilling,
+                        MonthBilling = b.MonthBilling,
+                        DescriptionBilling = b.DescriptionBilling,
+                        ObservationBilling = b.ObservationBilling,
+                        IdUserBudget = b.IdUserBudget,
                         EmailUserBudget = u.Email,
                         UsernameUserBudget = u.Username,
-                        IdStatus = b.IdStatus,
-                        NameStatusBudget = s.Name,
-                        DescriptionStatusBudget = s.Description
-                    }
-                  )
-                  .ToList();
+                        IdStatusBudget = b.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = b.CreationUser,
+                        CreationDate = b.CreationDate,
+                        ModificationUser = b.ModificationUser,
+                        ModificationDate = b.ModificationDate
+                     }
+                   )
+                   .ToList();
         }
 
         #endregion

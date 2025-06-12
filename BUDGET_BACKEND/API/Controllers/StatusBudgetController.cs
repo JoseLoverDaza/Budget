@@ -25,15 +25,15 @@
 
         #region Atributos y Propiedades
 
-        private readonly IStatusBudgetService _statusService;
+        private readonly IStatusBudgetService _statusBudgetService;
 
         #endregion
 
         #region Constructor
 
-        public StatusBudgetController(IStatusBudgetService statusService)
+        public StatusBudgetController(IStatusBudgetService statusBudgetService)
         {
-            _statusService = statusService;
+            _statusBudgetService = statusBudgetService;
         }
 
         #endregion
@@ -41,13 +41,13 @@
         #region Métodos y Funciones
 
         [HttpPost]
-        [Route("GetStatusById")]
-        [SwaggerOperation(Summary = "Get Status By Id")]
-        public ResponseDto GetStatusById(StatusDto status)
+        [Route("GetStatusBudgetByIdStatusBudget")]
+        [SwaggerOperation(Summary = "Get Status Budget By IdStatus Budget")]
+        public ResponseDto GetStatusBudgetByIdStatusBudget(StatusBudgetDto statusBudget)
         {
             try
             {
-                response.Data = _statusService.GetStatusById(status);
+                response.Data = _statusBudgetService.GetStatusBudgetByIdStatusBudget(statusBudget);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -58,13 +58,13 @@
         }
 
         [HttpPost]
-        [Route("GetStatusByName")]
-        [SwaggerOperation(Summary = "Get Status By Name")]
-        public ResponseDto GetStatusByName(StatusDto status)
+        [Route("GetStatusBudgetByNameStatus")]
+        [SwaggerOperation(Summary = "Get Status Budget By Name Status")]
+        public ResponseDto GetStatusBudgetByNameStatus(StatusBudgetDto statusBudget)
         {
             try
             {
-                response.Data = _statusService.GetStatusByName(status);
+                response.Data = _statusBudgetService.GetStatusBudgetByNameStatus(statusBudget);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -75,13 +75,13 @@
         }
 
         [HttpPost]
-        [Route("GetStatus")]
-        [SwaggerOperation(Summary = "Get Status")]
-        public ResponseDto GetStatus()
+        [Route("GetStatusBudget")]
+        [SwaggerOperation(Summary = "Get StatusBudget")]
+        public ResponseDto GetStatusBudget()
         {
             try
             {
-                response.Data = _statusService.GetStatus();
+                response.Data = _statusBudgetService.GetStatusBudget();
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -92,13 +92,13 @@
         }
 
         [HttpPost]
-        [Route("SaveStatus")]
-        [SwaggerOperation(Summary = "Save Status")]
-        public ResponseDto SaveStatus(StatusDto status)
+        [Route("SaveStatusBudget")]
+        [SwaggerOperation(Summary = "Save Status Budget")]
+        public ResponseDto SaveStatusBudget(StatusBudgetDto statusBudget)
         {
             try
             {
-                response.Data = _statusService.SaveStatus(status);
+                response.Data = _statusBudgetService.SaveStatusBudget(statusBudget);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -109,13 +109,13 @@
         }
 
         [HttpPost]
-        [Route("UpdateStatus")]
-        [SwaggerOperation(Summary = "Update Status")]
-        public ResponseDto UpdateStatus(StatusDto status)
+        [Route("UpdateStatusBudget")]
+        [SwaggerOperation(Summary = "Update StatusBudget")]
+        public ResponseDto UpdateStatusBudget(StatusBudgetDto statusBudget)
         {
             try
             {
-                response.Data = _statusService.UpdateStatus(status);
+                response.Data = _statusBudgetService.UpdateStatusBudget(statusBudget);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)

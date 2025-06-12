@@ -43,28 +43,32 @@
         {
             return (
                       from d in _context.Deposits.AsNoTracking()
-                      join u in _context.Users.AsNoTracking()
-                      on d.IdUser equals u.IdUser
+                      join u in _context.UsersBudget.AsNoTracking()
+                      on d.IdUserBudget equals u.IdUserBudget
                       join a in _context.Accounts.AsNoTracking()
                       on d.IdAccount equals a.IdAccount
-                      join s in _context.Status.AsNoTracking()
-                      on d.IdStatus equals s.IdStatus
+                      join s in _context.StatusBudget.AsNoTracking()
+                      on d.IdStatusBudget equals s.IdStatusBudget
                       where d.IdDeposit == deposit.IdDeposit
                       select new DepositExtendDto
                       {
                           IdDeposit = d.IdDeposit,
-                          Year = d.Year,
-                          Month = d.Month,
+                          YearDeposit = d.YearDeposit,
+                          MonthDeposit = d.MonthDeposit,
                           Amount = d.Amount,
-                          IdUser = d.IdUser,
+                          IdUserBudget = d.IdUserBudget,
                           EmailUserBudget = u.Email,
                           UsernameUserBudget = u.Username,
                           IdAccount = d.IdAccount,
-                          NameAccount = a.Name,
-                          DescriptionAccount = a.Description,
-                          IdStatus = d.IdStatus,
-                          NameStatusBudget = s.Name,
-                          DescriptionStatusBudget = s.Description
+                          NameAccount = a.NameAccount,
+                          DescriptionAccount = a.DescriptionAccount,
+                          IdStatusBudget = d.IdStatusBudget,
+                          NameStatusBudget = s.NameStatus,
+                          DescriptionStatusBudget = s.DescriptionStatus,
+                          CreationUser = d.CreationUser,
+                          CreationDate = d.CreationDate,
+                          ModificationUser = d.ModificationUser,
+                          ModificationDate = d.ModificationDate
                       }
                   )
                   .FirstOrDefault();
@@ -74,214 +78,242 @@
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
-                    join u in _context.Users.AsNoTracking()
-                    on d.IdUser equals u.IdUser
+                    join u in _context.UsersBudget.AsNoTracking()
+                    on d.IdUserBudget equals u.IdUserBudget
                     join a in _context.Accounts.AsNoTracking()
                     on d.IdAccount equals a.IdAccount
-                    join s in _context.Status.AsNoTracking()
-                    on d.IdStatus equals s.IdStatus
-                    where d.Year == deposit.Year && d.Month == deposit.Month
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on d.IdStatusBudget equals s.IdStatusBudget
+                    where d.YearDeposit == deposit.YearDeposit && d.MonthDeposit == deposit.MonthDeposit
                     select new DepositExtendDto
                     {
                         IdDeposit = d.IdDeposit,
-                        Year = d.Year,
-                        Month = d.Month,
+                        YearDeposit = d.YearDeposit,
+                        MonthDeposit = d.MonthDeposit,
                         Amount = d.Amount,
-                        IdUser = d.IdUser,
+                        IdUserBudget = d.IdUserBudget,
                         EmailUserBudget = u.Email,
                         UsernameUserBudget = u.Username,
                         IdAccount = d.IdAccount,
-                        NameAccount = a.Name,
-                        DescriptionAccount = a.Description,
-                        IdStatus = d.IdStatus,
-                        NameStatusBudget = s.Name,
-                        DescriptionStatusBudget = s.Description
+                        NameAccount = a.NameAccount,
+                        DescriptionAccount = a.DescriptionAccount,
+                        IdStatusBudget = d.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = d.CreationUser,
+                        CreationDate = d.CreationDate,
+                        ModificationUser = d.ModificationUser,
+                        ModificationDate = d.ModificationDate
                     }
                   )
-                 .ToList();
+                  .ToList();
         }
 
         public List<DepositExtendDto> GetDepositsByYearUserBudget(DepositDto deposit)
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
-                    join u in _context.Users.AsNoTracking()
-                    on d.IdUser equals u.IdUser
+                    join u in _context.UsersBudget.AsNoTracking()
+                    on d.IdUserBudget equals u.IdUserBudget
                     join a in _context.Accounts.AsNoTracking()
                     on d.IdAccount equals a.IdAccount
-                    join s in _context.Status.AsNoTracking()
-                    on d.IdStatus equals s.IdStatus
-                    where d.Year == deposit.Year && d.IdUser == deposit.IdUser
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on d.IdStatusBudget equals s.IdStatusBudget
+                    where d.YearDeposit == deposit.YearDeposit && d.IdUserBudget == deposit.IdUserBudget
                     select new DepositExtendDto
                     {
                         IdDeposit = d.IdDeposit,
-                        Year = d.Year,
-                        Month = d.Month,
+                        YearDeposit = d.YearDeposit,
+                        MonthDeposit = d.MonthDeposit,
                         Amount = d.Amount,
-                        IdUser = d.IdUser,
+                        IdUserBudget = d.IdUserBudget,
                         EmailUserBudget = u.Email,
                         UsernameUserBudget = u.Username,
                         IdAccount = d.IdAccount,
-                        NameAccount = a.Name,
-                        DescriptionAccount = a.Description,
-                        IdStatus = d.IdStatus,
-                        NameStatusBudget = s.Name,
-                        DescriptionStatusBudget = s.Description
+                        NameAccount = a.NameAccount,
+                        DescriptionAccount = a.DescriptionAccount,
+                        IdStatusBudget = d.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = d.CreationUser,
+                        CreationDate = d.CreationDate,
+                        ModificationUser = d.ModificationUser,
+                        ModificationDate = d.ModificationDate
                     }
                   )
-                 .ToList();
+                  .ToList();
         }
 
         public List<DepositExtendDto> GetDepositsByMonthUserBudget(DepositDto deposit)
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
-                    join u in _context.Users.AsNoTracking()
-                    on d.IdUser equals u.IdUser
+                    join u in _context.UsersBudget.AsNoTracking()
+                    on d.IdUserBudget equals u.IdUserBudget
                     join a in _context.Accounts.AsNoTracking()
                     on d.IdAccount equals a.IdAccount
-                    join s in _context.Status.AsNoTracking()
-                    on d.IdStatus equals s.IdStatus
-                    where d.Month == deposit.Month && d.IdUser == deposit.IdUser
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on d.IdStatusBudget equals s.IdStatusBudget
+                    where d.MonthDeposit == deposit.MonthDeposit && d.IdUserBudget == deposit.IdUserBudget
                     select new DepositExtendDto
                     {
                         IdDeposit = d.IdDeposit,
-                        Year = d.Year,
-                        Month = d.Month,
+                        YearDeposit = d.YearDeposit,
+                        MonthDeposit = d.MonthDeposit,
                         Amount = d.Amount,
-                        IdUser = d.IdUser,
+                        IdUserBudget = d.IdUserBudget,
                         EmailUserBudget = u.Email,
                         UsernameUserBudget = u.Username,
                         IdAccount = d.IdAccount,
-                        NameAccount = a.Name,
-                        DescriptionAccount = a.Description,
-                        IdStatus = d.IdStatus,
-                        NameStatusBudget = s.Name,
-                        DescriptionStatusBudget = s.Description
+                        NameAccount = a.NameAccount,
+                        DescriptionAccount = a.DescriptionAccount,
+                        IdStatusBudget = d.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = d.CreationUser,
+                        CreationDate = d.CreationDate,
+                        ModificationUser = d.ModificationUser,
+                        ModificationDate = d.ModificationDate
                     }
                   )
-                 .ToList();
+                  .ToList();
         }
 
         public List<DepositExtendDto> GetDepositsByYearMonthUserBudget(DepositDto deposit)
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
-                    join u in _context.Users.AsNoTracking()
-                    on d.IdUser equals u.IdUser
+                    join u in _context.UsersBudget.AsNoTracking()
+                    on d.IdUserBudget equals u.IdUserBudget
                     join a in _context.Accounts.AsNoTracking()
                     on d.IdAccount equals a.IdAccount
-                    join s in _context.Status.AsNoTracking()
-                    on d.IdStatus equals s.IdStatus
-                    where d.Year == deposit.Year && d.Month == deposit.Month && d.IdUser == deposit.IdUser
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on d.IdStatusBudget equals s.IdStatusBudget
+                    where d.YearDeposit == deposit.YearDeposit && d.MonthDeposit == deposit.MonthDeposit && d.IdUserBudget == deposit.IdUserBudget
                     select new DepositExtendDto
                     {
                         IdDeposit = d.IdDeposit,
-                        Year = d.Year,
-                        Month = d.Month,
+                        YearDeposit = d.YearDeposit,
+                        MonthDeposit = d.MonthDeposit,
                         Amount = d.Amount,
-                        IdUser = d.IdUser,
+                        IdUserBudget = d.IdUserBudget,
                         EmailUserBudget = u.Email,
                         UsernameUserBudget = u.Username,
                         IdAccount = d.IdAccount,
-                        NameAccount = a.Name,
-                        DescriptionAccount = a.Description,
-                        IdStatus = d.IdStatus,
-                        NameStatusBudget = s.Name,
-                        DescriptionStatusBudget = s.Description
+                        NameAccount = a.NameAccount,
+                        DescriptionAccount = a.DescriptionAccount,
+                        IdStatusBudget = d.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = d.CreationUser,
+                        CreationDate = d.CreationDate,
+                        ModificationUser = d.ModificationUser,
+                        ModificationDate = d.ModificationDate
                     }
                   )
-                 .ToList();
+                  .ToList();
         }
 
         public List<DepositExtendDto> GetDepositsByYearMonthAccount(DepositDto deposit)
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
-                    join u in _context.Users.AsNoTracking()
-                    on d.IdUser equals u.IdUser
+                    join u in _context.UsersBudget.AsNoTracking()
+                    on d.IdUserBudget equals u.IdUserBudget
                     join a in _context.Accounts.AsNoTracking()
                     on d.IdAccount equals a.IdAccount
-                    join s in _context.Status.AsNoTracking()
-                    on d.IdStatus equals s.IdStatus
-                    where d.Year == deposit.Year && d.Month == deposit.Month && d.IdAccount == deposit.IdAccount
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on d.IdStatusBudget equals s.IdStatusBudget
+                    where d.YearDeposit == deposit.YearDeposit && d.MonthDeposit == deposit.MonthDeposit && d.IdAccount == deposit.IdAccount
                     select new DepositExtendDto
                     {
                         IdDeposit = d.IdDeposit,
-                        Year = d.Year,
-                        Month = d.Month,
+                        YearDeposit = d.YearDeposit,
+                        MonthDeposit = d.MonthDeposit,
                         Amount = d.Amount,
-                        IdUser = d.IdUser,
+                        IdUserBudget = d.IdUserBudget,
                         EmailUserBudget = u.Email,
                         UsernameUserBudget = u.Username,
                         IdAccount = d.IdAccount,
-                        NameAccount = a.Name,
-                        DescriptionAccount = a.Description,
-                        IdStatus = d.IdStatus,
-                        NameStatusBudget = s.Name,
-                        DescriptionStatusBudget = s.Description
+                        NameAccount = a.NameAccount,
+                        DescriptionAccount = a.DescriptionAccount,
+                        IdStatusBudget = d.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = d.CreationUser,
+                        CreationDate = d.CreationDate,
+                        ModificationUser = d.ModificationUser,
+                        ModificationDate = d.ModificationDate
                     }
                   )
-                 .ToList();
+                  .ToList();
         }
 
         public List<DepositExtendDto> GetDepositsByYearMonthStatusBudget(DepositDto deposit)
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
-                    join u in _context.Users.AsNoTracking()
-                    on d.IdUser equals u.IdUser
+                    join u in _context.UsersBudget.AsNoTracking()
+                    on d.IdUserBudget equals u.IdUserBudget
                     join a in _context.Accounts.AsNoTracking()
                     on d.IdAccount equals a.IdAccount
-                    join s in _context.Status.AsNoTracking()
-                    on d.IdStatus equals s.IdStatus
-                    where d.Year == deposit.Year && d.Month == deposit.Month && d.IdStatus == deposit.IdStatus
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on d.IdStatusBudget equals s.IdStatusBudget
+                    where d.YearDeposit == deposit.YearDeposit && d.MonthDeposit == deposit.MonthDeposit && d.IdStatusBudget == deposit.IdStatusBudget
                     select new DepositExtendDto
                     {
                         IdDeposit = d.IdDeposit,
-                        Year = d.Year,
-                        Month = d.Month,
+                        YearDeposit = d.YearDeposit,
+                        MonthDeposit = d.MonthDeposit,
                         Amount = d.Amount,
-                        IdUser = d.IdUser,
+                        IdUserBudget = d.IdUserBudget,
                         EmailUserBudget = u.Email,
                         UsernameUserBudget = u.Username,
                         IdAccount = d.IdAccount,
-                        NameAccount = a.Name,
-                        DescriptionAccount = a.Description,
-                        IdStatus = d.IdStatus,
-                        NameStatusBudget = s.Name,
-                        DescriptionStatusBudget = s.Description
+                        NameAccount = a.NameAccount,
+                        DescriptionAccount = a.DescriptionAccount,
+                        IdStatusBudget = d.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = d.CreationUser,
+                        CreationDate = d.CreationDate,
+                        ModificationUser = d.ModificationUser,
+                        ModificationDate = d.ModificationDate
                     }
                   )
-                 .ToList();
+                  .ToList();
         }
 
         public List<DepositExtendDto> GetDepositsByYearMonthUserBudgetAccount(DepositDto deposit)
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
-                    join u in _context.Users.AsNoTracking()
-                    on d.IdUser equals u.IdUser
+                    join u in _context.UsersBudget.AsNoTracking()
+                    on d.IdUserBudget equals u.IdUserBudget
                     join a in _context.Accounts.AsNoTracking()
                     on d.IdAccount equals a.IdAccount
-                    join s in _context.Status.AsNoTracking()
-                    on d.IdStatus equals s.IdStatus
-                    where d.Year == deposit.Year && d.Month == deposit.Month && d.IdUser == deposit.IdUser && d.IdAccount == deposit.IdAccount
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on d.IdStatusBudget equals s.IdStatusBudget
+                    where d.YearDeposit == deposit.YearDeposit && d.MonthDeposit == deposit.MonthDeposit && d.IdUserBudget == deposit.IdUserBudget && d.IdAccount == deposit.IdAccount
                     select new DepositExtendDto
                     {
                         IdDeposit = d.IdDeposit,
-                        Year = d.Year,
-                        Month = d.Month,
+                        YearDeposit = d.YearDeposit,
+                        MonthDeposit = d.MonthDeposit,
                         Amount = d.Amount,
-                        IdUser = d.IdUser,
+                        IdUserBudget = d.IdUserBudget,
                         EmailUserBudget = u.Email,
                         UsernameUserBudget = u.Username,
                         IdAccount = d.IdAccount,
-                        NameAccount = a.Name,
-                        DescriptionAccount = a.Description,
-                        IdStatus = d.IdStatus,
-                        NameStatusBudget = s.Name,
-                        DescriptionStatusBudget = s.Description
+                        NameAccount = a.NameAccount,
+                        DescriptionAccount = a.DescriptionAccount,
+                        IdStatusBudget = d.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = d.CreationUser,
+                        CreationDate = d.CreationDate,
+                        ModificationUser = d.ModificationUser,
+                        ModificationDate = d.ModificationDate
                     }
                   )
                  .ToList();
@@ -291,59 +323,67 @@
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
-                    join u in _context.Users.AsNoTracking()
-                    on d.IdUser equals u.IdUser
+                    join u in _context.UsersBudget.AsNoTracking()
+                    on d.IdUserBudget equals u.IdUserBudget
                     join a in _context.Accounts.AsNoTracking()
                     on d.IdAccount equals a.IdAccount
-                    join s in _context.Status.AsNoTracking()
-                    on d.IdStatus equals s.IdStatus
-                    where d.IdUser == deposit.IdUser
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on d.IdStatusBudget equals s.IdStatusBudget
+                    where d.IdUserBudget == deposit.IdUserBudget
                     select new DepositExtendDto
                     {
                         IdDeposit = d.IdDeposit,
-                        Year = d.Year,
-                        Month = d.Month,
+                        YearDeposit = d.YearDeposit,
+                        MonthDeposit = d.MonthDeposit,
                         Amount = d.Amount,
-                        IdUser = d.IdUser,
+                        IdUserBudget = d.IdUserBudget,
                         EmailUserBudget = u.Email,
                         UsernameUserBudget = u.Username,
                         IdAccount = d.IdAccount,
-                        NameAccount = a.Name,
-                        DescriptionAccount = a.Description,
-                        IdStatus = d.IdStatus,
-                        NameStatusBudget = s.Name,
-                        DescriptionStatusBudget = s.Description
+                        NameAccount = a.NameAccount,
+                        DescriptionAccount = a.DescriptionAccount,
+                        IdStatusBudget = d.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = d.CreationUser,
+                        CreationDate = d.CreationDate,
+                        ModificationUser = d.ModificationUser,
+                        ModificationDate = d.ModificationDate
                     }
                   )
-                 .ToList();
+                  .ToList();
         }
 
         public List<DepositExtendDto> GetDepositsByAccount(DepositDto deposit)
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
-                    join u in _context.Users.AsNoTracking()
-                    on d.IdUser equals u.IdUser
+                    join u in _context.UsersBudget.AsNoTracking()
+                    on d.IdUserBudget equals u.IdUserBudget
                     join a in _context.Accounts.AsNoTracking()
                     on d.IdAccount equals a.IdAccount
-                    join s in _context.Status.AsNoTracking()
-                    on d.IdStatus equals s.IdStatus
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on d.IdStatusBudget equals s.IdStatusBudget
                     where d.IdAccount == deposit.IdAccount
                     select new DepositExtendDto
                     {
                         IdDeposit = d.IdDeposit,
-                        Year = d.Year,
-                        Month = d.Month,
+                        YearDeposit = d.YearDeposit,
+                        MonthDeposit = d.MonthDeposit,
                         Amount = d.Amount,
-                        IdUser = d.IdUser,
+                        IdUserBudget = d.IdUserBudget,
                         EmailUserBudget = u.Email,
                         UsernameUserBudget = u.Username,
                         IdAccount = d.IdAccount,
-                        NameAccount = a.Name,
-                        DescriptionAccount = a.Description,
-                        IdStatus = d.IdStatus,
-                        NameStatusBudget = s.Name,
-                        DescriptionStatusBudget = s.Description
+                        NameAccount = a.NameAccount,
+                        DescriptionAccount = a.DescriptionAccount,
+                        IdStatusBudget = d.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = d.CreationUser,
+                        CreationDate = d.CreationDate,
+                        ModificationUser = d.ModificationUser,
+                        ModificationDate = d.ModificationDate
                     }
                   )
                  .ToList();
@@ -353,93 +393,105 @@
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
-                    join u in _context.Users.AsNoTracking()
-                    on d.IdUser equals u.IdUser
+                    join u in _context.UsersBudget.AsNoTracking()
+                    on d.IdUserBudget equals u.IdUserBudget
                     join a in _context.Accounts.AsNoTracking()
                     on d.IdAccount equals a.IdAccount
-                    join s in _context.Status.AsNoTracking()
-                    on d.IdStatus equals s.IdStatus
-                    where d.IdStatus == deposit.IdStatus
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on d.IdStatusBudget equals s.IdStatusBudget
+                    where d.IdStatusBudget == deposit.IdStatusBudget
                     select new DepositExtendDto
                     {
                         IdDeposit = d.IdDeposit,
-                        Year = d.Year,
-                        Month = d.Month,
+                        YearDeposit = d.YearDeposit,
+                        MonthDeposit = d.MonthDeposit,
                         Amount = d.Amount,
-                        IdUser = d.IdUser,
+                        IdUserBudget = d.IdUserBudget,
                         EmailUserBudget = u.Email,
                         UsernameUserBudget = u.Username,
                         IdAccount = d.IdAccount,
-                        NameAccount = a.Name,
-                        DescriptionAccount = a.Description,
-                        IdStatus = d.IdStatus,
-                        NameStatusBudget = s.Name,
-                        DescriptionStatusBudget = s.Description
+                        NameAccount = a.NameAccount,
+                        DescriptionAccount = a.DescriptionAccount,
+                        IdStatusBudget = d.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = d.CreationUser,
+                        CreationDate = d.CreationDate,
+                        ModificationUser = d.ModificationUser,
+                        ModificationDate = d.ModificationDate
                     }
                   )
-                 .ToList();
+                  .ToList();
         }
 
         public List<DepositExtendDto> GetDepositsByUserBudgetStatusBudget(DepositDto deposit)
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
-                    join u in _context.Users.AsNoTracking()
-                    on d.IdUser equals u.IdUser
+                    join u in _context.UsersBudget.AsNoTracking()
+                    on d.IdUserBudget equals u.IdUserBudget
                     join a in _context.Accounts.AsNoTracking()
                     on d.IdAccount equals a.IdAccount
-                    join s in _context.Status.AsNoTracking()
-                    on d.IdStatus equals s.IdStatus
-                    where d.IdUser == deposit.IdUser && d.IdStatus == deposit.IdStatus
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on d.IdStatusBudget equals s.IdStatusBudget
+                    where d.IdUserBudget == deposit.IdUserBudget && d.IdStatusBudget == deposit.IdStatusBudget
                     select new DepositExtendDto
                     {
                         IdDeposit = d.IdDeposit,
-                        Year = d.Year,
-                        Month = d.Month,
+                        YearDeposit = d.YearDeposit,
+                        MonthDeposit = d.MonthDeposit,
                         Amount = d.Amount,
-                        IdUser = d.IdUser,
+                        IdUserBudget = d.IdUserBudget,
                         EmailUserBudget = u.Email,
                         UsernameUserBudget = u.Username,
                         IdAccount = d.IdAccount,
-                        NameAccount = a.Name,
-                        DescriptionAccount = a.Description,
-                        IdStatus = d.IdStatus,
-                        NameStatusBudget = s.Name,
-                        DescriptionStatusBudget = s.Description
+                        NameAccount = a.NameAccount,
+                        DescriptionAccount = a.DescriptionAccount,
+                        IdStatusBudget = d.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = d.CreationUser,
+                        CreationDate = d.CreationDate,
+                        ModificationUser = d.ModificationUser,
+                        ModificationDate = d.ModificationDate
                     }
                   )
-                 .ToList();
+                  .ToList();
         }
 
         public List<DepositExtendDto> GetDepositsByAccountStatusBudget(DepositDto deposit)
         {
             return (
                     from d in _context.Deposits.AsNoTracking()
-                    join u in _context.Users.AsNoTracking()
-                    on d.IdUser equals u.IdUser
+                    join u in _context.UsersBudget.AsNoTracking()
+                    on d.IdUserBudget equals u.IdUserBudget
                     join a in _context.Accounts.AsNoTracking()
                     on d.IdAccount equals a.IdAccount
-                    join s in _context.Status.AsNoTracking()
-                    on d.IdStatus equals s.IdStatus
-                    where d.IdAccount == deposit.IdAccount && d.IdStatus == deposit.IdStatus
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on d.IdStatusBudget equals s.IdStatusBudget
+                    where d.IdAccount == deposit.IdAccount && d.IdStatusBudget == deposit.IdStatusBudget
                     select new DepositExtendDto
                     {
                         IdDeposit = d.IdDeposit,
-                        Year = d.Year,
-                        Month = d.Month,
+                        YearDeposit = d.YearDeposit,
+                        MonthDeposit = d.MonthDeposit,
                         Amount = d.Amount,
-                        IdUser = d.IdUser,
+                        IdUserBudget = d.IdUserBudget,
                         EmailUserBudget = u.Email,
                         UsernameUserBudget = u.Username,
                         IdAccount = d.IdAccount,
-                        NameAccount = a.Name,
-                        DescriptionAccount = a.Description,
-                        IdStatus = d.IdStatus,
-                        NameStatusBudget = s.Name,
-                        DescriptionStatusBudget = s.Description
+                        NameAccount = a.NameAccount,
+                        DescriptionAccount = a.DescriptionAccount,
+                        IdStatusBudget = d.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = d.CreationUser,
+                        CreationDate = d.CreationDate,
+                        ModificationUser = d.ModificationUser,
+                        ModificationDate = d.ModificationDate
                     }
                   )
-                 .ToList();
+                  .ToList();
         }
 
         #endregion

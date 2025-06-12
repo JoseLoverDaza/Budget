@@ -41,13 +41,13 @@
         #region Métodos y Funciones
 
         [HttpPost]
-        [Route("GetLogApiById")]
-        [SwaggerOperation(Summary = "Get Log Api By Id")]
-        public ResponseDto GetLogApiById(LogApiDto logApi)
+        [Route("GetLogApiByIdLogApi")]
+        [SwaggerOperation(Summary = "Get LogApi By IdLogApi")]
+        public ResponseDto GetLogApiByIdLogApi(LogApiDto logApi)
         {
             try
             {
-                response.Data = _logApiService.GetLogApiById(logApi);
+                response.Data = _logApiService.GetLogApiByIdLogApi(logApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -75,13 +75,13 @@
         }
 
         [HttpPost]
-        [Route("GetLogApisByStatus")]
-        [SwaggerOperation(Summary = "Get Log Apis By Status")]
-        public ResponseDto GetLogApisByStatus(LogApiDto logApi)
+        [Route("GetLogApisByStatusBudget")]
+        [SwaggerOperation(Summary = "Get LogApis By StatusBudget")]
+        public ResponseDto GetLogApisByStatusBudget(LogApiDto logApi)
         {
             try
             {
-                response.Data = _logApiService.GetLogApisByStatus(logApi);
+                response.Data = _logApiService.GetLogApisByStatusBudget(logApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -109,13 +109,13 @@
         }
 
         [HttpPost]
-        [Route("GetLogApisByCreationDateStatus")]
-        [SwaggerOperation(Summary = "Get Log Apis By Creation Date Status")]
-        public ResponseDto GetLogApisByCreationDateStatus(LogApiDto logApi)
+        [Route("GetLogApisByCreationDateStatusBudget")]
+        [SwaggerOperation(Summary = "Get LogApis By CreationDate StatusBudget")]
+        public ResponseDto GetLogApisByCreationDateStatusBudget(LogApiDto logApi)
         {
             try
             {
-                response.Data = _logApiService.GetLogApisByCreationDateStatus(logApi);
+                response.Data = _logApiService.GetLogApisByCreationDateStatusBudget(logApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -126,13 +126,13 @@
         }
 
         [HttpPost]
-        [Route("GetLogApisByEntityCreationDateStatus")]
-        [SwaggerOperation(Summary = "Get Log Apis By Entity Creation Date Status")]
-        public ResponseDto GetLogApisByEntityCreationDateStatus(LogApiDto logApi)
+        [Route("GetLogApisByEntityCreationDateStatusBudget")]
+        [SwaggerOperation(Summary = "Get LogApis By Entity CreationDate StatusBudget")]
+        public ResponseDto GetLogApisByEntityCreationDateStatusBudget(LogApiDto logApi)
         {
             try
             {
-                response.Data = _logApiService.GetLogApisByEntityCreationDateStatus(logApi);
+                response.Data = _logApiService.GetLogApisByEntityCreationDateStatusBudget(logApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)

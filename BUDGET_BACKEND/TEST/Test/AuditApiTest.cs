@@ -20,26 +20,26 @@
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
-    /// Nombre: AuditTest   
+    /// Nombre: AuditApiTest   
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
     [TestClass]
-    public class AuditTest
+    public class AuditApiTest
     {
 
         #region  Atributos y Propiedades
 
-        private readonly IAuditApiService _auditService;
+        private readonly IAuditApiService _auditApiService;
         private readonly ILogApiService _logApiService;
         private readonly EFContext? _context;
-        private readonly AuditController? _auditController;
+        private readonly AuditApiController? _auditApiController;
 
         #endregion
 
         #region Constructor
 
-        public AuditTest()
+        public AuditApiTest()
         {
             var options = new DbContextOptionsBuilder<EFContext>()
            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
@@ -48,47 +48,47 @@
             _context = new EFContext(options);
             UnitOfWork unitOfWork = new(_context);
             _logApiService = new LogApiService(unitOfWork);
-            _auditService = new AuditService(unitOfWork, _logApiService);           
-            _auditController = new AuditController(_auditService);
+            _auditApiService = new AuditService(unitOfWork, _logApiService);           
+            _auditApiController = new AuditApiController(_auditApiService);
 
             #region Data
 
-            /// Status Id 1
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 1
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 1,
-                Name = Constants.Status.INACTIVO,
-                Description = Constants.Status.INACTIVO
+                IdStatusBudget = 1,
+                NameStatus = Constants.Status.INACTIVO,
+                DescriptionStatus = Constants.Status.INACTIVO
             });
 
             _context.SaveChanges();
 
-            /// Status Id 2
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 2
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 2,
-                Name = Constants.Status.ACTIVO,
-                Description = Constants.Status.ACTIVO
+                IdStatusBudget = 2,
+                NameStatus = Constants.Status.ACTIVO,
+                DescriptionStatus = Constants.Status.ACTIVO
             });
 
             _context.SaveChanges();
 
-            /// Status Id 3
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 3
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 3,
-                Name = Constants.Status.CANCELADO,
-                Description = Constants.Status.CANCELADO
+                IdStatusBudget = 3,
+                NameStatus = Constants.Status.CANCELADO,
+                DescriptionStatus = Constants.Status.CANCELADO
             });
 
             _context.SaveChanges();
 
-            /// Audit Id 1
-            _context.Audits.Add(new Audit()
+            /// AuditApis IdAuditApi 1
+            _context.AuditApis.Add(new AuditApi()
             {
-                IdAudit = 1,
+                IdAuditApi = 1,
                 Host = "Test",
-                Endpoint = "Test",
+                EndpointUrl = "Test",
                 Agent = "Test",
                 Method = "Test",
                 CreationDate = new DateTime(2026, 1, 1)
@@ -104,16 +104,16 @@
         #region Métodos y Funciones
 
         [TestMethod]
-        public void GetAuditByIdOK()
+        public void GetAuditApiByIdAuditApiOK()
         {
             ///Arrange   
-            AuditDto audit = new()
+            AuditApiDto auditApi = new()
             {
-                IdAudit = 1
+                IdAuditApi = 1
             };
 
             ///Act
-            var result = _auditController!.GetAuditById(audit);
+            var result = _auditApiController!.GetAuditApiByIdAuditApi(auditApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -122,16 +122,16 @@
         }
 
         [TestMethod]
-        public void GetAuditByIdFail()
+        public void GetAuditApiByIdAuditApiFail()
         {
             ///Arrange   
-            AuditDto audit = new()
+            AuditApiDto auditApi = new()
             {
-                IdAudit = -1
+                IdAuditApi = -1
             };
 
             ///Act
-            var result = _auditController!.GetAuditById(audit);
+            var result = _auditApiController!.GetAuditApiByIdAuditApi(auditApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -140,16 +140,16 @@
         }
 
         [TestMethod]
-        public void GetAuditsByCreationDateOK()
+        public void GetAuditApisByCreationDateOK()
         {
             ///Arrange   
-            AuditDto audit = new()
+            AuditApiDto auditApi = new()
             {
                 CreationDate = new DateTime(2026, 1, 1)
             };
 
             ///Act
-            var result = _auditController!.GetAuditsByCreationDate(audit);
+            var result = _auditApiController!.GetAuditApisByCreationDate(auditApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -158,16 +158,16 @@
         }
 
         [TestMethod]
-        public void GetAuditsByCreationDateFail()
+        public void GetAuditApisByCreationDateFail()
         {
             ///Arrange   
-            AuditDto audit = new()
+            AuditApiDto auditApi = new()
             {
                 CreationDate = new DateTime(2025, 1, 1)
             };
 
             ///Act
-            var result = _auditController!.GetAuditsByCreationDate(audit);
+            var result = _auditApiController!.GetAuditApisByCreationDate(auditApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -176,17 +176,17 @@
         }
 
         [TestMethod]
-        public void GetAuditsByMethodCreationDateOK()
+        public void GetAuditApisByMethodCreationDateOK()
         {
             ///Arrange   
-            AuditDto audit = new()
+            AuditApiDto auditApi = new()
             {
                 Method = "Test",
                 CreationDate = new DateTime(2026, 1, 1)
             };
 
             ///Act
-            var result = _auditController!.GetAuditsByMethodCreationDate(audit);
+            var result = _auditApiController!.GetAuditApisByMethodCreationDate(auditApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -195,17 +195,17 @@
         }
 
         [TestMethod]
-        public void GetAuditsByMethodCreationDateFail()
+        public void GetAuditApisByMethodCreationDateFail()
         {
             ///Arrange   
-            AuditDto audit = new()
+            AuditApiDto auditApi = new()
             {
                 Method = "T",
                 CreationDate = new DateTime(2025, 1, 1)
             };
 
             ///Act
-            var result = _auditController!.GetAuditsByMethodCreationDate(audit);
+            var result = _auditApiController!.GetAuditApisByMethodCreationDate(auditApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -214,17 +214,17 @@
         }
 
         [TestMethod]
-        public void GetAuditsByEndpointCreationDateOK()
+        public void GetAuditApisByEndpointUrlCreationDateOK()
         {
             ///Arrange   
-            AuditDto audit = new()
+            AuditApiDto auditApi = new()
             {
-                Endpoint = "Test",
+                EndpointUrl = "Test",
                 CreationDate = new DateTime(2026, 1, 1)
             };
 
             ///Act
-            var result = _auditController!.GetAuditsByEndpointCreationDate(audit);
+            var result = _auditApiController!.GetAuditApisByEndpointUrlCreationDate(auditApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -233,17 +233,17 @@
         }
 
         [TestMethod]
-        public void GetAuditsByEndpointCreationDateFail()
+        public void GetAuditApisByEndpointUrlCreationDateFail()
         {
             ///Arrange   
-            AuditDto audit = new()
+            AuditApiDto auditApi = new()
             {
-                Endpoint = "T",
+                EndpointUrl = "T",
                 CreationDate = new DateTime(2025, 1, 1)
             };
 
             ///Act
-            var result = _auditController!.GetAuditsByEndpointCreationDate(audit);
+            var result = _auditApiController!.GetAuditApisByEndpointUrlCreationDate(auditApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -252,18 +252,18 @@
         }
 
         [TestMethod]
-        public void GetAuditsByEndpointMethodCreationDateOK()
+        public void GetAuditApisByEndpointUrlMethodCreationDateOK()
         {
             ///Arrange   
-            AuditDto audit = new()
+            AuditApiDto auditApi = new()
             {
-                Endpoint = "Test",
+                EndpointUrl = "Test",
                 Method = "Test",
                 CreationDate = new DateTime(2026, 1, 1)
             };
 
             ///Act
-            var result = _auditController!.GetAuditsByEndpointMethodCreationDate(audit);
+            var result = _auditApiController!.GetAuditApisByEndpointUrlMethodCreationDate(auditApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -272,18 +272,18 @@
         }
 
         [TestMethod]
-        public void GetAuditsByEndpointMethodCreationDateFail()
+        public void GetAuditApisByEndpointUrlMethodCreationDateFail()
         {
             ///Arrange   
-            AuditDto audit = new()
+            AuditApiDto auditApi = new()
             {
-                Endpoint = "T",
+                EndpointUrl = "T",
                 Method = "T",
                 CreationDate = new DateTime(2025, 1, 1)
             };
 
             ///Act
-            var result = _auditController!.GetAuditsByEndpointMethodCreationDate(audit);
+            var result = _auditApiController!.GetAuditApisByEndpointUrlMethodCreationDate(auditApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -292,20 +292,20 @@
         }
 
         [TestMethod]
-        public void SaveAuditOK()
+        public void SaveAuditApiOK()
         {
             ///Arrange   
-            AuditDto audit = new()
+            AuditApiDto auditApi = new()
             {
                 Host = "Test",
-                Endpoint = "Test",
+                EndpointUrl = "Test",
                 Agent = "Test",
                 Method = "Test",
                 CreationDate = DateTime.Now
             };
 
             ///Act
-            var result = _auditController!.SaveAudit(audit);
+            var result = _auditApiController!.SaveAuditApi(auditApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -314,21 +314,20 @@
         }
 
         [TestMethod]
-        public void UpdateAuditOK()
+        public void SaveAuditApiFail()
         {
             ///Arrange   
-            AuditDto audit = new()
-            {
-                IdAudit = 1,
+            AuditApiDto auditApi = new()
+            {                
                 Host = "Test",
-                Endpoint = "Test",
+                EndpointUrl = "Test",
                 Agent = "Test",
                 Method = "Test",
                 CreationDate = DateTime.Now
             };
 
             ///Act
-            var result = _auditController!.UpdateAudit(audit);
+            var result = _auditApiController!.SaveAuditApi(auditApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -337,21 +336,44 @@
         }
 
         [TestMethod]
-        public void UpdateAuditFail()
+        public void UpdateAuditApiOK()
         {
             ///Arrange   
-            AuditDto audit = new()
+            AuditApiDto auditApi = new()
             {
-                IdAudit = -1,
+                IdAuditApi = 1,
                 Host = "Test",
-                Endpoint = "Test",
+                EndpointUrl = "Test",
                 Agent = "Test",
                 Method = "Test",
                 CreationDate = DateTime.Now
             };
 
             ///Act
-            var result = _auditController!.UpdateAudit(audit);
+            var result = _auditApiController!.UpdateAuditApi(auditApi);
+
+            ///Assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(HttpStatusCode.OK.GetHashCode(), result.Code);
+        }
+
+        [TestMethod]
+        public void UpdateAuditApiFail()
+        {
+            ///Arrange   
+            AuditApiDto auditApi = new()
+            {
+                IdAuditApi = -1,
+                Host = "Test",
+                EndpointUrl = "Test",
+                Agent = "Test",
+                Method = "Test",
+                CreationDate = DateTime.Now
+            };
+
+            ///Act
+            var result = _auditApiController!.UpdateAuditApi(auditApi);
 
             ///Assert
             Assert.IsNotNull(result);

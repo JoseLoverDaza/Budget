@@ -47,28 +47,32 @@
                      on a.IdFinancialInstitution equals f.IdFinancialInstitution
                      join t in _context.TypeAccounts.AsNoTracking()
                      on a.IdTypeAccount equals t.IdTypeAccount
-                     join u in _context.Users.AsNoTracking()
-                     on a.IdUser equals u.IdUser
-                     join s in _context.Status.AsNoTracking()
-                     on a.IdStatus equals s.IdStatus
+                     join u in _context.UsersBudget.AsNoTracking()
+                     on a.IdUserBudget equals u.IdUserBudget
+                     join s in _context.StatusBudget.AsNoTracking()
+                     on a.IdStatusBudget equals s.IdStatusBudget
                      where a.IdAccount == account.IdAccount
                      select new AccountExtendDto
                      {
                          IdAccount = a.IdAccount,
-                         Name = a.Name,
-                         Description = a.Description,
+                         NameAccount = a.NameAccount,
+                         DescriptionAccount = a.DescriptionAccount,
                          IdFinancialInstitution = a.IdFinancialInstitution,
-                         NameFinancialInstitution = f.Name,
-                         DescriptionFinancialInstitution = f.Description,
+                         NameFinancialInstitution = f.NameFinancialInstitution,
+                         DescriptionFinancialInstitution = f.DescriptionFinancialInstitution,
                          IdTypeAccount = a.IdTypeAccount,
-                         NameTypeAccount = t.Name,
-                         DescriptionTypeAccount = t.Description,
-                         IdUser = a.IdUser,
+                         NameTypeAccount = t.NameTypeAccount,
+                         DescriptionTypeAccount = t.DescriptionTypeAccount,
+                         IdUserBudget = a.IdUserBudget,
                          EmailUserBudget = u.Email,
                          UsernameUserBudget = u.Username,
-                         IdStatus = a.IdStatus,
-                         NameStatusBudget = s.Name,
-                         DescriptionStatusBudget = s.Description
+                         IdStatusBudget = a.IdStatusBudget,
+                         NameStatusBudget = s.NameStatus,
+                         DescriptionStatusBudget = s.DescriptionStatus,
+                         CreationUser = a.CreationUser,
+                         CreationDate = a.CreationDate,
+                         ModificationUser = a.ModificationUser,
+                         ModificationDate = a.ModificationDate
                      }
                  )
                  .FirstOrDefault();
@@ -82,28 +86,32 @@
                     on a.IdFinancialInstitution equals f.IdFinancialInstitution
                     join t in _context.TypeAccounts.AsNoTracking()
                     on a.IdTypeAccount equals t.IdTypeAccount
-                    join u in _context.Users.AsNoTracking()
-                    on a.IdUser equals u.IdUser
-                    join s in _context.Status.AsNoTracking()
-                    on a.IdStatus equals s.IdStatus
+                    join u in _context.UsersBudget.AsNoTracking()
+                    on a.IdUserBudget equals u.IdUserBudget
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on a.IdStatusBudget equals s.IdStatusBudget
                     where a.IdFinancialInstitution == account.IdFinancialInstitution
                     select new AccountExtendDto
                     {
                         IdAccount = a.IdAccount,
-                        Name = a.Name,
-                        Description = a.Description,
+                        NameAccount = a.NameAccount,
+                        DescriptionAccount = a.DescriptionAccount,
                         IdFinancialInstitution = a.IdFinancialInstitution,
-                        NameFinancialInstitution = f.Name,
-                        DescriptionFinancialInstitution = f.Description,
+                        NameFinancialInstitution = f.NameFinancialInstitution,
+                        DescriptionFinancialInstitution = f.DescriptionFinancialInstitution,
                         IdTypeAccount = a.IdTypeAccount,
-                        NameTypeAccount = t.Name,
-                        DescriptionTypeAccount = t.Description,
-                        IdUser = a.IdUser,
+                        NameTypeAccount = t.NameTypeAccount,
+                        DescriptionTypeAccount = t.DescriptionTypeAccount,
+                        IdUserBudget = a.IdUserBudget,
                         EmailUserBudget = u.Email,
                         UsernameUserBudget = u.Username,
-                        IdStatus = a.IdStatus,
-                        NameStatusBudget = s.Name,
-                        DescriptionStatusBudget = s.Description
+                        IdStatusBudget = a.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = a.CreationUser,
+                        CreationDate = a.CreationDate,
+                        ModificationUser = a.ModificationUser,
+                        ModificationDate = a.ModificationDate
                     }
                   )
                  .ToList();
@@ -117,28 +125,32 @@
                     on a.IdFinancialInstitution equals f.IdFinancialInstitution
                     join t in _context.TypeAccounts.AsNoTracking()
                     on a.IdTypeAccount equals t.IdTypeAccount
-                    join u in _context.Users.AsNoTracking()
-                    on a.IdUser equals u.IdUser
-                    join s in _context.Status.AsNoTracking()
-                    on a.IdStatus equals s.IdStatus
+                    join u in _context.UsersBudget.AsNoTracking()
+                    on a.IdUserBudget equals u.IdUserBudget
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on a.IdStatusBudget equals s.IdStatusBudget
                     where a.IdTypeAccount == account.IdTypeAccount
                     select new AccountExtendDto
                     {
                         IdAccount = a.IdAccount,
-                        Name = a.Name,
-                        Description = a.Description,
+                        NameAccount = a.NameAccount,
+                        DescriptionAccount = a.DescriptionAccount,
                         IdFinancialInstitution = a.IdFinancialInstitution,
-                        NameFinancialInstitution = f.Name,
-                        DescriptionFinancialInstitution = f.Description,
+                        NameFinancialInstitution = f.NameFinancialInstitution,
+                        DescriptionFinancialInstitution = f.DescriptionFinancialInstitution,
                         IdTypeAccount = a.IdTypeAccount,
-                        NameTypeAccount = t.Name,
-                        DescriptionTypeAccount = t.Description,
-                        IdUser = a.IdUser,
+                        NameTypeAccount = t.NameTypeAccount,
+                        DescriptionTypeAccount = t.DescriptionTypeAccount,
+                        IdUserBudget = a.IdUserBudget,
                         EmailUserBudget = u.Email,
                         UsernameUserBudget = u.Username,
-                        IdStatus = a.IdStatus,
-                        NameStatusBudget = s.Name,
-                        DescriptionStatusBudget = s.Description
+                        IdStatusBudget = a.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = a.CreationUser,
+                        CreationDate = a.CreationDate,
+                        ModificationUser = a.ModificationUser,
+                        ModificationDate = a.ModificationDate
                     }
                   )
                  .ToList();
@@ -152,28 +164,32 @@
                     on a.IdFinancialInstitution equals f.IdFinancialInstitution
                     join t in _context.TypeAccounts.AsNoTracking()
                     on a.IdTypeAccount equals t.IdTypeAccount
-                    join u in _context.Users.AsNoTracking()
-                    on a.IdUser equals u.IdUser
-                    join s in _context.Status.AsNoTracking()
-                    on a.IdStatus equals s.IdStatus
-                    where a.IdUser == account.IdUser
+                    join u in _context.UsersBudget.AsNoTracking()
+                    on a.IdUserBudget equals u.IdUserBudget
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on a.IdStatusBudget equals s.IdStatusBudget
+                    where a.IdUserBudget == account.IdUserBudget
                     select new AccountExtendDto
                     {
                         IdAccount = a.IdAccount,
-                        Name = a.Name,
-                        Description = a.Description,
+                        NameAccount = a.NameAccount,
+                        DescriptionAccount = a.DescriptionAccount,
                         IdFinancialInstitution = a.IdFinancialInstitution,
-                        NameFinancialInstitution = f.Name,
-                        DescriptionFinancialInstitution = f.Description,
+                        NameFinancialInstitution = f.NameFinancialInstitution,
+                        DescriptionFinancialInstitution = f.DescriptionFinancialInstitution,
                         IdTypeAccount = a.IdTypeAccount,
-                        NameTypeAccount = t.Name,
-                        DescriptionTypeAccount = t.Description,
-                        IdUser = a.IdUser,
+                        NameTypeAccount = t.NameTypeAccount,
+                        DescriptionTypeAccount = t.DescriptionTypeAccount,
+                        IdUserBudget = a.IdUserBudget,
                         EmailUserBudget = u.Email,
                         UsernameUserBudget = u.Username,
-                        IdStatus = a.IdStatus,
-                        NameStatusBudget = s.Name,
-                        DescriptionStatusBudget = s.Description
+                        IdStatusBudget = a.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = a.CreationUser,
+                        CreationDate = a.CreationDate,
+                        ModificationUser = a.ModificationUser,
+                        ModificationDate = a.ModificationDate
                     }
                   )
                  .ToList();
@@ -187,206 +203,230 @@
                     on a.IdFinancialInstitution equals f.IdFinancialInstitution
                     join t in _context.TypeAccounts.AsNoTracking()
                     on a.IdTypeAccount equals t.IdTypeAccount
-                    join u in _context.Users.AsNoTracking()
-                    on a.IdUser equals u.IdUser
-                    join s in _context.Status.AsNoTracking()
-                    on a.IdStatus equals s.IdStatus
-                    where a.IdStatus == account.IdStatus
+                    join u in _context.UsersBudget.AsNoTracking()
+                    on a.IdUserBudget equals u.IdUserBudget
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on a.IdStatusBudget equals s.IdStatusBudget
+                    where a.IdStatusBudget == account.IdStatusBudget
                     select new AccountExtendDto
                     {
                         IdAccount = a.IdAccount,
-                        Name = a.Name,
-                        Description = a.Description,
+                        NameAccount = a.NameAccount,
+                        DescriptionAccount = a.DescriptionAccount,
                         IdFinancialInstitution = a.IdFinancialInstitution,
-                        NameFinancialInstitution = f.Name,
-                        DescriptionFinancialInstitution = f.Description,
+                        NameFinancialInstitution = f.NameFinancialInstitution,
+                        DescriptionFinancialInstitution = f.DescriptionFinancialInstitution,
                         IdTypeAccount = a.IdTypeAccount,
-                        NameTypeAccount = t.Name,
-                        DescriptionTypeAccount = t.Description,
-                        IdUser = a.IdUser,
+                        NameTypeAccount = t.NameTypeAccount,
+                        DescriptionTypeAccount = t.DescriptionTypeAccount,
+                        IdUserBudget = a.IdUserBudget,
                         EmailUserBudget = u.Email,
                         UsernameUserBudget = u.Username,
-                        IdStatus = a.IdStatus,
-                        NameStatusBudget = s.Name,
-                        DescriptionStatusBudget = s.Description
+                        IdStatusBudget = a.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = a.CreationUser,
+                        CreationDate = a.CreationDate,
+                        ModificationUser = a.ModificationUser,
+                        ModificationDate = a.ModificationDate
                     }
                   )
-                 .ToList();
+                  .ToList();
         }
 
         public List<AccountExtendDto> GetAccountsByFinancialInstitutionStatusBudget(AccountDto account)
         {
             return (
-                   from a in _context.Accounts.AsNoTracking()
-                   join f in _context.FinancialInstitutions.AsNoTracking()
-                   on a.IdFinancialInstitution equals f.IdFinancialInstitution
-                   join t in _context.TypeAccounts.AsNoTracking()
-                   on a.IdTypeAccount equals t.IdTypeAccount
-                   join u in _context.Users.AsNoTracking()
-                   on a.IdUser equals u.IdUser
-                   join s in _context.Status.AsNoTracking()
-                   on a.IdStatus equals s.IdStatus
-                   where a.IdFinancialInstitution == account.IdFinancialInstitution && a.IdStatus == account.IdStatus
-                   select new AccountExtendDto
-                   {
-                       IdAccount = a.IdAccount,
-                       Name = a.Name,
-                       Description = a.Description,
-                       IdFinancialInstitution = a.IdFinancialInstitution,
-                       NameFinancialInstitution = f.Name,
-                       DescriptionFinancialInstitution = f.Description,
-                       IdTypeAccount = a.IdTypeAccount,
-                       NameTypeAccount = t.Name,
-                       DescriptionTypeAccount = t.Description,
-                       IdUser = a.IdUser,
-                       EmailUserBudget = u.Email,
-                       UsernameUserBudget = u.Username,
-                       IdStatus = a.IdStatus,
-                       NameStatusBudget = s.Name,
-                       DescriptionStatusBudget = s.Description
-                   }
-                 )
-                .ToList();
+                    from a in _context.Accounts.AsNoTracking()
+                    join f in _context.FinancialInstitutions.AsNoTracking()
+                    on a.IdFinancialInstitution equals f.IdFinancialInstitution
+                    join t in _context.TypeAccounts.AsNoTracking()
+                    on a.IdTypeAccount equals t.IdTypeAccount
+                    join u in _context.UsersBudget.AsNoTracking()
+                    on a.IdUserBudget equals u.IdUserBudget
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on a.IdStatusBudget equals s.IdStatusBudget
+                    where a.IdFinancialInstitution == account.IdFinancialInstitution && a.IdStatusBudget == account.IdStatusBudget
+                    select new AccountExtendDto
+                    {
+                        IdAccount = a.IdAccount,
+                        NameAccount = a.NameAccount,
+                        DescriptionAccount = a.DescriptionAccount,
+                        IdFinancialInstitution = a.IdFinancialInstitution,
+                        NameFinancialInstitution = f.NameFinancialInstitution,
+                        DescriptionFinancialInstitution = f.DescriptionFinancialInstitution,
+                        IdTypeAccount = a.IdTypeAccount,
+                        NameTypeAccount = t.NameTypeAccount,
+                        DescriptionTypeAccount = t.DescriptionTypeAccount,
+                        IdUserBudget = a.IdUserBudget,
+                        EmailUserBudget = u.Email,
+                        UsernameUserBudget = u.Username,
+                        IdStatusBudget = a.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = a.CreationUser,
+                        CreationDate = a.CreationDate,
+                        ModificationUser = a.ModificationUser,
+                        ModificationDate = a.ModificationDate
+                    }
+                  )
+                  .ToList();
         }
 
         public List<AccountExtendDto> GetAccountsByTypeAccountStatusBudget(AccountDto account)
         {
             return (
-                  from a in _context.Accounts.AsNoTracking()
-                  join f in _context.FinancialInstitutions.AsNoTracking()
-                  on a.IdFinancialInstitution equals f.IdFinancialInstitution
-                  join t in _context.TypeAccounts.AsNoTracking()
-                  on a.IdTypeAccount equals t.IdTypeAccount
-                  join u in _context.Users.AsNoTracking()
-                  on a.IdUser equals u.IdUser
-                  join s in _context.Status.AsNoTracking()
-                  on a.IdStatus equals s.IdStatus
-                  where a.IdTypeAccount == account.IdTypeAccount && a.IdStatus == account.IdStatus
-                  select new AccountExtendDto
-                  {
-                      IdAccount = a.IdAccount,
-                      Name = a.Name,
-                      Description = a.Description,
-                      IdFinancialInstitution = a.IdFinancialInstitution,
-                      NameFinancialInstitution = f.Name,
-                      DescriptionFinancialInstitution = f.Description,
-                      IdTypeAccount = a.IdTypeAccount,
-                      NameTypeAccount = t.Name,
-                      DescriptionTypeAccount = t.Description,
-                      IdUser = a.IdUser,
-                      EmailUserBudget = u.Email,
-                      UsernameUserBudget = u.Username,
-                      IdStatus = a.IdStatus,
-                      NameStatusBudget = s.Name,
-                      DescriptionStatusBudget = s.Description
-                  }
-                )
-               .ToList();
+                    from a in _context.Accounts.AsNoTracking()
+                    join f in _context.FinancialInstitutions.AsNoTracking()
+                    on a.IdFinancialInstitution equals f.IdFinancialInstitution
+                    join t in _context.TypeAccounts.AsNoTracking()
+                    on a.IdTypeAccount equals t.IdTypeAccount
+                    join u in _context.UsersBudget.AsNoTracking()
+                    on a.IdUserBudget equals u.IdUserBudget
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on a.IdStatusBudget equals s.IdStatusBudget
+                    where a.IdTypeAccount == account.IdTypeAccount && a.IdStatusBudget == account.IdStatusBudget
+                    select new AccountExtendDto
+                    {
+                        IdAccount = a.IdAccount,
+                        NameAccount = a.NameAccount,
+                        DescriptionAccount = a.DescriptionAccount,
+                        IdFinancialInstitution = a.IdFinancialInstitution,
+                        NameFinancialInstitution = f.NameFinancialInstitution,
+                        DescriptionFinancialInstitution = f.DescriptionFinancialInstitution,
+                        IdTypeAccount = a.IdTypeAccount,
+                        NameTypeAccount = t.NameTypeAccount,
+                        DescriptionTypeAccount = t.DescriptionTypeAccount,
+                        IdUserBudget = a.IdUserBudget,
+                        EmailUserBudget = u.Email,
+                        UsernameUserBudget = u.Username,
+                        IdStatusBudget = a.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = a.CreationUser,
+                        CreationDate = a.CreationDate,
+                        ModificationUser = a.ModificationUser,
+                        ModificationDate = a.ModificationDate
+                    }
+                   )
+                   .ToList();
         }
 
         public List<AccountExtendDto> GetAccountsByUserBudgetStatusBudget(AccountDto account)
         {
             return (
-                  from a in _context.Accounts.AsNoTracking()
-                  join f in _context.FinancialInstitutions.AsNoTracking()
-                  on a.IdFinancialInstitution equals f.IdFinancialInstitution
-                  join t in _context.TypeAccounts.AsNoTracking()
-                  on a.IdTypeAccount equals t.IdTypeAccount
-                  join u in _context.Users.AsNoTracking()
-                  on a.IdUser equals u.IdUser
-                  join s in _context.Status.AsNoTracking()
-                  on a.IdStatus equals s.IdStatus
-                  where a.IdUser == account.IdUser && a.IdStatus == account.IdStatus
-                  select new AccountExtendDto
-                  {
+                    from a in _context.Accounts.AsNoTracking()
+                    join f in _context.FinancialInstitutions.AsNoTracking()
+                    on a.IdFinancialInstitution equals f.IdFinancialInstitution
+                    join t in _context.TypeAccounts.AsNoTracking()
+                    on a.IdTypeAccount equals t.IdTypeAccount
+                    join u in _context.UsersBudget.AsNoTracking()
+                    on a.IdUserBudget equals u.IdUserBudget
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on a.IdStatusBudget equals s.IdStatusBudget
+                    where a.IdUserBudget == account.IdUserBudget && a.IdStatusBudget == account.IdStatusBudget
+                    select new AccountExtendDto
+                    {
                       IdAccount = a.IdAccount,
-                      Name = a.Name,
-                      Description = a.Description,
+                      NameAccount = a.NameAccount,
+                      DescriptionAccount = a.DescriptionAccount,
                       IdFinancialInstitution = a.IdFinancialInstitution,
-                      NameFinancialInstitution = f.Name,
-                      DescriptionFinancialInstitution = f.Description,
+                      NameFinancialInstitution = f.NameFinancialInstitution,
+                      DescriptionFinancialInstitution = f.DescriptionFinancialInstitution,
                       IdTypeAccount = a.IdTypeAccount,
-                      NameTypeAccount = t.Name,
-                      DescriptionTypeAccount = t.Description,
-                      IdUser = a.IdUser,
+                      NameTypeAccount = t.NameTypeAccount,
+                      DescriptionTypeAccount = t.DescriptionTypeAccount,
+                      IdUserBudget = a.IdUserBudget,
                       EmailUserBudget = u.Email,
                       UsernameUserBudget = u.Username,
-                      IdStatus = a.IdStatus,
-                      NameStatusBudget = s.Name,
-                      DescriptionStatusBudget = s.Description
-                  }
-                )
-               .ToList();
+                      IdStatusBudget = a.IdStatusBudget,
+                      NameStatusBudget = s.NameStatus,
+                      DescriptionStatusBudget = s.DescriptionStatus,
+                      CreationUser = a.CreationUser,
+                      CreationDate = a.CreationDate,
+                      ModificationUser = a.ModificationUser,
+                      ModificationDate = a.ModificationDate
+                    }
+                  )
+                  .ToList();
         }
 
         public List<AccountExtendDto> GetAccountsByNameFinancialInstitutionTypeAccountUserBudget(AccountDto account)
         {
             return (
-                 from a in _context.Accounts.AsNoTracking()
-                 join f in _context.FinancialInstitutions.AsNoTracking()
-                 on a.IdFinancialInstitution equals f.IdFinancialInstitution
-                 join t in _context.TypeAccounts.AsNoTracking()
-                 on a.IdTypeAccount equals t.IdTypeAccount
-                 join u in _context.Users.AsNoTracking()
-                 on a.IdUser equals u.IdUser
-                 join s in _context.Status.AsNoTracking()
-                 on a.IdStatus equals s.IdStatus
-                 where a.Name == account.Name && a.IdFinancialInstitution == account.IdFinancialInstitution && a.IdTypeAccount == account.IdTypeAccount && a.IdUser == account.IdUser
-                 select new AccountExtendDto
-                 {
+                    from a in _context.Accounts.AsNoTracking()
+                    join f in _context.FinancialInstitutions.AsNoTracking()
+                    on a.IdFinancialInstitution equals f.IdFinancialInstitution
+                    join t in _context.TypeAccounts.AsNoTracking()
+                    on a.IdTypeAccount equals t.IdTypeAccount
+                    join u in _context.UsersBudget.AsNoTracking()
+                    on a.IdUserBudget equals u.IdUserBudget
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on a.IdStatusBudget equals s.IdStatusBudget
+                    where a.NameAccount == account.NameAccount && a.IdFinancialInstitution == account.IdFinancialInstitution && a.IdTypeAccount == account.IdTypeAccount && a.IdUserBudget == account.IdUserBudget
+                    select new AccountExtendDto
+                    {
                      IdAccount = a.IdAccount,
-                     Name = a.Name,
-                     Description = a.Description,
+                     NameAccount = a.NameAccount,
+                     DescriptionAccount = a.DescriptionAccount,
                      IdFinancialInstitution = a.IdFinancialInstitution,
-                     NameFinancialInstitution = f.Name,
-                     DescriptionFinancialInstitution = f.Description,
+                     NameFinancialInstitution = f.NameFinancialInstitution,
+                     DescriptionFinancialInstitution = f.DescriptionFinancialInstitution,
                      IdTypeAccount = a.IdTypeAccount,
-                     NameTypeAccount = t.Name,
-                     DescriptionTypeAccount = t.Description,
-                     IdUser = a.IdUser,
+                     NameTypeAccount = t.NameTypeAccount,
+                     DescriptionTypeAccount = t.DescriptionTypeAccount,
+                     IdUserBudget = a.IdUserBudget,
                      EmailUserBudget = u.Email,
                      UsernameUserBudget = u.Username,
-                     IdStatus = a.IdStatus,
-                     NameStatusBudget = s.Name,
-                     DescriptionStatusBudget = s.Description
-                 }
-               )
-              .ToList();
+                     IdStatusBudget = a.IdStatusBudget,
+                     NameStatusBudget = s.NameStatus,
+                     DescriptionStatusBudget = s.DescriptionStatus,
+                     CreationUser = a.CreationUser,
+                     CreationDate = a.CreationDate,
+                     ModificationUser = a.ModificationUser,
+                     ModificationDate = a.ModificationDate
+                   }
+                 )
+                 .ToList();
         }
 
         public List<AccountExtendDto> GetAccountsByFinancialInstitutionTypeAccountUserBudget(AccountDto account)
         {
             return (
-                 from a in _context.Accounts.AsNoTracking()
-                 join f in _context.FinancialInstitutions.AsNoTracking()
-                 on a.IdFinancialInstitution equals f.IdFinancialInstitution
-                 join t in _context.TypeAccounts.AsNoTracking()
-                 on a.IdTypeAccount equals t.IdTypeAccount
-                 join u in _context.Users.AsNoTracking()
-                 on a.IdUser equals u.IdUser
-                 join s in _context.Status.AsNoTracking()
-                 on a.IdStatus equals s.IdStatus
-                 where a.IdFinancialInstitution == account.IdFinancialInstitution && a.IdTypeAccount == account.IdTypeAccount && a.IdUser == account.IdUser
-                 select new AccountExtendDto
-                 {
+                    from a in _context.Accounts.AsNoTracking()
+                    join f in _context.FinancialInstitutions.AsNoTracking()
+                    on a.IdFinancialInstitution equals f.IdFinancialInstitution
+                    join t in _context.TypeAccounts.AsNoTracking()
+                    on a.IdTypeAccount equals t.IdTypeAccount
+                    join u in _context.UsersBudget.AsNoTracking()
+                    on a.IdUserBudget equals u.IdUserBudget
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on a.IdStatusBudget equals s.IdStatusBudget
+                    where a.IdFinancialInstitution == account.IdFinancialInstitution && a.IdTypeAccount == account.IdTypeAccount && a.IdUserBudget == account.IdUserBudget
+                    select new AccountExtendDto
+                    {
                      IdAccount = a.IdAccount,
-                     Name = a.Name,
-                     Description = a.Description,
+                     NameAccount = a.NameAccount,
+                     DescriptionAccount = a.DescriptionAccount,
                      IdFinancialInstitution = a.IdFinancialInstitution,
-                     NameFinancialInstitution = f.Name,
-                     DescriptionFinancialInstitution = f.Description,
+                     NameFinancialInstitution = f.NameFinancialInstitution,
+                     DescriptionFinancialInstitution = f.DescriptionFinancialInstitution,
                      IdTypeAccount = a.IdTypeAccount,
-                     NameTypeAccount = t.Name,
-                     DescriptionTypeAccount = t.Description,
-                     IdUser = a.IdUser,
+                     NameTypeAccount = t.NameTypeAccount,
+                     DescriptionTypeAccount = t.DescriptionTypeAccount,
+                     IdUserBudget = a.IdUserBudget,
                      EmailUserBudget = u.Email,
                      UsernameUserBudget = u.Username,
-                     IdStatus = a.IdStatus,
-                     NameStatusBudget = s.Name,
-                     DescriptionStatusBudget = s.Description
-                 }
-               )
-              .ToList();
+                     IdStatusBudget = a.IdStatusBudget,
+                     NameStatusBudget = s.NameStatus,
+                     DescriptionStatusBudget = s.DescriptionStatus,
+                     CreationUser = a.CreationUser,
+                     CreationDate = a.CreationDate,
+                     ModificationUser = a.ModificationUser,
+                     ModificationDate = a.ModificationDate
+                    }
+                  )
+                  .ToList();
         }
 
         #endregion

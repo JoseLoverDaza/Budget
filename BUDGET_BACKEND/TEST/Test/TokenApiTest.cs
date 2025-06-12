@@ -52,76 +52,76 @@
             _tokenApiController = new TokenApiController(_tokenApiService);
 
             #region Data
-
-            /// Status Id 1
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 1
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 1,
-                Name = Constants.Status.INACTIVO,
-                Description = Constants.Status.INACTIVO
+                IdStatusBudget = 1,
+                NameStatus = Constants.Status.INACTIVO,
+                DescriptionStatus = Constants.Status.INACTIVO
             });
 
             _context.SaveChanges();
 
-            /// Status Id 2
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 2
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 2,
-                Name = Constants.Status.ACTIVO,
-                Description = Constants.Status.ACTIVO
+                IdStatusBudget = 2,
+                NameStatus = Constants.Status.ACTIVO,
+                DescriptionStatus = Constants.Status.ACTIVO
             });
 
             _context.SaveChanges();
 
-            /// Status Id 3
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 3
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 3,
-                Name = Constants.Status.CANCELADO,
-                Description = Constants.Status.CANCELADO
+                IdStatusBudget = 3,
+                NameStatus = Constants.Status.CANCELADO,
+                DescriptionStatus = Constants.Status.CANCELADO
             });
 
             _context.SaveChanges();
 
-            /// Role Id 1
-            _context.Roles.Add(new Role()
+            /// RolesBudget IdRoleBudget 1
+            _context.RolesBudget.Add(new RoleBudget()
             {
-                IdRole = 1,
-                Name = "Test",
-                Description = "Test",
-                IdStatus = 1
+                IdRoleBudget = 1,
+                NameRole = "Test",
+                DescriptionRole = "Test",
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
 
-            /// User Id 1
-            _context.Users.Add(new User()
+            /// UsersBudget IdUserBudget 1
+            _context.UsersBudget.Add(new UserBudget()
             {
-                IdUser = 1,
+                IdUserBudget = 1,
                 Email = "Test",
                 Phone = "1234567890",
                 Username = "Test",
-                Password = "A7Ws/sQDVsXXi/xheT1IufcXPN5rJUKXmPWvnJTGzjRgOzD+vAt1GAMXoD0/mlrD",
-                IdRole = 1,
-                IdStatus = 1
+                EncryptedPassword = "A7Ws/sQDVsXXi/xheT1IufcXPN5rJUKXmPWvnJTGzjRgOzD+vAt1GAMXoD0/mlrD",
+                IdRoleBudget = 1,
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
 
-            /// TokenApi Id 1
+            /// TokenApi IdTokenApi 1
             _context.TokenApis.Add(new TokenApi()
             {
                 IdTokenApi = 1,
                 Token = "Test",
                 CreationDate = new DateTime(2026, 1, 1),
                 ExpirationDate = new DateTime(2026, 1, 1),
-                IdUser = 1,
-                IdStatus = 1
+                IdUserBudget = 1,
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
 
             #endregion Data
+
         }
 
         #endregion
@@ -129,7 +129,7 @@
         #region Métodos y Funciones
 
         [TestMethod]
-        public void GetTokenApiByIdOK()
+        public void GetTokenApiByIdTokenApiOK()
         {
             ///Arrange   
             TokenApiDto tokenApi = new()
@@ -138,7 +138,7 @@
             };
 
             ///Act
-            var result = _tokenApiController!.GetTokenApiById(tokenApi);
+            var result = _tokenApiController!.GetTokenApiByIdTokenApi(tokenApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -147,7 +147,7 @@
         }
 
         [TestMethod]
-        public void GetTokenApiByIdFail()
+        public void GetTokenApiByIdTokenApiFail()
         {
             ///Arrange   
             TokenApiDto tokenApi = new()
@@ -156,7 +156,7 @@
             };
 
             ///Act
-            var result = _tokenApiController!.GetTokenApiById(tokenApi);
+            var result = _tokenApiController!.GetTokenApiByIdTokenApi(tokenApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -237,16 +237,16 @@
         }
 
         [TestMethod]
-        public void GetTokenApisByUserOK()
+        public void GetTokenApisByUserBudgetOK()
         {
             ///Arrange   
             TokenApiDto tokenApi = new()
             {
-                IdUser = 1
+                IdUserBudget = 1
             };
 
             ///Act
-            var result = _tokenApiController!.GetTokenApisByUser(tokenApi);
+            var result = _tokenApiController!.GetTokenApisByUserBudget(tokenApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -255,16 +255,16 @@
         }
 
         [TestMethod]
-        public void GetTokenApisByUserFail()
+        public void GetTokenApisByUserBudgetFail()
         {
             ///Arrange   
             TokenApiDto tokenApi = new()
             {
-                IdUser = -1
+                IdUserBudget = -1
             };
 
             ///Act
-            var result = _tokenApiController!.GetTokenApisByUser(tokenApi);
+            var result = _tokenApiController!.GetTokenApisByUserBudget(tokenApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -273,16 +273,16 @@
         }
 
         [TestMethod]
-        public void GetTokenApisByStatusOK()
+        public void GetTokenApisByStatusBudgetOK()
         {
             ///Arrange   
             TokenApiDto tokenApi = new()
             {
-                IdStatus = 1
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _tokenApiController!.GetTokenApisByStatus(tokenApi);
+            var result = _tokenApiController!.GetTokenApisByStatusBudget(tokenApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -291,16 +291,16 @@
         }
 
         [TestMethod]
-        public void GetTokenApisByStatusFail()
+        public void GetTokenApisByStatusBudgetFail()
         {
             ///Arrange   
             TokenApiDto tokenApi = new()
             {
-                IdStatus = -1
+                IdStatusBudget = -1
             };
 
             ///Act
-            var result = _tokenApiController!.GetTokenApisByStatus(tokenApi);
+            var result = _tokenApiController!.GetTokenApisByStatusBudget(tokenApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -309,17 +309,17 @@
         }
 
         [TestMethod]
-        public void GetTokenApisByCreationDateStatusOK()
+        public void GetTokenApisByCreationDateStatusBudgetOK()
         {
             ///Arrange   
             TokenApiDto tokenApi = new()
             {
                 CreationDate = new DateTime(2026, 1, 1),
-                IdStatus = 1
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _tokenApiController!.GetTokenApisByCreationDateStatus(tokenApi);
+            var result = _tokenApiController!.GetTokenApisByCreationDateStatusBudget(tokenApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -328,17 +328,17 @@
         }
 
         [TestMethod]
-        public void GetTokenApisByCreationDateStatusFail()
+        public void GetTokenApisByCreationDateStatusBudgetFail()
         {
             ///Arrange   
             TokenApiDto tokenApi = new()
             {
                 CreationDate = new DateTime(2025, 1, 1),
-                IdStatus = -1
+                IdStatusBudget = -1
             };
 
             ///Act
-            var result = _tokenApiController!.GetTokenApisByCreationDateStatus(tokenApi);
+            var result = _tokenApiController!.GetTokenApisByCreationDateStatusBudget(tokenApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -347,17 +347,17 @@
         }
 
         [TestMethod]
-        public void GetTokenApisByExpirationDateStatusOK()
+        public void GetTokenApisByExpirationDateStatusBudgetOK()
         {
             ///Arrange   
             TokenApiDto tokenApi = new()
             {
                 ExpirationDate = new DateTime(2026, 1, 1),
-                IdStatus = 1
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _tokenApiController!.GetTokenApisByExpirationDateStatus(tokenApi);
+            var result = _tokenApiController!.GetTokenApisByExpirationDateStatusBudget(tokenApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -366,17 +366,17 @@
         }
 
         [TestMethod]
-        public void GetTokenApisByExpirationDateStatusFail()
+        public void GetTokenApisByExpirationDateStatusBudgetFail()
         {
             ///Arrange   
             TokenApiDto tokenApi = new()
             {
                 ExpirationDate = new DateTime(2025, 1, 1),
-                IdStatus = -1
+                IdStatusBudget = -1
             };
 
             ///Act
-            var result = _tokenApiController!.GetTokenApisByExpirationDateStatus(tokenApi);
+            var result = _tokenApiController!.GetTokenApisByExpirationDateStatusBudget(tokenApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -385,17 +385,17 @@
         }
 
         [TestMethod]
-        public void GetTokenApisByUserStatusOK()
+        public void GetTokenApisByUserBudgetStatusBudgetOK()
         {
             ///Arrange   
             TokenApiDto tokenApi = new()
             {
-                IdUser = 1,
-                IdStatus = 1
+                IdUserBudget = 1,
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _tokenApiController!.GetTokenApisByUserStatus(tokenApi);
+            var result = _tokenApiController!.GetTokenApisByUserBudgetStatusBudget(tokenApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -404,17 +404,17 @@
         }
 
         [TestMethod]
-        public void GetTokenApisByUserStatusFail()
+        public void GetTokenApisByUserBudgetStatusBudgetFail()
         {
             ///Arrange   
             TokenApiDto tokenApi = new()
             {
-                IdUser = -1,
-                IdStatus = -1
+                IdUserBudget = -1,
+                IdStatusBudget = -1
             };
 
             ///Act
-            var result = _tokenApiController!.GetTokenApisByUserStatus(tokenApi);
+            var result = _tokenApiController!.GetTokenApisByUserBudgetStatusBudget(tokenApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -423,18 +423,18 @@
         }
 
         [TestMethod]
-        public void GetTokenApisByCreationDateUserStatusOK()
+        public void GetTokenApisByCreationDateUserBudgetStatusBudgetOK()
         {
             ///Arrange   
             TokenApiDto tokenApi = new()
             {
                 CreationDate = new DateTime(2026, 1, 1),
-                IdUser = 1,
-                IdStatus = 1
+                IdUserBudget = 1,
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _tokenApiController!.GetTokenApisByCreationDateUserStatus(tokenApi);
+            var result = _tokenApiController!.GetTokenApisByCreationDateUserBudgetStatusBudget(tokenApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -443,18 +443,18 @@
         }
 
         [TestMethod]
-        public void GetTokenApisByCreationDateUserStatusFail()
+        public void GetTokenApisByCreationDateUserBudgetStatusBudgetFail()
         {
             ///Arrange   
             TokenApiDto tokenApi = new()
             {
                 CreationDate = new DateTime(2025, 1, 1),
-                IdUser = -1,
-                IdStatus = -1
+                IdUserBudget = -1,
+                IdStatusBudget = -1
             };
 
             ///Act
-            var result = _tokenApiController!.GetTokenApisByCreationDateUserStatus(tokenApi);
+            var result = _tokenApiController!.GetTokenApisByCreationDateUserBudgetStatusBudget(tokenApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -463,18 +463,18 @@
         }
 
         [TestMethod]
-        public void GetTokenApisByExpirationDateUserStatusOK()
+        public void GetTokenApisByExpirationDateUserBudgetStatusBudgetOK()
         {
             ///Arrange   
             TokenApiDto tokenApi = new()
             {
                 ExpirationDate = new DateTime(2026, 1, 1),
-                IdUser = 1,
-                IdStatus = 1
+                IdUserBudget = 1,
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _tokenApiController!.GetTokenApisByExpirationDateUserStatus(tokenApi);
+            var result = _tokenApiController!.GetTokenApisByExpirationDateUserBudgetStatusBudget(tokenApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -483,18 +483,18 @@
         }
 
         [TestMethod]
-        public void GetTokenApisByExpirationDateUserStatusFail()
+        public void GetTokenApisByExpirationDateUserBudgetStatusBudgetFail()
         {
             ///Arrange   
             TokenApiDto tokenApi = new()
             {
                 ExpirationDate = new DateTime(2025, 1, 1),
-                IdUser = -1,
-                IdStatus = -1
+                IdUserBudget = -1,
+                IdStatusBudget = -1
             };
 
             ///Act
-            var result = _tokenApiController!.GetTokenApisByExpirationDateUserStatus(tokenApi);
+            var result = _tokenApiController!.GetTokenApisByExpirationDateUserBudgetStatusBudget(tokenApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -511,8 +511,8 @@
                 Token = "Test1",
                 CreationDate = new DateTime(2025, 1, 1),
                 ExpirationDate = new DateTime(2025, 1, 1),
-                IdUser = 1,
-                IdStatus = 1
+                IdUserBudget = 1,
+                IdStatusBudget = 1
             };
 
             ///Act
@@ -533,8 +533,8 @@
                 Token = "Test",
                 CreationDate = new DateTime(2025, 1, 1),
                 ExpirationDate = new DateTime(2025, 1, 1),
-                IdUser = -1,
-                IdStatus = -1
+                IdUserBudget = -1,
+                IdStatusBudget = -1
             };
 
             ///Act
@@ -556,8 +556,8 @@
                 Token = "Test",
                 CreationDate = new DateTime(2025, 1, 1),
                 ExpirationDate = new DateTime(2025, 1, 1),
-                IdUser = 1,
-                IdStatus = 1
+                IdUserBudget = 1,
+                IdStatusBudget = 1
             };
 
             ///Act
@@ -579,8 +579,8 @@
                 Token = "Test",
                 CreationDate = new DateTime(2025, 1, 1),
                 ExpirationDate = new DateTime(2025, 1, 1),
-                IdUser = 1,
-                IdStatus = 1
+                IdUserBudget = 1,
+                IdStatusBudget = 1
             };
 
             ///Act
@@ -602,8 +602,8 @@
                 Token = "Test",
                 CreationDate = new DateTime(2025, 1, 1),
                 ExpirationDate = new DateTime(2025, 1, 1),
-                IdUser = 1,
-                IdStatus = 3
+                IdUserBudget = 1,
+                IdStatusBudget = 3
             };
 
             ///Act
@@ -625,8 +625,8 @@
                 Token = "Test",
                 CreationDate = new DateTime(2025, 1, 1),
                 ExpirationDate = new DateTime(2025, 1, 1),
-                IdUser = 1,
-                IdStatus = 1
+                IdUserBudget = 1,
+                IdStatusBudget = 1
             };
 
             ///Act

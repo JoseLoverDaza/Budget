@@ -14,26 +14,26 @@
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
-    /// Nombre: RoleController   
+    /// Nombre: RoleBudgetController   
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
     [Route("api/[controller]")]
     [ApiController]
-    public class RoleController : BaseController
+    public class RoleBudgetController : BaseController
     {
 
         #region Atributos y Propiedades
 
-        private readonly IRoleBudgetService _roleService;
+        private readonly IRoleBudgetService _roleBudgetService;
 
         #endregion
 
         #region Constructor
 
-        public RoleController(IRoleBudgetService roleService)
+        public RoleBudgetController(IRoleBudgetService roleBudgetService)
         {
-            _roleService = roleService;
+            _roleBudgetService = roleBudgetService;
         }
 
         #endregion
@@ -41,13 +41,13 @@
         #region Métodos y Funciones
 
         [HttpGet]
-        [Route("GetRoleById")]
-        [SwaggerOperation(Summary = "Get Role By Id")]
-        public ResponseDto GetRoleById(RoleDto role)
+        [Route("GetRoleBudgetByIdRoleBudget")]
+        [SwaggerOperation(Summary = "Get RoleBudget By IdRoleBudget")]
+        public ResponseDto GetRoleBudgetByIdRoleBudget(RoleBudgetDto roleBudget)
         {
             try
             {
-                response.Data = _roleService.GetRoleById(role);
+                response.Data = _roleBudgetService.GetRoleBudgetByIdRoleBudget(roleBudget);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -58,13 +58,13 @@
         }
 
         [HttpGet]
-        [Route("GetRoleByName")]
-        [SwaggerOperation(Summary = "Get Role By Name")]
-        public ResponseDto GetRoleByName(RoleDto role)
+        [Route("GetRoleBudgetByNameRole")]
+        [SwaggerOperation(Summary = "Get RoleBudget By NameRole")]
+        public ResponseDto GetRoleBudgetByNameRole(RoleBudgetDto roleBudget)
         {
             try
             {
-                response.Data = _roleService.GetRoleByName(role);
+                response.Data = _roleBudgetService.GetRoleBudgetByNameRole(roleBudget);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -75,13 +75,13 @@
         }
 
         [HttpGet]
-        [Route("GetRolesByStatus")]
-        [SwaggerOperation(Summary = "Get Roles By Status")]
-        public ResponseDto GetRolesByStatus(RoleDto role)
+        [Route("GetRolesBudgetByStatusBudget")]
+        [SwaggerOperation(Summary = "Get RolesBudget By StatusBudget")]
+        public ResponseDto GetRolesBudgetByStatusBudget(RoleBudgetDto roleBudget)
         {
             try
             {
-                response.Data = _roleService.GetRolesByStatus(role);
+                response.Data = _roleBudgetService.GetRolesBudgetByStatusBudget(roleBudget);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -92,13 +92,13 @@
         }
 
         [HttpPost]
-        [Route("SaveRole")]
-        [SwaggerOperation(Summary = "Save Role")]
-        public ResponseDto SaveRole(RoleDto role)
+        [Route("SaveRoleBudget")]
+        [SwaggerOperation(Summary = "Save RoleBudget")]
+        public ResponseDto SaveRoleBudget(RoleBudgetDto roleBudget)
         {
             try
             {
-                response.Data = _roleService.SaveRole(role);
+                response.Data = _roleBudgetService.SaveRoleBudget(roleBudget);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -109,13 +109,13 @@
         }
 
         [HttpPost]
-        [Route("UpdateRole")]
-        [SwaggerOperation(Summary = "Update Role")]
-        public ResponseDto UpdateRole(RoleDto role)
+        [Route("UpdateRoleBudget")]
+        [SwaggerOperation(Summary = "Update RoleBudget")]
+        public ResponseDto UpdateRoleBudget(RoleBudgetDto roleBudget)
         {
             try
             {
-                response.Data = _roleService.UpdateRole(role);
+                response.Data = _roleBudgetService.UpdateRoleBudget(roleBudget);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -126,13 +126,13 @@
         }
 
         [HttpPost]
-        [Route("DeleteRole")]
-        [SwaggerOperation(Summary = "Delete Role")]
-        public ResponseDto DeleteRole(RoleDto role)
+        [Route("DeleteRoleBudget")]
+        [SwaggerOperation(Summary = "Delete RoleBudget")]
+        public ResponseDto DeleteRoleBudget(RoleBudgetDto roleBudget)
         {
             try
             {
-                response.Data = _roleService.DeleteRole(role);
+                response.Data = _roleBudgetService.DeleteRoleBudget(roleBudget);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)

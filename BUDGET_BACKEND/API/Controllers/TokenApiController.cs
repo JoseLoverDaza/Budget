@@ -41,13 +41,13 @@
         #region Métodos y Funciones
 
         [HttpPost]
-        [Route("GetTokenApiById")]
-        [SwaggerOperation(Summary = "Get Token Api By Id")]
-        public ResponseDto GetTokenApiById(TokenApiDto tokenApi)
+        [Route("GetTokenApiByIdTokenApi")]
+        [SwaggerOperation(Summary = "Get TokenApi By IdTokenApi")]
+        public ResponseDto GetTokenApiByIdTokenApi(TokenApiDto tokenApi)
         {
             try
             {
-                response.Data = _tokenApiService.GetTokenApiById(tokenApi);
+                response.Data = _tokenApiService.GetTokenApiByIdTokenApi(tokenApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -92,13 +92,13 @@
         }
 
         [HttpPost]
-        [Route("GetTokenApisByUser")]
-        [SwaggerOperation(Summary = "Get Token Apis By User")]
-        public ResponseDto GetTokenApisByUser(TokenApiDto tokenApi)
+        [Route("GetTokenApisByUserBudget")]
+        [SwaggerOperation(Summary = "Get TokenApis By UserBudget")]
+        public ResponseDto GetTokenApisByUserBudget(TokenApiDto tokenApi)
         {
             try
             {
-                response.Data = _tokenApiService.GetTokenApisByUser(tokenApi);
+                response.Data = _tokenApiService.GetTokenApisByUserBudget(tokenApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -109,13 +109,13 @@
         }
 
         [HttpPost]
-        [Route("GetTokenApisByStatus")]
-        [SwaggerOperation(Summary = "Get Token Apis By Status")]
-        public ResponseDto GetTokenApisByStatus(TokenApiDto tokenApi)
+        [Route("GetTokenApisByStatusBudget")]
+        [SwaggerOperation(Summary = "Get TokenApis By StatusBudget")]
+        public ResponseDto GetTokenApisByStatusBudget(TokenApiDto tokenApi)
         {
             try
             {
-                response.Data = _tokenApiService.GetTokenApisByStatus(tokenApi);
+                response.Data = _tokenApiService.GetTokenApisByStatusBudget(tokenApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -126,13 +126,13 @@
         }
 
         [HttpPost]
-        [Route("GetTokenApisByCreationDateStatus")]
-        [SwaggerOperation(Summary = "Get Token Apis By Creation Date Status")]
-        public ResponseDto GetTokenApisByCreationDateStatus(TokenApiDto tokenApi)
+        [Route("GetTokenApisByCreationDateStatusBudget")]
+        [SwaggerOperation(Summary = "Get TokenApis By CreationDate StatusBudget")]
+        public ResponseDto GetTokenApisByCreationDateStatusBudget(TokenApiDto tokenApi)
         {
             try
             {
-                response.Data = _tokenApiService.GetTokenApisByCreationDateStatus(tokenApi);
+                response.Data = _tokenApiService.GetTokenApisByCreationDateStatusBudget(tokenApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -143,13 +143,13 @@
         }
 
         [HttpPost]
-        [Route("GetTokenApisByExpirationDateStatus")]
-        [SwaggerOperation(Summary = "Get Token Apis By Expiration Date Status")]
-        public ResponseDto GetTokenApisByExpirationDateStatus(TokenApiDto tokenApi)
+        [Route("GetTokenApisByExpirationDateStatusBudget")]
+        [SwaggerOperation(Summary = "Get TokenApis By ExpirationDate StatusBudget")]
+        public ResponseDto GetTokenApisByExpirationDateStatusBudget(TokenApiDto tokenApi)
         {
             try
             {
-                response.Data = _tokenApiService.GetTokenApisByExpirationDateStatus(tokenApi);
+                response.Data = _tokenApiService.GetTokenApisByExpirationDateStatusBudget(tokenApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -160,13 +160,13 @@
         }
 
         [HttpPost]
-        [Route("GetTokenApisByUserStatus")]
-        [SwaggerOperation(Summary = "Get Token Apis By User Status")]
-        public ResponseDto GetTokenApisByUserStatus(TokenApiDto tokenApi)
+        [Route("GetTokenApisByUserBudgetStatusBudget")]
+        [SwaggerOperation(Summary = "Get TokenApis By UserBudget StatusBudget")]
+        public ResponseDto GetTokenApisByUserBudgetStatusBudget(TokenApiDto tokenApi)
         {
             try
             {
-                response.Data = _tokenApiService.GetTokenApisByUserStatus(tokenApi);
+                response.Data = _tokenApiService.GetTokenApisByUserBudgetStatusBudget(tokenApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -177,13 +177,13 @@
         }
 
         [HttpPost]
-        [Route("GetTokenApisByCreationDateUserStatus")]
-        [SwaggerOperation(Summary = "Get Token Apis By Creation Date User Status")]
-        public ResponseDto GetTokenApisByCreationDateUserStatus(TokenApiDto tokenApi)
+        [Route("GetTokenApisByCreationDateUserBudgetStatusBudget")]
+        [SwaggerOperation(Summary = "Get TokenApis By CreationDate UserBudget StatusBudget")]
+        public ResponseDto GetTokenApisByCreationDateUserBudgetStatusBudget(TokenApiDto tokenApi)
         {
             try
             {
-                response.Data = _tokenApiService.GetTokenApisByCreationDateUserStatus(tokenApi);
+                response.Data = _tokenApiService.GetTokenApisByCreationDateUserBudgetStatusBudget(tokenApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -194,13 +194,13 @@
         }
 
         [HttpPost]
-        [Route("GetTokenApisByExpirationDateUserStatus")]
-        [SwaggerOperation(Summary = "Get Token Apis By Expiration Date User Status")]
-        public ResponseDto GetTokenApisByExpirationDateUserStatus(TokenApiDto tokenApi)
+        [Route("GetTokenApisByExpirationDateUserBudgetStatusBudget")]
+        [SwaggerOperation(Summary = "Get TokenApis By ExpirationDate UserBudget StatusBudget")]
+        public ResponseDto GetTokenApisByExpirationDateUserBudgetStatusBudget(TokenApiDto tokenApi)
         {
             try
             {
-                response.Data = _tokenApiService.GetTokenApisByExpirationDateUserStatus(tokenApi);
+                response.Data = _tokenApiService.GetTokenApisByExpirationDateUserBudgetStatusBudget(tokenApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)

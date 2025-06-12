@@ -42,24 +42,28 @@
         public ExpenseExtendDto? GetExpenseByIdExpense(ExpenseDto expense)
         {
             return (
-                       from e in _context.Expenses.AsNoTracking()
-                       join t in _context.TypeExpenses.AsNoTracking()
-                       on e.IdTypeExpense equals t.IdTypeExpense
-                       join s in _context.Status.AsNoTracking()
-                       on e.IdStatus equals s.IdStatus
-                       where e.IdExpense == expense.IdExpense
-                       select new ExpenseExtendDto
-                       {
-                           IdExpense = e.IdExpense,
-                           Name = e.Name,
-                           Description = e.Description,
-                           IdTypeExpense = t.IdTypeExpense,
-                           NameTypeExpense = t.Name,
-                           DescriptionTypeExpense = t.Description,
-                           IdStatus = e.IdStatus,
-                           NameStatusBudget = s.Name,
-                           DescriptionStatusBudget = s.Description
-                       }
+                    from e in _context.Expenses.AsNoTracking()
+                    join t in _context.TypeExpenses.AsNoTracking()
+                    on e.IdTypeExpense equals t.IdTypeExpense
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on e.IdStatusBudget equals s.IdStatusBudget
+                    where e.IdExpense == expense.IdExpense
+                    select new ExpenseExtendDto
+                    {
+                        IdExpense = e.IdExpense,
+                        NameExpense = e.NameExpense,
+                        DescriptionExpense = e.DescriptionExpense,
+                        IdTypeExpense = t.IdTypeExpense,
+                        NameTypeExpense = t.NameTypeExpense,
+                        DescriptionTypeExpense = t.DescriptionTypeExpense,
+                        IdStatusBudget = e.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = e.CreationUser,
+                        CreationDate = e.CreationDate,
+                        ModificationUser = e.ModificationUser,
+                        ModificationDate = e.ModificationDate                        
+                    }
                    )
                    .FirstOrDefault();
         }
@@ -67,76 +71,88 @@
         public List<ExpenseExtendDto> GetExpensesByTypeExpense(ExpenseDto expense)
         {
             return (
-                   from e in _context.Expenses.AsNoTracking()
-                   join t in _context.TypeExpenses.AsNoTracking()
-                   on e.IdTypeExpense equals t.IdTypeExpense
-                   join s in _context.Status.AsNoTracking()
-                   on e.IdStatus equals s.IdStatus
-                   where e.IdTypeExpense == expense.IdTypeExpense
-                   select new ExpenseExtendDto
-                   {
+                    from e in _context.Expenses.AsNoTracking()
+                    join t in _context.TypeExpenses.AsNoTracking()
+                    on e.IdTypeExpense equals t.IdTypeExpense
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on e.IdStatusBudget equals s.IdStatusBudget
+                    where e.IdTypeExpense == expense.IdTypeExpense
+                    select new ExpenseExtendDto
+                    {
                        IdExpense = e.IdExpense,
-                       Name = e.Name,
-                       Description = e.Description,
+                       NameExpense = e.NameExpense,
+                       DescriptionExpense = e.DescriptionExpense,
                        IdTypeExpense = t.IdTypeExpense,
-                       NameTypeExpense = t.Name,
-                       DescriptionTypeExpense = t.Description,
-                       IdStatus = e.IdStatus,
-                       NameStatusBudget = s.Name,
-                       DescriptionStatusBudget = s.Description
-                   }
-                 )
-                .ToList();
+                       NameTypeExpense = t.NameTypeExpense,
+                       DescriptionTypeExpense = t.DescriptionTypeExpense,
+                       IdStatusBudget = e.IdStatusBudget,
+                       NameStatusBudget = s.NameStatus,
+                       DescriptionStatusBudget = s.DescriptionStatus,
+                       CreationUser = e.CreationUser,
+                       CreationDate = e.CreationDate,
+                       ModificationUser = e.ModificationUser,
+                       ModificationDate = e.ModificationDate
+                    }
+                  )
+                  .ToList();
         }
 
-        public List<ExpenseExtendDto> GetExpensesByStatus(ExpenseDto expense)
+        public List<ExpenseExtendDto> GetExpensesByStatusBudget(ExpenseDto expense)
         {
             return (
                     from e in _context.Expenses.AsNoTracking()
                     join t in _context.TypeExpenses.AsNoTracking()
                     on e.IdTypeExpense equals t.IdTypeExpense
-                    join s in _context.Status.AsNoTracking()
-                    on e.IdStatus equals s.IdStatus
-                    where e.IdStatus == expense.IdStatus
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on e.IdStatusBudget equals s.IdStatusBudget
+                    where e.IdStatusBudget == expense.IdStatusBudget
                     select new ExpenseExtendDto
                     {
                         IdExpense = e.IdExpense,
-                        Name = e.Name,
-                        Description = e.Description,
+                        NameExpense = e.NameExpense,
+                        DescriptionExpense = e.DescriptionExpense,
                         IdTypeExpense = t.IdTypeExpense,
-                        NameTypeExpense = t.Name,
-                        DescriptionTypeExpense = t.Description,
-                        IdStatus = e.IdStatus,
-                        NameStatusBudget = s.Name,
-                        DescriptionStatusBudget = s.Description
+                        NameTypeExpense = t.NameTypeExpense,
+                        DescriptionTypeExpense = t.DescriptionTypeExpense,
+                        IdStatusBudget = e.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = e.CreationUser,
+                        CreationDate = e.CreationDate,
+                        ModificationUser = e.ModificationUser,
+                        ModificationDate = e.ModificationDate
                     }
                   )
-                 .ToList();
+                  .ToList();
         }
 
         public List<ExpenseExtendDto> GetExpensesByNameTypeExpense(ExpenseDto expense)
         {
             return (
-                   from e in _context.Expenses.AsNoTracking()
-                   join t in _context.TypeExpenses.AsNoTracking()
-                   on e.IdTypeExpense equals t.IdTypeExpense
-                   join s in _context.Status.AsNoTracking()
-                   on e.IdStatus equals s.IdStatus
-                   where e.Name == expense.Name && e.IdTypeExpense == expense.IdTypeExpense
-                   select new ExpenseExtendDto
-                   {
+                    from e in _context.Expenses.AsNoTracking()
+                    join t in _context.TypeExpenses.AsNoTracking()
+                    on e.IdTypeExpense equals t.IdTypeExpense
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on e.IdStatusBudget equals s.IdStatusBudget
+                    where e.NameExpense == expense.NameExpense && e.IdTypeExpense == expense.IdTypeExpense
+                    select new ExpenseExtendDto
+                    {
                        IdExpense = e.IdExpense,
-                       Name = e.Name,
-                       Description = e.Description,
+                       NameExpense = e.NameExpense,
+                       DescriptionExpense = e.DescriptionExpense,
                        IdTypeExpense = t.IdTypeExpense,
-                       NameTypeExpense = t.Name,
-                       DescriptionTypeExpense = t.Description,
-                       IdStatus = e.IdStatus,
-                       NameStatusBudget = s.Name,
-                       DescriptionStatusBudget = s.Description
-                   }
-                 )
-                .ToList();
+                       NameTypeExpense = t.NameTypeExpense,
+                       DescriptionTypeExpense = t.DescriptionTypeExpense,
+                       IdStatusBudget = e.IdStatusBudget,
+                       NameStatusBudget = s.NameStatus,
+                       DescriptionStatusBudget = s.DescriptionStatus,
+                       CreationUser = e.CreationUser,
+                       CreationDate = e.CreationDate,
+                       ModificationUser = e.ModificationUser,
+                       ModificationDate = e.ModificationDate
+                    }
+                  )
+                  .ToList();
         }
 
         public List<ExpenseExtendDto> GetExpensesByTypeExpenseStatusBudget(ExpenseDto expense)
@@ -145,23 +161,27 @@
                     from e in _context.Expenses.AsNoTracking()
                     join t in _context.TypeExpenses.AsNoTracking()
                     on e.IdTypeExpense equals t.IdTypeExpense
-                    join s in _context.Status.AsNoTracking()
-                    on e.IdStatus equals s.IdStatus
-                    where e.IdTypeExpense == expense.IdTypeExpense && e.IdStatus == expense.IdStatus
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on e.IdStatusBudget equals s.IdStatusBudget
+                    where e.IdTypeExpense == expense.IdTypeExpense && e.IdStatusBudget == expense.IdStatusBudget
                     select new ExpenseExtendDto
                     {
                         IdExpense = e.IdExpense,
-                        Name = e.Name,
-                        Description = e.Description,
+                        NameExpense = e.NameExpense,
+                        DescriptionExpense = e.DescriptionExpense,
                         IdTypeExpense = t.IdTypeExpense,
-                        NameTypeExpense = t.Name,
-                        DescriptionTypeExpense = t.Description,
-                        IdStatus = e.IdStatus,
-                        NameStatusBudget = s.Name,
-                        DescriptionStatusBudget = s.Description
+                        NameTypeExpense = t.NameTypeExpense,
+                        DescriptionTypeExpense = t.DescriptionTypeExpense,
+                        IdStatusBudget = e.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = e.CreationUser,
+                        CreationDate = e.CreationDate,
+                        ModificationUser = e.ModificationUser,
+                        ModificationDate = e.ModificationDate
                     }
                   )
-                 .ToList();
+                  .ToList();
         }
 
         #endregion

@@ -42,37 +42,47 @@
         public FinancialInstitutionExtendDto? GetFinancialInstitutionByIdFinancialInstitution(FinancialInstitutionDto financialInstitution)
         {
             return (
-                       from f in _context.FinancialInstitutions.AsNoTracking()
-                       join s in _context.Status.AsNoTracking()
-                       on f.IdStatus equals s.IdStatus
-                       where f.IdFinancialInstitution == financialInstitution.IdFinancialInstitution
-                       select new FinancialInstitutionExtendDto
-                       {
-                           IdFinancialInstitution = f.IdFinancialInstitution,
-                           Name = f.Name,
-                           IdStatus = f.IdStatus,
-                           NameStatusBudget = s.Name,
-                           DescriptionStatusBudget = s.Description
-                       }
-                   )
-                   .FirstOrDefault();
+                    from f in _context.FinancialInstitutions.AsNoTracking()
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on f.IdStatusBudget equals s.IdStatusBudget
+                    where f.IdFinancialInstitution == financialInstitution.IdFinancialInstitution
+                    select new FinancialInstitutionExtendDto
+                    {
+                        IdFinancialInstitution = f.IdFinancialInstitution,
+                        NameFinancialInstitution = f.NameFinancialInstitution,
+                        DescriptionFinancialInstitution = f.DescriptionFinancialInstitution,
+                        IdStatusBudget = f.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = f.CreationUser,
+                        CreationDate = f.CreationDate,
+                        ModificationUser = f.ModificationUser,
+                        ModificationDate = f.ModificationDate
+                    }
+                  )
+                  .FirstOrDefault();
         }
 
         public FinancialInstitutionExtendDto? GetFinancialInstitutionByNameFinancialInstitution(FinancialInstitutionDto financialInstitution)
         {
             return (
-                       from f in _context.FinancialInstitutions.AsNoTracking()
-                       join s in _context.Status.AsNoTracking()
-                       on f.IdStatus equals s.IdStatus
-                       where f.Name == financialInstitution.Name
-                       select new FinancialInstitutionExtendDto
-                       {
-                           IdFinancialInstitution = f.IdFinancialInstitution,
-                           Name = f.Name,
-                           IdStatus = f.IdStatus,
-                           NameStatusBudget = s.Name,
-                           DescriptionStatusBudget = s.Description
-                       }
+                    from f in _context.FinancialInstitutions.AsNoTracking()
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on f.IdStatusBudget equals s.IdStatusBudget
+                    where f.NameFinancialInstitution == financialInstitution.NameFinancialInstitution
+                    select new FinancialInstitutionExtendDto
+                    {
+                        IdFinancialInstitution = f.IdFinancialInstitution,
+                        NameFinancialInstitution = f.NameFinancialInstitution,
+                        DescriptionFinancialInstitution = f.DescriptionFinancialInstitution,
+                        IdStatusBudget = f.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = f.CreationUser,
+                        CreationDate = f.CreationDate,
+                        ModificationUser = f.ModificationUser,
+                        ModificationDate = f.ModificationDate
+                    }
                    )
                    .FirstOrDefault();
         }
@@ -81,16 +91,21 @@
         {
             return (
                     from f in _context.FinancialInstitutions.AsNoTracking()
-                    join s in _context.Status.AsNoTracking()
-                    on f.IdStatus equals s.IdStatus
-                    where f.IdStatus == financialInstitution.IdStatus
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on f.IdStatusBudget equals s.IdStatusBudget
+                    where f.IdStatusBudget == financialInstitution.IdStatusBudget
                     select new FinancialInstitutionExtendDto
                     {
                         IdFinancialInstitution = f.IdFinancialInstitution,
-                        Name = f.Name,
-                        IdStatus = f.IdStatus,
-                        NameStatusBudget = s.Name,
-                        DescriptionStatusBudget = s.Description
+                        NameFinancialInstitution = f.NameFinancialInstitution,
+                        DescriptionFinancialInstitution = f.DescriptionFinancialInstitution,
+                        IdStatusBudget = f.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = f.CreationUser,
+                        CreationDate = f.CreationDate,
+                        ModificationUser = f.ModificationUser,
+                        ModificationDate = f.ModificationDate
                     }
                   )
                  .ToList();

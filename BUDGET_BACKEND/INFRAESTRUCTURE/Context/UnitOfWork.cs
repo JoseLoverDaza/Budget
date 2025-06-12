@@ -66,22 +66,22 @@
 
         public IStatusBudgetRepository StatusRepository()
         {
-            return new StatusRepository(_dbContext);
+            return new StatusBudgetRepository(_dbContext);
         }
 
         public IRoleBudgetRepository RoleRepository()
         {
-            return new RoleRepository(_dbContext);
+            return new RoleBudgetRepository(_dbContext);
         }
 
         public IUserBudgetRepository UserRepository()
         {
-            return new UserRepository(_dbContext);
+            return new UserBudgetRepository(_dbContext);
         }
 
         public IAuditApiRepository AuditRepository()
         {
-            return new AuditRepository(_dbContext);
+            return new AuditApiRepository(_dbContext);
         }
 
         public ITokenApiRepository TokenApiRepository()

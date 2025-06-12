@@ -42,37 +42,47 @@
         public TypeAccountExtendDto? GetTypeAccountByIdTypeAccount(TypeAccountDto typeAccount)
         {
             return (
-                       from t in _context.TypeAccounts.AsNoTracking()
-                       join s in _context.Status.AsNoTracking()
-                       on t.IdStatus equals s.IdStatus
-                       where t.IdTypeAccount == typeAccount.IdTypeAccount
-                       select new TypeAccountExtendDto
-                       {
-                           IdTypeAccount = t.IdTypeAccount,
-                           Name = t.Name,
-                           IdStatus = t.IdStatus,
-                           NameStatusBudget = s.Name,
-                           DescriptionStatusBudget = s.Description
-                       }
-                   )
-                   .FirstOrDefault();
+                     from t in _context.TypeAccounts.AsNoTracking()
+                     join s in _context.StatusBudget.AsNoTracking()
+                     on t.IdStatusBudget equals s.IdStatusBudget
+                     where t.IdTypeAccount == typeAccount.IdTypeAccount
+                     select new TypeAccountExtendDto
+                     {
+                        IdTypeAccount = t.IdTypeAccount,
+                        NameTypeAccount = t.NameTypeAccount,
+                        DescriptionTypeAccount = t.DescriptionTypeAccount,
+                        IdStatusBudget = t.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = t.CreationUser,
+                        CreationDate = t.CreationDate,
+                        ModificationUser = t.ModificationUser,
+                        ModificationDate = t.ModificationDate                        
+                     }
+                  )
+                  .FirstOrDefault();
         }
 
         public TypeAccountExtendDto? GetTypeAccountByNameTypeAccount(TypeAccountDto typeAccount)
         {
             return (
-                      from t in _context.TypeAccounts.AsNoTracking()
-                      join s in _context.Status.AsNoTracking()
-                      on t.IdStatus equals s.IdStatus
-                      where t.Name == typeAccount.Name
-                      select new TypeAccountExtendDto
-                      {
-                          IdTypeAccount = t.IdTypeAccount,
-                          Name = t.Name,
-                          IdStatus = t.IdStatus,
-                          NameStatusBudget = s.Name,
-                          DescriptionStatusBudget = s.Description
-                      }
+                     from t in _context.TypeAccounts.AsNoTracking()
+                     join s in _context.StatusBudget.AsNoTracking()
+                     on t.IdStatusBudget equals s.IdStatusBudget
+                     where t.NameTypeAccount == typeAccount.NameTypeAccount
+                     select new TypeAccountExtendDto
+                     {
+                         IdTypeAccount = t.IdTypeAccount,
+                         NameTypeAccount = t.NameTypeAccount,
+                         DescriptionTypeAccount = t.DescriptionTypeAccount,
+                         IdStatusBudget = t.IdStatusBudget,
+                         NameStatusBudget = s.NameStatus,
+                         DescriptionStatusBudget = s.DescriptionStatus,
+                         CreationUser = t.CreationUser,
+                         CreationDate = t.CreationDate,
+                         ModificationUser = t.ModificationUser,
+                         ModificationDate = t.ModificationDate
+                     }
                   )
                   .FirstOrDefault();
         }
@@ -80,18 +90,23 @@
         public List<TypeAccountExtendDto> GetTypeAccountsByStatusBudget(TypeAccountDto typeAccount)
         {
             return (
-                     from t in _context.TypeAccounts.AsNoTracking()
-                     join s in _context.Status.AsNoTracking()
-                     on t.IdStatus equals s.IdStatus
-                     where t.IdStatus == typeAccount.IdStatus
-                     select new TypeAccountExtendDto
-                     {
-                         IdTypeAccount = t.IdTypeAccount,
-                         Name = t.Name,
-                         IdStatus = t.IdStatus,
-                         NameStatusBudget = s.Name,
-                         DescriptionStatusBudget = s.Description
-                     }
+                    from t in _context.TypeAccounts.AsNoTracking()
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on t.IdStatusBudget equals s.IdStatusBudget
+                    where t.IdStatusBudget == typeAccount.IdStatusBudget
+                    select new TypeAccountExtendDto
+                    {
+                        IdTypeAccount = t.IdTypeAccount,
+                        NameTypeAccount = t.NameTypeAccount,
+                        DescriptionTypeAccount = t.DescriptionTypeAccount,
+                        IdStatusBudget = t.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = t.CreationUser,
+                        CreationDate = t.CreationDate,
+                        ModificationUser = t.ModificationUser,
+                        ModificationDate = t.ModificationDate
+                    }
                   )
                  .ToList();
         }

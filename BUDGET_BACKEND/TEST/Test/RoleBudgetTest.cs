@@ -3,8 +3,7 @@
 
     #region Librerias
 
-    using API.Controllers;
-    using CORE.Dto;
+    using API.Controllers;    
     using CORE.Interfaces.Services;
     using CORE.Services;
     using CORE.Utils;
@@ -20,26 +19,26 @@
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
-    /// Nombre: RoleTest   
+    /// Nombre: RoleBudgetTest   
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
     [TestClass]
-    public class RoleTest
+    public class RoleBudgetTest
     {
 
         #region Atributos y Propiedades
 
-        private readonly IRoleBudgetService _roleService;
+        private readonly IRoleBudgetService _roleBudgetService;
         private readonly ILogApiService _logApiService;
         private readonly EFContext? _context;
-        private readonly RoleController? _roleController;
+        private readonly RoleBudgetController? _roleBudgetController;
 
         #endregion
 
         #region Constructor
 
-        public RoleTest()
+        public RoleBudgetTest()
         {
             var options = new DbContextOptionsBuilder<EFContext>()
            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
@@ -48,48 +47,48 @@
             _context = new EFContext(options);
             UnitOfWork unitOfWork = new(_context);
             _logApiService = new LogApiService(unitOfWork);
-            _roleService = new RoleService(unitOfWork, _logApiService);            
-            _roleController = new RoleController(_roleService);
+            _roleBudgetService = new RoleService(unitOfWork, _logApiService);            
+            _roleBudgetController = new RoleBudgetController(_roleBudgetService);
 
             #region Data
 
-            /// Status Id 1
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 1
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 1,
-                Name = Constants.Status.INACTIVO,
-                Description = Constants.Status.INACTIVO
+                IdStatusBudget = 1,
+                NameStatus = Constants.Status.INACTIVO,
+                DescriptionStatus = Constants.Status.INACTIVO
             });
 
             _context.SaveChanges();
 
-            /// Status Id 2
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 2
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 2,
-                Name = Constants.Status.ACTIVO,
-                Description = Constants.Status.ACTIVO
+                IdStatusBudget = 2,
+                NameStatus = Constants.Status.ACTIVO,
+                DescriptionStatus = Constants.Status.ACTIVO
             });
 
             _context.SaveChanges();
 
-            /// Status Id 3
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 3
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 3,
-                Name = Constants.Status.CANCELADO,
-                Description = Constants.Status.CANCELADO
+                IdStatusBudget = 3,
+                NameStatus = Constants.Status.CANCELADO,
+                DescriptionStatus = Constants.Status.CANCELADO
             });
 
             _context.SaveChanges();
 
-            /// Role Id 1
-            _context.Roles.Add(new Role()
+            /// RolesBudget IdRoleBudget 1
+            _context.RolesBudget.Add(new RoleBudget()
             {
-                IdRole = 1,
-                Name = "Test",
-                Description = "Test",
-                IdStatus = 1
+                IdRoleBudget = 1,
+                NameRole = "Test",
+                DescriptionRole = "Test",
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
@@ -103,16 +102,16 @@
         #region Métodos y Funciones
 
         [TestMethod]
-        public void GetRoleByIdOK()
+        public void GetRoleBudgetByIdRoleBudgetOK()
         {
             ///Arrange   
-            RoleDto role = new()
+            RoleBudgetDto roleBudget = new()
             {
-                IdRole = 1
+                IdRoleBudget = 1
             };
 
             ///Act
-            var result = _roleController!.GetRoleById(role);
+            var result = _roleBudgetController!.GetRoleBudgetByIdRoleBudget(roleBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -121,16 +120,16 @@
         }
 
         [TestMethod]
-        public void GetRoleByIdFail()
+        public void GetRoleBudgetByIdRoleBudgetFail()
         {
             ///Arrange   
-            RoleDto role = new()
+            RoleBudgetDto roleBudget = new()
             {
-                IdRole = -1
+                IdRoleBudget = -1
             };
 
             ///Act
-            var result = _roleController!.GetRoleById(role);
+            var result = _roleBudgetController!.GetRoleBudgetByIdRoleBudget(roleBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -139,16 +138,16 @@
         }
 
         [TestMethod]
-        public void GetRoleByNameOK()
+        public void GetRoleBudgetByNameRoleOK()
         {
             ///Arrange   
-            RoleDto role = new()
+            RoleBudgetDto roleBudget = new()
             {
-                Name = "Test"
+                NameRole = "Test"
             };
 
             ///Act
-            var result = _roleController!.GetRoleByName(role);
+            var result = _roleBudgetController!.GetRoleBudgetByNameRole(roleBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -157,16 +156,16 @@
         }
 
         [TestMethod]
-        public void GetRoleByNameFail()
+        public void GetRoleBudgetByNameRoleFail()
         {
             ///Arrange   
-            RoleDto role = new()
+            RoleBudgetDto roleBudget = new()
             {
-                Name = "T"
+                NameRole = "T"
             };
 
             ///Act
-            var result = _roleController!.GetRoleByName(role);
+            var result = _roleBudgetController!.GetRoleBudgetByNameRole(roleBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -175,16 +174,16 @@
         }
 
         [TestMethod]
-        public void GetRolesOK()
+        public void GetRolesBudgetByStatusBudgetOK()
         {
             ///Arrange   
-            RoleDto role = new()
+            RoleBudgetDto roleBudget = new()
             {
-                IdStatus = 1
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _roleController!.GetRolesByStatus(role);
+            var result = _roleBudgetController!.GetRolesBudgetByStatusBudget(roleBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -193,16 +192,16 @@
         }
 
         [TestMethod]
-        public void GetRolesFail()
+        public void GetRolesBudgetByStatusBudgetFail()
         {
             ///Arrange   
-            RoleDto role = new()
+            RoleBudgetDto roleBudget = new()
             {
-                IdStatus = -1
+                IdStatusBudget = -1
             };
 
             ///Act
-            var result = _roleController!.GetRolesByStatus(role);
+            var result = _roleBudgetController!.GetRolesBudgetByStatusBudget(roleBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -211,17 +210,17 @@
         }
 
         [TestMethod]
-        public void SaveRoleOK()
+        public void SaveRoleBudgetOK()
         {
             ///Arrange   
-            RoleBudgetExtendDto role = new()
+            RoleBudgetDto roleBudget = new()
             {
-                Name = "Test1",
-                IdStatus = 1
+                IdStatusBudget = 1,
+                NameRole = "Test1"               
             };
 
             ///Act
-            var result = _roleController!.SaveRole(role);
+            var result = _roleBudgetController!.SaveRoleBudget(roleBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -230,17 +229,17 @@
         }
 
         [TestMethod]
-        public void SaveRoleFail()
+        public void SaveRoleBudgetFail()
         {
             ///Arrange   
-            RoleBudgetExtendDto role = new()
+            RoleBudgetDto roleBudget = new()
             {
-                Name = "Test",
-                IdStatus = 1
+                IdStatusBudget = 1,
+                NameRole = "Test"                
             };
 
             ///Act
-            var result = _roleController!.SaveRole(role);
+            var result = _roleBudgetController!.SaveRoleBudget(roleBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -249,18 +248,18 @@
         }
 
         [TestMethod]
-        public void UpdateRoleOK()
+        public void UpdateRoleBudgetOK()
         {
             ///Arrange   
-            RoleBudgetExtendDto role = new()
+            RoleBudgetDto roleBudget = new()
             {
-                IdRole = 1,
-                Name = "Test1",
-                IdStatus = 1
+                IdRoleBudget = 1,
+                NameRole = "Test1",
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _roleController!.UpdateRole(role);
+            var result = _roleBudgetController!.UpdateRoleBudget(roleBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -269,18 +268,18 @@
         }
 
         [TestMethod]
-        public void UpdateRoleFail()
+        public void UpdateRoleBudgetFail()
         {
             ///Arrange   
-            RoleBudgetExtendDto role = new()
+            RoleBudgetDto roleBudget = new()
             {
-                IdRole = -1,
-                Name = "Test1",
-                IdStatus = 1
+                IdRoleBudget = -1,
+                NameRole = "Test1",
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _roleController!.UpdateRole(role);
+            var result = _roleBudgetController!.UpdateRoleBudget(roleBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -289,18 +288,18 @@
         }
 
         [TestMethod]
-        public void DeleteRoleOK()
+        public void DeleteRoleBudgetOK()
         {
             ///Arrange   
-            RoleBudgetExtendDto role = new()
+            RoleBudgetDto roleBudget = new()
             {
-                IdRole = 1,
-                Name = "Test1",
-                IdStatus = 3
+                IdRoleBudget = 1,
+                NameRole = "Test1",
+                IdStatusBudget = 3
             };
 
             ///Act
-            var result = _roleController!.DeleteRole(role);
+            var result = _roleBudgetController!.DeleteRoleBudget(roleBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -309,18 +308,18 @@
         }
 
         [TestMethod]
-        public void DeleteRoleFail()
+        public void DeleteRoleBudgetFail()
         {
             ///Arrange   
-            RoleBudgetExtendDto role = new()
+            RoleBudgetDto roleBudget = new()
             {
-                IdRole = -1,
-                Name = "Test1",
-                IdStatus = 1
+                IdRoleBudget = -1,
+                NameRole = "Test1",
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _roleController!.DeleteRole(role);
+            var result = _roleBudgetController!.DeleteRoleBudget(roleBudget);
 
             ///Assert
             Assert.IsNotNull(result);

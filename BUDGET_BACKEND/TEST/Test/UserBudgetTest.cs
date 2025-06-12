@@ -20,26 +20,26 @@
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
-    /// Nombre: UserTest   
+    /// Nombre: UserBudgetTest   
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
     [TestClass]
-    public class UserTest
+    public class UserBudgetTest
     {
 
         #region  Atributos y Propiedades
 
-        private readonly IUserBudgetService _userService;
+        private readonly IUserBudgetService _userBudgetService;
         private readonly ILogApiService _logApiService;
         private readonly EFContext? _context;
-        private readonly UserController? _userController;
+        private readonly UserBudgetController? _userBudgetController;
 
         #endregion
 
         #region Constructor
 
-        public UserTest()
+        public UserBudgetTest()
         {
             var options = new DbContextOptionsBuilder<EFContext>()
            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
@@ -48,76 +48,76 @@
             _context = new EFContext(options);
             UnitOfWork unitOfWork = new(_context);
             _logApiService = new LogApiService(unitOfWork);
-            _userService = new UserService(unitOfWork, _logApiService);            
-            _userController = new UserController(_userService);
+            _userBudgetService = new UserService(unitOfWork, _logApiService);            
+            _userBudgetController = new UserBudgetController(_userBudgetService);
 
             #region Data
 
-            /// Status Id 1
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 1
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 1,
-                Name = Constants.Status.INACTIVO,
-                Description = Constants.Status.INACTIVO
+                IdStatusBudget = 1,
+                NameStatus = Constants.Status.INACTIVO,
+                DescriptionStatus = Constants.Status.INACTIVO
             });
 
             _context.SaveChanges();
 
-            /// Status Id 2
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 2
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 2,
-                Name = Constants.Status.ACTIVO,
-                Description = Constants.Status.ACTIVO
+                IdStatusBudget = 2,
+                NameStatus = Constants.Status.ACTIVO,
+                DescriptionStatus = Constants.Status.ACTIVO
             });
 
             _context.SaveChanges();
 
-            /// Status Id 3
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 3
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 3,
-                Name = Constants.Status.CANCELADO,
-                Description = Constants.Status.CANCELADO
+                IdStatusBudget = 3,
+                NameStatus = Constants.Status.CANCELADO,
+                DescriptionStatus = Constants.Status.CANCELADO
             });
 
             _context.SaveChanges();
 
-            /// Role Id 1
-            _context.Roles.Add(new Role()
+            /// RolesBudget IdRoleBudget 1
+            _context.RolesBudget.Add(new RoleBudget()
             {
-                IdRole = 1,
-                Name = "Test",
-                Description = "Test",
-                IdStatus = 1
+                IdRoleBudget = 1,
+                NameRole = "Test",
+                DescriptionRole = "Test",
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
 
-            /// User Id 1
-            _context.Users.Add(new User()
+            /// UsersBudget IdUserBudget 1
+            _context.UsersBudget.Add(new UserBudget()
             {
-                IdUser = 1,
+                IdUserBudget = 1,
                 Email = "Test",
                 Phone = "1234567890",
                 Username = "Test",
-                Password = "A7Ws/sQDVsXXi/xheT1IufcXPN5rJUKXmPWvnJTGzjRgOzD+vAt1GAMXoD0/mlrD",
-                IdRole = 1,
-                IdStatus = 1
+                EncryptedPassword = "A7Ws/sQDVsXXi/xheT1IufcXPN5rJUKXmPWvnJTGzjRgOzD+vAt1GAMXoD0/mlrD",
+                IdRoleBudget = 1,
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
 
             /// User Id 2
-            _context.Users.Add(new User()
+            _context.UsersBudget.Add(new UserBudget()
             {
-                IdUser = 2,
+                IdUserBudget = 2,
                 Email = "Test",
                 Phone = "1234567890",
                 Username = "Test1",
-                Password = "Test",
-                IdRole = 1,
-                IdStatus = 2
+                EncryptedPassword = "Test",
+                IdRoleBudget = 1,
+                IdStatusBudget = 2
             });
 
             _context.SaveChanges();
@@ -131,16 +131,16 @@
         #region Métodos y Funciones
 
         [TestMethod]
-        public void GetUserByIdOK()
+        public void GetUserBudgetByIdUserBudgetOK()
         {
             ///Arrange   
-            UserDto user = new()
+            UserBudgetDto userBudget = new()
             {
-                IdUser = 1
+                IdUserBudget = 1
             };
 
             ///Act
-            var result = _userController!.GetUserById(user);
+            var result = _userBudgetController!.GetUserBudgetByIdUserBudget(userBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -149,16 +149,16 @@
         }
 
         [TestMethod]
-        public void GetRoleByIdFail()
+        public void GetUserBudgetByIdUserBudgetFail()
         {
             ///Arrange   
-            UserDto user = new()
+            UserBudgetDto userBudget = new()
             {
-                IdUser = -1
+                IdUserBudget = -1
             };
 
             ///Act
-            var result = _userController!.GetUserById(user);
+            var result = _userBudgetController!.GetUserBudgetByIdUserBudget(userBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -167,16 +167,16 @@
         }
 
         [TestMethod]
-        public void GetUserByEmailOK()
+        public void GetUserBudgetByEmailOK()
         {
             ///Arrange   
-            UserDto user = new()
+            UserBudgetDto userBudget = new()
             {
                 Email = "Test"
             };
 
             ///Act
-            var result = _userController!.GetUserByEmail(user);
+            var result = _userBudgetController!.GetUserBudgetByEmail(userBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -185,16 +185,16 @@
         }
 
         [TestMethod]
-        public void GetUserByEmailFail()
+        public void GetUserBudgetByEmailFail()
         {
             ///Arrange   
-            UserDto user = new()
+            UserBudgetDto userBudget = new()
             {
                 Email = "T"
             };
 
             ///Act
-            var result = _userController!.GetUserByEmail(user);
+            var result = _userBudgetController!.GetUserBudgetByEmail(userBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -203,16 +203,16 @@
         }
 
         [TestMethod]
-        public void GetUserByUsernameOK()
+        public void GetUserBudgetByUsernameOK()
         {
             ///Arrange   
-            UserDto user = new()
+            UserBudgetDto userBudget = new()
             {
                 Username = "Test"
             };
 
             ///Act
-            var result = _userController!.GetUserByUsername(user);
+            var result = _userBudgetController!.GetUserBudgetByUsername(userBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -221,16 +221,16 @@
         }
 
         [TestMethod]
-        public void GetUserByUsernameFail()
+        public void GetUserBudgetByUsernameFail()
         {
             ///Arrange   
-            UserDto user = new()
+            UserBudgetDto userBudget = new()
             {
                 Username = "T"
             };
 
             ///Act
-            var result = _userController!.GetUserByUsername(user);
+            var result = _userBudgetController!.GetUserBudgetByUsername(userBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -239,16 +239,16 @@
         }
 
         [TestMethod]
-        public void GetUsersByRoleOK()
+        public void GetUsersBudgetByRoleBudgetOK()
         {
             ///Arrange   
-            UserDto user = new()
+            UserBudgetDto userBudget = new()
             {
-                IdRole = 1
+                IdRoleBudget = 1
             };
 
             ///Act
-            var result = _userController!.GetUsersByRole(user);
+            var result = _userBudgetController!.GetUsersBudgetByRoleBudget(userBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -257,16 +257,16 @@
         }
 
         [TestMethod]
-        public void GetUsersByRoleFail()
+        public void GetUsersBudgetByRoleBudgetFail()
         {
             ///Arrange   
-            UserDto user = new()
+            UserBudgetDto userBudget = new()
             {
-                IdRole = -1
+                IdRoleBudget = -1
             };
 
             ///Act
-            var result = _userController!.GetUsersByRole(user);
+            var result = _userBudgetController!.GetUsersBudgetByRoleBudget(userBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -275,16 +275,16 @@
         }
 
         [TestMethod]
-        public void GetUsersByStatusOK()
+        public void GetUsersBudgetByStatusBudgetOK()
         {
             ///Arrange   
-            UserDto user = new()
+            UserBudgetDto userBudget = new()
             {
-                IdStatus = 1
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _userController!.GetUsersByStatus(user);
+            var result = _userBudgetController!.GetUsersBudgetByStatusBudget(userBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -293,16 +293,16 @@
         }
 
         [TestMethod]
-        public void GetUsersByStatusFail()
+        public void GetUsersBudgetByStatusBudgetFail()
         {
             ///Arrange   
-            UserDto user = new()
+            UserBudgetDto userBudget = new()
             {
-                IdStatus = -1
+                IdStatusBudget = -1
             };
 
             ///Act
-            var result = _userController!.GetUsersByStatus(user);
+            var result = _userBudgetController!.GetUsersBudgetByStatusBudget(userBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -311,17 +311,17 @@
         }
 
         [TestMethod]
-        public void GetUsersByRoleStatusOK()
+        public void GetUsersBudgetByRoleBudgetStatusBudgetOK()
         {
             ///Arrange   
-            UserDto user = new()
+            UserBudgetDto userBudget = new()
             {
-                IdStatus = 1,
-                IdRole = 1
+                IdStatusBudget = 1,
+                IdRoleBudget  = 1
             };
 
             ///Act
-            var result = _userController!.GetUsersByRoleStatus(user);
+            var result = _userBudgetController!.GetUsersBudgetByRoleBudgetStatusBudget(userBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -330,17 +330,17 @@
         }
 
         [TestMethod]
-        public void GetUsersByRoleStatusFail()
+        public void GetUsersBudgetByRoleBudgetStatusBudgetFail()
         {
             ///Arrange   
-            UserDto user = new()
+            UserBudgetDto userBudget = new()
             {
-                IdStatus = -1,
-                IdRole = -1
+                IdStatusBudget = -1,
+                IdRoleBudget = -1
             };
 
             ///Act
-            var result = _userController!.GetUsersByRoleStatus(user);
+            var result = _userBudgetController!.GetUsersBudgetByRoleBudgetStatusBudget(userBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -349,21 +349,21 @@
         }
 
         [TestMethod]
-        public void SaveUserOK()
+        public void SaveUserBudgetOK()
         {
             ///Arrange   
-            UserDto user = new()
+            UserBudgetDto userBudget = new()
             {
                 Email = "Test1",
                 Phone = "Test1",
                 Username = "Test2",
-                Password = "Test",
-                IdRole = 1,
-                IdStatus = 1
+                EncryptedPassword = "Test",
+                IdRoleBudget = 1,
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _userController!.SaveUser(user);
+            var result = _userBudgetController!.SaveUserBudget(userBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -372,21 +372,21 @@
         }
 
         [TestMethod]
-        public void SaveUserFail()
+        public void SaveUserBudgetFail()
         {
             ///Arrange   
-            UserDto user = new()
+            UserBudgetDto userBudget = new()
             {
                 Email = "Test",
                 Phone = "Test",
                 Username = "Test",
-                Password = "Test",
-                IdRole = 1,
-                IdStatus = 1
+                EncryptedPassword = "Test",
+                IdRoleBudget = 1,
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _userController!.SaveUser(user);
+            var result = _userBudgetController!.SaveUserBudget(userBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -395,22 +395,22 @@
         }
 
         [TestMethod]
-        public void UpdateUserOK()
+        public void UpdateUserBudgetOK()
         {
             ///Arrange   
-            UserDto user = new()
+            UserBudgetDto userBudget = new()
             {
-                IdUser = 1,
+                IdUserBudget = 1,
                 Email = "Test1",
                 Phone = "Test1",
                 Username = "Test",
-                Password = "Test",
-                IdRole = 1,
-                IdStatus = 1
+                EncryptedPassword = "Test",
+                IdRoleBudget = 1,
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _userController!.UpdateUser(user);
+            var result = _userBudgetController!.UpdateUserBudget(userBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -419,22 +419,22 @@
         }
 
         [TestMethod]
-        public void UpdateUserFail()
+        public void UpdateUserBudgetFail()
         {
             ///Arrange   
-            UserDto user = new()
+            UserBudgetDto userBudget = new()
             {
-                IdUser = -1,
+                IdUserBudget = -1,
                 Email = "Test1",
                 Phone = "Test1",
                 Username = "Test1",
-                Password = "Test",
-                IdRole = 1,
-                IdStatus = 1
+                EncryptedPassword = "Test",
+                IdRoleBudget = 1,
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _userController!.UpdateUser(user);
+            var result = _userBudgetController!.UpdateUserBudget(userBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -443,22 +443,22 @@
         }
 
         [TestMethod]
-        public void DeleteUserOK()
+        public void DeleteUserBudgetOK()
         {
             ///Arrange   
-            UserDto user = new()
+            UserBudgetDto userBudget = new()
             {
-                IdUser = 2,
+                IdUserBudget = 2,
                 Email = "Test1",
                 Phone = "Test1",
                 Username = "Test1",
-                Password = "Test",
-                IdRole = 1,
-                IdStatus = 3
+                EncryptedPassword = "Test",
+                IdRoleBudget = 1,
+                IdStatusBudget = 3
             };
 
             ///Act
-            var result = _userController!.DeleteUser(user);
+            var result = _userBudgetController!.DeleteUserBudget(userBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -467,22 +467,22 @@
         }
 
         [TestMethod]
-        public void DeleteUserFail()
+        public void DeleteUserBudgetFail()
         {
             ///Arrange   
-            UserDto user = new()
+            UserBudgetDto userBudget = new()
             {
-                IdUser = -1,
+                IdUserBudget = -1,
                 Email = "Test1",
                 Phone = "Test1",
                 Username = "Test1",
-                Password = "Test",
-                IdRole = 1,
-                IdStatus = 1
+                EncryptedPassword = "Test",
+                IdRoleBudget = 1,
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _userController!.DeleteUser(user);
+            var result = _userBudgetController!.DeleteUserBudget(userBudget);
 
             ///Assert
             Assert.IsNotNull(result);

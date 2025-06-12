@@ -20,7 +20,7 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    internal class UserRepository : BaseRepository<User>, IUserBudgetRepository
+    internal class UserBudgetRepository : BaseRepository<UserBudget>, IUserBudgetRepository
     {
 
         #region Atributos y Propiedades
@@ -31,7 +31,7 @@
 
         #region Constructor
 
-        public UserRepository(EFContext context) : base(context)
+        public UserBudgetRepository(EFContext context) : base(context)
         {
             _context = context;
         }
@@ -40,164 +40,164 @@
 
         #region Métodos y Funciones
 
-        public UserBudgetExtendDto? GetUserById(UserDto user)
+        public UserBudgetExtendDto? GetUserBudgetByIdUserBudget(UserBudgetDto userBudget)
         {
             return (
-                       from u in _context.Users.AsNoTracking()
-                       join r in _context.Roles.AsNoTracking()
-                       on u.IdRole equals r.IdRole
-                       join s in _context.Status.AsNoTracking()
-                       on u.IdStatus equals s.IdStatus
-                       where u.IdUser == user.IdUser
+                       from u in _context.UsersBudget.AsNoTracking()
+                       join r in _context.RolesBudget.AsNoTracking()
+                       on u.IdRoleBudget equals r.IdRoleBudget
+                       join s in _context.StatusBudget.AsNoTracking()
+                       on u.IdStatusBudget equals s.IdStatusBudget
+                       where u.IdUserBudget == userBudget.IdUserBudget
                        select new UserBudgetExtendDto
                        {
-                           IdUser = u.IdUser,
+                           IdUserBudget = u.IdUserBudget,
                            Email = u.Email,
                            Phone = u.Phone,
                            Username = u.Username,
-                           Password = u.Password,
-                           IdRole = u.IdRole,
-                           NameRoleBudget = r.Name,
-                           DescriptionRoleBudget = r.Description,
-                           IdStatus = u.IdStatus,
-                           NameStatusBudget = s.Name,
-                           DescriptionStatusBudget = s.Description
+                           EncryptedPassword = u.EncryptedPassword,
+                           IdRoleBudget = u.IdRoleBudget,
+                           NameRoleBudget = r.NameRole,
+                           DescriptionRoleBudget = r.DescriptionRole,
+                           IdStatusBudget = u.IdStatusBudget,
+                           NameStatusBudget = s.NameStatus,
+                           DescriptionStatusBudget = s.DescriptionStatus
                        }
                    )
                    .FirstOrDefault();
         }
 
-        public UserBudgetExtendDto? GetUserByEmail(UserDto user)
+        public UserBudgetExtendDto? GetUserBudgetByEmail(UserBudgetDto userBudget)
         {
             return (
-                      from u in _context.Users.AsNoTracking()
-                      join r in _context.Roles.AsNoTracking()
-                      on u.IdRole equals r.IdRole
-                      join s in _context.Status.AsNoTracking()
-                      on u.IdStatus equals s.IdStatus
-                      where u.Email == user.Email
+                      from u in _context.UsersBudget.AsNoTracking()
+                      join r in _context.RolesBudget.AsNoTracking()
+                      on u.IdRoleBudget equals r.IdRoleBudget
+                      join s in _context.StatusBudget.AsNoTracking()
+                      on u.IdStatusBudget equals s.IdStatusBudget
+                      where u.Email == userBudget.Email
                       select new UserBudgetExtendDto
                       {
-                          IdUser = u.IdUser,
+                          IdUserBudget = u.IdUserBudget,
                           Email = u.Email,
                           Phone = u.Phone,
                           Username = u.Username,
-                          Password = u.Password,
-                          IdRole = u.IdRole,
-                          NameRoleBudget = r.Name,
-                          DescriptionRoleBudget = r.Description,
-                          IdStatus = u.IdStatus,
-                          NameStatusBudget = s.Name,
-                          DescriptionStatusBudget = s.Description
+                          EncryptedPassword = u.EncryptedPassword,
+                          IdRoleBudget = u.IdRoleBudget,
+                          NameRoleBudget = r.NameRole,
+                          DescriptionRoleBudget = r.DescriptionRole,
+                          IdStatusBudget = u.IdStatusBudget,
+                          NameStatusBudget = s.NameStatus,
+                          DescriptionStatusBudget = s.DescriptionStatus
                       }
                   )
                   .FirstOrDefault();
         }
 
-        public UserBudgetExtendDto? GetUserByUsername(UserDto user)
+        public UserBudgetExtendDto? GetUserBudgetByUsername(UserBudgetDto userBudget)
         {
             return (
-                      from u in _context.Users.AsNoTracking()
-                      join r in _context.Roles.AsNoTracking()
-                      on u.IdRole equals r.IdRole
-                      join s in _context.Status.AsNoTracking()
-                      on u.IdStatus equals s.IdStatus
-                      where u.Username == user.Username
+                      from u in _context.UsersBudget.AsNoTracking()
+                      join r in _context.RolesBudget.AsNoTracking()
+                      on u.IdRoleBudget equals r.IdRoleBudget
+                      join s in _context.StatusBudget.AsNoTracking()
+                      on u.IdStatusBudget equals s.IdStatusBudget
+                      where u.Username == userBudget.Username
                       select new UserBudgetExtendDto
                       {
-                          IdUser = u.IdUser,
+                          IdUserBudget = u.IdUserBudget,
                           Email = u.Email,
                           Phone = u.Phone,
                           Username = u.Username,
-                          Password = u.Password,
-                          IdRole = u.IdRole,
-                          NameRoleBudget = r.Name,
-                          DescriptionRoleBudget = r.Description,
-                          IdStatus = u.IdStatus,
-                          NameStatusBudget = s.Name,
-                          DescriptionStatusBudget = s.Description
+                          EncryptedPassword = u.EncryptedPassword,
+                          IdRoleBudget = u.IdRoleBudget,
+                          NameRoleBudget = r.NameRole,
+                          DescriptionRoleBudget = r.DescriptionRole,
+                          IdStatusBudget = u.IdStatusBudget,
+                          NameStatusBudget = s.NameStatus,
+                          DescriptionStatusBudget = s.DescriptionStatus
                       }
                   )
                   .FirstOrDefault();
         }
 
-        public List<UserBudgetExtendDto> GetUsersByRole(UserDto user)
+        public List<UserBudgetExtendDto> GetUsersBudgetByRoleBudget(UserBudgetDto userBudget)
         {
             return (
-                     from u in _context.Users.AsNoTracking()
-                     join r in _context.Roles.AsNoTracking()
-                     on u.IdRole equals r.IdRole
-                     join s in _context.Status.AsNoTracking()
-                     on u.IdStatus equals s.IdStatus
-                     where r.IdRole == user.IdRole
+                     from u in _context.UsersBudget.AsNoTracking()
+                     join r in _context.RolesBudget.AsNoTracking()
+                     on u.IdRoleBudget equals r.IdRoleBudget
+                     join s in _context.StatusBudget.AsNoTracking()
+                     on u.IdStatusBudget equals s.IdStatusBudget
+                     where r.IdRoleBudget == userBudget.IdRoleBudget
                      select new UserBudgetExtendDto
                      {
-                         IdUser = u.IdUser,
+                         IdUserBudget = u.IdUserBudget,
                          Email = u.Email,
                          Phone = u.Phone,
                          Username = u.Username,
-                         Password = u.Password,
-                         IdRole = u.IdRole,
-                         NameRoleBudget = r.Name,
-                         DescriptionRoleBudget = r.Description,
-                         IdStatus = u.IdStatus,
-                         NameStatusBudget = s.Name,
-                         DescriptionStatusBudget = s.Description
+                         EncryptedPassword = u.EncryptedPassword,
+                         IdRoleBudget = u.IdRoleBudget,
+                         NameRoleBudget = r.NameRole,
+                         DescriptionRoleBudget = r.DescriptionRole,
+                         IdStatusBudget = u.IdStatusBudget,
+                         NameStatusBudget = s.NameStatus,
+                         DescriptionStatusBudget = s.DescriptionStatus
                      }
                   )
                  .ToList();
         }
 
-        public List<UserBudgetExtendDto> GetUsersByStatus(UserDto user)
+        public List<UserBudgetExtendDto> GetUsersBudgetByStatusBudget(UserBudgetDto userBudget)
         {
             return (
-                     from u in _context.Users.AsNoTracking()
-                     join r in _context.Roles.AsNoTracking()
-                     on u.IdRole equals r.IdRole
-                     join s in _context.Status.AsNoTracking()
-                     on u.IdStatus equals s.IdStatus
-                     where r.IdStatus == user.IdStatus
+                     from u in _context.UsersBudget.AsNoTracking()
+                     join r in _context.RolesBudget.AsNoTracking()
+                     on u.IdRoleBudget equals r.IdRoleBudget
+                     join s in _context.StatusBudget.AsNoTracking()
+                     on u.IdStatusBudget equals s.IdStatusBudget
+                     where r.IdStatusBudget == userBudget.IdStatusBudget
                      select new UserBudgetExtendDto
                      {
-                         IdUser = u.IdUser,
+                         IdUserBudget = u.IdUserBudget,
                          Email = u.Email,
                          Phone = u.Phone,
                          Username = u.Username,
-                         Password = u.Password,
-                         IdRole = u.IdRole,
-                         NameRoleBudget = r.Name,
-                         DescriptionRoleBudget = r.Description,
-                         IdStatus = u.IdStatus,
-                         NameStatusBudget = s.Name,
-                         DescriptionStatusBudget = s.Description
+                         EncryptedPassword = u.EncryptedPassword,
+                         IdRoleBudget = u.IdRoleBudget,
+                         NameRoleBudget = r.NameRole,
+                         DescriptionRoleBudget = r.DescriptionRole,
+                         IdStatusBudget = u.IdStatusBudget,
+                         NameStatusBudget = s.NameStatus,
+                         DescriptionStatusBudget = s.DescriptionStatus
                      }
                   )
                  .ToList();
         }
 
-        public List<UserBudgetExtendDto> GetUsersByRoleStatus(UserDto user)
+        public List<UserBudgetExtendDto> GetUsersBudgetByRoleBudgetStatusBudget(UserBudgetDto userBudget)
         {
             return (
-                     from u in _context.Users.AsNoTracking()
-                     join r in _context.Roles.AsNoTracking()
-                     on u.IdRole equals r.IdRole
-                     join s in _context.Status.AsNoTracking()
-                     on u.IdStatus equals s.IdStatus
-                     where r.IdRole == user.IdRole && r.IdStatus == user.IdStatus
-                     select new UserBudgetExtendDto
-                     {
-                         IdUser = u.IdUser,
+                      from u in _context.UsersBudget.AsNoTracking()
+                      join r in _context.RolesBudget.AsNoTracking()
+                      on u.IdRoleBudget equals r.IdRoleBudget
+                      join s in _context.StatusBudget.AsNoTracking()
+                      on u.IdStatusBudget equals s.IdStatusBudget
+                      where r.IdRoleBudget == userBudget.IdRoleBudget && r.IdStatusBudget == userBudget.IdStatusBudget
+                      select new UserBudgetExtendDto
+                      {
+                         IdUserBudget = u.IdUserBudget,
                          Email = u.Email,
                          Phone = u.Phone,
                          Username = u.Username,
-                         Password = u.Password,
-                         IdRole = u.IdRole,
-                         NameRoleBudget = r.Name,
-                         DescriptionRoleBudget = r.Description,
-                         IdStatus = u.IdStatus,
-                         NameStatusBudget = s.Name,
-                         DescriptionStatusBudget = s.Description
-                     }
+                         EncryptedPassword = u.EncryptedPassword,
+                         IdRoleBudget = u.IdRoleBudget,
+                         NameRoleBudget = r.NameRole,
+                         DescriptionRoleBudget = r.DescriptionRole,
+                         IdStatusBudget = u.IdStatusBudget,
+                         NameStatusBudget = s.NameStatus,
+                         DescriptionStatusBudget = s.DescriptionStatus
+                      }
                   )
                  .ToList();
         }

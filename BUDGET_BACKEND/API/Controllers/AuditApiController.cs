@@ -14,26 +14,26 @@
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
-    /// Nombre: AuditController   
+    /// Nombre: AuditApiController   
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
     [Route("api/[controller]")]
     [ApiController]
-    public class AuditController : BaseController
+    public class AuditApiController : BaseController
     {
 
         #region Atributos y Propiedades
 
-        private readonly IAuditApiService _auditService;
+        private readonly IAuditApiService _auditApiService;
 
         #endregion
 
         #region Constructor
 
-        public AuditController(IAuditApiService auditService)
+        public AuditApiController(IAuditApiService auditApiService)
         {
-            _auditService = auditService;
+            _auditApiService = auditApiService;
         }
 
         #endregion
@@ -41,13 +41,13 @@
         #region Métodos y Funciones
 
         [HttpPost]
-        [Route("GetAuditById")]
-        [SwaggerOperation(Summary = "Get Audit By Id")]
-        public ResponseDto GetAuditById(AuditDto audit)
+        [Route("GetAuditApiByIdAuditApi")]
+        [SwaggerOperation(Summary = "Get AuditApi By IdAuditApi")]
+        public ResponseDto GetAuditApiByIdAuditApi(AuditApiDto auditApi)
         {
             try
             {
-                response.Data = _auditService.GetAuditById(audit);
+                response.Data = _auditApiService.GetAuditApiByIdAuditApi(auditApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -58,13 +58,13 @@
         }
 
         [HttpPost]
-        [Route("GetAuditsByCreationDate")]
-        [SwaggerOperation(Summary = "Get Audits By Creation Date")]
-        public ResponseDto GetAuditsByCreationDate(AuditDto audit)
+        [Route("GetAuditApisByCreationDate")]
+        [SwaggerOperation(Summary = "Get AuditApis By CreationDate")]
+        public ResponseDto GetAuditApisByCreationDate(AuditApiDto auditApi)
         {
             try
             {
-                response.Data = _auditService.GetAuditsByCreationDate(audit);
+                response.Data = _auditApiService.GetAuditApisByCreationDate(auditApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -75,13 +75,13 @@
         }
 
         [HttpPost]
-        [Route("GetAuditsByMethodCreationDate")]
-        [SwaggerOperation(Summary = "Get Audits By Method Creation Date")]
-        public ResponseDto GetAuditsByMethodCreationDate(AuditDto audit)
+        [Route("GetAuditApisByMethodCreationDate")]
+        [SwaggerOperation(Summary = "Get AuditApis By Method CreationDate")]
+        public ResponseDto GetAuditApisByMethodCreationDate(AuditApiDto auditApi)
         {
             try
             {
-                response.Data = _auditService.GetAuditsByMethodCreationDate(audit);
+                response.Data = _auditApiService.GetAuditApisByMethodCreationDate(auditApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -92,13 +92,13 @@
         }
 
         [HttpPost]
-        [Route("GetAuditsByEndpointCreationDate")]
-        [SwaggerOperation(Summary = "Get Audits By Endpoint Creation Date")]
-        public ResponseDto GetAuditsByEndpointCreationDate(AuditDto audit)
+        [Route("GetAuditApisByEndpointUrlCreationDate")]
+        [SwaggerOperation(Summary = "Get AuditApis By EndpointUrl CreationDate")]
+        public ResponseDto GetAuditApisByEndpointUrlCreationDate(AuditApiDto auditApi)
         {
             try
             {
-                response.Data = _auditService.GetAuditsByEndpointCreationDate(audit);
+                response.Data = _auditApiService.GetAuditApisByEndpointUrlCreationDate(auditApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -109,13 +109,13 @@
         }
 
         [HttpPost]
-        [Route("GetAuditsByEndpointMethodCreationDate")]
-        [SwaggerOperation(Summary = "Get Audits By Endpoint Method Creation Date")]
-        public ResponseDto GetAuditsByEndpointMethodCreationDate(AuditDto audit)
+        [Route("GetAuditApisByEndpointUrlMethodCreationDate")]
+        [SwaggerOperation(Summary = "Get AuditApis By EndpointUrl Method CreationDate")]
+        public ResponseDto GetAuditApisByEndpointUrlMethodCreationDate(AuditApiDto auditApi)
         {
             try
             {
-                response.Data = _auditService.GetAuditsByEndpointMethodCreationDate(audit);
+                response.Data = _auditApiService.GetAuditApisByEndpointUrlMethodCreationDate(auditApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -126,13 +126,13 @@
         }
 
         [HttpPost]
-        [Route("SaveAudit")]
-        [SwaggerOperation(Summary = "Save Audit")]
-        public ResponseDto SaveAudit(AuditDto audit)
+        [Route("SaveAuditApi")]
+        [SwaggerOperation(Summary = "Save AuditApi")]
+        public ResponseDto SaveAuditApi(AuditApiDto auditApi)
         {
             try
             {
-                response.Data = _auditService.SaveAudit(audit);
+                response.Data = _auditApiService.SaveAuditApi(auditApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)
@@ -143,13 +143,13 @@
         }
 
         [HttpPost]
-        [Route("UpdateAudit")]
-        [SwaggerOperation(Summary = "Update Audit")]
-        public ResponseDto UpdateAudit(AuditDto audit)
+        [Route("UpdateAuditApi")]
+        [SwaggerOperation(Summary = "Update AuditApi")]
+        public ResponseDto UpdateAuditApi(AuditApiDto auditApi)
         {
             try
             {
-                response.Data = _auditService.UpdateAudit(audit);
+                response.Data = _auditApiService.UpdateAuditApi(auditApi);
                 response.Message = Constants.General.SUCCESSUL;
             }
             catch (Exception ex)

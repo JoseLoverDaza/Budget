@@ -19,26 +19,26 @@
 
     /// <summary>
     /// Fecha: 01 de enero de 2026
-    /// Nombre: StatusTest   
+    /// Nombre: StatusBudgetTest   
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
     [TestClass]
-    public class StatusTest
+    public class StatusBudgetTest
     {
 
         #region Atributos y Propiedades
 
-        private readonly IStatusBudgetService _statusService;
+        private readonly IStatusBudgetService _statusBudgetService;
         private readonly ILogApiService _logApiService;
         private readonly EFContext? _context;
-        private readonly StatusBudgetController? _statusController;
+        private readonly StatusBudgetController? _statusBudgetController;
 
         #endregion 
 
         #region Constructor
 
-        public StatusTest()
+        public StatusBudgetTest()
         {
             var options = new DbContextOptionsBuilder<EFContext>()
            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
@@ -47,27 +47,27 @@
             _context = new EFContext(options);
             UnitOfWork unitOfWork = new(_context);
             _logApiService = new LogApiService(unitOfWork);
-            _statusService = new StatusService(unitOfWork, _logApiService);            
-            _statusController = new StatusBudgetController(_statusService);
+            _statusBudgetService = new StatusService(unitOfWork, _logApiService);            
+            _statusBudgetController = new StatusBudgetController(_statusBudgetService);
 
             #region Data
 
-            /// Status Id 1
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 1
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 1,
-                Name = Constants.Status.INACTIVO,
-                Description = Constants.Status.INACTIVO
+                IdStatusBudget = 1,
+                NameStatus = Constants.Status.INACTIVO,
+                DescriptionStatus = Constants.Status.INACTIVO
             });
 
             _context.SaveChanges();
 
-            /// Status Id 2
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 2
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 2,
-                Name = Constants.Status.ACTIVO,
-                Description = Constants.Status.ACTIVO
+                IdStatusBudget = 2,
+                NameStatus = Constants.Status.ACTIVO,
+                DescriptionStatus = Constants.Status.ACTIVO
             });
 
             _context.SaveChanges();
@@ -81,16 +81,16 @@
         #region Métodos y Funciones
 
         [TestMethod]
-        public void GetStatusByIdOK()
+        public void GetStatusBudgetByIdStatusBudgetOK()
         {
             ///Arrange 
-            StatusDto status = new()
+            StatusBudgetDto statusBudget = new()
             {
-                IdStatus = 2
+                IdStatusBudget = 2
             };
 
             ///Act
-            var result = _statusController!.GetStatusById(status);
+            var result = _statusBudgetController!.GetStatusBudgetByIdStatusBudget(statusBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -99,16 +99,16 @@
         }
 
         [TestMethod]
-        public void GetStatusByIdFail()
+        public void GetStatusBudgetByIdStatusBudgetFail()
         {
             ///Arrange   
-            StatusDto status = new()
+            StatusBudgetDto statusBudget = new()
             {
-                IdStatus = -1
+                IdStatusBudget = -1
             };
 
             ///Act
-            var result = _statusController!.GetStatusById(status);
+            var result = _statusBudgetController!.GetStatusBudgetByIdStatusBudget(statusBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -117,16 +117,16 @@
         }
 
         [TestMethod]
-        public void GetStatusByNameOK()
+        public void GetStatusBudgetByNameStatusOK()
         {
             ///Arrange   
-            StatusDto status = new()
+            StatusBudgetDto statusBudget = new()
             {
-                Name = Constants.Status.ACTIVO
+                NameStatus = Constants.Status.ACTIVO
             };
 
             ///Act
-            var result = _statusController!.GetStatusByName(status);
+            var result = _statusBudgetController!.GetStatusBudgetByNameStatus(statusBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -135,16 +135,16 @@
         }
 
         [TestMethod]
-        public void GetStatusByNameFail()
+        public void GetStatusBudgetByNameStatusFail()
         {
             ///Arrange   
-            StatusDto status = new()
+            StatusBudgetDto statusBudget = new()
             {
-                Name = "T"
+                NameStatus = "T"
             };
 
             ///Act
-            var result = _statusController!.GetStatusByName(status);
+            var result = _statusBudgetController!.GetStatusBudgetByNameStatus(statusBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -153,12 +153,12 @@
         }
 
         [TestMethod]
-        public void GetStatusOK()
+        public void GetStatusBudgetOK()
         {
             ///Arrange   
 
             ///Act
-            var result = _statusController!.GetStatus();
+            var result = _statusBudgetController!.GetStatusBudget();
 
             ///Assert
             Assert.IsNotNull(result);
@@ -167,16 +167,16 @@
         }
 
         [TestMethod]
-        public void SaveStatusOK()
+        public void SaveStatusBudgetOK()
         {
             ///Arrange   
-            StatusDto status = new()
+            StatusBudgetDto statusBudget = new()
             {
-                Name = Constants.Status.CANCELADO
+                NameStatus = Constants.Status.CANCELADO
             };
 
             ///Act
-            var result = _statusController!.SaveStatus(status);
+            var result = _statusBudgetController!.SaveStatusBudget(statusBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -185,17 +185,17 @@
         }
 
         [TestMethod]
-        public void SaveStatusFail()
+        public void SaveStatusBudgetFail()
         {
             ///Arrange   
-            StatusDto status = new()
+            StatusBudgetDto statusBudget = new()
             {
-                Name = Constants.Status.INACTIVO,
-                IdStatus = -1
+                IdStatusBudget = -1,
+                NameStatus = Constants.Status.INACTIVO                
             };
 
             ///Act
-            var result = _statusController!.SaveStatus(status);
+            var result = _statusBudgetController!.SaveStatusBudget(statusBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -204,17 +204,17 @@
         }
 
         [TestMethod]
-        public void UpdateStatus()
+        public void UpdateStatusBudgetOK()
         {
             ///Arrange   
-            StatusDto status = new()
+            StatusBudgetDto statusBudget = new()
             {
-                IdStatus = 1,
-                Name = "Test1"
+                IdStatusBudget = 1,
+                NameStatus = "Test1"
             };
 
             ///Act
-            var result = _statusController!.UpdateStatus(status);
+            var result = _statusBudgetController!.UpdateStatusBudget(statusBudget);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -223,17 +223,17 @@
         }
 
         [TestMethod]
-        public void UpdateStatusFail()
+        public void UpdateStatusBudgetFail()
         {
             ///Arrange   
-            StatusDto status = new()
+            StatusBudgetDto statusBudget = new()
             {
-                Name = "Test",
-                IdStatus = -1
+                IdStatusBudget = -1,
+                NameStatus = "Test"                
             };
 
             ///Act
-            var result = _statusController!.UpdateStatus(status);
+            var result = _statusBudgetController!.UpdateStatusBudget(statusBudget);
 
             ///Assert
             Assert.IsNotNull(result);

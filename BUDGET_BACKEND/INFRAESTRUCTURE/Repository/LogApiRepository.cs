@@ -43,8 +43,8 @@
         {
             return (
                     from l in _context.LogApis.AsNoTracking()
-                    join s in _context.Status.AsNoTracking()
-                    on l.IdStatus equals s.IdStatus
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on l.IdStatusBudget equals s.IdStatusBudget
                     where l.IdLogApi == logApi.IdLogApi
                     select new LogApiExtendDto
                     {
@@ -52,11 +52,14 @@
                         Entity = l.Entity,
                         PreviousValues = l.PreviousValues,
                         NewValues = l.NewValues,
-                        EntityAction = l.EntityAction,
+                        EntityAction = l.EntityAction,                        
+                        IdStatusBudget = l.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = l.CreationUser,
                         CreationDate = l.CreationDate,
-                        IdStatus = l.IdStatus,
-                        NameStatusBudget = s.Name,
-                        DescriptionStatusBudget = s.Description
+                        ModificationUser = l.ModificationUser,
+                        ModificationDate = l.ModificationDate
                     }
                   )
                   .FirstOrDefault();
@@ -66,8 +69,8 @@
         {
             return (
                     from l in _context.LogApis.AsNoTracking()
-                    join s in _context.Status.AsNoTracking()
-                    on l.IdStatus equals s.IdStatus
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on l.IdStatusBudget equals s.IdStatusBudget
                     where l.CreationDate == logApi.CreationDate
                     select new LogApiExtendDto
                     {
@@ -76,10 +79,13 @@
                         PreviousValues = l.PreviousValues,
                         NewValues = l.NewValues,
                         EntityAction = l.EntityAction,
+                        IdStatusBudget = l.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = l.CreationUser,
                         CreationDate = l.CreationDate,
-                        IdStatus = l.IdStatus,
-                        NameStatusBudget = s.Name,
-                        DescriptionStatusBudget = s.Description
+                        ModificationUser = l.ModificationUser,
+                        ModificationDate = l.ModificationDate
                     }
                   )
                   .ToList();
@@ -89,9 +95,9 @@
         {
             return (
                     from l in _context.LogApis.AsNoTracking()
-                    join s in _context.Status.AsNoTracking()
-                    on l.IdStatus equals s.IdStatus
-                    where l.IdStatus == logApi.IdStatus
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on l.IdStatusBudget equals s.IdStatusBudget
+                    where l.IdStatusBudget == logApi.IdStatusBudget
                     select new LogApiExtendDto
                     {
                         IdLogApi = l.IdLogApi,
@@ -99,10 +105,13 @@
                         PreviousValues = l.PreviousValues,
                         NewValues = l.NewValues,
                         EntityAction = l.EntityAction,
+                        IdStatusBudget = l.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = l.CreationUser,
                         CreationDate = l.CreationDate,
-                        IdStatus = l.IdStatus,
-                        NameStatusBudget = s.Name,
-                        DescriptionStatusBudget = s.Description
+                        ModificationUser = l.ModificationUser,
+                        ModificationDate = l.ModificationDate
                     }
                    )
                    .ToList();
@@ -112,8 +121,8 @@
         {
             return (
                     from l in _context.LogApis.AsNoTracking()
-                    join s in _context.Status.AsNoTracking()
-                    on l.IdStatus equals s.IdStatus
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on l.IdStatusBudget equals s.IdStatusBudget
                     where l.EntityAction == logApi.EntityAction && l.CreationDate == logApi.CreationDate
                     select new LogApiExtendDto
                     {
@@ -122,10 +131,13 @@
                         PreviousValues = l.PreviousValues,
                         NewValues = l.NewValues,
                         EntityAction = l.EntityAction,
+                        IdStatusBudget = l.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = l.CreationUser,
                         CreationDate = l.CreationDate,
-                        IdStatus = l.IdStatus,
-                        NameStatusBudget = s.Name,
-                        DescriptionStatusBudget = s.Description
+                        ModificationUser = l.ModificationUser,
+                        ModificationDate = l.ModificationDate
                     }
                    )
                    .ToList();
@@ -135,9 +147,9 @@
         {
             return (
                     from l in _context.LogApis.AsNoTracking()
-                    join s in _context.Status.AsNoTracking()
-                    on l.IdStatus equals s.IdStatus
-                    where l.CreationDate == logApi.CreationDate && l.IdStatus == logApi.IdStatus
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on l.IdStatusBudget equals s.IdStatusBudget
+                    where l.CreationDate == logApi.CreationDate && l.IdStatusBudget == logApi.IdStatusBudget
                     select new LogApiExtendDto
                     {
                         IdLogApi = l.IdLogApi,
@@ -145,22 +157,25 @@
                         PreviousValues = l.PreviousValues,
                         NewValues = l.NewValues,
                         EntityAction = l.EntityAction,
+                        IdStatusBudget = l.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = l.CreationUser,
                         CreationDate = l.CreationDate,
-                        IdStatus = l.IdStatus,
-                        NameStatusBudget = s.Name,
-                        DescriptionStatusBudget = s.Description
+                        ModificationUser = l.ModificationUser,
+                        ModificationDate = l.ModificationDate
                     }
                    )
                    .ToList();
         }
 
-        public List<LogApiExtendDto> GetLogApisByEntityCreationDateStatus(LogApiDto logApi)
+        public List<LogApiExtendDto> GetLogApisByEntityCreationDateStatusBudget(LogApiDto logApi)
         {
             return (
                     from l in _context.LogApis.AsNoTracking()
-                    join s in _context.Status.AsNoTracking()
-                    on l.IdStatus equals s.IdStatus
-                    where l.EntityAction == logApi.EntityAction && l.CreationDate == logApi.CreationDate && l.IdStatus == logApi.IdStatus
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on l.IdStatusBudget equals s.IdStatusBudget
+                    where l.EntityAction == logApi.EntityAction && l.CreationDate == logApi.CreationDate && l.IdStatusBudget == logApi.IdStatusBudget
                     select new LogApiExtendDto
                     {
                         IdLogApi = l.IdLogApi,
@@ -168,10 +183,13 @@
                         PreviousValues = l.PreviousValues,
                         NewValues = l.NewValues,
                         EntityAction = l.EntityAction,
+                        IdStatusBudget = l.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = l.CreationUser,
                         CreationDate = l.CreationDate,
-                        IdStatus = l.IdStatus,
-                        NameStatusBudget = s.Name,
-                        DescriptionStatusBudget = s.Description
+                        ModificationUser = l.ModificationUser,
+                        ModificationDate = l.ModificationDate
                     }
                   )
                   .ToList();

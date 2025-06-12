@@ -51,32 +51,32 @@
 
             #region Data
 
-            /// Status Id 1
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 1
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 1,
-                Name = Constants.Status.INACTIVO,
-                Description = Constants.Status.INACTIVO
+                IdStatusBudget = 1,
+                NameStatus = Constants.Status.INACTIVO,
+                DescriptionStatus = Constants.Status.INACTIVO
             });
 
             _context.SaveChanges();
 
-            /// Status Id 2
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 2
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 2,
-                Name = Constants.Status.ACTIVO,
-                Description = Constants.Status.ACTIVO
+                IdStatusBudget = 2,
+                NameStatus = Constants.Status.ACTIVO,
+                DescriptionStatus = Constants.Status.ACTIVO
             });
 
             _context.SaveChanges();
 
-            /// Status Id 3
-            _context.Status.Add(new Status()
+            /// StatusBudget IdStatusBudget 3
+            _context.StatusBudget.Add(new StatusBudget()
             {
-                IdStatus = 3,
-                Name = Constants.Status.CANCELADO,
-                Description = Constants.Status.CANCELADO
+                IdStatusBudget = 3,
+                NameStatus = Constants.Status.CANCELADO,
+                DescriptionStatus = Constants.Status.CANCELADO
             });
 
             _context.SaveChanges();
@@ -90,12 +90,13 @@
                 PreviousValues = "Test",
                 NewValues = "Test",
                 CreationDate = new DateTime(2026, 1, 1),
-                IdStatus = 1
+                IdStatusBudget = 1
             });
 
             _context.SaveChanges();
 
             #endregion Data
+
         }
 
         #endregion
@@ -103,7 +104,7 @@
         #region Métodos y Funciones
 
         [TestMethod]
-        public void GetLogApiByIdOK()
+        public void GetLogApiByIdLogApiOK()
         {
             ///Arrange   
             LogApiDto logApi = new()
@@ -112,7 +113,7 @@
             };
 
             ///Act
-            var result = _logApiController!.GetLogApiById(logApi);
+            var result = _logApiController!.GetLogApiByIdLogApi(logApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -121,7 +122,7 @@
         }
 
         [TestMethod]
-        public void GetLogApiByIdFail()
+        public void GetLogApiByIdLogApiFail()
         {
             ///Arrange   
             LogApiDto logApi = new()
@@ -130,7 +131,7 @@
             };
 
             ///Act
-            var result = _logApiController!.GetLogApiById(logApi);
+            var result = _logApiController!.GetLogApiByIdLogApi(logApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -175,16 +176,16 @@
         }
 
         [TestMethod]
-        public void GetLogApisByStatusOK()
+        public void GetLogApisByStatusBudgetOK()
         {
             ///Arrange   
             LogApiDto logApi = new()
             {
-                IdStatus = 1
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _logApiController!.GetLogApisByStatus(logApi);
+            var result = _logApiController!.GetLogApisByStatusBudget(logApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -193,16 +194,16 @@
         }
 
         [TestMethod]
-        public void GetLogApisByStatusFail()
+        public void GetLogApisByStatusBudgetFail()
         {
             ///Arrange   
             LogApiDto logApi = new()
             {
-                IdStatus = -1
+                IdStatusBudget = -1
             };
 
             ///Act
-            var result = _logApiController!.GetLogApisByStatus(logApi);
+            var result = _logApiController!.GetLogApisByStatusBudget(logApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -249,17 +250,17 @@
         }
 
         [TestMethod]
-        public void GetLogApisByCreationDateStatusOK()
+        public void GetLogApisByCreationDateStatusBudgetOK()
         {
             ///Arrange   
             LogApiDto logApi = new()
             {
                 CreationDate = new DateTime(2026, 1, 1),
-                IdStatus = 1
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _logApiController!.GetLogApisByCreationDateStatus(logApi);
+            var result = _logApiController!.GetLogApisByCreationDateStatusBudget(logApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -268,17 +269,17 @@
         }
 
         [TestMethod]
-        public void GetLogApisByCreationDateStatusFail()
+        public void GetLogApisByCreationDateStatusBudgetFail()
         {
             ///Arrange   
             LogApiDto logApi = new()
             {
                 CreationDate = new DateTime(2025, 1, 1),
-                IdStatus = -1
+                IdStatusBudget = -1
             };
 
             ///Act
-            var result = _logApiController!.GetLogApisByCreationDateStatus(logApi);
+            var result = _logApiController!.GetLogApisByCreationDateStatusBudget(logApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -287,18 +288,18 @@
         }
 
         [TestMethod]
-        public void GetLogApisByEntityCreationDateStatusOK()
+        public void GetLogApisByEntityCreationDateStatusBudgetOK()
         {
             ///Arrange   
             LogApiDto logApi = new()
             {
                 EntityAction = "Test",
                 CreationDate = new DateTime(2026, 1, 1),
-                IdStatus = 1
+                IdStatusBudget = 1
             };
 
             ///Act
-            var result = _logApiController!.GetLogApisByEntityCreationDateStatus(logApi);
+            var result = _logApiController!.GetLogApisByEntityCreationDateStatusBudget(logApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -307,18 +308,18 @@
         }
 
         [TestMethod]
-        public void GetLogApisByEntityCreationDateStatusFail()
+        public void GetLogApisByEntityCreationDateStatusBudgetFail()
         {
             ///Arrange   
             LogApiDto logApi = new()
             {
                 EntityAction = "T",
                 CreationDate = new DateTime(2025, 1, 1),
-                IdStatus = -1
+                IdStatusBudget = -1
             };
 
             ///Act
-            var result = _logApiController!.GetLogApisByEntityCreationDateStatus(logApi);
+            var result = _logApiController!.GetLogApisByEntityCreationDateStatusBudget(logApi);
 
             ///Assert
             Assert.IsNotNull(result);
@@ -337,7 +338,7 @@
                 PreviousValues = "Test",
                 NewValues = "Test",
                 CreationDate = new DateTime(2026, 1, 1),
-                IdStatus = 1
+                IdStatusBudget = 1
             };
 
             ///Act
@@ -360,7 +361,7 @@
                 PreviousValues = "Test",
                 NewValues = "Test",
                 CreationDate = new DateTime(2026, 1, 1),
-                IdStatus = -1
+                IdStatusBudget = -1
             };
 
             ///Act
@@ -384,7 +385,7 @@
                 PreviousValues = "Test",
                 NewValues = "Test",
                 CreationDate = new DateTime(2026, 1, 1),
-                IdStatus = -1
+                IdStatusBudget = -1
             };
 
             ///Act
@@ -408,7 +409,7 @@
                 PreviousValues = "Test",
                 NewValues = "Test",
                 CreationDate = new DateTime(2026, 1, 1),
-                IdStatus = 3
+                IdStatusBudget = 3
             };
 
             ///Act
@@ -432,7 +433,7 @@
                 PreviousValues = "Test",
                 NewValues = "Test",
                 CreationDate = new DateTime(2026, 1, 1),
-                IdStatus = -1
+                IdStatusBudget = -1
             };
 
             ///Act
