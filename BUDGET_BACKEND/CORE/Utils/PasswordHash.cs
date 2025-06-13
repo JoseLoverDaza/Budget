@@ -48,11 +48,11 @@
             return CryptographicOperations.FixedTimeEquals(storedHash, computedHash);
         }
 
-        public static string GenerateJwtToken(UserBudgetExtendDto userBudget, string secretKey)
+        public static string GenerateJwtToken(UserBudgetExtendDto userBudget, string secretKey, string issuer, string audience, DateTime dNow)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.UTF8.GetBytes(secretKey);
-
+           
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(
@@ -61,7 +61,11 @@
                     new Claim(ClaimTypes.NameIdentifier, userBudget.IdUserBudget.ToString()),
                     new Claim(ClaimTypes.Name, userBudget.Username)
                 ]),
-                Expires = DateTime.UtcNow.AddDays(1),
+                IssuedAt = dNow,
+                NotBefore = dNow,
+                Expires = dNow.AddDays(1),
+                Issuer = issuer,
+                Audience = audience,
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature)

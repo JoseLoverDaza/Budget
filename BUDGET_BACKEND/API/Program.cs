@@ -2,12 +2,37 @@
 
 using API.Extensions;
 using API.Helper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.IdentityModel.Tokens;
 using System.Globalization;
+using System.Text;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var key = Encoding.UTF8.GetBytes(builder.Configuration["Encryption:SecretKey"]!);
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = builder.Configuration["Encryption:Issuer"],
+
+            ValidateAudience = true,
+            ValidAudience = builder.Configuration["Encryption:Audience"],
+
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(builder.Configuration["Encryption:SecretKey"]!)
+            )
+        };
+        options.SaveToken = true;
+    });
 
 EncryptionHelper.Configure(builder.Configuration);
 
@@ -68,6 +93,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseAuthentication();
+app.UseAuthorization();
 app.UseSwaggerGen();
 app.UseCors("CorsPolicy");
 app.UseSwaggerUI();

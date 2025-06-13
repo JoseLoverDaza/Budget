@@ -7,6 +7,7 @@
     using CORE.Utils;
     using Domain.Dto;
     using Domain.Dto.Common;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Swashbuckle.AspNetCore.Annotations;
 
@@ -18,6 +19,7 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AccountController : BaseController

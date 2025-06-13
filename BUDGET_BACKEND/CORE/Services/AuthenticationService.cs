@@ -62,19 +62,23 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
+            TimeZoneInfo colombiaZone = TimeZoneInfo.FindSystemTimeZoneById("SA Pacific Standard Time");
+            DateTime dNow = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, colombiaZone);
             string secretKey = _configuration["Encryption:SecretKey"]!;
-            string sToken = PasswordHash.GenerateJwtToken(userSearch, secretKey);
-
+            string issuer = _configuration["Encryption:Issuer"]!;
+            string audience = _configuration["Encryption:Audience"]!;
+            string sToken = PasswordHash.GenerateJwtToken(userSearch, secretKey, issuer, audience, dNow);
+            
             if (string.IsNullOrWhiteSpace(secretKey) || string.IsNullOrWhiteSpace(sToken))
             {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+                throw new ExternalException(General.MESSAGE_GENERAL);
             }
 
             TokenApi saveTokenApi = new()
             {
                 Token = sToken,
-                CreationDate = DateTime.Now,
-                ExpirationDate = DateTime.Now.AddDays(1),
+                CreationDate = dNow,
+                ExpirationDate = dNow.AddDays(1),
                 IdUserBudget = userSearch.IdUserBudget,
                 IdStatusBudget = statusBudgetSearch.IdStatusBudget
             };
@@ -87,8 +91,8 @@
             }
                         
             authentication.Token = sToken;
-            authentication.CreationDate = DateTime.Now;
-            authentication.ExpirationDate = DateTime.Now.AddDays(1);
+            authentication.CreationDate = saveTokenApi.CreationDate;
+            authentication.ExpirationDate = saveTokenApi.ExpirationDate;
             authentication.IsAuthenticated = true;
 
             _logApiService.TraceLog(typeof(TokenApi).Name, MethodHttp.TOKEN, JsonSerializer.Serialize(General.JSON_EMPTY), JsonSerializer.Serialize(General.JSON_EMPTY), Json.SerializeWithoutNulls(authentication), DateTime.Now, statusBudgetSearch.IdStatusBudget);
