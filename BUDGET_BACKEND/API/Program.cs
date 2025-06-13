@@ -2,7 +2,7 @@
 
 using API.Extensions;
 using API.Helper;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using CORE.Utils;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.IdentityModel.Tokens;
@@ -13,8 +13,8 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddAuthentication("Bearer")
-    .AddJwtBearer("Bearer", options =>
+builder.Services.AddAuthentication(Constants.General.BEARER)
+    .AddJwtBearer(Constants.General.BEARER, options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {

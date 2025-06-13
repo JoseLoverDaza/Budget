@@ -25,6 +25,7 @@
             public const string SUCCESSUL_EDIT = "Successful Edit";
             public const string SUCCESSUL_DELETE = "Successful Delete";
             public const string JSON_EMPTY = "{}";
+            public const string BEARER = "Bearer";
         }
 
         public static class Status
