@@ -6,16 +6,15 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Globalization;
 using System.Text;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var key = Encoding.UTF8.GetBytes(builder.Configuration["Encryption:SecretKey"]!);
-
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
+builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer("Bearer", options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
@@ -28,10 +27,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(builder.Configuration["Encryption:SecretKey"]!)
-            )
+                Encoding.UTF8.GetBytes(builder.Configuration["Encryption:SecretKey"]!))
         };
-        options.SaveToken = true;
     });
 
 EncryptionHelper.Configure(builder.Configuration);
@@ -43,20 +40,51 @@ builder.Services
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
         options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
     });
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddHttpContextAccessor();
 builder.Host.AddSerilogConfig(builder.Configuration);
 builder.Services.AddDatabase(builder.Configuration);
 builder.Services.AddUnitOfWork();
 builder.Services.AddBusinessServices();
-builder.Services.AddSwaggerGen();
-builder.Services.AddSwaggerDocumentation();
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy", policy =>
     {
-        policy.AllowAnyHeader().AllowAnyMethod().WithOrigins(builder.Configuration["AllowedHosts"]!);
+        policy.AllowAnyHeader()
+              .AllowAnyMethod()
+              .WithOrigins(builder.Configuration["AllowedHosts"]!);
+    });
+});
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "BUDGET_BACKEND.API",
+        Version = "v1"
+    });
+        
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Ingrese el token JWT en formato: Bearer {token}",
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
+            },
+            Array.Empty<string>()
+        }
     });
 });
 
@@ -66,17 +94,11 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-var supportedCultures = new[]
-{
-    new CultureInfo("es-CO")
-};
-
+var supportedCultures = new[] { new CultureInfo("es-CO") };
 app.UseRequestLocalization(new RequestLocalizationOptions
 {
     DefaultRequestCulture = new RequestCulture(supportedCultures[0]),
-
     SupportedCultures = supportedCultures,
-
     SupportedUICultures = supportedCultures
 });
 
@@ -90,14 +112,12 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwagger();
 }
 
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseSwaggerGen();
 app.UseCors("CorsPolicy");
-app.UseSwaggerUI();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();

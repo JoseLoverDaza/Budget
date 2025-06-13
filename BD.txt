@@ -104,6 +104,7 @@ CREATE TABLE [SecurityBudget].[LogApi](
 	[EntityAction] [nvarchar](10) NULL,
 	[PreviousValues] NVARCHAR(MAX),
     [NewValues] NVARCHAR(MAX),	
+	[FilterValues] NVARCHAR(MAX),	
 	[IdStatusBudget] [int] NOT NULL,
 	[CreationUser] [int] NOT NULL,
 	[CreationDate] [datetime] NOT NULL,

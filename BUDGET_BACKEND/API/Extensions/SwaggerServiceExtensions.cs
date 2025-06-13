@@ -1,5 +1,6 @@
 ﻿namespace API.Extensions
 {
+    using Microsoft.AspNetCore.Builder;
 
     #region Librerias
 
@@ -59,18 +60,6 @@
                     });
             });
             return services;
-        }
-
-        /// <summary>
-        /// Descripción: Método que define la documentación de Swagger
-        /// </summary>
-        /// <param name="app"></param>
-        /// <returns></returns>
-        public static IApplicationBuilder UseSwaggerGen(this IApplicationBuilder app)
-        {
-            app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("./v1/swagger.json", String.Format("BUDGET_BACKEND.API {0}", "v1")));
-            return app;
         }
 
         #endregion
