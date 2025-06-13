@@ -40,7 +40,10 @@
 
             entity.Property(e => e.NewValues)
                   .HasColumnType("nvarchar(max)");
-                      
+
+            entity.Property(e => e.FilterValues)
+                  .HasColumnType("nvarchar(max)");
+
             entity.Property(e => e.IdStatusBudget)
                   .IsRequired();
 

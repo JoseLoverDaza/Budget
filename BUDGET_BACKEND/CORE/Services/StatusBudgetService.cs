@@ -10,6 +10,7 @@
     using Domain.Entities;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
+    using System.Security.Principal;
     using System.Text.Json;
 
     #endregion
@@ -45,7 +46,7 @@
             IStatusBudgetRepository statusBudgetRepository = UnitOfWork.StatusBudgetRepository();
             StatusBudgetDto? statusBudgetSearch = statusBudgetRepository.GetStatusBudgetByIdStatusBudget(statusBudget);
 
-            _logApiService.TraceLog(typeof(StatusBudget).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(StatusBudget).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(statusBudget), DateTime.Now, null);
 
             if (statusBudgetSearch != null)
             {
@@ -62,7 +63,7 @@
             IStatusBudgetRepository statusBudgetRepository = UnitOfWork.StatusBudgetRepository();
             StatusBudgetDto? statusBudgetSearch = statusBudgetRepository.GetStatusBudgetByNameStatus(statusBudget);
 
-            _logApiService.TraceLog(typeof(StatusBudget).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(StatusBudget).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(statusBudget), DateTime.Now, null);
 
             if (statusBudgetSearch != null)
             {
@@ -79,7 +80,7 @@
             IStatusBudgetRepository statusBudgetRepository = UnitOfWork.StatusBudgetRepository();
             List<StatusBudgetDto> statusBudget = statusBudgetRepository.GetStatusBudget();
 
-            _logApiService.TraceLog(typeof(StatusBudget).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(StatusBudget).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(statusBudget), DateTime.Now, null);
 
             if (statusBudget.Count != 0)
             {
@@ -120,7 +121,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            _logApiService.TraceLog(typeof(StatusBudget).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(saveStatusBudget), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(StatusBudget).Name, Constants.EntityAction.SAVE, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(saveStatusBudget), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             return statusBudget;
         }
@@ -155,7 +156,8 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
-            _logApiService.TraceLog(typeof(StatusBudget).Name, Constants.Method.POST, JsonSerializer.Serialize(statusBudgetSearch), JsonSerializer.Serialize(updateStatusBudget), DateTime.Now, null);
+
+            _logApiService.TraceLog(typeof(StatusBudget).Name, Constants.EntityAction.UPDATE, JsonSerializer.Serialize(statusBudgetSearch), JsonSerializer.Serialize(updateStatusBudget), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             return statusBudget;
         }

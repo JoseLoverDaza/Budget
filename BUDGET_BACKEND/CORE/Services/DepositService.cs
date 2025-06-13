@@ -11,6 +11,7 @@
     using Domain.Entities;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
+    using System.Security.Principal;
     using System.Text.Json;
 
     #endregion
@@ -46,7 +47,7 @@
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
             DepositExtendDto? depositSearch = depositRepository.GetDepositByIdDeposit(deposit);
 
-            _logApiService.TraceLog(typeof(Deposit).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(Deposit).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(deposit), DateTime.Now, null);
 
             if (depositSearch != null)
             {
@@ -63,7 +64,7 @@
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
             List<DepositExtendDto> depositsSearch = depositRepository.GetDepositsByYearMonth(deposit);
 
-            _logApiService.TraceLog(typeof(Deposit).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(Deposit).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(deposit), DateTime.Now, null);
 
             if (depositsSearch.Count != 0)
             {
@@ -80,7 +81,7 @@
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
             List<DepositExtendDto> depositsSearch = depositRepository.GetDepositsByYearUserBudget(deposit);
 
-            _logApiService.TraceLog(typeof(Deposit).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(Deposit).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(deposit), DateTime.Now, null);
 
             if (depositsSearch.Count != 0)
             {
@@ -97,7 +98,7 @@
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
             List<DepositExtendDto> depositsSearch = depositRepository.GetDepositsByMonthUserBudget(deposit);
 
-            _logApiService.TraceLog(typeof(Deposit).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(Deposit).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(deposit), DateTime.Now, null);
 
             if (depositsSearch.Count != 0)
             {
@@ -114,7 +115,7 @@
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
             List<DepositExtendDto> depositsSearch = depositRepository.GetDepositsByYearMonthUserBudget(deposit);
 
-            _logApiService.TraceLog(typeof(Deposit).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(Deposit).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(deposit), DateTime.Now, null);
 
             if (depositsSearch.Count != 0)
             {
@@ -131,7 +132,7 @@
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
             List<DepositExtendDto> depositsSearch = depositRepository.GetDepositsByYearMonthAccount(deposit);
 
-            _logApiService.TraceLog(typeof(Deposit).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(Deposit).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(deposit), DateTime.Now, null);
 
             if (depositsSearch.Count != 0)
             {
@@ -148,7 +149,7 @@
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
             List<DepositExtendDto> depositsSearch = depositRepository.GetDepositsByYearMonthStatusBudget(deposit);
 
-            _logApiService.TraceLog(typeof(Deposit).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(Deposit).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(deposit), DateTime.Now, null);
 
             if (depositsSearch.Count != 0)
             {
@@ -165,7 +166,7 @@
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
             List<DepositExtendDto> deposits = depositRepository.GetDepositsByYearMonthUserBudgetAccount(deposit);
 
-            _logApiService.TraceLog(typeof(Deposit).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(Deposit).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(deposit), DateTime.Now, null);
 
             if (deposits.Count != 0)
             {
@@ -182,7 +183,7 @@
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
             List<DepositExtendDto> deposits = depositRepository.GetDepositsByUserBudget(deposit);
 
-            _logApiService.TraceLog(typeof(Deposit).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(Deposit).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(deposit), DateTime.Now, null);
 
             if (deposits.Count != 0)
             {
@@ -199,7 +200,7 @@
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
             List<DepositExtendDto> deposits = depositRepository.GetDepositsByAccount(deposit);
 
-            _logApiService.TraceLog(typeof(Deposit).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(Deposit).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(deposit), DateTime.Now, null);
 
             if (deposits.Count != 0)
             {
@@ -216,7 +217,7 @@
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
             List<DepositExtendDto> deposits = depositRepository.GetDepositsByStatusBudget(deposit);
 
-            _logApiService.TraceLog(typeof(Deposit).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(Deposit).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(deposit), DateTime.Now, null);
 
             if (deposits.Count != 0)
             {
@@ -233,7 +234,7 @@
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
             List<DepositExtendDto> deposits = depositRepository.GetDepositsByUserBudgetStatusBudget(deposit);
 
-            _logApiService.TraceLog(typeof(Deposit).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(Deposit).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(deposit), DateTime.Now, null);
 
             if (deposits.Count != 0)
             {
@@ -250,7 +251,7 @@
             IDepositRepository depositRepository = UnitOfWork.DepositRepository();
             List<DepositExtendDto> deposits = depositRepository.GetDepositsByAccountStatusBudget(deposit);
 
-            _logApiService.TraceLog(typeof(Deposit).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(Deposit).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(deposit), DateTime.Now, null);
 
             if (deposits.Count != 0)
             {
@@ -307,7 +308,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            _logApiService.TraceLog(typeof(Deposit).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(saveDeposit), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(Deposit).Name, Constants.EntityAction.SAVE, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(saveDeposit), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             return deposit;
         }
@@ -345,7 +346,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            _logApiService.TraceLog(typeof(Deposit).Name, Constants.Method.POST, JsonSerializer.Serialize(depositSearch), JsonSerializer.Serialize(updateDeposit), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(Deposit).Name, Constants.EntityAction.UPDATE, JsonSerializer.Serialize(depositSearch), JsonSerializer.Serialize(updateDeposit), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             return deposit;
         }
@@ -385,7 +386,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            _logApiService.TraceLog(typeof(Deposit).Name, Constants.Method.POST, JsonSerializer.Serialize(depositSearch), JsonSerializer.Serialize(deleteDeposit), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(Deposit).Name, Constants.EntityAction.DELETE, JsonSerializer.Serialize(depositSearch), JsonSerializer.Serialize(deleteDeposit), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             return deposit;
         }

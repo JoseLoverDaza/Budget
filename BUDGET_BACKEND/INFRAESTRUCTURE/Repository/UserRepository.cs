@@ -20,7 +20,7 @@
     /// Autor: Jose Lover Daza Rojas
     /// </summary>
 
-    internal class UserBudgetRepository : BaseRepository<UserBudget>, IUserBudgetRepository
+    public class UserBudgetRepository : BaseRepository<UserBudget>, IUserBudgetRepository
     {
 
         #region Atributos y Propiedades

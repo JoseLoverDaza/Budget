@@ -1,14 +1,15 @@
 ﻿namespace API.Extensions
 {
-    using API.Helper;
 
     #region Librerias
 
+    using API.Helper;
     using CORE.Interfaces.Repositories;
     using CORE.Interfaces.Services;
     using CORE.Services;
     using CORE.Utils;
     using Domain.Context;
+    using INFRAESTRUCTURE.Repository;
     using Microsoft.EntityFrameworkCore;
     using Serilog;
     using Serilog.Sinks.MSSqlServer;
@@ -60,6 +61,7 @@
             services.AddTransient<IBillingDetailsService, BillingDetailsService>();
             services.AddTransient<IBudgetService, BudgetService>();
             services.AddTransient<IBudgetDetailsService, BudgetDetailsService>();
+            services.AddTransient<IUserBudgetRepository, UserBudgetRepository>();
 
             return services;
         }

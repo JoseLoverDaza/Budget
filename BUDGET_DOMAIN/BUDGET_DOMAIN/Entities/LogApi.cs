@@ -15,9 +15,10 @@
         public int IdLogApi { get; set; }
         public string Entity { get; set; } = null!;
         public string EntityAction { get; set; } = null!;
-        public string PreviousValues { get; set; } = null!;
-        public string NewValues { get; set; } = null!;        
-        
+        public string PreviousValues { get; set; } = null!;       
+        public string NewValues { get; set; } = null!;
+        public string FilterValues { get; set; } = null!;
+
         public int IdStatusBudget { get; set; }
 
         #endregion

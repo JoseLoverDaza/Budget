@@ -1,9 +1,9 @@
 ﻿namespace CORE.Services
 {
-    using CORE.Dto;
 
     #region Librerias
 
+    using CORE.Dto;
     using CORE.Interfaces.Repositories;
     using CORE.Interfaces.Services;
     using CORE.Utils;
@@ -11,6 +11,7 @@
     using Domain.Entities;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
+    using System.Security.Principal;
     using System.Text.Json;
     using static CORE.Utils.Constants;
 
@@ -47,7 +48,7 @@
             IAuditApiRepository auditApiRepository = UnitOfWork.AuditApiRepository();
             AuditApiDto? auditApisSearch = auditApiRepository.GetAuditApiByIdAuditApi(auditApi);
 
-            _logApiService.TraceLog(typeof(AuditApi).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(AuditApi).Name, EntityAction.CONSULT, JsonSerializer.Serialize(General.JSON_EMPTY), JsonSerializer.Serialize(General.JSON_EMPTY), Json.SerializeWithoutNulls(auditApi), DateTime.Now, null);
 
             if (auditApisSearch != null)
             {
@@ -55,7 +56,7 @@
             }
             else
             {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+                throw new ExternalException(General.MESSAGE_GENERAL);
             }
         }
 
@@ -64,7 +65,7 @@
             IAuditApiRepository auditApiRepository = UnitOfWork.AuditApiRepository();
             List<AuditApiDto> auditApisSearch = auditApiRepository.GetAuditApisByCreationDate(auditApi);
 
-            _logApiService.TraceLog(typeof(AuditApi).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(AuditApi).Name, EntityAction.CONSULT, JsonSerializer.Serialize(General.JSON_EMPTY), JsonSerializer.Serialize(General.JSON_EMPTY), Json.SerializeWithoutNulls(auditApi), DateTime.Now, null);
 
             if (auditApisSearch.Count != 0)
             {
@@ -72,7 +73,7 @@
             }
             else
             {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+                throw new ExternalException(General.MESSAGE_GENERAL);
             }
         }
 
@@ -81,7 +82,7 @@
             IAuditApiRepository auditApiRepository = UnitOfWork.AuditApiRepository();
             List<AuditApiDto> auditApisSearch = auditApiRepository.GetAuditApisByMethodCreationDate(auditApi);
 
-            _logApiService.TraceLog(typeof(AuditApi).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(AuditApi).Name, EntityAction.CONSULT, JsonSerializer.Serialize(General.JSON_EMPTY), JsonSerializer.Serialize(General.JSON_EMPTY), Json.SerializeWithoutNulls(auditApi), DateTime.Now, null);
 
             if (auditApisSearch.Count != 0)
             {
@@ -89,7 +90,7 @@
             }
             else
             {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+                throw new ExternalException(General.MESSAGE_GENERAL);
             }
         }
 
@@ -98,7 +99,7 @@
             IAuditApiRepository auditApiRepository = UnitOfWork.AuditApiRepository();
             List<AuditApiDto> auditApisSearch = auditApiRepository.GetAuditApisByEndpointUrlCreationDate(auditApi);
 
-            _logApiService.TraceLog(typeof(AuditApi).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(AuditApi).Name, EntityAction.CONSULT, JsonSerializer.Serialize(General.JSON_EMPTY), JsonSerializer.Serialize(General.JSON_EMPTY), Json.SerializeWithoutNulls(auditApi), DateTime.Now, null);
 
             if (auditApisSearch.Count != 0)
             {
@@ -106,7 +107,7 @@
             }
             else
             {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+                throw new ExternalException(General.MESSAGE_GENERAL);
             }
         }
 
@@ -115,7 +116,7 @@
             IAuditApiRepository auditApiRepository = UnitOfWork.AuditApiRepository();
             List<AuditApiDto> auditApisSearch = auditApiRepository.GetAuditApisByEndpointUrlMethodCreationDate(auditApi);
 
-            _logApiService.TraceLog(typeof(AuditApi).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(AuditApi).Name, EntityAction.CONSULT, JsonSerializer.Serialize(General.JSON_EMPTY), JsonSerializer.Serialize(General.JSON_EMPTY), Json.SerializeWithoutNulls(auditApi), DateTime.Now, null);
 
             if (auditApisSearch.Count != 0)
             {
@@ -123,7 +124,7 @@
             }
             else
             {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+                throw new ExternalException(General.MESSAGE_GENERAL);
             }
         }
 
@@ -131,11 +132,11 @@
         {
             if (auditApi == null)
             {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+                throw new ExternalException(General.MESSAGE_GENERAL);
             }
 
             IUserBudgetRepository userBudgetRepository = UnitOfWork.UserBudgetRepository();
-            UserBudgetExtendDto? userBudgetAdminSearch = userBudgetRepository.GetUserBudgetByUsername(new UserBudgetDto { Username = Constants.UserBudget.USERNAME_ADMIN }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            UserBudgetExtendDto? userBudgetAdminSearch = userBudgetRepository.GetUserBudgetByUsername(new UserBudgetDto { Username = Constants.UserBudget.USERNAME_ADMIN }) ?? throw new ExternalException(General.MESSAGE_GENERAL);
 
             AuditApi saveAuditApi = new()
             {
@@ -153,10 +154,8 @@
 
             if (UnitOfWork.SaveChanges() <= 0)
             {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+                throw new ExternalException(General.MESSAGE_GENERAL);
             }
-
-            _logApiService.TraceLog(typeof(AuditApi).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(saveAuditApi), DateTime.Now, null);
 
             return auditApi;
         }
@@ -167,10 +166,10 @@
 
             if (auditApi == null || auditApi.IdAuditApi <= 0)
             {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+                throw new ExternalException(General.MESSAGE_GENERAL);
             }
 
-            AuditApiDto? auditApiSearch = (auditApiRepository.GetAuditApiByIdAuditApi(auditApi) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL));
+            AuditApiDto? auditApiSearch = (auditApiRepository.GetAuditApiByIdAuditApi(auditApi) ?? throw new ExternalException(General.MESSAGE_GENERAL));
 
             AuditApi updateAudit = new()
             {
@@ -189,10 +188,8 @@
 
             if (UnitOfWork.SaveChanges() <= 0)
             {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+                throw new ExternalException(General.MESSAGE_GENERAL);
             }
-
-            _logApiService.TraceLog(typeof(AuditApi).Name, Constants.Method.POST, JsonSerializer.Serialize(auditApiSearch), JsonSerializer.Serialize(updateAudit), DateTime.Now, null);
 
             return auditApi;
         }

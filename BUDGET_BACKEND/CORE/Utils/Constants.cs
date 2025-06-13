@@ -34,13 +34,21 @@
             public const string CANCELADO = "Cancelado";
         }
 
-        public static class Method
+        public static class MethodHttp
         {
             public const string GET = "GET";
             public const string POST = "POST";
             public const string DELETE = "DELETE";            
             public const string TOKEN = "TOKEN";
             public const string VERIFY = "VERIFY";
+        }
+
+        public static class EntityAction
+        {
+            public const string CONSULT = "CONSULT";
+            public const string SAVE = "SAVE";
+            public const string UPDATE = "UPDATE";
+            public const string DELETE = "DELETE";           
         }
 
         public static class UserBudget

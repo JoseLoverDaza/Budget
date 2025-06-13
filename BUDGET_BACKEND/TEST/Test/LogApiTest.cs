@@ -114,6 +114,7 @@
                 EntityAction = "Test",
                 PreviousValues = "Test",
                 NewValues = "Test",
+                FilterValues = "Test",
                 CreationDate = new DateTime(2026, 1, 1),
                 IdStatusBudget = 1
             });
@@ -362,6 +363,7 @@
                 EntityAction = "Test",
                 PreviousValues = "Test",
                 NewValues = "Test",
+                FilterValues = "Test",
                 CreationDate = new DateTime(2026, 1, 1),
                 IdStatusBudget = 1
             };
@@ -385,6 +387,7 @@
                 EntityAction = "Test",
                 PreviousValues = "Test",
                 NewValues = "Test",
+                FilterValues = "Test",
                 CreationDate = new DateTime(2026, 1, 1),
                 IdStatusBudget = -1
             };
@@ -407,8 +410,9 @@
                 IdLogApi = -1,
                 Entity = "Test",
                 EntityAction = "Test",
-                PreviousValues = "Test",
+                PreviousValues = "Test",              
                 NewValues = "Test",
+                FilterValues = "Test",
                 CreationDate = new DateTime(2026, 1, 1),
                 IdStatusBudget = -1
             };
@@ -433,6 +437,7 @@
                 EntityAction = "Test",
                 PreviousValues = "Test",
                 NewValues = "Test",
+                FilterValues = "Test",
                 CreationDate = new DateTime(2026, 1, 1),
                 IdStatusBudget = 3
             };
@@ -457,6 +462,7 @@
                 EntityAction = "Test",
                 PreviousValues = "Test",
                 NewValues = "Test",
+                FilterValues = "Test",
                 CreationDate = new DateTime(2026, 1, 1),
                 IdStatusBudget = -1
             };

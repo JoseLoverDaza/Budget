@@ -11,6 +11,7 @@
     using Domain.Entities;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
+    using System.Security.Principal;
     using System.Text.Json;
 
     #endregion
@@ -46,7 +47,7 @@
             ITypeExpenseRepository typeExpenseRepository = UnitOfWork.TypeExpenseRepository();
             TypeExpenseExtendDto? typeExpenseSearch = typeExpenseRepository.GetTypeExpenseByIdTypeExpense(typeExpense);
 
-            _logApiService.TraceLog(typeof(TypeExpense).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(TypeExpense).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(typeExpense), DateTime.Now, null);
 
             if (typeExpenseSearch != null)
             {
@@ -63,7 +64,7 @@
             ITypeExpenseRepository typeExpenseRepository = UnitOfWork.TypeExpenseRepository();
             TypeExpenseExtendDto? typeExpenseSearch = typeExpenseRepository.GetTypeExpenseByNameTypeExpense(typeExpense);
 
-            _logApiService.TraceLog(typeof(TypeExpense).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(TypeExpense).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(typeExpense), DateTime.Now, null);
 
             if (typeExpenseSearch != null)
             {
@@ -80,7 +81,7 @@
             ITypeExpenseRepository typeExpenseRepository = UnitOfWork.TypeExpenseRepository();
             List<TypeExpenseExtendDto> typeExpensesSearch = typeExpenseRepository.GetTypeExpensesByStatusBudget(typeExpense);
 
-            _logApiService.TraceLog(typeof(TypeExpense).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(TypeExpense).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(typeExpense), DateTime.Now, null);
 
             if (typeExpensesSearch.Count != 0)
             {
@@ -131,7 +132,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            _logApiService.TraceLog(typeof(TypeExpense).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(saveTypeExpense), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(TypeExpense).Name, Constants.EntityAction.SAVE, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(saveTypeExpense), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             return typeExpense;
         }
@@ -177,7 +178,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            _logApiService.TraceLog(typeof(TypeExpense).Name, Constants.Method.POST, JsonSerializer.Serialize(typeExpenseSearch), JsonSerializer.Serialize(updateTypeExpense), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(TypeExpense).Name, Constants.EntityAction.UPDATE, JsonSerializer.Serialize(typeExpenseSearch), JsonSerializer.Serialize(updateTypeExpense), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             return typeExpense;
         }
@@ -214,7 +215,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            _logApiService.TraceLog(typeof(TypeExpense).Name, Constants.Method.POST, JsonSerializer.Serialize(typeExpenseSearch), JsonSerializer.Serialize(deleteTypeExpense), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(TypeExpense).Name, Constants.EntityAction.DELETE, JsonSerializer.Serialize(typeExpenseSearch), JsonSerializer.Serialize(deleteTypeExpense), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             return typeExpense;
         }

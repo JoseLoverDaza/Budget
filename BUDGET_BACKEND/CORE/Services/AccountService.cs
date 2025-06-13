@@ -46,7 +46,7 @@
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();            
             AccountExtendDto? accountSearch = accountRepository.GetAccountByIdAccount(account);
 
-            _logApiService.TraceLog(typeof(Account).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(Account).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(account), DateTime.Now, null);
 
             if (accountSearch != null)
             {
@@ -63,7 +63,7 @@
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
             List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByFinancialInstitution(account);
 
-            _logApiService.TraceLog(typeof(Account).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(Account).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(account), DateTime.Now, null);
 
             if (accountsSearch.Count != 0)
             {
@@ -80,7 +80,7 @@
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
             List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByTypeAccount(account);
 
-            _logApiService.TraceLog(typeof(Account).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(Account).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(account), DateTime.Now, null);
 
             if (accountsSearch.Count != 0)
             {
@@ -97,7 +97,7 @@
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
             List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByUserBudget(account);
 
-            _logApiService.TraceLog(typeof(Account).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(Account).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(account), DateTime.Now, null);
 
             if (accountsSearch.Count != 0)
             {
@@ -114,7 +114,7 @@
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
             List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByStatusBudget(account);
 
-            _logApiService.TraceLog(typeof(Account).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(Account).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(account), DateTime.Now, null);
 
             if (accountsSearch.Count != 0)
             {
@@ -131,7 +131,7 @@
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
             List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByFinancialInstitutionStatusBudget(account);
 
-            _logApiService.TraceLog(typeof(Account).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(Account).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(account), DateTime.Now, null);
 
             if (accountsSearch.Count != 0)
             {
@@ -148,7 +148,7 @@
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
             List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByTypeAccountStatusBudget(account);
 
-            _logApiService.TraceLog(typeof(Account).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(Account).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(account), DateTime.Now, null);
 
             if (accountsSearch.Count != 0)
             {
@@ -165,7 +165,7 @@
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
             List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByUserBudgetStatusBudget(account);
 
-            _logApiService.TraceLog(typeof(Account).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(Account).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(account), DateTime.Now, null);
 
             if (accountsSearch.Count != 0)
             {
@@ -182,7 +182,7 @@
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
             List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByNameFinancialInstitutionTypeAccountUserBudget(account);
 
-            _logApiService.TraceLog(typeof(Account).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(Account).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(account), DateTime.Now, null);
 
             if (accountsSearch.Count != 0)
             {
@@ -199,7 +199,7 @@
             IAccountRepository accountRepository = UnitOfWork.AccountRepository();
             List<AccountExtendDto> accountsSearch = accountRepository.GetAccountsByFinancialInstitutionTypeAccountUserBudget(account);
 
-            _logApiService.TraceLog(typeof(Account).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(Account).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(account), DateTime.Now, null);
 
             if (accountsSearch.Count != 0)
             {
@@ -258,7 +258,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            _logApiService.TraceLog(typeof(Account).Name, Constants.Method.POST, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(saveAccount), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(Account).Name, Constants.EntityAction.SAVE, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(saveAccount), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             return account;
         }
@@ -302,7 +302,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            _logApiService.TraceLog(typeof(Account).Name, Constants.Method.POST, JsonSerializer.Serialize(accountSearch), JsonSerializer.Serialize(updateAccount), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(Account).Name, Constants.EntityAction.UPDATE, JsonSerializer.Serialize(accountSearch), JsonSerializer.Serialize(updateAccount), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             return account;
         }
@@ -342,7 +342,7 @@
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
-            _logApiService.TraceLog(typeof(Account).Name, Constants.Method.POST, JsonSerializer.Serialize(accountSearch), JsonSerializer.Serialize(deleteAccount), DateTime.Now, null);
+            _logApiService.TraceLog(typeof(Account).Name, Constants.EntityAction.DELETE, JsonSerializer.Serialize(accountSearch), JsonSerializer.Serialize(deleteAccount), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), DateTime.Now, null);
 
             return account;
         }

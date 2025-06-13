@@ -37,7 +37,7 @@
 
         public LogApiDto DeleteLogApi(LogApiDto logApi);
 
-        public void TraceLog(string entity, string entityAction, string previousValues, string newValues, DateTime creationDate, int? idStatus);
+        public void TraceLog(string entity, string entityAction, string previousValues, string newValues, string filterValues, DateTime creationDate, int? idStatus);
 
         #endregion
 

@@ -139,9 +139,10 @@
             LogApi saveApiLog = new()
             {
                 Entity = logApi.Entity?.Trim() ?? string.Empty,
+                EntityAction = logApi.EntityAction?.Trim() ?? string.Empty,
                 PreviousValues = logApi.PreviousValues?.Trim() ?? string.Empty,
                 NewValues = logApi.NewValues?.Trim() ?? string.Empty,
-                EntityAction = logApi.EntityAction?.Trim() ?? string.Empty,
+                FilterValues = logApi.FilterValues?.Trim() ?? string.Empty,
                 IdStatusBudget = statusBudgetSearch.IdStatusBudget,
                 CreationUser = userBudgetAdminSearch.IdUserBudget,
                 CreationDate = logApi.CreationDate,
@@ -173,9 +174,10 @@
             {
                 IdLogApi = logApiSearch.IdLogApi,
                 Entity = logApi.Entity?.Trim() ?? string.Empty,
+                EntityAction = logApi.EntityAction?.Trim() ?? string.Empty,
                 PreviousValues = logApi.PreviousValues?.Trim() ?? string.Empty,
                 NewValues = logApi.NewValues?.Trim() ?? string.Empty,
-                EntityAction = logApi.EntityAction?.Trim() ?? string.Empty,                
+                FilterValues = logApi.FilterValues?.Trim() ?? string.Empty,                         
                 IdStatusBudget = logApiSearch.IdStatusBudget,
                 CreationUser = logApiSearch.CreationUser,
                 CreationDate = logApiSearch.CreationDate,
@@ -209,9 +211,10 @@
             {
                 IdLogApi = logApiSearch.IdLogApi,
                 Entity = logApiSearch.Entity,
+                EntityAction = logApiSearch.EntityAction,
                 PreviousValues = logApiSearch.PreviousValues,
                 NewValues = logApiSearch.NewValues,
-                EntityAction = logApiSearch.EntityAction,                
+                FilterValues = logApiSearch.FilterValues,                             
                 IdStatusBudget = statusBudgetSearch.IdStatusBudget,
                 CreationUser = logApiSearch.CreationUser,
                 CreationDate = logApiSearch.CreationDate,
@@ -228,7 +231,7 @@
             return logApi;
         }
 
-        public void TraceLog(string entity, string entityAction, string previousValues, string newValues, DateTime creationDate, int? idStatus)
+        public void TraceLog(string entity, string entityAction, string previousValues, string newValues, string filterValues, DateTime creationDate, int? idStatus)
         {
             IUserBudgetRepository userBudgetRepository = UnitOfWork.UserBudgetRepository();
             IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
@@ -238,40 +241,14 @@
 
             LogApi saveLogApi = new()
             {
-                Entity = entity,
-                EntityAction = entityAction,
-                PreviousValues = previousValues,
-                NewValues = newValues,
+                Entity = entity?.Trim() ?? string.Empty,
+                EntityAction = entityAction?.Trim() ?? string.Empty,
+                PreviousValues = previousValues?.Trim() ?? string.Empty,
+                NewValues = newValues?.Trim() ?? string.Empty,
+                FilterValues = filterValues?.Trim() ?? string.Empty,
                 CreationDate = creationDate,
                 IdStatusBudget = statusSearch.IdStatusBudget,
                 CreationUser = userBudgetAdminSearch.IdUserBudget,
-                ModificationUser = userBudgetAdminSearch.IdUserBudget,
-                ModificationDate = creationDate                
-            };
-
-            UnitOfWork.BaseRepository<LogApi>().Add(saveLogApi);
-
-            if (UnitOfWork.SaveChanges() <= 0)
-            {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-            }
-        }
-
-        public void TraceLog(string entity, string entityAction, TokenApi? tokenApiPrevious, TokenApi? tokenApiNew, DateTime creationDate, int idStatus)
-        {
-            IUserBudgetRepository userBudgetRepository = UnitOfWork.UserBudgetRepository();
-
-            UserBudgetExtendDto? userBudgetAdminSearch = userBudgetRepository.GetUserBudgetByUsername(new UserBudgetDto { Username = Constants.UserBudget.USERNAME_ADMIN }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
-
-            LogApi saveLogApi = new()
-            {
-                Entity = entity,
-                EntityAction = entityAction,
-                PreviousValues = tokenApiPrevious != null ? JsonSerializer.Serialize(tokenApiPrevious) : JsonSerializer.Serialize(Constants.General.JSON_EMPTY),
-                NewValues = tokenApiNew != null ? JsonSerializer.Serialize(tokenApiNew) : JsonSerializer.Serialize(Constants.General.JSON_EMPTY),
-                IdStatusBudget = idStatus,
-                CreationUser = userBudgetAdminSearch.IdUserBudget,
-                CreationDate = creationDate,
                 ModificationUser = userBudgetAdminSearch.IdUserBudget,
                 ModificationDate = creationDate                
             };

@@ -12,6 +12,7 @@
     using Microsoft.Extensions.Configuration;
     using System.Runtime.InteropServices;
     using System.Text.Json;
+    using static CORE.Utils.Constants;
 
     #endregion
 
@@ -90,7 +91,7 @@
             authentication.ExpirationDate = DateTime.Now.AddDays(1);
             authentication.IsAuthenticated = true;
 
-            _logApiService.TraceLog(typeof(Account).Name, Constants.Method.TOKEN, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(authentication), DateTime.Now, statusBudgetSearch.IdStatusBudget);
+            _logApiService.TraceLog(typeof(TokenApi).Name, MethodHttp.TOKEN, JsonSerializer.Serialize(General.JSON_EMPTY), JsonSerializer.Serialize(General.JSON_EMPTY), Json.SerializeWithoutNulls(authentication), DateTime.Now, statusBudgetSearch.IdStatusBudget);
 
             return authentication;
         }
@@ -121,7 +122,7 @@
             authentication.ExpirationDate = tokenApiSearch.ExpirationDate;
             authentication.IsAuthenticated = tokenApiSearch.ExpirationDate >= DateTime.Now;
 
-            _logApiService.TraceLog(typeof(Account).Name, Constants.Method.VERIFY, JsonSerializer.Serialize(tokenApiSearch), JsonSerializer.Serialize(authentication), DateTime.Now, statusBudgetSearch.IdStatusBudget);
+            _logApiService.TraceLog(typeof(TokenApi).Name, MethodHttp.VERIFY, JsonSerializer.Serialize(General.JSON_EMPTY), JsonSerializer.Serialize(General.JSON_EMPTY), Json.SerializeWithoutNulls(tokenApiSearch), DateTime.Now, statusBudgetSearch.IdStatusBudget);
 
             return authentication;
         }
