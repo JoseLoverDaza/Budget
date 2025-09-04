@@ -42,7 +42,7 @@
 
         #region Métodos y Funciones
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetRoleBudgetByIdRoleBudget")]
         [SwaggerOperation(Summary = "Get RoleBudget By IdRoleBudget")]
         public ResponseDto GetRoleBudgetByIdRoleBudget(RoleBudgetDto roleBudget)
@@ -59,7 +59,7 @@
             return response;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetRoleBudgetByNameRole")]
         [SwaggerOperation(Summary = "Get RoleBudget By NameRole")]
         public ResponseDto GetRoleBudgetByNameRole(RoleBudgetDto roleBudget)
@@ -76,7 +76,7 @@
             return response;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetRolesBudgetByStatusBudget")]
         [SwaggerOperation(Summary = "Get RolesBudget By StatusBudget")]
         public ResponseDto GetRolesBudgetByStatusBudget(RoleBudgetDto roleBudget)
