@@ -42,7 +42,7 @@
 
         #region Métodos y Funciones
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetTypeAccountByIdTypeAccount")]
         [SwaggerOperation(Summary = "Get TypeAccount By IdTypeAccount")]
         public ResponseDto GetTypeAccountByIdTypeAccount(TypeAccountDto typeAccount)
@@ -59,7 +59,7 @@
             return response;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetTypeAccountByNameTypeAccount")]
         [SwaggerOperation(Summary = "Get TypeAccount By NameTypeAccount")]
         public ResponseDto GetTypeAccountByNameTypeAccount(TypeAccountDto typeAccount)
@@ -76,7 +76,7 @@
             return response;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetTypeAccountsByStatusBudget")]
         [SwaggerOperation(Summary = "Get TypeAccounts By StatusBudget")]
         public ResponseDto GetTypeAccountsByStatusBudget(TypeAccountDto typeAccount)
