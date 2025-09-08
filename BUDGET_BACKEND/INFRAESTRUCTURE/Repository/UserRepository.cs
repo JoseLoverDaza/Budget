@@ -156,7 +156,7 @@
                      on u.IdRoleBudget equals r.IdRoleBudget
                      join s in _context.StatusBudget.AsNoTracking()
                      on u.IdStatusBudget equals s.IdStatusBudget
-                     where r.IdStatusBudget == userBudget.IdStatusBudget
+                     where u.IdStatusBudget == userBudget.IdStatusBudget
                      select new UserBudgetExtendDto
                      {
                          IdUserBudget = u.IdUserBudget,
@@ -183,7 +183,7 @@
                       on u.IdRoleBudget equals r.IdRoleBudget
                       join s in _context.StatusBudget.AsNoTracking()
                       on u.IdStatusBudget equals s.IdStatusBudget
-                      where r.IdRoleBudget == userBudget.IdRoleBudget && r.IdStatusBudget == userBudget.IdStatusBudget
+                      where r.IdRoleBudget == userBudget.IdRoleBudget && u.IdStatusBudget == userBudget.IdStatusBudget
                       select new UserBudgetExtendDto
                       {
                          IdUserBudget = u.IdUserBudget,
