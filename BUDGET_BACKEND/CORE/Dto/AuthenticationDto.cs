@@ -16,6 +16,7 @@
 
         #region Atributos y Propiedades
 
+        public int IdUserBudget { get; set; }
         public string Username { get; set; } = null!;
         public string EncryptedPassword { get; set; } = null!;
         public string Token { get; set; } = null!;

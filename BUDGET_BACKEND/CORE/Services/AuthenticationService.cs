@@ -51,7 +51,7 @@
 
             if (authentication == null || string.IsNullOrWhiteSpace(authentication.Username.Trim()) || string.IsNullOrWhiteSpace(authentication.EncryptedPassword.Trim()))
             {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+                throw new ExternalException(General.MESSAGE_GENERAL);
             }
 
             UserBudgetExtendDto? userSearch = (userRepository.GetUserBudgetByUsername(new UserBudgetDto { Username = authentication.Username }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL));
@@ -59,7 +59,7 @@
 
             if (!PasswordHash.VerifyPassword(authentication.EncryptedPassword, userSearch.EncryptedPassword))
             {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+                throw new ExternalException(General.MESSAGE_GENERAL);
             }
 
             TimeZoneInfo colombiaZone = TimeZoneInfo.FindSystemTimeZoneById("SA Pacific Standard Time");
@@ -87,9 +87,12 @@
 
             if (UnitOfWork.SaveChanges() <= 0)
             {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+                throw new ExternalException(General.MESSAGE_GENERAL);
             }
-                        
+                
+            authentication.IdUserBudget = userSearch.IdUserBudget;
+            authentication.Username = userSearch.Username;
+            authentication.EncryptedPassword = userSearch.EncryptedPassword;
             authentication.Token = sToken;
             authentication.CreationDate = saveTokenApi.CreationDate;
             authentication.ExpirationDate = saveTokenApi.ExpirationDate;
@@ -108,7 +111,7 @@
 
             if (authentication == null || string.IsNullOrWhiteSpace(authentication.Token.Trim()))
             {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+                throw new ExternalException(General.MESSAGE_GENERAL);
             }
 
             TokenApiExtendDto? tokenApiSearch = (tokenApiRepository.GetTokenApiByToken(new TokenApiDto { Token = authentication.Token.Trim() }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL));
@@ -117,7 +120,7 @@
 
             if (userSearch.IdStatusBudget != statusBudgetSearch.IdStatusBudget)
             {
-                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+                throw new ExternalException(General.MESSAGE_GENERAL);
             }
                         
             authentication.Username = userSearch.Username;
@@ -130,9 +133,7 @@
 
             return authentication;
         }
-
         
-
         #endregion
 
     }
