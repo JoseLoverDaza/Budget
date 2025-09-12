@@ -201,6 +201,7 @@
                 IdExpense = expenseSearch.IdExpense,
                 NameExpense = expense.NameExpense.Trim(),
                 DescriptionExpense = expense.DescriptionExpense?.Trim() ?? string.Empty,
+                IdTypeExpense = expenseSearch.IdTypeExpense,
                 IdStatusBudget = expenseSearch.IdStatusBudget,
                 CreationUser = expenseSearch.CreationUser,
                 CreationDate = expenseSearch.CreationDate,
