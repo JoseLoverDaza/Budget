@@ -88,6 +88,7 @@
                             EndpointUrl = endpointurl,
                             Method = metodo,
                             Agent = agente,
+                            IdStatusBudget = Constants.StatusBudget.ACTIVO,
                             CreationDate = fecha,
                             CreationUser = userBudgetSearch.IdUserBudget,
                             ModificationDate = fecha,

@@ -144,6 +144,7 @@
                 EndpointUrl = auditApi.EndpointUrl?.Trim() ?? string.Empty,
                 Agent = auditApi.Agent?.Trim() ?? string.Empty,
                 Method = auditApi.Method?.Trim() ?? string.Empty,
+                IdStatusBudget = auditApi.IdStatusBudget,
                 CreationUser = userBudgetAdminSearch.IdUserBudget,
                 CreationDate = auditApi.CreationDate,
                 ModificationDate = auditApi.ModificationDate,
@@ -206,7 +207,6 @@
             {
                 throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
-
 
             AuditApi deleteAuditApi = new()
             {

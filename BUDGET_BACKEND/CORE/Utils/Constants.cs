@@ -57,6 +57,11 @@
             public const string USERNAME_ADMIN = "Admin";            
         }
 
+        public static class StatusBudget
+        {
+            public const int ACTIVO = 2;
+        }
+
         #endregion
 
     }
