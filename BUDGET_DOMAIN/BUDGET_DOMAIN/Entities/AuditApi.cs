@@ -16,8 +16,10 @@
         public string? Host { get; set; }               
         public string? EndpointUrl { get; set; }               
         public string? Agent { get; set; }               
-        public string? Method { get; set; }               
-      
+        public string? Method { get; set; }
+
+        public int IdStatusBudget { get; set; }
+
         #endregion
 
     }

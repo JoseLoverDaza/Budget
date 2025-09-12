@@ -71,7 +71,7 @@
                     from l in _context.LogApis.AsNoTracking()
                     join s in _context.StatusBudget.AsNoTracking()
                     on l.IdStatusBudget equals s.IdStatusBudget
-                    where l.CreationDate == logApi.CreationDate
+                    where l.CreationDate.Date == logApi.CreationDate.Date
                     select new LogApiExtendDto
                     {
                         IdLogApi = l.IdLogApi,
@@ -123,7 +123,7 @@
                     from l in _context.LogApis.AsNoTracking()
                     join s in _context.StatusBudget.AsNoTracking()
                     on l.IdStatusBudget equals s.IdStatusBudget
-                    where l.EntityAction == logApi.EntityAction && l.CreationDate == logApi.CreationDate
+                    where l.EntityAction == logApi.EntityAction && l.CreationDate.Date == logApi.CreationDate.Date
                     select new LogApiExtendDto
                     {
                         IdLogApi = l.IdLogApi,
@@ -149,7 +149,7 @@
                     from l in _context.LogApis.AsNoTracking()
                     join s in _context.StatusBudget.AsNoTracking()
                     on l.IdStatusBudget equals s.IdStatusBudget
-                    where l.CreationDate == logApi.CreationDate && l.IdStatusBudget == logApi.IdStatusBudget
+                    where l.CreationDate.Date == logApi.CreationDate.Date && l.IdStatusBudget == logApi.IdStatusBudget
                     select new LogApiExtendDto
                     {
                         IdLogApi = l.IdLogApi,
@@ -175,7 +175,7 @@
                     from l in _context.LogApis.AsNoTracking()
                     join s in _context.StatusBudget.AsNoTracking()
                     on l.IdStatusBudget equals s.IdStatusBudget
-                    where l.EntityAction == logApi.EntityAction && l.CreationDate == logApi.CreationDate && l.IdStatusBudget == logApi.IdStatusBudget
+                    where l.EntityAction == logApi.EntityAction && l.CreationDate.Date == logApi.CreationDate.Date && l.IdStatusBudget == logApi.IdStatusBudget
                     select new LogApiExtendDto
                     {
                         IdLogApi = l.IdLogApi,

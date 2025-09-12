@@ -40,6 +40,9 @@
             entity.Property(e => e.Method)
                     .HasMaxLength(255);
 
+            entity.Property(e => e.IdStatusBudget)
+                 .IsRequired();
+
             entity.Property(e => e.CreationUser)
                     .IsRequired();
 

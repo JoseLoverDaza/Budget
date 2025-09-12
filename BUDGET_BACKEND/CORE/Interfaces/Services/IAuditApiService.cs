@@ -1,5 +1,6 @@
 ﻿namespace CORE.Interfaces.Services
 {
+    using CORE.Dto;
 
     #region Librerias
 
@@ -18,19 +19,21 @@
 
         #region Métodos y Funciones
 
-        public AuditApiDto? GetAuditApiByIdAuditApi(AuditApiDto auditApi);
+        public AuditApiExtendDto? GetAuditApiByIdAuditApi(AuditApiDto auditApi);
 
-        public List<AuditApiDto> GetAuditApisByCreationDate(AuditApiDto auditApi);
+        public List<AuditApiExtendDto> GetAuditApisByCreationDate(AuditApiDto auditApi);
 
-        public List<AuditApiDto> GetAuditApisByMethodCreationDate(AuditApiDto auditApi);
+        public List<AuditApiExtendDto> GetAuditApisByMethodCreationDate(AuditApiDto auditApi);
 
-        public List<AuditApiDto> GetAuditApisByEndpointUrlCreationDate(AuditApiDto auditApi);
+        public List<AuditApiExtendDto> GetAuditApisByEndpointUrlCreationDate(AuditApiDto auditApi);
 
-        public List<AuditApiDto> GetAuditApisByEndpointUrlMethodCreationDate(AuditApiDto auditApi);
+        public List<AuditApiExtendDto> GetAuditApisByEndpointUrlMethodCreationDate(AuditApiDto auditApi);
 
         public AuditApiDto SaveAuditApi(AuditApiDto auditApi);
 
         public AuditApiDto UpdateAuditApi(AuditApiDto auditApi);
+
+        public AuditApiDto DeleteAuditApi(AuditApiDto auditApi);
 
         #endregion
 

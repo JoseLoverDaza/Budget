@@ -43,10 +43,10 @@
 
         #region Métodos y Funciones
 
-        public AuditApiDto? GetAuditApiByIdAuditApi(AuditApiDto auditApi)
+        public AuditApiExtendDto? GetAuditApiByIdAuditApi(AuditApiDto auditApi)
         {
             IAuditApiRepository auditApiRepository = UnitOfWork.AuditApiRepository();
-            AuditApiDto? auditApisSearch = auditApiRepository.GetAuditApiByIdAuditApi(auditApi);
+            AuditApiExtendDto? auditApisSearch = auditApiRepository.GetAuditApiByIdAuditApi(auditApi);
 
             _logApiService.TraceLog(typeof(AuditApi).Name, EntityAction.CONSULT, JsonSerializer.Serialize(General.JSON_EMPTY), JsonSerializer.Serialize(General.JSON_EMPTY), Json.SerializeWithoutNulls(auditApi), DateTime.Now, null);
 
@@ -60,10 +60,10 @@
             }
         }
 
-        public List<AuditApiDto> GetAuditApisByCreationDate(AuditApiDto auditApi)
+        public List<AuditApiExtendDto> GetAuditApisByCreationDate(AuditApiDto auditApi)
         {
             IAuditApiRepository auditApiRepository = UnitOfWork.AuditApiRepository();
-            List<AuditApiDto> auditApisSearch = auditApiRepository.GetAuditApisByCreationDate(auditApi);
+            List<AuditApiExtendDto> auditApisSearch = auditApiRepository.GetAuditApisByCreationDate(auditApi);
 
             _logApiService.TraceLog(typeof(AuditApi).Name, EntityAction.CONSULT, JsonSerializer.Serialize(General.JSON_EMPTY), JsonSerializer.Serialize(General.JSON_EMPTY), Json.SerializeWithoutNulls(auditApi), DateTime.Now, null);
 
@@ -77,10 +77,10 @@
             }
         }
 
-        public List<AuditApiDto> GetAuditApisByMethodCreationDate(AuditApiDto auditApi)
+        public List<AuditApiExtendDto> GetAuditApisByMethodCreationDate(AuditApiDto auditApi)
         {
             IAuditApiRepository auditApiRepository = UnitOfWork.AuditApiRepository();
-            List<AuditApiDto> auditApisSearch = auditApiRepository.GetAuditApisByMethodCreationDate(auditApi);
+            List<AuditApiExtendDto> auditApisSearch = auditApiRepository.GetAuditApisByMethodCreationDate(auditApi);
 
             _logApiService.TraceLog(typeof(AuditApi).Name, EntityAction.CONSULT, JsonSerializer.Serialize(General.JSON_EMPTY), JsonSerializer.Serialize(General.JSON_EMPTY), Json.SerializeWithoutNulls(auditApi), DateTime.Now, null);
 
@@ -94,10 +94,10 @@
             }
         }
 
-        public List<AuditApiDto> GetAuditApisByEndpointUrlCreationDate(AuditApiDto auditApi)
+        public List<AuditApiExtendDto> GetAuditApisByEndpointUrlCreationDate(AuditApiDto auditApi)
         {
             IAuditApiRepository auditApiRepository = UnitOfWork.AuditApiRepository();
-            List<AuditApiDto> auditApisSearch = auditApiRepository.GetAuditApisByEndpointUrlCreationDate(auditApi);
+            List<AuditApiExtendDto> auditApisSearch = auditApiRepository.GetAuditApisByEndpointUrlCreationDate(auditApi);
 
             _logApiService.TraceLog(typeof(AuditApi).Name, EntityAction.CONSULT, JsonSerializer.Serialize(General.JSON_EMPTY), JsonSerializer.Serialize(General.JSON_EMPTY), Json.SerializeWithoutNulls(auditApi), DateTime.Now, null);
 
@@ -111,10 +111,10 @@
             }
         }
 
-        public List<AuditApiDto> GetAuditApisByEndpointUrlMethodCreationDate(AuditApiDto auditApi)
+        public List<AuditApiExtendDto> GetAuditApisByEndpointUrlMethodCreationDate(AuditApiDto auditApi)
         {
             IAuditApiRepository auditApiRepository = UnitOfWork.AuditApiRepository();
-            List<AuditApiDto> auditApisSearch = auditApiRepository.GetAuditApisByEndpointUrlMethodCreationDate(auditApi);
+            List<AuditApiExtendDto> auditApisSearch = auditApiRepository.GetAuditApisByEndpointUrlMethodCreationDate(auditApi);
 
             _logApiService.TraceLog(typeof(AuditApi).Name, EntityAction.CONSULT, JsonSerializer.Serialize(General.JSON_EMPTY), JsonSerializer.Serialize(General.JSON_EMPTY), Json.SerializeWithoutNulls(auditApi), DateTime.Now, null);
 
@@ -189,6 +189,44 @@
             if (UnitOfWork.SaveChanges() <= 0)
             {
                 throw new ExternalException(General.MESSAGE_GENERAL);
+            }
+
+            return auditApi;
+        }
+
+        public AuditApiDto DeleteAuditApi(AuditApiDto auditApi) 
+        {
+            IAuditApiRepository auditApiRepository = UnitOfWork.AuditApiRepository();
+            IStatusBudgetRepository statusRepository = UnitOfWork.StatusBudgetRepository();
+
+            AuditApiExtendDto? auditApiSearch = auditApiRepository.GetAuditApiByIdAuditApi(auditApi) ?? throw new ExternalException(General.MESSAGE_GENERAL);
+            StatusBudgetDto? statusBudgetSearch = statusRepository.GetStatusBudgetByIdStatusBudget(new StatusBudgetDto { IdStatusBudget = auditApi.IdStatusBudget }) ?? throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+
+            if (auditApiSearch.IdStatusBudget == statusBudgetSearch.IdStatusBudget)
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+
+
+            AuditApi deleteAuditApi = new()
+            {
+                IdAuditApi = auditApiSearch.IdAuditApi,
+                Host = auditApiSearch.Host,
+                EndpointUrl = auditApiSearch.EndpointUrl,
+                Agent = auditApiSearch.Agent,
+                Method = auditApiSearch.Method,               
+                IdStatusBudget = statusBudgetSearch.IdStatusBudget,
+                CreationUser = auditApiSearch.CreationUser,
+                CreationDate = auditApiSearch.CreationDate,
+                ModificationUser = auditApiSearch.ModificationUser,
+                ModificationDate = auditApiSearch.ModificationDate
+            };
+
+            UnitOfWork.BaseRepository<AuditApi>().Update(deleteAuditApi);
+
+            if (UnitOfWork.SaveChanges() <= 0)
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
             }
 
             return auditApi;

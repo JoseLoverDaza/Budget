@@ -3,6 +3,7 @@
 
     #region Librerias
 
+    using CORE.Dto;
     using CORE.Interfaces.Repositories;
     using Domain.Context;
     using Domain.Dto;
@@ -38,91 +39,131 @@
 
         #region Métodos y Funciones
 
-        public AuditApiDto? GetAuditApiByIdAuditApi(AuditApiDto auditApi)
+        public AuditApiExtendDto? GetAuditApiByIdAuditApi(AuditApiDto auditApi)
         {
             return (
                     from a in _context.AuditApis.AsNoTracking()
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on a.IdStatusBudget equals s.IdStatusBudget
                     where a.IdAuditApi == auditApi.IdAuditApi
-                    select new AuditApiDto
+                    select new AuditApiExtendDto
                     {
                         IdAuditApi = a.IdAuditApi,
                         Host = a.Host,
                         EndpointUrl = a.EndpointUrl,
                         Agent = a.Agent,
                         Method = a.Method,
-                        CreationDate = a.CreationDate
+                        IdStatusBudget = a.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = a.CreationUser,
+                        CreationDate = a.CreationDate,
+                        ModificationUser = a.ModificationUser,
+                        ModificationDate = a.ModificationDate
                     }
                 )
                 .FirstOrDefault();
         }
 
-        public List<AuditApiDto> GetAuditApisByCreationDate(AuditApiDto auditApi)
+        public List<AuditApiExtendDto> GetAuditApisByCreationDate(AuditApiDto auditApi)
         {
             return (
                     from a in _context.AuditApis.AsNoTracking()
-                    where a.CreationDate == auditApi.CreationDate
-                    select new AuditApiDto
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on a.IdStatusBudget equals s.IdStatusBudget
+                    where a.CreationDate.Date == auditApi.CreationDate.Date
+                    select new AuditApiExtendDto
                     {
                         IdAuditApi = a.IdAuditApi,
                         Host = a.Host,
                         EndpointUrl = a.EndpointUrl,
                         Agent = a.Agent,
                         Method = a.Method,
-                        CreationDate = a.CreationDate
+                        IdStatusBudget = a.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = a.CreationUser,
+                        CreationDate = a.CreationDate,
+                        ModificationUser = a.ModificationUser,
+                        ModificationDate = a.ModificationDate
                     }
                   )
                  .ToList();
         }
 
-        public List<AuditApiDto> GetAuditApisByMethodCreationDate(AuditApiDto auditApi)
+        public List<AuditApiExtendDto> GetAuditApisByMethodCreationDate(AuditApiDto auditApi)
         {
             return (
                     from a in _context.AuditApis.AsNoTracking()
-                    where a.Method == auditApi.Method && a.CreationDate == auditApi.CreationDate
-                    select new AuditApiDto
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on a.IdStatusBudget equals s.IdStatusBudget
+                    where a.Method == auditApi.Method && a.CreationDate.Date == auditApi.CreationDate.Date
+                    select new AuditApiExtendDto
                     {
                         IdAuditApi = a.IdAuditApi,
                         Host = a.Host,
                         EndpointUrl = a.EndpointUrl,
                         Agent = a.Agent,
                         Method = a.Method,
-                        CreationDate = a.CreationDate
+                        IdStatusBudget = a.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = a.CreationUser,
+                        CreationDate = a.CreationDate,
+                        ModificationUser = a.ModificationUser,
+                        ModificationDate = a.ModificationDate
                     }
                   )
                  .ToList();
         }
 
-        public List<AuditApiDto> GetAuditApisByEndpointUrlCreationDate(AuditApiDto auditApi)
+        public List<AuditApiExtendDto> GetAuditApisByEndpointUrlCreationDate(AuditApiDto auditApi)
         {
             return (
                     from a in _context.AuditApis.AsNoTracking()
-                    where a.EndpointUrl == auditApi.EndpointUrl && a.CreationDate == auditApi.CreationDate
-                    select new AuditApiDto
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on a.IdStatusBudget equals s.IdStatusBudget
+                    where a.EndpointUrl == auditApi.EndpointUrl && a.CreationDate.Date == auditApi.CreationDate.Date
+                    select new AuditApiExtendDto
                     {
                         IdAuditApi = a.IdAuditApi,
                         Host = a.Host,
                         EndpointUrl = a.EndpointUrl,
                         Agent = a.Agent,
                         Method = a.Method,
-                        CreationDate = a.CreationDate
+                        IdStatusBudget = a.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = a.CreationUser,
+                        CreationDate = a.CreationDate,
+                        ModificationUser = a.ModificationUser,
+                        ModificationDate = a.ModificationDate
                     }
                   )
                  .ToList();
         }
 
-        public List<AuditApiDto> GetAuditApisByEndpointUrlMethodCreationDate(AuditApiDto auditApi)
+        public List<AuditApiExtendDto> GetAuditApisByEndpointUrlMethodCreationDate(AuditApiDto auditApi)
         {
             return (
                     from a in _context.AuditApis.AsNoTracking()
-                    where a.EndpointUrl == auditApi.EndpointUrl && a.Method == auditApi.Method && a.CreationDate == auditApi.CreationDate
-                    select new AuditApiDto
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on a.IdStatusBudget equals s.IdStatusBudget
+                    where a.EndpointUrl == auditApi.EndpointUrl && a.Method == auditApi.Method && a.CreationDate.Date == auditApi.CreationDate.Date
+                    select new AuditApiExtendDto
                     {
                         IdAuditApi = a.IdAuditApi,
                         Host = a.Host,
                         EndpointUrl = a.EndpointUrl,
                         Agent = a.Agent,
                         Method = a.Method,
-                        CreationDate = a.CreationDate
+                        IdStatusBudget = a.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = a.CreationUser,
+                        CreationDate = a.CreationDate,
+                        ModificationUser = a.ModificationUser,
+                        ModificationDate = a.ModificationDate
                     }
                   )
                  .ToList();
