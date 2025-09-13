@@ -76,6 +76,23 @@
             }
         }
 
+        public List<BillingExtendDto> GetBillingsByYearMonthStatusBudget(BillingDto billing)
+        {
+            IBillingRepository billingRepository = UnitOfWork.BillingRepository();
+            List<BillingExtendDto> billings = billingRepository.GetBillingsByYearMonthStatusBudget(billing);
+
+            _logApiService.TraceLog(typeof(Billing).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(billing), DateTime.Now, null);
+
+            if (billings.Count != 0)
+            {
+                return billings;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+        }
+
         public List<BillingExtendDto> GetBillingsByYearUserBudget(BillingDto billing)
         {
             IBillingRepository billingRepository = UnitOfWork.BillingRepository();

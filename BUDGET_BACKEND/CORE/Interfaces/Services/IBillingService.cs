@@ -23,6 +23,8 @@
 
         public List<BillingExtendDto> GetBillingsByYearMonth(BillingDto billing);
 
+        public List<BillingExtendDto> GetBillingsByYearMonthStatusBudget(BillingDto billing);
+
         public List<BillingExtendDto> GetBillingsByYearUserBudget(BillingDto billing);
 
         public List<BillingExtendDto> GetBillingsByMonthUserBudget(BillingDto billing);

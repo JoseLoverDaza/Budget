@@ -101,6 +101,38 @@
                   .ToList();
         }
 
+        public List<BudgetExtendDto> GetBudgetsByYearMonthStatusBudget(BudgetDto budget)
+        {
+            return (
+                    from b in _context.Budgets.AsNoTracking()
+                    join u in _context.UsersBudget.AsNoTracking()
+                    on b.IdUserBudget equals u.IdUserBudget
+                    join s in _context.StatusBudget.AsNoTracking()
+                    on b.IdStatusBudget equals s.IdStatusBudget
+                    where b.YearBudget == budget.YearBudget && b.MonthBudget == budget.MonthBudget
+                    && b.IdStatusBudget == budget.IdStatusBudget
+                    select new BudgetExtendDto
+                    {
+                        IdBudget = b.IdBudget,
+                        YearBudget = b.YearBudget,
+                        MonthBudget = b.MonthBudget,
+                        DescriptionBudget = b.DescriptionBudget,
+                        ObservationBudget = b.ObservationBudget,
+                        IdUserBudget = b.IdUserBudget,
+                        EmailUserBudget = u.Email,
+                        UsernameUserBudget = u.Username,
+                        IdStatusBudget = b.IdStatusBudget,
+                        NameStatusBudget = s.NameStatus,
+                        DescriptionStatusBudget = s.DescriptionStatus,
+                        CreationUser = b.CreationUser,
+                        CreationDate = b.CreationDate,
+                        ModificationUser = b.ModificationUser,
+                        ModificationDate = b.ModificationDate
+                    }
+                  )
+                  .ToList();
+        }
+
         public List<BudgetExtendDto> GetBudgetsByYearUserBudget(BudgetDto budget)
         {
             return (

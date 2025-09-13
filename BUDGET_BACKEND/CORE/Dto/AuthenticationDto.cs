@@ -18,6 +18,7 @@
 
         public int IdUserBudget { get; set; }
         public string Username { get; set; } = null!;
+        public string NameRoleBudget { get; set; } = null!;
         public string EncryptedPassword { get; set; } = null!;
         public string Token { get; set; } = null!;
         public DateTime CreationDate { get; set; } = DateTime.Now;

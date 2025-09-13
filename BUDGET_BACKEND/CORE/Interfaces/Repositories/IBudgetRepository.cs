@@ -23,6 +23,8 @@
 
         public List<BudgetExtendDto> GetBudgetsByYearMonth(BudgetDto budget);
 
+        public List<BudgetExtendDto> GetBudgetsByYearMonthStatusBudget(BudgetDto budget);
+
         public List<BudgetExtendDto> GetBudgetsByYearUserBudget(BudgetDto budget);
 
         public List<BudgetExtendDto> GetBudgetsByMonthUserBudget(BudgetDto budget);

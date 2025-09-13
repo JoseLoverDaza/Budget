@@ -76,6 +76,23 @@
             }
         }
 
+        public List<BudgetExtendDto> GetBudgetsByYearMonthStatusBudget(BudgetDto budget)
+        {
+            IBudgetRepository budgetRepository = UnitOfWork.BudgetRepository();
+            List<BudgetExtendDto> budgets = budgetRepository.GetBudgetsByYearMonthStatusBudget(budget);
+
+            _logApiService.TraceLog(typeof(Budget).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(budget), DateTime.Now, null);
+
+            if (budgets.Count != 0)
+            {
+                return budgets;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+        }
+
         public List<BudgetExtendDto> GetBudgetsByYearUserBudget(BudgetDto budget)
         {
             IBudgetRepository budgetRepository = UnitOfWork.BudgetRepository();

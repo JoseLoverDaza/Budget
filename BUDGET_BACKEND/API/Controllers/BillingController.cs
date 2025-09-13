@@ -77,6 +77,23 @@
         }
 
         [HttpPost]
+        [Route("GetBillingsByYearMonthStatusBudget")]
+        [SwaggerOperation(Summary = "Get Billings By Year Month StatusBudget")]
+        public ResponseDto GetBillingsByYearMonthStatusBudget(BillingDto billing)
+        {
+            try
+            {
+                response.Data = _billingService.GetBillingsByYearMonthStatusBudget(billing);
+                response.Message = Constants.General.SUCCESSUL;
+            }
+            catch (Exception ex)
+            {
+                ResponseError(ex, true);
+            }
+            return response;
+        }
+
+        [HttpPost]
         [Route("GetBillingsByYearUserBudget")]
         [SwaggerOperation(Summary = "Get Billings By Year UserBudget")]
         public ResponseDto GetBillingsByYearUserBudget(BillingDto billing)

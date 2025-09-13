@@ -92,6 +92,7 @@
                 
             authentication.IdUserBudget = userSearch.IdUserBudget;
             authentication.Username = userSearch.Username;
+            authentication.NameRoleBudget = userSearch.NameRoleBudget;
             authentication.EncryptedPassword = userSearch.EncryptedPassword;
             authentication.Token = sToken;
             authentication.CreationDate = saveTokenApi.CreationDate;
@@ -124,6 +125,7 @@
             }
                         
             authentication.Username = userSearch.Username;
+            authentication.NameRoleBudget = userSearch.NameRoleBudget;
             authentication.EncryptedPassword = string.Empty;
             authentication.CreationDate = tokenApiSearch.CreationDate;
             authentication.ExpirationDate = tokenApiSearch.ExpirationDate;
