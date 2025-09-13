@@ -1,0 +1,46 @@
+ng new FRONTEND --standalone
+yes
+yes
+css
+none
+
+npm install @angular/animations@latest
+--npm install @angular/cdk@latest
+npm install @angular/cdk@19.2.3
+npm install @angular/common@latest
+npm install @angular/compiler@latest
+npm install @angular/core@latest
+npm install @angular/forms@latest
+npm install @angular/platform-browser@latest
+npm install @angular/platform-browser-dynamic@latest
+npm install @angular/router@latest
+npm install @fullcalendar/angular@latest
+npm install @fullcalendar/core@latest
+npm install @fullcalendar/daygrid@latest
+npm install @fullcalendar/interaction@latest
+npm install @fullcalendar/timegrid@latest
+npm install chart.js@latest
+npm install js-sha512@latest
+npm install primeflex@latest
+npm install primeicons@latest
+npm install primeng@latest
+npm install prismjs@latest
+npm install quill@latest
+npm install rxjs@latest
+npm install tslib@latest
+npm install zone.js@latest
+
+ng g s core/services/account
+ng g s core/services/type-expense
+ng g s core/services/billing --skip-tests
+
+ng g c ui/type-expense
+ng g c ui/type-expense/create-type-expense
+ng g c ui/type-expense/update-type-expense
+
+ng g c ui/user
+ng g c ui/user/create-user
+ng g c ui/user/update-user
+
+ng g m ui/type-account/type-account
+ng g m ui/type-expense/type-expense
