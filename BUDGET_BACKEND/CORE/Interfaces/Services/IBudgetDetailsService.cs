@@ -31,6 +31,8 @@
 
         public List<BudgetDetailExtendDto> GetBudgetDetailsByExpenseStatusBudget(BudgetDetailsDto budgetDetails);
 
+        public List<BudgetDetailExtendDto> GetBudgetDetailsByBudgetStatusBudget(BudgetDetailsDto budgetDetails);
+
         public List<BudgetDetailExtendDto> GetBudgetDetailsByBudgetExpenseStatusBudget(BudgetDetailsDto budgetDetails);
 
         public BudgetDetailsDto SaveBudgetDetail(BudgetDetailsDto budgetDetails);

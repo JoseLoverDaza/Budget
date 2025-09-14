@@ -81,7 +81,7 @@
                      join e in _context.Expenses.AsNoTracking()
                      on bd.IdExpense equals e.IdExpense
                      join s in _context.StatusBudget.AsNoTracking()
-                     on b.IdStatusBudget equals s.IdStatusBudget
+                     on bd.IdStatusBudget equals s.IdStatusBudget
                      where bd.IdBilling == billingDetails.IdBilling
                      select new BillingDetailExtendDto
                      {
@@ -114,7 +114,7 @@
                      join e in _context.Expenses.AsNoTracking()
                      on bd.IdExpense equals e.IdExpense
                      join s in _context.StatusBudget.AsNoTracking()
-                     on b.IdStatusBudget equals s.IdStatusBudget
+                     on bd.IdStatusBudget equals s.IdStatusBudget
                      where bd.IdExpense == billingDetails.IdExpense
                      select new BillingDetailExtendDto
                      {
@@ -147,7 +147,7 @@
                      join e in _context.Expenses.AsNoTracking()
                      on bd.IdExpense equals e.IdExpense
                      join s in _context.StatusBudget.AsNoTracking()
-                     on b.IdStatusBudget equals s.IdStatusBudget
+                     on bd.IdStatusBudget equals s.IdStatusBudget
                      where bd.IdStatusBudget == billingDetails.IdStatusBudget
                      select new BillingDetailExtendDto
                      {
@@ -180,8 +180,41 @@
                      join e in _context.Expenses.AsNoTracking()
                      on bd.IdExpense equals e.IdExpense
                      join s in _context.StatusBudget.AsNoTracking()
-                     on b.IdStatusBudget equals s.IdStatusBudget
+                     on bd.IdStatusBudget equals s.IdStatusBudget
                      where bd.IdBilling == billingDetails.IdBilling && bd.IdExpense == billingDetails.IdExpense
+                     select new BillingDetailExtendDto
+                     {
+                         IdBillingDetails = bd.IdBillingDetails,
+                         IdBilling = bd.IdBilling,
+                         YearBilling = b.YearBilling,
+                         MonthBilling = b.MonthBilling,
+                         Amount = bd.Amount,
+                         IdExpense = bd.IdExpense,
+                         NameExpense = e.NameExpense,
+                         DescriptionExpense = e.DescriptionExpense,
+                         IdStatusBudget = bd.IdStatusBudget,
+                         NameStatusBudget = s.NameStatus,
+                         DescriptionStatusBudget = s.DescriptionStatus,
+                         CreationUser = b.CreationUser,
+                         CreationDate = b.CreationDate,
+                         ModificationUser = b.ModificationUser,
+                         ModificationDate = b.ModificationDate
+                     }
+                  )
+                  .ToList();
+        }
+
+        public List<BillingDetailExtendDto> GetBillingDetailsByBillingStatusBudget(BillingDetailsDto billingDetails)
+        {
+            return (
+                     from bd in _context.BillingDetails.AsNoTracking()
+                     join b in _context.Billings.AsNoTracking()
+                     on bd.IdBilling equals b.IdBilling
+                     join e in _context.Expenses.AsNoTracking()
+                     on bd.IdExpense equals e.IdExpense
+                     join s in _context.StatusBudget.AsNoTracking()
+                     on bd.IdStatusBudget equals s.IdStatusBudget
+                     where bd.IdBilling == billingDetails.IdBilling && bd.IdStatusBudget == billingDetails.IdStatusBudget
                      select new BillingDetailExtendDto
                      {
                          IdBillingDetails = bd.IdBillingDetails,
@@ -213,7 +246,7 @@
                      join e in _context.Expenses.AsNoTracking()
                      on bd.IdExpense equals e.IdExpense
                      join s in _context.StatusBudget.AsNoTracking()
-                     on b.IdStatusBudget equals s.IdStatusBudget
+                     on bd.IdStatusBudget equals s.IdStatusBudget
                      where bd.IdExpense == billingDetails.IdExpense && bd.IdStatusBudget == billingDetails.IdStatusBudget
                      select new BillingDetailExtendDto
                      {
@@ -246,7 +279,7 @@
                      join e in _context.Expenses.AsNoTracking()
                      on bd.IdExpense equals e.IdExpense
                      join s in _context.StatusBudget.AsNoTracking()
-                     on b.IdStatusBudget equals s.IdStatusBudget
+                     on bd.IdStatusBudget equals s.IdStatusBudget
                      where bd.IdBilling == billingDetails.IdBilling && bd.IdExpense == billingDetails.IdExpense && bd.IdStatusBudget == billingDetails.IdStatusBudget
                      select new BillingDetailExtendDto
                      {

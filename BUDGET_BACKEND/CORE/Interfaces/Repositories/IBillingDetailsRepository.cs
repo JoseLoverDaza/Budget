@@ -29,6 +29,8 @@
 
         public List<BillingDetailExtendDto> GetBillingDetailsByBillingExpense(BillingDetailsDto billingDetails);
 
+        public List<BillingDetailExtendDto> GetBillingDetailsByBillingStatusBudget(BillingDetailsDto billingDetails);
+
         public List<BillingDetailExtendDto> GetBillingDetailsByExpenseStatusBudget(BillingDetailsDto billingDetails);
 
         public List<BillingDetailExtendDto> GetBillingDetailsByBillingExpenseStatusBudget(BillingDetailsDto billingDetails);

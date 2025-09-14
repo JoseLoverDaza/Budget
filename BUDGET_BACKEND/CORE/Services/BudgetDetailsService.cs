@@ -127,6 +127,23 @@
             }
         }
 
+        public List<BudgetDetailExtendDto> GetBudgetDetailsByBudgetStatusBudget(BudgetDetailsDto budgetDetails)
+        {
+            IBudgetDetailsRepository budgetDetailRepository = UnitOfWork.BudgetDetailsRepository();
+            List<BudgetDetailExtendDto> budgetDetailsSearch = budgetDetailRepository.GetBudgetDetailsByBudgetStatusBudget(budgetDetails);
+
+            _logApiService.TraceLog(typeof(BillingDetails).Name, Constants.EntityAction.CONSULT, JsonSerializer.Serialize(Constants.General.JSON_EMPTY), JsonSerializer.Serialize(Constants.General.JSON_EMPTY), Json.SerializeWithoutNulls(budgetDetails), DateTime.Now, null);
+
+            if (budgetDetailsSearch.Count != 0)
+            {
+                return budgetDetailsSearch;
+            }
+            else
+            {
+                throw new ExternalException(Constants.General.MESSAGE_GENERAL);
+            }
+        }
+
         public List<BudgetDetailExtendDto> GetBudgetDetailsByExpenseStatusBudget(BudgetDetailsDto budgetDetails)
         {
             IBudgetDetailsRepository budgetDetailRepository = UnitOfWork.BudgetDetailsRepository();

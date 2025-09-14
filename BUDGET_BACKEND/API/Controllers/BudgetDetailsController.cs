@@ -128,6 +128,23 @@
         }
 
         [HttpPost]
+        [Route("GetBudgetDetailsByBudgetStatusBudget")]
+        [SwaggerOperation(Summary = "Get Budget Details By Budget StatusBudget")]
+        public ResponseDto GetBudgetDetailsByBudgetStatusBudget(BudgetDetailsDto budgetDetails)
+        {
+            try
+            {
+                response.Data = _budgetDetailsService.GetBudgetDetailsByBudgetStatusBudget(budgetDetails);
+                response.Message = Constants.General.SUCCESSUL;
+            }
+            catch (Exception ex)
+            {
+                ResponseError(ex, true);
+            }
+            return response;
+        }
+
+        [HttpPost]
         [Route("GetBudgetDetailsByExpenseStatusBudget")]
         [SwaggerOperation(Summary = "Get BudgetDetails By Expense StatusBudget")]
         public ResponseDto GetBudgetDetailsByExpenseStatusBudget(BudgetDetailsDto budgetDetails)

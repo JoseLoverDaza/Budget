@@ -29,6 +29,8 @@
 
         public List<BudgetDetailExtendDto> GetBudgetDetailsByBudgetExpense(BudgetDetailsDto budgetDetails);
 
+        public List<BudgetDetailExtendDto> GetBudgetDetailsByBudgetStatusBudget(BudgetDetailsDto budgetDetails);
+
         public List<BudgetDetailExtendDto> GetBudgetDetailsByExpenseStatusBudget(BudgetDetailsDto budgetDetails);
 
         public List<BudgetDetailExtendDto> GetBudgetDetailsByBudgetExpenseStatusBudget(BudgetDetailsDto budgetDetails);
