@@ -1,12 +1,12 @@
 ﻿namespace API.Extensions
 {
-    using Microsoft.AspNetCore.Builder;
 
     #region Librerias
-
-    using Microsoft.OpenApi.Models;
-    using System.Diagnostics.CodeAnalysis;
-
+        
+    using Microsoft.OpenApi;
+    using System.Diagnostics.CodeAnalysis;  
+    using Microsoft.Extensions.DependencyInjection;
+   
     #endregion
 
     /// <summary>
@@ -45,7 +45,7 @@
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement
                     {
                         { new OpenApiSecurityScheme
-                            {
+                            {                               
                                 Reference = new OpenApiReference
                                 {
                                     Type = ReferenceType.SecurityScheme,
